@@ -322,6 +322,7 @@ select-all='<Primary>a'
 
 [org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
 background-color='rgb(21,20,20)'
+cursor-blink-mode='off'
 use-theme-colors=false
 visible-name='rhett'
 
