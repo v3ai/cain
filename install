@@ -7,25 +7,25 @@ sudo cp cain /usr/local/bin
 
 
 #update to most reecent apt repos
-#sudo apt update -y
+sudo apt update -y
 
 #getting the bare nessesities
-#sudo apt install micro -y
-#sudo apt install xclip -y
-#sudo apt install xsel -y
-#sudo apt install input-remapper -y
-#sudo apt install git -y
-#sudo apt install mint-backgrounds-victoria -y
+sudo apt install micro -y
+sudo apt install xclip -y
+sudo apt install xsel -y
+sudo apt install input-remapper -y
+sudo apt install git -y
+sudo apt install mint-backgrounds-victoria -y
 
 
 
 #getting qcom
-#git clone https://github.com/v3ai/qcom
-#cd qcom
-#chmod +x qcom
-#sudo mv qcom /usr/local/bin
-#cd ..
-#rm -rf qcom
+git clone https://github.com/v3ai/qcom
+cd qcom
+chmod +x qcom
+sudo mv qcom /usr/local/bin
+cd ..
+rm -rf qcom
 
 #loading configs for cinnamon
 dconf load / < $CAINDIR/collected-files/cinnamon_settings
