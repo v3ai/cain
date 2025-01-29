@@ -1,0 +1,12 @@
+#!/bin/bash
+
+CAINDIR=~/cain
+
+cp ~/.bashrc $CAINDIR/collected-files/
+
+
+dconf dump / > $CAINDIR/collected-files/cinnamon-settings
+
+cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json $CAINDIR/collected-files
+
+cp ~/.config/micro/bindings.json $CAINDIR/collected-files

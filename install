@@ -1,0 +1,27 @@
+#!/bin/bash
+
+sudo apt update -y
+
+sudo apt install micro -y
+sudo apt install xclip -y
+sudo apt install xsel -y
+sudo apt install git -y
+
+sudo apt install golang-go -y
+
+
+sudo apt install nvim -y
+sudo apt install input-remapper -y
+
+sudo apt install mint-backgrounds-victoria -y
+
+
+git clone https://github.com/v3ai/qcom
+cd qcom
+chmod +x qcom
+sudo mv qcom /usr/local/bin
+cd ..
+rm -rf qcom
+
+
+dconf load / < ~/Desktop/cain/collected-files/cinnamon_settings
