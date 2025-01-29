@@ -1,27 +1,41 @@
 #!/bin/bash
 
-sudo apt update -y
+CAINDIR=~/cain
 
-sudo apt install micro -y
-sudo apt install xclip -y
-sudo apt install xsel -y
-sudo apt install git -y
-
-sudo apt install golang-go -y
+chmod +x cain
+sudo cp cain /usr/local/bin
 
 
-sudo apt install nvim -y
-sudo apt install input-remapper -y
+#update to most reecent apt repos
+#sudo apt update -y
 
-sudo apt install mint-backgrounds-victoria -y
-
-
-git clone https://github.com/v3ai/qcom
-cd qcom
-chmod +x qcom
-sudo mv qcom /usr/local/bin
-cd ..
-rm -rf qcom
+#getting the bare nessesities
+#sudo apt install micro -y
+#sudo apt install xclip -y
+#sudo apt install xsel -y
+#sudo apt install input-remapper -y
+#sudo apt install git -y
+#sudo apt install mint-backgrounds-victoria -y
 
 
-dconf load / < ~/Desktop/cain/collected-files/cinnamon_settings
+
+#getting qcom
+#git clone https://github.com/v3ai/qcom
+#cd qcom
+#chmod +x qcom
+#sudo mv qcom /usr/local/bin
+#cd ..
+#rm -rf qcom
+
+#loading configs for cinnamon
+dconf load / < $CAINDIR/collected-files/cinnamon_settings
+
+#add something here to turn on input remapper automatically load
+cp $CAINDIR/collected-files/rhett-keybindings.json ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard
+
+#Put my bashrc in
+cp $CAINDIR/collected-files/.bashrc ~/
+
+#put micro text editor bindings in
+cp $CAINDIR/collected-files/ ~/.config/micro
+

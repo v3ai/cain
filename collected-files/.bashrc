@@ -157,3 +157,8 @@ alias c="clear"
 #open the micro or nvim text editor
 alias m="micro"
 alias v="nvim"
+
+#Default editor micro
+export EDITOR=micro
+export VISUAL=micro
+

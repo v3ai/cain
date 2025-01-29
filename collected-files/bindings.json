@@ -1,6 +1,7 @@
 {
     "Alt-/": "lua:comment.comment",
     "Alt-g": "command-edit:goto ",
+    "Ctrl-g": "command-edit:goto ",
     "Escape": "CommandMode",
     "Alt-2": "ToggleMacro",
     "Alt-3": "PlayMacro",
