@@ -26,7 +26,7 @@ cat ~/cain/files/cai
 # Collecting .bashrc and error handling
 cp ~/.bashrc ~/cain/files/dotfiles
 if [ $? -eq 0 ]; then
-	echo -e ".bashrc collected successfully\n"
+	echo -e ".bashrc collected successfully"
 else
 	echo "Error has occured collecting .bashrc" && exit 1
 
@@ -35,7 +35,7 @@ fi
 # Collecting configs for cinnamon desktop enviornment and error handling
 dconf dump / > ~/cain/files/cinnamon/cinnamon-settings
 if [ $? -eq 0 ]; then
-	echo -e "cinnamon settings collected successfully\n"
+	echo -e "cinnamon settings collected successfully"
 else
 	echo "Error has occured collecting cinnamon settings" && exit 1
 
@@ -44,7 +44,7 @@ fi
 # Collecting keybindings for input-remapper and error handling
 cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/files/input-remapper
 if [ $? -eq 0 ]; then
-	echo -e "Input-remapper keybindings colected successfully\n"
+	echo -e "Input-remapper keybindings colected successfully"
 else
 	echo "Error has occured collecting input-remapper keybindings" && exit 1
 
@@ -53,7 +53,7 @@ fi
 # Collecting configs for input-remapper and error handling
 cp ~/.config/input-remapper-2/config.json ~/cain/files/input-remapper
 if [ $? -eq 0 ]; then
-	echo -e "Input remapper config collected successfully\n"
+	echo -e "Input remapper config collected successfully"
 else
 	echo "Error has occured collecting input-remapper config" && exit 1
 
@@ -62,7 +62,7 @@ fi
 # Collecting micro key bindings and error handling
 cp ~/.config/micro/bindings.json ~/cain/files/micro
 if [ $? -eq 0 ]; then
-	echo -e "Micro keybindings collected successfully\n"
+	echo -e "Micro keybindings collected successfully"
 else
 	echo "Error has occured collecting micro key bindings" && exit 1
 
@@ -71,7 +71,7 @@ fi
 # Collecting micro key settings and error handling
 cp ~/.config/micro/settings.json ~/cain/files/micro
 if [ $? -eq 0 ]; then
-	echo -e "Micro settings collected successfully\n"
+	echo -e "Micro settings collected successfully"
 else
 	echo "Error has occured collecting micro settings" && exit 1
 
