@@ -5,7 +5,7 @@ dconf load / < ~/cain/collected-files/cinnamon/cinnamon-settings
 
 #add something here to turn on input remapper automatically load
 cp ~/cain/collected-files/input-remapper/rhett-keybindings.json ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard
-
+cp ~/cain/collected-files/input-remapper/config.json ~/.config/input-remapper-2
 #Put my bashrc in
 cp ~/cain/collected-files/dotfiles/.bashrc ~/
 
