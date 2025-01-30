@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#loading configs for cinnamon
+dconf load / < ~/cain/collected-files/cinnamon/cinnamon-settings
+
+#add something here to turn on input remapper automatically load
+cp ~/cain/collected-files/input-remapper/rhett-keybindings.json ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard
+
+#Put my bashrc in
+cp ~/cain/collected-files/dotfiles/.bashrc ~/
+
+#put micro text editor bindings in
+cp ~/cain/collected-files/micro/bindings.json ~/.config/micro
+cp ~/cain/collected-files/micro/settings.json ~/.config/micro
+

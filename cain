@@ -1,15 +1,14 @@
 #!/bin/bash
 
-CAINDIR=~/cain
+#save rc to dotfiles in collected files
+cp ~/.bashrc ~/cain/collected-files/dotfiles
 
-cp ~/.bashrc $CAINDIR/collected-files/
 
+dconf dump / > ~/cain/collected-files/cinnamon/cinnamon-settings
 
-dconf dump / > $CAINDIR/collected-files/cinnamon-settings
+cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/collected-files/input-remapper
 
-cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json $CAINDIR/collected-files
+cp ~/.config/input-remapper-2/config.json ~/cain/collected-files/input-remapper
 
-cp ~/.config/micro/bindings.json $CAINDIR/collected-files
-
-qcom ~/cain
-
+cp ~/.config/micro/bindings.json ~/cain/collected-files/micro
+cp ~/.config/micro/settings.json ~/cain/collected-files/micro

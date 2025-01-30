@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+#update to most reecent apt repos
+sudo apt update -y
+
+#getting the bare nessesities
+sudo apt install micro -y
+sudo apt install xclip -y
+sudo apt install xsel -y
+sudo apt install input-remapper -y
+sudo apt install mint-backgrounds-victoria -y

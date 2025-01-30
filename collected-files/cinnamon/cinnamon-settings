@@ -322,8 +322,11 @@ select-all='<Primary>a'
 
 [org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
 background-color='rgb(21,20,20)'
+background-transparency-percent=16
 cursor-blink-mode='off'
 use-theme-colors=false
+use-theme-transparency=true
+use-transparent-background=false
 visible-name='rhett'
 
 [org/gtk/settings/color-chooser]
@@ -367,6 +370,9 @@ show-toolbar=true
 [org/virt-manager/virt-manager/new-vm]
 graphics-type='system'
 
+[org/virt-manager/virt-manager/paths]
+media-default='/home/rhett/Downloads'
+
 [org/virt-manager/virt-manager/urls]
 isos=['/var/lib/libvirt/images/Win10_22H2_English_x64v1.iso']
 
@@ -378,6 +384,10 @@ network-traffic=false
 autoconnect=1
 scaling=1
 vm-window-size=(976, 766)
+
+[org/virt-manager/virt-manager/vms/fd61f704e3bc48aa899c8859eb1a8e10]
+autoconnect=1
+scaling=1
 
 [org/x/editor/plugins]
 active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-uri-context-menu', 'bracketcompletion', 'textsize', 'docinfo', 'spell']
