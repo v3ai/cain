@@ -21,8 +21,6 @@
 
 # ==================== Making the cli look nice ==================== #
 cat files/cai
-
-
 # ====================== Collecting Files ========================== #
 
 # Collecting .bashrc and error handling
@@ -73,7 +71,7 @@ fi
 # ============= Committing and pushing files with git ============== #
 cd ~/cain
 git add .
-git commit -m "configs have been updated: cain"
+git commit -m "cain: configs have been updated"
 
 # ================================================================== #
 
