@@ -389,6 +389,7 @@ vm-window-size=(976, 766)
 [org/virt-manager/virt-manager/vms/fd61f704e3bc48aa899c8859eb1a8e10]
 autoconnect=1
 scaling=1
+vm-window-size=(1024, 835)
 
 [org/x/editor/plugins]
 active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-uri-context-menu', 'bracketcompletion', 'textsize', 'docinfo', 'spell']
