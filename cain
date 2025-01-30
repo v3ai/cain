@@ -17,16 +17,24 @@
 # ================================================================== #
 
 
+
+
 # ================================================================== #
+cat collected-files/cai
+
 
 #save rc to dotfiles in collected files
 cp ~/.bashrc ~/cain/collected-files/dotfiles
-if [$? == 0]; then
+if [ $? -eq 0 ]; then
 	echo ".bashrc collected"
 fi
 
 
 dconf dump / > ~/cain/collected-files/cinnamon/cinnamon-settings
+if [ $? -eq 0 ]; then
+	echo "cinnamon settings "
+fi
+
 
 cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/collected-files/input-remapper
 

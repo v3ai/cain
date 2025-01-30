@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1738212787
+refresh-last-run=1738219990
 show-welcome-page=false
 window-height=570
 window-pane-position=344
