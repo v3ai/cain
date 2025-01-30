@@ -1,6 +1,3 @@
-#!/bin/bash
-
-
 #                                   db                               
 #                                                                    
 #                ,p6"bo   ,6"Yb.  `7MM  `7MMpMMMb.                   
@@ -14,24 +11,4 @@
 #																	 #
 #				              MIT License							 #
 #	    		 Copyright (c) 2025 Rhett Applestone				 #
-# ================================================================== #
-
-
-# ================================================================== #
-
-#save rc to dotfiles in collected files
-cp ~/.bashrc ~/cain/collected-files/dotfiles
-if [$? == 0]; then
-	echo ".bashrc collected"
-fi
-
-
-dconf dump / > ~/cain/collected-files/cinnamon/cinnamon-settings
-
-cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/collected-files/input-remapper
-
-cp ~/.config/input-remapper-2/config.json ~/cain/collected-files/input-remapper
-
-cp ~/.config/micro/bindings.json ~/cain/collected-files/micro
-
 # ================================================================== #
