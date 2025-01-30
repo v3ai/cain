@@ -20,26 +20,26 @@
 
 
 # ================================================================== #
-cat collected-files/cai
+cat files/cai
 
 
 #save rc to dotfiles in collected files
-cp ~/.bashrc ~/cain/collected-files/dotfiles
+cp ~/.bashrc ~/cain/files/dotfiles
 if [ $? -eq 0 ]; then
 	echo ".bashrc collected"
 fi
 
 
-dconf dump / > ~/cain/collected-files/cinnamon/cinnamon-settings
+dconf dump / > ~/cain/files/cinnamon/cinnamon-settings
 if [ $? -eq 0 ]; then
 	echo "cinnamon settings "
 fi
 
 
-cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/collected-files/input-remapper
+cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/files/input-remapper
 
-cp ~/.config/input-remapper-2/config.json ~/cain/collected-files/input-remapper
+cp ~/.config/input-remapper-2/config.json ~/cain/files/input-remapper
 
-cp ~/.config/micro/bindings.json ~/cain/collected-files/micro
+cp ~/.config/micro/bindings.json ~/cain/files/micro
 
 # ================================================================== #

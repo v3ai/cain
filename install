@@ -41,25 +41,25 @@ sudo apt install mint-backgrounds-victoria -y
 # ============== Putting Configs In The Right Places =============== #
 
 # Loading configs for cinnamon desktop enviornment
-dconf load / < ~/cain/collected-files/cinnamon/cinnamon-settings
+dconf load / < ~/cain/files/cinnamon/cinnamon-settings
 
 # Loading keybindings for input-remapper
-cp ~/cain/collected-files/input-remapper/rhett-keybindings.json ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard
+cp ~/cain/files/input-remapper/rhett-keybindings.json ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard
 
 # Loading config file for input-remapper
-cp ~/cain/collected-files/input-remapper/config.json ~/.config/input-remapper-2
+cp ~/cain/files/input-remapper/config.json ~/.config/input-remapper-2
 
 # Starting input reamapper
 input-remapper-control --command autoload
 
 # Loading my .bashrc file
-cp ~/cain/collected-files/dotfiles/.bashrc ~
+cp ~/cain/files/dotfiles/.bashrc ~
 
 # Making bash see the new .bashrc file
 source ~/.bashrc
 
 # Loading micro keybindings
-cp ~/cain/collected-files/micro/bindings.json ~/.config/micro
+cp ~/cain/files/micro/bindings.json ~/.config/micro
 
 # ================================================================== #
 
