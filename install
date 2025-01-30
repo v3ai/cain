@@ -34,6 +34,10 @@ sudo apt install input-remapper -y
 # Getting background I like
 sudo apt install mint-backgrounds-victoria -y
 
+# Installing git and configuring it
+sudo apt install git -y
+git config --global user.name "Rhett Applestone"
+git config --global user.email "rhettapples@google-email.com"
 
 # ================ Putting Files In The Right Places =============== #
 

@@ -74,8 +74,8 @@ cd ~/cain
 git add .
 git commit -m "cain: configs have been updated"
 
-#Optional line if you want to push the repo every time
-git push
+#Optional line if you want to push the repo every time, remove "#" before git push
+#git push
 
 # ================================================================== #
 
