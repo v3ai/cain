@@ -12,7 +12,7 @@
                                                MIT License                             
                                    Copyright (c) 2025 Rhett Applestone                 
 
-### This program will write over some dotfiles and config files, make backups
+### This program will switch your dotfiles and configs for mine
 
 ### What is cain and what does it do?
 
