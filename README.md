@@ -15,7 +15,11 @@
 
 
 ### What is cain and what does it do?
-cain is a little program that helps me keep track of dotfiles, keybindings, and desktop enviornemnt settings
+
+cain is a little program that helps me keep track of dotfiles, keybindings, and desktop enviornemnt settings and install them easily on a new computer
+
+cain stands for Collect And INstall
+
 
 
 
