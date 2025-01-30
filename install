@@ -27,6 +27,10 @@ sudo apt install input-remapper -y
 # Getting background I like
 sudo apt install mint-backgrounds-victoria -y
 
+# ================================================================== #
+
+
+
 
 # ============== Putting Configs In The Right Places =============== #
 
@@ -51,5 +55,5 @@ source ~/.bashrc
 # Loading micro keybindings
 cp ~/cain/collected-files/micro/bindings.json ~/.config/micro
 
-
+# ================================================================== #
 
