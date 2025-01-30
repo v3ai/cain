@@ -58,7 +58,7 @@ panel-zone-symbolic-icon-sizes='[{"panelId": 1, "left": 28, "center": 28, "right
 panels-height=['1:33']
 
 [org/cinnamon/desktop/a11y/applications]
-screen-keyboard-enabled=true
+screen-keyboard-enabled=false
 
 [org/cinnamon/desktop/background]
 picture-options='zoom'
@@ -74,7 +74,7 @@ cursor-blink-time=1200
 cursor-size=24
 cursor-theme='Yaru'
 gtk-theme='Mint-Y-Dark-Grey'
-toolkit-accessibility=true
+toolkit-accessibility=false
 
 [org/cinnamon/desktop/keybindings/media-keys]
 calculator=['<Alt>7']
@@ -158,7 +158,7 @@ word-size=64
 always-show-text-caret=false
 
 [org/gnome/desktop/a11y/applications]
-screen-keyboard-enabled=true
+screen-keyboard-enabled=false
 screen-reader-enabled=false
 
 [org/gnome/desktop/a11y/mouse]
@@ -205,7 +205,7 @@ text-scaling-factor=1.0
 toolbar-detachable=false
 toolbar-icons-size='large'
 toolbar-style='both-horiz'
-toolkit-accessibility=true
+toolkit-accessibility=false
 
 [org/gnome/desktop/peripherals/mouse]
 accel-profile='default'
