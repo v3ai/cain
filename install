@@ -19,6 +19,9 @@
 
 # ================== Installing Needed Programs ==================== #
 
+# Making Making everything look pretty
+cat ~/cain/files/cai
+
 # Update to most reecent apt repos
 sudo apt update -y
 
@@ -82,5 +85,6 @@ cp ~/cain/files/micro/settings.json ~/.config/micro/settings.json
 # Copying cain to the user's $PATH so it can be executed
 sudo cp cain /usr/local/bin/cain
 
+echo -e "\ncain is installed"
 # ================================================================== #
 
