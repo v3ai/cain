@@ -31,7 +31,7 @@ sudo apt install xclip -y
 # Getting program I use for keybindings
 sudo apt install input-remapper -y
 
-# Starting that program so there's a folder to copy to
+# Starting that program
 sudo systemctl start input-remapper
 
 # Getting background I like
@@ -46,6 +46,13 @@ git config --global user.email "rhettapples@google-email.com"
 
 # Loading configs for cinnamon desktop enviornment
 dconf load / < ~/cain/files/cinnamon/cinnamon-settings
+
+
+#Making correct directories for input-remapper
+mkdir ~/.config/input-remapper-2
+mkdir ~/.config/input-remapper-2/presets
+mkdir ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard
+
 
 # Loading keybindings for input-remapper
 cp ~/cain/files/input-remapper/rhett-keybindings.json ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json
@@ -62,12 +69,17 @@ cp ~/cain/files/dotfiles/.bashrc ~/.bashrc
 # Making bash see the new .bashrc file
 source ~/.bashrc
 
-#Making a directory to put micro bindings in
+# Making a directory to put micro bindings in
 mkdir ~/.config/micro
+mkdir ~/.config/micro/buffers
 
 # Loading micro keybindings
 cp ~/cain/files/micro/bindings.json ~/.config/micro/bindings.json
 
+# Loading micro settings
+cp ~/cain/files/micro/settings.json ~/.config/micro/settings.json
+
+# Copying cain to the user's $PATH so it can be executed
 sudo cp cain /usr/local/bin/cain
 
 # ================================================================== #

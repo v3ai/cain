@@ -58,12 +58,22 @@ else
 	echo "Error has occured collecting input-remapper config" && exit 1
 
 fi
+
 # Collecting micro key bindings and error handling
 cp ~/.config/micro/bindings.json ~/cain/files/micro
 if [ $? -eq 0 ]; then
 	echo -e "Micro keybindings collected successfully\n"
 else
 	echo "Error has occured collecting micro key bindings" && exit 1
+
+fi
+
+# Collecting micro key settings and error handling
+cp ~/.config/micro/settings.json ~/cain/files/micro
+if [ $? -eq 0 ]; then
+	echo -e "Micro settings collected successfully\n"
+else
+	echo "Error has occured collecting micro settings" && exit 1
 
 fi
 
