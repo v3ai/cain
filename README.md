@@ -47,3 +47,6 @@ Go about your life normally, and if you update a keybinding run cain in the term
 ```
 cain
 ```
+
+Don't move the cain directory from your home directory or it will break
+
