@@ -4,7 +4,7 @@
 #update to most reecent apt repos
 sudo apt update -y
 
-#getting the bare nessesities
+#getting the bare nessesities so this program runs
 sudo apt install micro -y
 sudo apt install xclip -y
 sudo apt install xsel -y

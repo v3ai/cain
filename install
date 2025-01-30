@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# ================================================================== #
+#																	 #
+#		 This Program Was Made January 2025 By Rhett Applestone      #  
+#																	 #
+#				              MIT License							 #
+#	    		 Copyright (c) 2025 Rhett Applestone				 #
+#																	 #
+# ================================================================== #
+
+
+# ================== Installing Needed Programs ==================== #
+
+# Update to most reecent apt repos
+sudo apt update -y
+
+# Text editor I use
+sudo apt install micro -y
+
+# Getting clipboard working right
+sudo apt install xclip -y
+
+# Getting program I use for keybindings
+sudo apt install input-remapper -y
+
+# Getting background I like
+sudo apt install mint-backgrounds-victoria -y
+
+
+# ============== Putting Configs In The Right Places =============== #
+
+# Loading configs for cinnamon desktop enviornment
+dconf load / < ~/cain/collected-files/cinnamon/cinnamon-settings
+
+# Loading keybindings for input-remapper
+cp ~/cain/collected-files/input-remapper/rhett-keybindings.json ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard
+
+# Loading config file for input-remapper
+cp ~/cain/collected-files/input-remapper/config.json ~/.config/input-remapper-2
+
+# Starting input reamapper
+input-remapper-control --command autoload
+
+# Loading my .bashrc file
+cp ~/cain/collected-files/dotfiles/.bashrc ~
+
+# Making bash see the new .bashrc file
+source ~/.bashrc
+
+# Loading micro keybindings
+cp ~/cain/collected-files/micro/bindings.json ~/.config/micro
+
+
+

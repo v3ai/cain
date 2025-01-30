@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1738185847
+refresh-last-run=1738212787
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -318,12 +318,13 @@ enabled-gtk-modules=@as []
 overrides=@a{sv} {}
 
 [org/gnome/terminal/legacy/keybindings]
-select-all='<Primary>a'
+select-all='<Primary><Shift>a'
 
 [org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
 background-color='rgb(21,20,20)'
 background-transparency-percent=16
 cursor-blink-mode='off'
+cursor-shape='ibeam'
 use-theme-colors=false
 use-theme-transparency=true
 use-transparent-background=false
