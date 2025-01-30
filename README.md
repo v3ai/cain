@@ -12,7 +12,7 @@
                                                MIT License                             
                                    Copyright (c) 2025 Rhett Applestone                 
 
-### NOTE: This program will switch your dotfiles and configs for mine
+### NOTE: This program will switch your dotfiles and configs to mine
 
 ### What is cain and what does it do?
 
