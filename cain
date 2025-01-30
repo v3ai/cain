@@ -20,7 +20,7 @@
 
 
 # ==================== Making the cli look nice ==================== #
-cat files/cai
+cat ~/cain/files/cai
 # ====================== Collecting Files ========================== #
 
 # Collecting .bashrc and error handling
