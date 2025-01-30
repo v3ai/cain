@@ -16,43 +16,34 @@
 
 ### What is cain and what does it do?
 
-cain is a little program that helps me keep track of dotfiles, keybindings, and desktop enviornemnt settings and install them easily on a new computer
+Think of cain like a little robot that helps you keep track of dotfiles, keybindings, and desktop enviornemnt settings and install them easily on a new computer
 
-cain stands for Collect And INstall
+I made cain because I was having a hard time keeping track of individual repositories of all my configs and because it was annoying to do
 
+cain stands for Collect And INstall and it does those two things
 
+The install script will download all required programs, and put all of your configuration files in their respective places
 
-
-
-
-
-What should cain's user experience be?
-type cain in the terminal and these things happen
+The install script also gives you a command called "cain" that will grab the most reecent version of those files, commit them to git in the cain directory, and push them.
 
 
 
-Pre install
-- git clone qcom to home directory
-- run install script
-- install script puts cain in /usr/local/bin
-- install script downloads all required programs
-- install script loads all keybindings
+### How do I use cain (linux mint)
 
 
-After installing:
-- input remapper bindings are put in folder
-- cinnamon settings are put in folder
-- micro bindings are put in folder
+Change to your home directory and clone the cain repo
+```
+cd 
+git clone https://github.com/v3ai/cain
+```
 
+Go inside the cain directory and run the install script
+```
+cd cain
+./install
+```
 
-
-
-
-
-
-
-This is cain, it collects keybindings and settings in one place so you can quickily install them automatically later
-
-
-
-License: MIT
+Go about your life normally, and if you update a keybinding run cain in the terminal so you can download all your bindings later
+```
+cain
+```
