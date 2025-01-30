@@ -69,4 +69,14 @@ else
 
 fi
 
+
+# ============= Committing and pushing files with git ============== #
+cd ~/cain
+git add .
+git commit -m "configs have been updated: cain"
+
 # ================================================================== #
+
+
+
+
