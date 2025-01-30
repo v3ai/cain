@@ -12,3 +12,5 @@ cp ~/.config/input-remapper-2/config.json ~/cain/collected-files/input-remapper
 
 cp ~/.config/micro/bindings.json ~/cain/collected-files/micro
 cp ~/.config/micro/settings.json ~/cain/collected-files/micro
+
+input-remapper-control --command autoload

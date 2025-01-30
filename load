@@ -13,3 +13,6 @@ cp ~/cain/collected-files/dotfiles/.bashrc ~/
 cp ~/cain/collected-files/micro/bindings.json ~/.config/micro
 cp ~/cain/collected-files/micro/settings.json ~/.config/micro
 
+
+#start input reamapper
+input-remapper-control --command autoload
