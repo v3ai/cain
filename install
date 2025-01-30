@@ -86,5 +86,16 @@ cp ~/cain/files/micro/settings.json ~/.config/micro/settings.json
 sudo cp cain /usr/local/bin/cain
 
 echo -e "\ncain is installed"
+
+
+sleep 1
+
+for i in $(seq 0 4);
+do	
+    echo "System will reboot in $((5 - $i)) seconds"
+    sleep 1
+done
+
+reboot
 # ================================================================== #
 
