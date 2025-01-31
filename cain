@@ -24,13 +24,7 @@ cat ~/cain/files/cai
 # ====================== Collecting Files ========================== #
 
 # Collecting .bashrc and error handling
-cp ~/.bashrc ~/cain/files/dotfiles
-if [ $? -eq 0 ]; then
-	echo ".bashrc collected successfully"
-else
-	echo "Error has occured collecting .bashrc" && exit 1
-
-fi
+cp ~/.bashrc ~/cain/files/dotfiles || exit 1
 
 # Collecting configs for cinnamon desktop enviornment and error handling
 dconf dump / > ~/cain/files/cinnamon/cinnamon-settings
