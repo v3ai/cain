@@ -94,7 +94,6 @@ cp ~/cain/files/input-remapper/rhett-keybindings.json ~/.config/input-remapper-2
 cp ~/cain/files/input-remapper/config.json ~/.config/input-remapper-2/config.json || handle_error
 
 # Starting and auto loading input-remapper and keybindings
-sudo systemctl start input-remapper || handle_error
 sudo input-remapper-control --command autoload || handle_error
 
 # Loading my .bashrc file

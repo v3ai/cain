@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1738291349
+refresh-last-run=1738311630
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -122,6 +122,9 @@ swipe-up-2='PUSH_TILE_UP::end'
 swipe-up-3='TOGGLE_EXPO::end'
 swipe-up-4='VOLUME_UP::end'
 tap-3='MEDIA_PLAY_PAUSE::end'
+
+[org/cinnamon/settings-daemon/peripherals/keyboard]
+numlock-state='off'
 
 [org/cinnamon/sounds]
 login-enabled=false
@@ -385,7 +388,19 @@ network-traffic=false
 autoconnect=1
 scaling=1
 
+[org/virt-manager/virt-manager/vms/17ff614811c8480a9f1a38f19e24cd35]
+autoconnect=1
+scaling=1
+
 [org/virt-manager/virt-manager/vms/1dae9130ed75423ab7fa304ac3aef36a]
+autoconnect=1
+scaling=1
+
+[org/virt-manager/virt-manager/vms/226eac10aab6459d8545544a8bd95a3f]
+autoconnect=1
+scaling=1
+
+[org/virt-manager/virt-manager/vms/344825c0009b4d34a4341a1d0b50bf3a]
 autoconnect=1
 scaling=1
 
@@ -407,6 +422,10 @@ scaling=1
 autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/9ce55a47cd5940f8a17576a8478c4442]
+autoconnect=1
+scaling=1
 
 [org/virt-manager/virt-manager/vms/fd61f704e3bc48aa899c8859eb1a8e10]
 autoconnect=1

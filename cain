@@ -44,6 +44,9 @@ cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-key
 # Collecting configs for input-remapper and error handling
 cp ~/.config/input-remapper-2/config.json ~/cain/files/input-remapper || handle_error
 
+# Collecting xmodmap.json for input-remapper and error handling
+cp ~/.config/input-remapper-2/xmodmap.json ~/cain/files/input-remapper || handle_error
+
 # Collecting micro key bindings and error handling
 cp ~/.config/micro/bindings.json ~/cain/files/micro || handle_error
 
