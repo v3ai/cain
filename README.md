@@ -26,7 +26,7 @@ cain stands for Collect And INstall and it does those two things
 
 The install script will download all required programs, and put all of your configuration files in their respective places
 
-The install script also gives you a command called "cain" that will grab the most reecent version of those files, commit them to git in the cain directory, and push them.
+The install script also gives you a command called "cain" that will grab the most reecent version of those files, commit them to git in the cain directory, and (optionally) push them.
 
 
 
