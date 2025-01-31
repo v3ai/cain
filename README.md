@@ -18,7 +18,9 @@
 
 Think of cain like a little robot that helps you keep track of dotfiles, keybindings, and desktop enviornemnt settings and install them easily on a new computer
 
-I made cain because I was having a hard time keeping track of individual repositories of all my configs and because it was annoying to do
+I made cain because I was having a hard time keeping track and updating individual repositories for configs
+
+Cain makes it easy to make your computer exactly like you like it on a fresh install
 
 cain stands for Collect And INstall and it does those two things
 
