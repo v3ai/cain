@@ -46,6 +46,8 @@ cain
 ### Don't move the cain directory from your home directory or it will break.
 Ascii art made with figlet -f Georgia11.flf cain (you may have to download that .flf file)
 
+my configs change pretty frequently, but the majority of them are at https://rhettapplestone.com/keys.html
+
 
 
 
