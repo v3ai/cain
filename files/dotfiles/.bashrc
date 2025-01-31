@@ -158,6 +158,9 @@ alias c="clear"
 alias m="micro"
 alias v="nvim"
 
+#setting autocd
+shopt -s autocd
+
 #Default editor micro
 export EDITOR=micro
 export VISUAL=micro
