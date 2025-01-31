@@ -12,7 +12,6 @@
                                                MIT License                             
                                    Copyright (c) 2025 Rhett Applestone                 
 
-### NOTE: This program will switch your dotfiles and configs to mine
 
 ### What is cain and what does it do?
 
@@ -24,11 +23,12 @@ Cain makes it easy to make your computer exactly like you like it on a fresh ins
 
 cain stands for Collect And INstall and it does those two things
 
-The install script will download all required programs, and put all of your configuration files in their respective places
+First, the install script will download all required programs and put all of your configuration files in their respective places
 
-The install script also gives you a command called "cain" that will grab the most reecent version of those files, commit them to git in the cain directory, and (optionally) push them.
+then it gives you a command called "cain" that will grab the most reecent version of those files, commit them to git in the cain directory, and (optionally) push them.
 
 
+## NOTE: This program will switch your dotfiles and configs to mine
 
 ### How do I use cain (linux mint)
 
@@ -38,7 +38,7 @@ cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && cd ca
 ```
 
 
-Go about your life normally, and if you update a keybinding, run cain in the terminal so you can have all your configs in one place with an easy way to install them
+Go about your life normally, and if you update a keybinding, run cain in the terminal so you can have all your configs in one place for an easy install
 ```
 cain
 ```
