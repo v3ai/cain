@@ -20,11 +20,11 @@
 
 
 # ==================== Making the cli look nice ==================== #
-cat ~/cain/files/cai
+cat ~/cain/files/casi
 # ====================== Collecting Files ========================== #
 
 # Collecting .bashrc and error handling
-cp ~/.bashrc ~/cain/files/dotfiles || exit 1
+cp ~/.bashrc ~/cain/files/dotfiles
 
 # Collecting configs for cinnamon desktop enviornment and error handling
 dconf dump / > ~/cain/files/cinnamon/cinnamon-settings
