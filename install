@@ -105,10 +105,11 @@ cp ~/cain/files/dotfiles/.bashrc ~/.bashrc || handle_error
 # Making bash see the new .bashrc file
 source ~/.bashrc || handle_error
 
-
 # Copying cain to the user's $PATH so it can be executed
 sudo cp cain /usr/local/bin/cain || handle_error
 
+
+# Countdown before restart
 echo -e "\ncain is installed"
 
 echo -n "System will reboot in: "	
