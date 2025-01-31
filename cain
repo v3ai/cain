@@ -83,7 +83,7 @@ fi
 # Collecting micro key settings and error handling
 cp ~/.config/micro/settings.json ~/cain/files/micro
 if [ $? -eq 0 ]; then
-	echo "Micro settings collected successfully"
+	echo -e "\nMicro settings collected successfully"
 else
 	echo "Error has occured collecting micro settings" && exit 1
 
