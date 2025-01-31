@@ -113,7 +113,7 @@ echo -e "\ncain is installed"
 echo -n "System will reboot in: "	
 for i in $(seq 0 4);
 do	
-	echo -n "$((5 - i)) "
+	echo "$((5 - i))"
     sleep 1    
 done
 
