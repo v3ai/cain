@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1738282102
+refresh-last-run=1738291349
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -380,6 +380,10 @@ isos=['/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/lib
 [org/virt-manager/virt-manager/vmlist-fields]
 disk-usage=false
 network-traffic=false
+
+[org/virt-manager/virt-manager/vms/1dae9130ed75423ab7fa304ac3aef36a]
+autoconnect=1
+scaling=1
 
 [org/virt-manager/virt-manager/vms/4f503e88a1784aa2a733c03f9a0243cb]
 autoconnect=1
