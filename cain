@@ -41,6 +41,15 @@ else
 
 fi
 
+# Collecting cinnamon menu settings
+cp ~/.config/cinnamon/spices/menu@cinnamon.org/0.json ~/cain/files/cinnamon/0.json
+if [ $? -eq 0 ]; then
+	echo "cinnamon menu settings collected successfully"
+else
+	echo "Error has occured collecting cinnamon menu settings" && exit 1
+
+fi
+
 # Collecting keybindings for input-remapper and error handling
 cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/files/input-remapper
 if [ $? -eq 0 ]; then

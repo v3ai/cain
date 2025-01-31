@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1738277442
+refresh-last-run=1738282102
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -375,7 +375,7 @@ graphics-type='system'
 media-default='/home/rhett/Downloads'
 
 [org/virt-manager/virt-manager/urls]
-isos=['/var/lib/libvirt/images/Win10_22H2_English_x64v1.iso']
+isos=['/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/Win10_22H2_English_x64v1.iso']
 
 [org/virt-manager/virt-manager/vmlist-fields]
 disk-usage=false
@@ -386,10 +386,20 @@ autoconnect=1
 scaling=1
 vm-window-size=(976, 766)
 
+[org/virt-manager/virt-manager/vms/58153b2237094a789789f8189bc12b6a]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/6d90d29318e64f9ba5ccd2a516b697f6]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
 [org/virt-manager/virt-manager/vms/fd61f704e3bc48aa899c8859eb1a8e10]
 autoconnect=1
 scaling=1
-vm-window-size=(1024, 835)
+vm-window-size=(1024, 811)
 
 [org/x/editor/plugins]
 active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-uri-context-menu', 'bracketcompletion', 'textsize', 'docinfo', 'spell']
