@@ -16,15 +16,24 @@
 #                Copyright (c) 2025 Rhett Applestone                 #
 # ================================================================== #
 
+# ==================== Error handling function ===================== #
 
-
+handle_error () {
+	echo "An error has occured" && exit 1 
+}
 
 # ==================== Making the cli look nice ==================== #
-cat ~/cain/files/casi ||( echo "error" && exit 1)
+cat ~/cain/files/cai || handle_error
 # ====================== Collecting Files ========================== #
 
 # Collecting .bashrc and error handling
 cp ~/.bashrc ~/cain/files/dotfiles
+if [ $? -eq 0 ]; then
+	echo ".bashrc collected successfully"
+else
+	echo "Error has occured collecting .bashrc" && exit 1
+
+fi
 
 # Collecting configs for cinnamon desktop enviornment and error handling
 dconf dump / > ~/cain/files/cinnamon/cinnamon-settings

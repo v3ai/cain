@@ -21,6 +21,9 @@
 
 # Making Making everything look pretty
 cat ~/cain/files/cai
+if [ $? -ne 0 ]; then
+	echo "Error has occured printing cain ascii art in ~/cain/files/cai" && exit 1
+fi
 
 # Update to most reecent apt repos
 sudo apt update -y
