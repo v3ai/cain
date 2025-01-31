@@ -41,10 +41,10 @@ sudo apt install micro -y || handle_error
 sudo apt install xclip -y || handle_error
 
 # Getting program I use for keybindings
-sudo apt install input-remapper || handle_error
+sudo apt install input-remapper -y || handle_error
 
 # Getting background I like
-sudo apt install mint-backgrounds-victoria || handle_error
+sudo apt install mint-backgrounds-victoria -y || handle_error
 
 # Installing git and configuring it
 sudo apt install git -y || handle_error
