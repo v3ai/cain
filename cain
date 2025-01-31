@@ -58,7 +58,7 @@ cp ~/.config/micro/settings.json ~/cain/files/micro || handle_error
 
 cd ~/cain || handle_error
 git add .
-git commit -m "cain: configs have collected | msg: $1"
+git commit -m "cain: configs collected | msg: $1"
 
 #Optional line if you want to push the repo every time, remove "#" before git push
 git push
