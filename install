@@ -93,6 +93,9 @@ cp ~/cain/files/input-remapper/rhett-keybindings.json ~/.config/input-remapper-2
 # Loading config file for input-remapper
 cp ~/cain/files/input-remapper/config.json ~/.config/input-remapper-2/config.json || handle_error
 
+# Loading xmodmap for input-remapper
+cp ~/cain/files/input-remapper/xmodmap.json ~/.config/input-remapper-2/xmodmap.json  || handle_error
+
 # Starting and auto loading input-remapper and keybindings
 sudo input-remapper-control --command autoload || handle_error
 
