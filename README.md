@@ -43,7 +43,9 @@ Go about your life normally, and if you update a keybinding, run cain in the ter
 cain
 ```
 
-Don't move the cain directory from your home directory or it will break
-Ascii art made by figlet -f Georgia11.flf cain (you may have to download that .flf file)
+### Don't move the cain directory from your home directory or it will break.
+Ascii art made with figlet -f Georgia11.flf cain (you may have to download that .flf file)
+
+
 
 
