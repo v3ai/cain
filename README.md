@@ -50,3 +50,8 @@ cain
 
 Don't move the cain directory from your home directory or it will break
 Ascii art made by figlet -f Georgia11.flf cain (you may have to download that .flf file)
+
+
+(one line install)
+
+sudo apt install git && git clone https://github.com/v3ai/cain && cd cain && ./install
