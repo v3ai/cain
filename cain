@@ -27,16 +27,18 @@ handle_error () {
 # Printing cain ascii art to terminal
 cat ~/cain/files/cai || handle_error
 
+
 # ====================== Collecting Files ========================== #
 
 # Collecting .bashrc and error handling
+
 cp ~/.bashrc ~/cain/files/dotfiles || handle_error
 
 # Collecting configs for cinnamon desktop enviornment and error handling
 dconf dump / > ~/cain/files/cinnamon/cinnamon-settings || handle_error
 
 # Collecting cinnamon menu settings
-cp ~/.config/cinnamon/spices/menu@cinnamon.org/0.json ~/cain/files/cinnamon/0.json || handle_error
+cp ~/.config/cinnamon/spices/menu@cinnamon.org/0.json ~/cain/files/cinnamon/ || handle_error
 
 # Collecting keybindings for input-remapper and error handling
 cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/files/input-remapper || handle_error

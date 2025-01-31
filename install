@@ -56,7 +56,7 @@ git config --global user.email "rhettapples@google-email.com" || handle_error
 dconf load / < ~/cain/files/cinnamon/cinnamon-settings || handle_error
 
 # Loading configs for cinnamon menu settings
-cp ~/cain/files/cinnamon/0.json ~/.config/cinnamon/spices/menu@cinnamon.org/0.json || handle_error
+cp ~/cain/files/cinnamon/0.json ~/.config/cinnamon/spices/menu@cinnamon.org/ || handle_error
 
 # Making a directory to put micro bindings in if they don't exist
 if [ ! -d "$HOME/.config/micro" ]; then
@@ -68,10 +68,10 @@ if [ ! -d "$HOME/.config/micro/buffers" ]; then
 fi
 
 # Loading micro keybindings
-cp ~/cain/files/micro/bindings.json ~/.config/micro/bindings.json || handle_error
+cp ~/cain/files/micro/bindings.json ~/.config/micro/ || handle_error
 
 # Loading micro settings
-cp ~/cain/files/micro/settings.json ~/.config/micro/settings.json || handle_error
+cp ~/cain/files/micro/settings.json ~/.config/micro/ || handle_error
 
 #Making correct directories for input-remapper if they don't exist
 if [ ! -d "$HOME/.config/input-remapper-2" ]; then
@@ -88,22 +88,22 @@ fi
 
 
 # Loading keybindings for input-remapper
-cp ~/cain/files/input-remapper/rhett-keybindings.json ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json || handle_error
+cp ~/cain/files/input-remapper/rhett-keybindings.json ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/ || handle_error
 
 # Loading config file for input-remapper
-cp ~/cain/files/input-remapper/config.json ~/.config/input-remapper-2/config.json || handle_error
+cp ~/cain/files/input-remapper/config.json ~/.config/input-remapper-2/ || handle_error
 
 # Loading xmodmap for input-remapper
-cp ~/cain/files/input-remapper/xmodmap.json ~/.config/input-remapper-2/xmodmap.json  || handle_error
+cp ~/cain/files/input-remapper/xmodmap.json ~/.config/input-remapper-2/  || handle_error
 
 # Starting and auto loading input-remapper and keybindings
 sudo input-remapper-control --command autoload || handle_error
 
 # Loading my .bashrc file
-cp ~/cain/files/dotfiles/.bashrc ~/.bashrc || handle_error
+cp ~/cain/files/dotfiles/.bashrc ~/ || handle_error
 
 # Copying cain to the user's $PATH so it can be executed
-sudo cp cain /usr/local/bin/cain || handle_error
+sudo cp cain /usr/local/bin/ || handle_error
 
 
 # Successful install of cain
