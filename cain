@@ -20,7 +20,7 @@
 
 
 # ==================== Making the cli look nice ==================== #
-cat ~/cain/files/casi
+cat ~/cain/files/casi ||( echo "error" && exit 1)
 # ====================== Collecting Files ========================== #
 
 # Collecting .bashrc and error handling
