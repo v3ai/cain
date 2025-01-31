@@ -32,7 +32,7 @@ The install script also gives you a command called "cain" that will grab the mos
 
 ### How do I use cain (linux mint)
 
-(One line install)
+(One line install), paste into terminal
 ```
 cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && cd cain && ./install
 ```
