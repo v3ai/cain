@@ -388,6 +388,14 @@ network-traffic=false
 autoconnect=1
 scaling=1
 
+[org/virt-manager/virt-manager/vms/0822da68790a4ee09fe172d51f38a7f8]
+autoconnect=1
+scaling=1
+
+[org/virt-manager/virt-manager/vms/0da9a08cabeb4bcaa7e6f14fecdb6667]
+autoconnect=1
+scaling=1
+
 [org/virt-manager/virt-manager/vms/17ff614811c8480a9f1a38f19e24cd35]
 autoconnect=1
 scaling=1
@@ -424,6 +432,10 @@ scaling=1
 vm-window-size=(1024, 841)
 
 [org/virt-manager/virt-manager/vms/9ce55a47cd5940f8a17576a8478c4442]
+autoconnect=1
+scaling=1
+
+[org/virt-manager/virt-manager/vms/e31120f3db4d46e4b98817f6f2ea0c93]
 autoconnect=1
 scaling=1
 

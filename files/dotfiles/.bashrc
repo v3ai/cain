@@ -116,11 +116,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#Rhett's dirs
-export BOOKS="~/Desktop/books"
-export GENERAL_PROGRAMMING="~/Desktop/books/programming/general-programming"
-export WEBSITE="~/Desktop/rhettapplestone.com"
-
 #Rhett's Aliases
 
 #Easy nav to Desktop and Downlads dir from anywhere
@@ -129,11 +124,11 @@ alias dow="cd ~/Downloads"
 alias doc="cd ~/Documents"
 
 #Easy nav to books dir, 
-alias books="cd $BOOKS"
-alias gen="cd $GENERAL_PROGRAMMING"
+alias books="cd ~/Desktop/books"
+alias gen="cd ~/Desktop/books/programming/general-programming"
 
 #Easy nav to website
-alias rhett="cd $WEBSITE"
+alias rhett="cd ~/Desktop/rhettapplestone.com"
 
 #easy to nav and edit todo list and push to github
 alias list="wdir=$(pwd) && cd $WEBSITE && micro list && qcom && cd $wdir"
