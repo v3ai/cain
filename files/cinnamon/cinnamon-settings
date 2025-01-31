@@ -381,6 +381,10 @@ isos=['/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/lib
 disk-usage=false
 network-traffic=false
 
+[org/virt-manager/virt-manager/vms/012acd508ebf42f2b8eea2ca8d9e9dce]
+autoconnect=1
+scaling=1
+
 [org/virt-manager/virt-manager/vms/1dae9130ed75423ab7fa304ac3aef36a]
 autoconnect=1
 scaling=1
