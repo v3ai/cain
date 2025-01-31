@@ -116,7 +116,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
 #Rhett's dirs
 export BOOKS="~/Desktop/books"
 export GENERAL_PROGRAMMING="~/Desktop/books/programming/general-programming"
