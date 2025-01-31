@@ -32,20 +32,13 @@ The install script also gives you a command called "cain" that will grab the mos
 
 ### How do I use cain (linux mint)
 
-
-Change to your home directory and clone the cain repo
+(One line install)
 ```
-cd 
-git clone https://github.com/v3ai/cain
+cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && cd cain && ./install
 ```
 
-Go inside the cain directory and run the install script
-```
-cd cain
-./install
-```
 
-Go about your life normally, and if you update a keybinding run cain in the terminal so you can download all your bindings later
+Go about your life normally, and if you update a keybinding, run cain in the terminal so you can have all your configs in one place with an easy way to install them
 ```
 cain
 ```
@@ -54,7 +47,3 @@ Don't move the cain directory from your home directory or it will break
 Ascii art made by figlet -f Georgia11.flf cain (you may have to download that .flf file)
 
 
-(one line install)
-```
-sudo apt install git && git clone https://github.com/v3ai/cain && cd cain && ./install
-```
