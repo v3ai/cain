@@ -22,77 +22,38 @@ handle_error () {
 	echo "An error has occured" && exit 1 
 }
 
-# ==================== Making the cli look nice ==================== #
+# ================== Making The CLI look pretty ==================== #
+
+# Printing cain ascii art to terminal
 cat ~/cain/files/cai || handle_error
+
 # ====================== Collecting Files ========================== #
 
 # Collecting .bashrc and error handling
-cp ~/.bashrc ~/cain/files/dotfiles
-if [ $? -eq 0 ]; then
-	echo ".bashrc collected successfully"
-else
-	echo "Error has occured collecting .bashrc" && exit 1
-
-fi
+cp ~/.bashrc ~/cain/files/dotfiles || handle_error
 
 # Collecting configs for cinnamon desktop enviornment and error handling
-dconf dump / > ~/cain/files/cinnamon/cinnamon-settings
-if [ $? -eq 0 ]; then
-	echo "cinnamon settings collected successfully"
-else
-	echo "Error has occured collecting cinnamon settings" && exit 1
-
-fi
+dconf dump / > ~/cain/files/cinnamon/cinnamon-settings || handle_error
 
 # Collecting cinnamon menu settings
-cp ~/.config/cinnamon/spices/menu@cinnamon.org/0.json ~/cain/files/cinnamon/0.json
-if [ $? -eq 0 ]; then
-	echo "cinnamon menu settings collected successfully"
-else
-	echo "Error has occured collecting cinnamon menu settings" && exit 1
-
-fi
+cp ~/.config/cinnamon/spices/menu@cinnamon.org/0.json ~/cain/files/cinnamon/0.json || handle_error
 
 # Collecting keybindings for input-remapper and error handling
-cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/files/input-remapper
-if [ $? -eq 0 ]; then
-	echo "Input-remapper keybindings colected successfully"
-else
-	echo "Error has occured collecting input-remapper keybindings" && exit 1
-
-fi
+cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/files/input-remapper || handle_error
 
 # Collecting configs for input-remapper and error handling
-cp ~/.config/input-remapper-2/config.json ~/cain/files/input-remapper
-if [ $? -eq 0 ]; then
-	echo "Input remapper config collected successfully"
-else
-	echo "Error has occured collecting input-remapper config" && exit 1
-
-fi
+cp ~/.config/input-remapper-2/config.json ~/cain/files/input-remapper || handle_error
 
 # Collecting micro key bindings and error handling
-cp ~/.config/micro/bindings.json ~/cain/files/micro
-if [ $? -eq 0 ]; then
-	echo "Micro keybindings collected successfully"
-else
-	echo "Error has occured collecting micro key bindings" && exit 1
-
-fi
+cp ~/.config/micro/bindings.json ~/cain/files/micro || handle_error
 
 # Collecting micro key settings and error handling
-cp ~/.config/micro/settings.json ~/cain/files/micro
-if [ $? -eq 0 ]; then
-	echo -e "\nMicro settings collected successfully"
-else
-	echo "Error has occured collecting micro settings" && exit 1
-
-fi
+cp ~/.config/micro/settings.json ~/cain/files/micro || handle_error
 
 
 # ================== Committing files with git ===================== #
 
-cd ~/cain
+cd ~/cain || handle_error
 git add .
 git commit -m "cain: configs have collected | msg: $1"
 

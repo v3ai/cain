@@ -17,86 +17,90 @@
 # ================================================================== #
 
 
+# ==================== Error handling function ===================== #
+
+handle_error () {
+	echo "An error has occured" && exit 1 
+}
+
+# ================== Making The CLI look pretty ==================== #
+
+# Printing cain ascii art to terminal
+cat ~/cain/files/cai || handle_error
+
+
 # ================== Installing Needed Programs ==================== #
 
-# Making Making everything look pretty
-cat ~/cain/files/cai
-if [ $? -ne 0 ]; then
-	echo "Error has occured printing cain ascii art in ~/cain/files/cai" && exit 1
-fi
-
 # Update to most reecent apt repos
-sudo apt update -y
+sudo apt update -y || handle_error
 
 # Text editor I use
-sudo apt install micro -y
+sudo apt install micro -y || handle_error
 
 # Getting clipboard working right
-sudo apt install xclip -y
+sudo apt install xclip -y || handle_error
 
 # Getting program I use for keybindings
-sudo apt install input-remapper -y
+sudo apt install input-remapper || handle_error
 
 # Getting background I like
-sudo apt install mint-backgrounds-victoria -y
+sudo apt install mint-backgrounds-victoria || handle_error
 
 # Installing git and configuring it
-sudo apt install git -y
-git config --global user.name "Rhett Applestone"
-git config --global user.email "rhettapples@google-email.com"
+sudo apt install git -y || handle_error
+git config --global user.name "Rhett Applestone" || handle_error
+git config --global user.email "rhettapples@google-email.com" || handle_error
 
 # ================ Putting Files In The Right Places =============== #
 
 # Loading configs for cinnamon desktop enviornment
-dconf load / < ~/cain/files/cinnamon/cinnamon-settings
+dconf load / < ~/cain/files/cinnamon/cinnamon-settings || handle_error
 
 # Loading configs for cinnamon menu settings
-cp ~/cain/files/cinnamon/0.json ~/.config/cinnamon/spices/menu@cinnamon.org/0.json 
+cp ~/cain/files/cinnamon/0.json ~/.config/cinnamon/spices/menu@cinnamon.org/0.json || handle_error
 
 #Making correct directories for input-remapper
-mkdir ~/.config/input-remapper-2
-mkdir ~/.config/input-remapper-2/presets
-mkdir ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard
+mkdir ~/.config/input-remapper-2 || handle_error
+mkdir ~/.config/input-remapper-2/presets || handle_error
+mkdir ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard || handle_error
 
 
 # Loading keybindings for input-remapper
-cp ~/cain/files/input-remapper/rhett-keybindings.json ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json
+cp ~/cain/files/input-remapper/rhett-keybindings.json ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json || handle_error
 
 # Loading config file for input-remapper
-cp ~/cain/files/input-remapper/config.json ~/.config/input-remapper-2/config.json
+cp ~/cain/files/input-remapper/config.json ~/.config/input-remapper-2/config.json || handle_error
 
 # Starting and auto loading input-remapper and keybindings
-sudo systemctl start input-remapper
-sudo input-remapper-control --command autoload
+sudo systemctl start input-remapper || handle_error
+sudo input-remapper-control --command autoload || handle_error
 
 # Loading my .bashrc file
-cp ~/cain/files/dotfiles/.bashrc ~/.bashrc
+cp ~/cain/files/dotfiles/.bashrc ~/.bashrc || handle_error
 
 # Making bash see the new .bashrc file
-source ~/.bashrc
+source ~/.bashrc || handle_error
 
 # Making a directory to put micro bindings in
-mkdir ~/.config/micro
-mkdir ~/.config/micro/buffers
+mkdir ~/.config/micro || handle_error
+mkdir ~/.config/micro/buffers || handle_error
 
 # Loading micro keybindings
-cp ~/cain/files/micro/bindings.json ~/.config/micro/bindings.json
+cp ~/cain/files/micro/bindings.json ~/.config/micro/bindings.json || handle_error
 
 # Loading micro settings
-cp ~/cain/files/micro/settings.json ~/.config/micro/settings.json
+cp ~/cain/files/micro/settings.json ~/.config/micro/settings.json || handle_error
 
 # Copying cain to the user's $PATH so it can be executed
-sudo cp cain /usr/local/bin/cain
+sudo cp cain /usr/local/bin/cain || handle_error
 
 echo -e "\ncain is installed"
 
-
-sleep 1
-
+echo -n "System will reboot in: "	
 for i in $(seq 0 4);
 do	
-    echo "System will reboot in $((5 - $i)) seconds"
-    sleep 1
+	echo -n "$((5 - i)) "
+    sleep 1    
 done
 
 reboot
