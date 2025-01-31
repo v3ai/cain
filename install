@@ -106,10 +106,11 @@ cp ~/cain/files/dotfiles/.bashrc ~/.bashrc || handle_error
 sudo cp cain /usr/local/bin/cain || handle_error
 
 
-# Countdown before restart
+# Successful install of cain
 echo -e "\ncain is installed"
 
-echo -n "System will reboot in: "	
+# Countdown before restart
+echo -e "reboot in:"	
 for i in $(seq 0 4);
 do	
 	echo "$((5 - i))"
@@ -117,5 +118,6 @@ do
 done
 
 reboot
+
 # ================================================================== #
 
