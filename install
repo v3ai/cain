@@ -26,7 +26,7 @@ handle_error () {
 # ================== Making The CLI look pretty ==================== #
 
 # Printing cain ascii art to terminal
-cat ~/cain/files/cai || handle_error
+cat ~/cain/files/cainfiles/cai || handle_error
 
 # ================== Installing Needed Programs ==================== #
 
@@ -105,7 +105,7 @@ cp ~/cain/files/dotfiles/.bashrc ~/ || handle_error
 # Copying cain to the user's $PATH so it can be executed
 sudo cp cain /usr/local/bin/ || handle_error
 
-crontab ~/cain/files/caintab || handle_error
+crontab ~/cain/files/cainfiles/caintab || handle_error
 
 
 # Successful install of cain

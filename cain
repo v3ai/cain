@@ -25,7 +25,7 @@ handle_error () {
 # ================== Making The CLI look pretty ==================== #
 
 # Printing cain ascii art to terminal
-cat ~/cain/files/cai || handle_error
+cat ~/cain/files/cainfiles/cai || handle_error
 
 # ====================== Collecting Files ========================== #
 
