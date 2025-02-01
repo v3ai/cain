@@ -122,7 +122,6 @@ fi
 alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
 alias doc="cd ~/Documents"
-alias doom="cd ~/Documents"
 
 
 #Easy nav to books dir, 
