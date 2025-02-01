@@ -160,4 +160,3 @@ shopt -s autocd
 #Default editor micro
 export EDITOR=micro
 export VISUAL=micro
-
