@@ -92,6 +92,9 @@ cursor-theme='Yaru'
 gtk-theme='Mint-Y-Dark-Grey'
 toolkit-accessibility=false
 
+[org/cinnamon/desktop/keybindings]
+show-desklets=@as []
+
 [org/cinnamon/desktop/keybindings/media-keys]
 calculator=['<Alt>7']
 home=['<Alt>9', 'XF86Explorer']

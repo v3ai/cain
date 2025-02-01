@@ -52,7 +52,7 @@ sed -i '/refresh-last-run/d' ~/cain/files/cainfiles/tmp/current-cinnamon
 sed -i '/refresh-last-run/d' ~/cain/files/cainfiles/tmp/cinnamon-settings
 
 if ! cmp -s ~/cain/files/cainfiles/tmp/current-cinnamon ~/cain/files/cainfiles/tmp/cinnamon-settings; then
-	dconf dump / > ~/cain/files/cinnamon-settings || handle_error
+	dconf dump / > ~/cain/files/cinnamon/cinnamon-settings || handle_error
 	echo "CHANGED: Collected cinnamon settings" && CHANGES="$CHANGES Collected cinnamon settings"
 else
 	echo "SAME: Cinnamon settings up to date"
@@ -125,7 +125,7 @@ then
 	cd ~/cain || handle_error
 	git add .
 	git commit -m "cain:$CHANGES"
-	            
+	git push	            
 fi
 
 # ================================================================== #
