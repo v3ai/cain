@@ -42,14 +42,25 @@ else
 fi
 
 # Collecting configs for cinnamon desktop enviornment and error handling
-dconf dump / > ~/cain/files/cinnamon-settings || handle_error
-if ! cmp -s ~/cain/files/cinnamon-settings ~/cain/files/cinnamon/cinnamon-settings; then
-	mv ~/cain/files/cinnamon-settings ~/cain/files/cinnamon/cinnamon-settings
+
+
+dconf dump / > ~/cain/files/cainfiles/tmp/current-cinnamon
+
+cp ~/cain/files/cinnamon/cinnamon-settings ~/cain/files/cainfiles/tmp
+
+sed -i '/refresh-last-run/d' ~/cain/files/cainfiles/tmp/current-cinnamon
+sed -i '/refresh-last-run/d' ~/cain/files/cainfiles/tmp/cinnamon-settings
+
+if ! cmp -s ~/cain/files/cainfiles/tmp/current-cinnamon ~/cain/files/cainfiles/tmp/cinnamon-settings; then
+	dconf dump / > ~/cain/files/cinnamon-settings || handle_error
 	echo "CHANGED: Collected cinnamon settings" && CHANGES="$CHANGES Collected cinnamon settings"
 else
-	rm ~/cain/files/cinnamon-settings
 	echo "SAME: Cinnamon settings up to date"
 fi
+
+rm ~/cain/files/cainfiles/tmp/current-cinnamon 
+rm ~/cain/files/cainfiles/tmp/cinnamon-settings
+
 
 # Collecting cinnamon menu settings
 
