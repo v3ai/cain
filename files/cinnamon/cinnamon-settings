@@ -64,6 +64,18 @@ panels-height=['1:33']
 [org/cinnamon/desktop/a11y/applications]
 screen-keyboard-enabled=false
 
+[org/cinnamon/desktop/a11y/keyboard]
+bouncekeys-delay=300
+mousekeys-accel-time=300
+mousekeys-init-delay=300
+mousekeys-max-speed=10
+slowkeys-delay=300
+
+[org/cinnamon/desktop/a11y/mouse]
+dwell-threshold=10
+dwell-time=1.2
+secondary-click-time=1.2
+
 [org/cinnamon/desktop/background]
 picture-options='zoom'
 picture-uri='file:///usr/share/backgrounds/linuxmint-victoria/mmiyagi_japan.jpg'
