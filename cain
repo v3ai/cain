@@ -116,7 +116,7 @@ then
 	git commit -m "cain:$CHANGES"
 	      
 	#Optional line if you want to push the repo every time
-	git push
+	#git push
 	            
 fi
 

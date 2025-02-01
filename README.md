@@ -25,7 +25,7 @@ cain stands for Collect And INstall and it does those two things
 
 First, the install script will download all required programs and put all of your configuration files in their respective places
 
-then it gives you a command called "cain" that will grab the most reecent version of those files, commit them to git in the cain directory, and (optionally) push them.
+then it gives you a command called "cain" and sets up a crontab that will grab the most reecent version of those files, commit them to git in the cain directory, and (optionally) push them automatically.
 
 
 ## NOTE: This program will switch your dotfiles and configs to mine
@@ -38,10 +38,13 @@ cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && cd ca
 ```
 
 
-Go about your life normally, and if you update a keybinding, run cain in the terminal so you can have all your configs in one place for an easy install
+Go about your life normally, and if you update a keybinding, cain will see it and commit it to the cain directory
+
+You can also execute
 ```
 cain
 ```
+in the terminal if you want to do update it yourself
 
 ### Don't move the cain directory from your home directory or it will break.
 Ascii art made with figlet -f Georgia11.flf cain (you may have to download that .flf file)
