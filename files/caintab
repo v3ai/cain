@@ -1,2 +1,2 @@
 * * * * * /usr/local/bin/cain
-30 12 * * * cd ~/cain && git push
+30 20 * * 6 cd ~/cain && git push
