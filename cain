@@ -36,28 +36,28 @@ CHANGES=""
 
 if ! cmp -s ~/.bashrc ~/cain/files/dotfiles/.bashrc; then
 	cp ~/.bashrc ~/cain/files/dotfiles || handle_error
-	echo "Collected .bashrc" && CHANGES="$CHANGES Collected .bashrc"
+	echo "CHANGED: Collected .bashrc" && CHANGES="$CHANGES Collected .bashrc"
 else 
-	echo ".bashrc up to date"
+	echo "SAME: .bashrc up to date"
 fi
 
 # Collecting configs for cinnamon desktop enviornment and error handling
 dconf dump / > ~/cain/files/cinnamon-settings || handle_error
 if ! cmp -s ~/cain/files/cinnamon-settings ~/cain/files/cinnamon/cinnamon-settings; then
 	mv ~/cain/files/cinnamon-settings ~/cain/files/cinnamon/cinnamon-settings
-	echo "Collected cinnamon settings" && CHANGES="$CHANGES Collected cinnamon settings"
+	echo "CHANGED: Collected cinnamon settings" && CHANGES="$CHANGES Collected cinnamon settings"
 else
 	rm ~/cain/files/cinnamon-settings
-	echo "Cinnamon settings up to date"
+	echo "SAME: Cinnamon settings up to date"
 fi
 
 # Collecting cinnamon menu settings
 
 if ! cmp -s ~/.config/cinnamon/spices/menu@cinnamon.org/0.json ~/cain/files/cinnamon/0.json; then
 	cp ~/.config/cinnamon/spices/menu@cinnamon.org/0.json ~/cain/files/cinnamon/ || handle_error
-	echo "Collected menu settings" && CHANGES="$CHANGES Collected menu settings"
+	echo "CHANGED: Collected menu settings" && CHANGES="$CHANGES Collected menu settings"
 else 
-	echo "Menu settings up to date"
+	echo "SAME: Menu settings up to date"
 fi
 
 
@@ -65,36 +65,36 @@ fi
 
 if ! cmp -s ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/files/input-remapper/rhett-keybindings.json; then
 	cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/files/input-remapper || handle_error
-	echo "Collected input-remapper keybindings" && CHANGES="$CHANGES Collected input-remapper keybindings"
+	echo "CHANGED: Collected input-remapper keybindings" && CHANGES="$CHANGES Collected input-remapper keybindings"
 else 
-	echo "Input-remapper keybindings up to date"
+	echo "SAME: Input-remapper keybindings up to date"
 fi
 
 # Collecting configs for input-remapper and error handling
 
 if ! cmp -s ~/.config/input-remapper-2/config.json ~/cain/files/input-remapper/config.json; then
 	cp ~/.config/input-remapper-2/config.json ~/cain/files/input-remapper || handle_error
-	echo "Collected input-remapper config" && CHANGES="$CHANGES Collected input-remapper config"
+	echo "CHANGED: Collected input-remapper config" && CHANGES="$CHANGES Collected input-remapper config"
 else 
-	echo "Input-remapper config up to date"
+	echo "SAME: Input-remapper config up to date"
 fi
 
 # Collecting xmodmap.json for input-remapper and error handling
 
 if ! cmp -s ~/.config/input-remapper-2/xmodmap.json ~/cain/files/input-remapper/xmodmap.json; then
 	cp ~/.config/input-remapper-2/xmodmap.json ~/cain/files/input-remapper || handle_error
-	echo "Collected xmodmap.json" && CHANGES="$CHANGES Collected xmodmap.json"
+	echo "CHANGED: Collected xmodmap.json" && CHANGES="$CHANGES Collected xmodmap.json"
 else 
-	echo "Xmodmap.json up to date"
+	echo "SAME: Xmodmap.json up to date"
 fi
 
 # Collecting micro key bindings and error handling
 
 if ! cmp -s ~/.config/micro/bindings.json ~/cain/files/micro/bindings.json; then
 	cp ~/.config/micro/bindings.json ~/cain/files/micro || handle_error
-	echo "Collected micro keybindings" && CHANGES="$CHANGES Collected micro keybindings"
+	echo "CHANGED: Collected micro keybindings" && CHANGES="$CHANGES Collected micro keybindings"
 else 
-	echo "Micro keybindings up to date"
+	echo "SAME: Micro keybindings up to date"
 fi
 
 
@@ -102,9 +102,9 @@ fi
 
 if ! cmp -s ~/.config/micro/settings.json ~/cain/files/micro/settings.json; then
 	cp ~/.config/micro/settings.json ~/cain/files/micro || handle_error
-	echo "Collected micro settings" && CHANGES="$CHANGES Collected micro settings"
+	echo "CHANGED: Collected micro settings" && CHANGES="$CHANGES Collected micro settings"
 else 
-	echo "Micro settings up to date"
+	echo "SAME: Micro settings up to date"
 fi
 
 # ======== Committing files with git if $CHANGES not empty ========= #
