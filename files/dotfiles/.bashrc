@@ -131,10 +131,12 @@ alias gen="cd ~/Desktop/books/programming/general-programming"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
 
 #easy to nav and edit todo list and push to github
-alias list="wdir=$(pwd) && cd $WEBSITE && micro list && qcom && cd $wdir"
+alias list="wdir=$(pwd) && cd ~/Desktop/rhettapplestone.com && micro list && qcom && cd $wdir"
 
 #Easy way to exit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
+
+alias mbind="micro ~/.config/micro/bindings.json"
 
 #So you don't have to remember how to use the find command
 
