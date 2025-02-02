@@ -17,7 +17,7 @@
 
 cain stands for Collect And INstall
 
-Think of cain like a little robot that helps you keep track of dotfiles, keybindings, and desktop enviornemnt settings and easily install them on a new computer
+Think of cain like a little robot that helps you keep track of dotfiles, keybindings, and desktop environment settings and easily install them on a new computer
 
 I made cain because I was having a hard time keeping track and updating individual repositories for configs
 
@@ -25,7 +25,7 @@ Cain makes it easy to make your computer exactly like you like it on a fresh ins
 
 First, the install script will download all required programs and put all of your configuration files in their respective places
 
-then it gives you a command called "cain" and sets up a crontab that will grab the most reecent version of those files automatically, and commit them to git in the cain directory.
+then it gives you a command called "cain" and sets up a crontab that will grab the most recent version of those files automatically, and commit them to git in the cain directory.
 
 
 ## NOTE: This program will switch your dotfiles and configs to mine
