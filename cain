@@ -125,7 +125,9 @@ then
 	cd ~/cain || handle_error
 	git add .
 	git commit -m "cain:$CHANGES"
-	git push	            
+	
+	#Optional line
+	#git push	            
 fi
 
 # ================================================================== #

@@ -25,7 +25,7 @@ cain stands for Collect And INstall and it does those two things
 
 First, the install script will download all required programs and put all of your configuration files in their respective places
 
-then it gives you a command called "cain" and sets up a crontab that will grab the most reecent version of those files automatically, commit them to git in the cain directory, and (optionally) push them.
+then it gives you a command called "cain" and sets up a crontab that will grab the most reecent version of those files automatically, commit them to git in the cain directory.
 
 
 ## NOTE: This program will switch your dotfiles and configs to mine
@@ -36,7 +36,8 @@ then it gives you a command called "cain" and sets up a crontab that will grab t
 ```
 cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && cd cain && ./install
 ```
-
+if you want to make cain push to github whenever you change a file, edit /usr/local/bin/cain
+and remove the remove the pound sign before the line "git push"
 
 Go about your life normally, and if you update a keybinding, cain will see it and commit it to the cain directory for you
 
