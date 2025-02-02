@@ -49,7 +49,7 @@ volume=1.0
 width=600
 
 [org/blueman/general]
-window-properties=[730, 499, 342, 337]
+window-properties=[2876, 870, 2, 18]
 
 [org/cinnamon]
 alttab-switcher-delay=100
