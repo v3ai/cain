@@ -93,7 +93,7 @@ gtk-theme='Mint-Y-Dark-Grey'
 toolkit-accessibility=false
 
 [org/cinnamon/desktop/keybindings]
-show-desklets=['<Alt>5']
+show-desklets=@as []
 
 [org/cinnamon/desktop/keybindings/media-keys]
 calculator=['<Alt>7']
@@ -108,7 +108,7 @@ close=['<Alt>comma']
 panel-run-dialog=@as []
 push-tile-left=['<Alt>y']
 push-tile-right=['<Alt>p']
-show-desktop=['<Super>d', '<Alt>6']
+show-desktop=['<Super>d']
 switch-windows=['<Alt>Tab', '<Alt>backslash']
 toggle-maximized=['<Alt>r']
 
