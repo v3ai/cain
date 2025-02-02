@@ -137,7 +137,7 @@ alias list="wdir=$(pwd) && cd ~/Desktop/rhettapplestone.com && micro list && qco
 #Easy way to exit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 
-alias mbind="micro ~/.config/micro/bindings.json"
+alias mbin="micro ~/.config/micro/bindings.json"
 
 #So you don't have to remember how to use the find command
 
