@@ -361,7 +361,8 @@ select-all='<Primary><Shift>a'
 background-color='rgb(21,20,20)'
 background-transparency-percent=16
 cursor-blink-mode='off'
-cursor-shape='ibeam'
+cursor-shape='block'
+scrollbar-policy='never'
 use-theme-colors=false
 use-theme-transparency=true
 use-transparent-background=false
@@ -473,6 +474,10 @@ vm-window-size=(976, 766)
 autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/58b807ebaa6c40e996b72af9d024806f]
+autoconnect=1
+scaling=1
 
 [org/virt-manager/virt-manager/vms/5cba2465023548f189b67878faf5f33c]
 autoconnect=1
