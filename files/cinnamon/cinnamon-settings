@@ -108,6 +108,7 @@ close=['<Alt>comma']
 panel-run-dialog=@as []
 push-tile-left=['<Alt>y']
 push-tile-right=['<Alt>p']
+show-desktop=['<Super>d', '<Alt>6']
 switch-windows=['<Alt>Tab', '<Alt>backslash']
 toggle-maximized=['<Alt>r']
 
