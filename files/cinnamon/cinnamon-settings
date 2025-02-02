@@ -478,6 +478,10 @@ autoconnect=1
 scaling=1
 vm-window-size=(843, 835)
 
+[org/virt-manager/virt-manager/vms/a8c767a6136d4ffbae33ec7cd8c6881e]
+autoconnect=1
+scaling=1
+
 [org/virt-manager/virt-manager/vms/e31120f3db4d46e4b98817f6f2ea0c93]
 autoconnect=1
 scaling=1
@@ -486,6 +490,7 @@ vm-window-size=(1024, 841)
 [org/virt-manager/virt-manager/vms/ee4406ad48c84bcfaaeca7c6a1924339]
 autoconnect=1
 scaling=1
+vm-window-size=(1024, 835)
 
 [org/virt-manager/virt-manager/vms/fd61f704e3bc48aa899c8859eb1a8e10]
 autoconnect=1
