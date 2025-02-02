@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1738458735
+refresh-last-run=1738471828
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -479,6 +479,11 @@ scaling=1
 vm-window-size=(843, 835)
 
 [org/virt-manager/virt-manager/vms/a8c767a6136d4ffbae33ec7cd8c6881e]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/aaa32298920c4fffbb12190dcee18343]
 autoconnect=1
 scaling=1
 
