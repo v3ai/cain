@@ -93,7 +93,7 @@ gtk-theme='Mint-Y-Dark-Grey'
 toolkit-accessibility=false
 
 [org/cinnamon/desktop/keybindings]
-show-desklets=@as []
+show-desklets=['<Alt>5']
 
 [org/cinnamon/desktop/keybindings/media-keys]
 calculator=['<Alt>7']
