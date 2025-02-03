@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1738484097
+refresh-last-run=1738544318
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -188,7 +188,7 @@ source-currency=''
 source-units='degree'
 target-currency=''
 target-units='radian'
-window-position=(271, 328)
+window-position=(720, 0)
 word-size=64
 
 [org/gnome/desktop/a11y]
@@ -383,7 +383,7 @@ sort-column='name'
 sort-directories-first=true
 sort-order='ascending'
 type-format='category'
-window-position=(172, 193)
+window-position=(0, 91)
 window-size=(1096, 481)
 
 [org/nemo/window-state]
@@ -526,7 +526,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/Desktop'
+virtual-root='file:///home/rhett/Documents'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
