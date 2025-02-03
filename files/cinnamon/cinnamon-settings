@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1738544318
+refresh-last-run=1738551520
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -539,7 +539,7 @@ size=(926, 733)
 state=87168
 
 [org/x/reader/default]
-window-ratio=(2.8514851485148514, 1.2594268476621417)
+window-ratio=(2.7100250602039595, 1.2533021133525457)
 
 [org/x/viewer/window]
 maximized=true
