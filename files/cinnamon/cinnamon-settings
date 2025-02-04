@@ -82,7 +82,7 @@ picture-uri='file:///usr/share/backgrounds/linuxmint-victoria/mmiyagi_japan.jpg'
 
 [org/cinnamon/desktop/background/slideshow]
 delay=15
-image-source='xml:///usr/share/cinnamon-background-properties/linuxmint.xml'
+image-source='xml:///usr/share/cinnamon-background-properties/linuxmint-victoria.xml'
 
 [org/cinnamon/desktop/interface]
 clock-use-24h=false
@@ -500,6 +500,10 @@ autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
 
+[org/virt-manager/virt-manager/vms/794001eaeb00480bb27eadb9e3bdf03c]
+autoconnect=1
+scaling=1
+
 [org/virt-manager/virt-manager/vms/9ce55a47cd5940f8a17576a8478c4442]
 autoconnect=1
 scaling=1
@@ -514,6 +518,10 @@ vm-window-size=(1024, 841)
 autoconnect=1
 scaling=1
 vm-window-size=(1024, 638)
+
+[org/virt-manager/virt-manager/vms/dafda105195c4bdaafa57a199ad97c01]
+autoconnect=1
+scaling=1
 
 [org/virt-manager/virt-manager/vms/e31120f3db4d46e4b98817f6f2ea0c93]
 autoconnect=1
