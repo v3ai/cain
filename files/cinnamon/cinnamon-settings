@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1738647639
+refresh-last-run=1738654841
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -420,10 +420,10 @@ show-toolbar=true
 graphics-type='system'
 
 [org/virt-manager/virt-manager/paths]
-media-default='/home/rhett/Downloads'
+media-default='/home/rhett/tint'
 
 [org/virt-manager/virt-manager/urls]
-isos=['/var/lib/libvirt/images/trisquel_11.0.1_amd64.iso', '/var/lib/libvirt/images/archlinux-x86_64.iso', '/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/Win10_22H2_English_x64v1.iso']
+isos=['/var/lib/libvirt/images/tint-2025.02.04.iso', '/home/rhett/tint/tint-2025.02.04.iso', '/var/lib/libvirt/images/trisquel_11.0.1_amd64.iso', '/var/lib/libvirt/images/archlinux-x86_64.iso', '/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/Win10_22H2_English_x64v1.iso']
 
 [org/virt-manager/virt-manager/vmlist-fields]
 disk-usage=false
@@ -478,6 +478,10 @@ vm-window-size=(1024, 835)
 autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/368a98f557894d6398ce522e2a1a0bf8]
+autoconnect=1
+scaling=1
 
 [org/virt-manager/virt-manager/vms/40c9c5092cae45f6beda52b4f7ec4dd2]
 autoconnect=1
