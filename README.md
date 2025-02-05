@@ -25,7 +25,7 @@ Cain makes it easy to make your computer exactly like you like it on a fresh ins
 
 First, the install script will download all required programs and put all of your configuration files in their respective places
 
-then it gives you a command called "cain" and sets up a crontab that will grab the most recent version of those files automatically, and commit them to git in the cain directory.
+then it gives you a command called "cain" and (optionally) sets up a crontab that will grab the most recent version of those files automatically, and commit them to git in the cain directory.
 
 
 ## NOTE: This program will switch your dotfiles and configs to mine
@@ -39,18 +39,15 @@ cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && cd ca
 if you want to make cain push to github whenever you change a file, edit /usr/local/bin/cain
 and remove the remove the pound sign before the line "git push"
 
-Go about your life normally, and if you update a keybinding, cain will see it and commit it to the cain directory for you
+Go about your life normally, and if you update a keybinding, run (or it will do it automatically if you use the crontab)
 
-You can also execute
 ```
 cain
 ```
-in the terminal if you want to update it yourself
 
 ### Don't move the cain directory from your home directory or it will break.
 Ascii art made with figlet -f Georgia11.flf cain (you may have to download that .flf file)
 
-my configs change pretty frequently, but the majority of them are at https://rhettapplestone.com/keys.html
 
 
 
