@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1738654841
+refresh-last-run=1738711494
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -482,6 +482,7 @@ vm-window-size=(1024, 841)
 [org/virt-manager/virt-manager/vms/368a98f557894d6398ce522e2a1a0bf8]
 autoconnect=1
 scaling=1
+vm-window-size=(1024, 835)
 
 [org/virt-manager/virt-manager/vms/40c9c5092cae45f6beda52b4f7ec4dd2]
 autoconnect=1
@@ -516,6 +517,7 @@ vm-window-size=(1024, 841)
 [org/virt-manager/virt-manager/vms/794001eaeb00480bb27eadb9e3bdf03c]
 autoconnect=1
 scaling=1
+vm-window-size=(996, 743)
 
 [org/virt-manager/virt-manager/vms/9ce55a47cd5940f8a17576a8478c4442]
 autoconnect=1
@@ -535,6 +537,7 @@ vm-window-size=(1024, 638)
 [org/virt-manager/virt-manager/vms/dafda105195c4bdaafa57a199ad97c01]
 autoconnect=1
 scaling=2
+vm-window-size=(1024, 726)
 
 [org/virt-manager/virt-manager/vms/e31120f3db4d46e4b98817f6f2ea0c93]
 autoconnect=1
@@ -580,7 +583,7 @@ size=(926, 733)
 state=87168
 
 [org/x/reader/default]
-window-ratio=(2.7100250602039595, 1.2533021133525457)
+window-ratio=(2.3529411764705883, 1.0542929292929293)
 
 [org/x/viewer/window]
 maximized=true
