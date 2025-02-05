@@ -105,7 +105,9 @@ cp ~/cain/files/dotfiles/.bashrc ~/ || handle_error
 # Copying cain to the user's $PATH so it can be executed
 sudo cp cain /usr/local/bin/ || handle_error
 
-crontab ~/cain/files/cainfiles/caintab || handle_error
+
+#if you want auto
+#crontab ~/cain/files/cainfiles/caintab || handle_error
 
 
 # Successful install of cain
