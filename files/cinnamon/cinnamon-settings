@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1738747505
+refresh-last-run=1738903412
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -105,7 +105,7 @@ name='g'
 calculator=['<Alt>7']
 home=['<Alt>9', 'XF86Explorer']
 screensaver=['<Alt>1', 'XF86ScreenSaver']
-terminal=['<Alt>t']
+terminal=['<Alt>t', '<Alt>Return']
 www=['<Alt>8']
 
 [org/cinnamon/desktop/keybindings/wm]
@@ -163,7 +163,7 @@ numlock-state='off'
 [org/cinnamon/settings-daemon/plugins/power]
 idle-brightness=30
 lid-close-ac-action='suspend'
-lid-close-battery-action='suspend'
+lid-close-battery-action='shutdown'
 sleep-display-ac=1800
 sleep-display-battery=1800
 sleep-inactive-ac-timeout=0
@@ -197,7 +197,7 @@ source-currency=''
 source-units='degree'
 target-currency=''
 target-units='radian'
-window-position=(720, 0)
+window-position=(730, 0)
 word-size=64
 
 [org/gnome/desktop/a11y]
@@ -396,7 +396,7 @@ window-position=(172, 193)
 window-size=(1096, 481)
 
 [org/nemo/window-state]
-geometry='937x469+25+25'
+geometry='937x469+71+147'
 maximized=false
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
@@ -524,6 +524,11 @@ autoconnect=1
 scaling=1
 vm-window-size=(843, 835)
 
+[org/virt-manager/virt-manager/vms/a8c18f748bb844e69d2d6c760aeb339d]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
 [org/virt-manager/virt-manager/vms/a8c767a6136d4ffbae33ec7cd8c6881e]
 autoconnect=1
 scaling=1
@@ -570,7 +575,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/Desktop'
+virtual-root='file:///home/rhett/Downloads'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
