@@ -153,6 +153,8 @@ alias c="clear"
 
 #open the micro or nvim text editor
 alias m="micro"
+alias vim="nvim"
+alias vi="nvim"
 alias v="nvim"
 
 #setting autocd
