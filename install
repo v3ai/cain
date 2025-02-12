@@ -42,13 +42,13 @@ sudo apt install xclip -y || handle_error
 # Getting program I use for keybindings
 sudo apt install input-remapper -y || handle_error
 
-# Getting background I like
-sudo apt install mint-backgrounds-victoria -y || handle_error
+# Getting background I like (optional)
+# sudo apt install mint-backgrounds-victoria -y || handle_error
 
 # Installing git and configuring it
 sudo apt install git -y || handle_error
 git config --global user.name "Rhett Applestone" || handle_error
-git config --global user.email "rhettapples@google-email.com" || handle_error
+git config --global user.email "rhettapples@googleemailservice.com" || handle_error
 
 # ================ Putting Files In The Right Places =============== #
 
