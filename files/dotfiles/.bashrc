@@ -157,8 +157,7 @@ alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
 
-#setting autocd
-shopt -s autocd
+alias p="python3"
 
 #Default editor micro
 export EDITOR=micro
