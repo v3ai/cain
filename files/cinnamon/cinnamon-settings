@@ -367,7 +367,8 @@ enabled-gtk-modules=@as []
 overrides=@a{sv} {}
 
 [org/gnome/terminal/legacy/keybindings]
-next-tab='<Primary>Tab'
+move-tab-left='disabled'
+next-tab='disabled'
 select-all='<Primary><Shift>a'
 
 [org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
