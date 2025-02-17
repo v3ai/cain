@@ -6,8 +6,8 @@ height=476
 width=600
 
 [ca/desrt/dconf-editor]
-saved-pathbar-path='/desktop/gnome/crypto/cache/'
-saved-view='/desktop/gnome/crypto/cache/'
+saved-pathbar-path='/org/gnome/terminal/legacy/keybindings/'
+saved-view='/org/gnome/terminal/legacy/keybindings/'
 window-height=675
 window-is-maximized=false
 window-width=953
