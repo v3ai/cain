@@ -402,7 +402,7 @@ window-size=(1096, 481)
 
 [org/nemo/window-state]
 geometry='776x586+441+121'
-maximized=false
+maximized=true
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
 
@@ -593,7 +593,7 @@ size=(926, 733)
 state=87168
 
 [org/x/reader/default]
-window-ratio=(2.8570861689252198, 1.2537537537537538)
+window-ratio=(2.7100250602039595, 1.2533021133525457)
 
 [org/x/viewer/window]
 maximized=true

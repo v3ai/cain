@@ -5,6 +5,6 @@
     "Escape": "CommandMode",
     "Alt-2": "ToggleMacro",
     "Alt-3": "PlayMacro",
-    "Alt-0": "NextSplit",
+    "Tab": "NextSplit",
     "CtrlUnderscore": "lua:comment.comment"
 }
