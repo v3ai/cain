@@ -433,7 +433,7 @@
             }
         ],
         "target_uinput": "keyboard",
-        "output_symbol": "Super_L",
+        "output_symbol": "Escape",
         "mapping_type": "key_macro"
     },
     {

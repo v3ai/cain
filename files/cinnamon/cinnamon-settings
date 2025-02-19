@@ -368,7 +368,7 @@ overrides=@a{sv} {}
 
 [org/gnome/terminal/legacy/keybindings]
 move-tab-left='disabled'
-next-tab='disabled'
+next-tab='<Control>Tab'
 select-all='<Primary><Shift>a'
 
 [org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
@@ -401,8 +401,8 @@ window-position=(172, 193)
 window-size=(1096, 481)
 
 [org/nemo/window-state]
-geometry='776x586+441+121'
-maximized=true
+geometry='776x586+294+138'
+maximized=false
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
 
@@ -524,6 +524,11 @@ autoconnect=1
 scaling=1
 vm-window-size=(996, 743)
 
+[org/virt-manager/virt-manager/vms/93180a1827f1491486ca698996ca0ac1]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
 [org/virt-manager/virt-manager/vms/9ce55a47cd5940f8a17576a8478c4442]
 autoconnect=1
 scaling=1
@@ -593,6 +598,15 @@ size=(926, 733)
 state=87168
 
 [org/x/reader/default]
+continuous=true
+dual-page=false
+dual-page-odd-left=false
+fullscreen=false
+inverted-colors=false
+show-sidebar=true
+sidebar-page='links'
+sidebar-size=133
+sizing-mode='fit-width'
 window-ratio=(2.7100250602039595, 1.2533021133525457)
 
 [org/x/viewer/window]

@@ -124,6 +124,8 @@ alias dow="cd ~/Downloads"
 alias doc="cd ~/Documents"
 
 
+
+
 #Easy nav to books dir, 
 alias books="cd ~/Desktop/books"
 alias gen="cd ~/Desktop/books/programming/general-programming"
@@ -144,6 +146,8 @@ alias mbin="micro ~/.config/micro/bindings.json"
 find(){
 	command find . -iname "*$1*"
 }
+
+
 
 # When you mistype ls
 alias sl="ls"

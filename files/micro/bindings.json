@@ -3,8 +3,15 @@
     "Alt-g": "command-edit:goto ",
     "Ctrl-g": "command-edit:goto ",
     "Escape": "CommandMode",
+    "Alt-h": "CursorLeft",
+    "Alt-j": "CursorDown",
+    "Alt-k": "CursorUp",
+    "Alt-l": "CursorRight",
+    "Alt-n": "StartOfLine",
+    "Alt-m": "EndOfLine",
+    "Alt-s": "Save",
+    "Alt-q": "Quit",
     "Alt-2": "ToggleMacro",
     "Alt-3": "PlayMacro",
-    "Tab": "NextSplit",
     "CtrlUnderscore": "lua:comment.comment"
 }
