@@ -167,6 +167,4 @@ alias p="python3"
 bind 'set completion-ignore-case on'
 
 
-#Default editor micro
-
 . "$HOME/.cargo/env"
