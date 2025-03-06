@@ -118,6 +118,11 @@ show-desktop=['<Super>d']
 switch-windows=['<Alt>Tab', '<Alt>backslash']
 toggle-maximized=['<Alt>r']
 
+[org/cinnamon/desktop/media-handling]
+autorun-x-content-ignore=@as []
+autorun-x-content-open-folder=@as []
+autorun-x-content-start-app=['x-content/unix-software']
+
 [org/cinnamon/desktop/peripherals/keyboard]
 delay=uint32 500
 repeat-interval=uint32 30
@@ -165,6 +170,8 @@ orientation-lock=true
 
 [org/cinnamon/settings-daemon/plugins/power]
 idle-brightness=30
+idle-dim-battery=true
+idle-dim-time=600
 lid-close-ac-action='suspend'
 lid-close-battery-action='shutdown'
 sleep-display-ac=1800
@@ -309,6 +316,12 @@ migrated=true
 recreate-folders=true
 skip-newer=false
 
+[org/gnome/file-roller/dialogs/new]
+default-extension='.iso'
+encrypt-header=false
+expand-options=false
+volume-size=0
+
 [org/gnome/file-roller/listing]
 list-mode='as-folder'
 name-column-width=250
@@ -395,22 +408,22 @@ show-hidden=false
 show-size-column=true
 show-type-column=true
 sidebar-width=148
-sort-column='name'
+sort-column='modified'
 sort-directories-first=true
-sort-order='ascending'
+sort-order='descending'
 type-format='category'
 window-position=(172, 193)
 window-size=(1096, 481)
 
 [org/nemo/window-state]
-geometry='776x586+294+138'
+geometry='776x586+183+142'
 maximized=false
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
 
 [org/virt-manager/virt-manager]
-manager-window-height=550
-manager-window-width=550
+manager-window-height=469
+manager-window-width=720
 
 [org/virt-manager/virt-manager/confirm]
 delete-storage=false
@@ -427,10 +440,10 @@ show-toolbar=true
 graphics-type='system'
 
 [org/virt-manager/virt-manager/paths]
-media-default='/home/rhett/tint'
+media-default='/home/rhett/Desktop/aaaa'
 
 [org/virt-manager/virt-manager/urls]
-isos=['/var/lib/libvirt/images/tint-2025.02.04.iso', '/home/rhett/tint/tint-2025.02.04.iso', '/var/lib/libvirt/images/trisquel_11.0.1_amd64.iso', '/var/lib/libvirt/images/archlinux-x86_64.iso', '/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/Win10_22H2_English_x64v1.iso']
+isos=['/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/mm.iso', '/var/lib/libvirt/images/mtes.iso', '/var/lib/libvirt/images/minttest.iso', '/var/lib/libvirt/images/ppp.iso', '/var/lib/libvirt/images/pen.iso', '/var/lib/libvirt/images/penis.iso', '/home/rhett/Desktop/aaaa/penis.iso', '/var/lib/libvirt/images/tint-2025.02.04.iso', '/home/rhett/tint/tint-2025.02.04.iso']
 
 [org/virt-manager/virt-manager/vmlist-fields]
 disk-usage=false
@@ -461,12 +474,22 @@ autoconnect=1
 scaling=1
 vm-window-size=(1024, 568)
 
+[org/virt-manager/virt-manager/vms/1b29a6806a7a4b9cadc6fba48742da9c]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
 [org/virt-manager/virt-manager/vms/1dae9130ed75423ab7fa304ac3aef36a]
 autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
 
 [org/virt-manager/virt-manager/vms/226eac10aab6459d8545544a8bd95a3f]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/25a613e4635745f0a901eeb93bd6cdac]
 autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
@@ -486,6 +509,10 @@ autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
 
+[org/virt-manager/virt-manager/vms/35c6a00c8f544fa79232aab8dd0fda21]
+autoconnect=1
+scaling=1
+
 [org/virt-manager/virt-manager/vms/368a98f557894d6398ce522e2a1a0bf8]
 autoconnect=1
 scaling=1
@@ -496,10 +523,20 @@ autoconnect=1
 scaling=1
 vm-window-size=(1024, 711)
 
+[org/virt-manager/virt-manager/vms/43da979fee8d42188c2e2f2d4597e205]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
 [org/virt-manager/virt-manager/vms/4f503e88a1784aa2a733c03f9a0243cb]
 autoconnect=1
 scaling=1
 vm-window-size=(976, 766)
+
+[org/virt-manager/virt-manager/vms/5534ba8c30504903b488a6b234a1afd4]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
 
 [org/virt-manager/virt-manager/vms/58153b2237094a789789f8189bc12b6a]
 autoconnect=1
@@ -516,7 +553,17 @@ autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
 
+[org/virt-manager/virt-manager/vms/662d45b851b34f6e8858971725ee5f13]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
 [org/virt-manager/virt-manager/vms/6d90d29318e64f9ba5ccd2a516b697f6]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/78388b8bb42843c6bfa7d0f567e62091]
 autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
@@ -531,6 +578,10 @@ autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
 
+[org/virt-manager/virt-manager/vms/950bf44b70854adc9290b4b5d934d431]
+autoconnect=1
+scaling=1
+
 [org/virt-manager/virt-manager/vms/9ce55a47cd5940f8a17576a8478c4442]
 autoconnect=1
 scaling=1
@@ -539,7 +590,7 @@ vm-window-size=(843, 835)
 [org/virt-manager/virt-manager/vms/a8c18f748bb844e69d2d6c760aeb339d]
 autoconnect=1
 scaling=1
-vm-window-size=(1024, 841)
+vm-window-size=(1024, 835)
 
 [org/virt-manager/virt-manager/vms/a8c767a6136d4ffbae33ec7cd8c6881e]
 autoconnect=1
@@ -551,6 +602,31 @@ autoconnect=1
 scaling=1
 vm-window-size=(1024, 638)
 
+[org/virt-manager/virt-manager/vms/b522d2f64eca413c90322fd811ed0433]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/c11e3bb55c4f40238a1faea3a1e0135f]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/c3431d35128441b3a369bcb37d86f6f6]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/c53335ac940c4eb29eb14ba9365ec6ca]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/c9a7408fb90448d4aefd5a2310fb86ef]
+autoconnect=1
+scaling=1
+vm-window-size=(720, 835)
+
 [org/virt-manager/virt-manager/vms/dafda105195c4bdaafa57a199ad97c01]
 autoconnect=1
 scaling=2
@@ -560,6 +636,10 @@ vm-window-size=(1024, 726)
 autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/e7c4dd34d6074d2886e6c9fbbcac5b74]
+autoconnect=1
+scaling=1
 
 [org/virt-manager/virt-manager/vms/eb4d29541fb84dadb9fc7e03adb133f7]
 autoconnect=1
@@ -576,10 +656,20 @@ autoconnect=1
 scaling=1
 vm-window-size=(1024, 835)
 
+[org/virt-manager/virt-manager/vms/f55e5ce733bc4298b36c3bbe6fb322ca]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 811)
+
 [org/virt-manager/virt-manager/vms/fd61f704e3bc48aa899c8859eb1a8e10]
 autoconnect=1
 scaling=1
 vm-window-size=(1024, 811)
+
+[org/virt-manager/virt-manager/vms/ffd4f1b59d0c408a8b034de221a2a599]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 835)
 
 [org/x/editor/plugins]
 active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-uri-context-menu', 'bracketcompletion', 'textsize', 'docinfo', 'spell']
@@ -599,6 +689,29 @@ side-panel-size=200
 size=(926, 733)
 state=87168
 
+[org/x/pix/browser]
+browser-sidebar-width=285
+fullscreen-sidebar='hidden'
+fullscreen-thumbnails-visible=false
+maximized=false
+properties-visible=false
+sidebar-sections=['GthFileProperties:expanded', 'GthFileComment:expanded', 'GthFileDetails:expanded', 'GthImageHistogram:expanded']
+sidebar-visible=true
+sort-inverse=false
+sort-type='file::mtime'
+startup-current-file=''
+startup-location='file:///home/rhett/Pictures'
+statusbar-visible=true
+viewer-sidebar='hidden'
+window-height=675
+window-width=1195
+
+[org/x/pix/data-migration]
+catalogs-2-10=true
+
+[org/x/pix/general]
+active-extensions=['23hq', 'bookmarks', 'burn_disc', 'catalogs', 'change_date', 'comments', 'contact_sheet', 'convert_format', 'desktop_background', 'edit_metadata', 'exiv2_tools', 'file_manager', 'find_duplicates', 'flicker', 'gstreamer_tools', 'gstreamer_utils', 'image_print', 'image_rotation', 'importer', 'jpeg_utils', 'list_tools', 'oauth', 'photo_importer', 'raw_files', 'red_eye_removal', 'rename_series', 'resize_images', 'search', 'selections', 'slideshow', 'terminal', 'webalbums']
+
 [org/x/reader/default]
 continuous=true
 dual-page=false
@@ -609,10 +722,10 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=133
 sizing-mode='fit-width'
-window-ratio=(2.7100250602039595, 1.2533021133525457)
+window-ratio=(3.3333333333333335, 1.3753387533875339)
 
 [org/x/viewer/window]
-maximized=true
+maximized=false
 
 [org/x/warpinator/preferences]
 ask-for-send-permission=true

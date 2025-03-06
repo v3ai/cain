@@ -141,6 +141,7 @@ alias mbin="micro ~/.config/micro/bindings.json"
 
 #So you don't have to remember how to use the find command
 
+
 find(){
 	command find . -iname "*$1*"
 }
@@ -153,15 +154,19 @@ alias sl="ls"
 #clear but shorter
 alias c="clear"
 
+#Faster cd
+alias d="cd"
+
+
 #open the micro or nvim text editor
 alias m="micro"
-alias vim="nvim"
-alias vi="nvim"
-alias v="nvim"
 
 alias p="python3"
 
-#Default editor micro
-export EDITOR=micro
-export VISUAL=micro
 
+bind 'set completion-ignore-case on'
+
+
+#Default editor micro
+
+. "$HOME/.cargo/env"

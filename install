@@ -106,8 +106,21 @@ cp ~/cain/files/dotfiles/.bashrc ~/ || handle_error
 sudo cp cain /usr/local/bin/ || handle_error
 
 
+
+# ===================== Optional settings ========================== #
+
+
 #if you want auto
 #crontab ~/cain/files/cainfiles/caintab || handle_error
+
+if [ "$1" == "all" ]; then
+
+	sudo apt install micro
+	
+fi
+
+
+# ================================================================== #
 
 
 # Successful install of cain
