@@ -168,4 +168,3 @@ alias p="python3"
 bind 'set completion-ignore-case on'
 
 
-. "$HOME/.cargo/env"
