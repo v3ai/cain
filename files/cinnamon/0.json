@@ -127,7 +127,7 @@
         "units": "px",
         "description": "Icon size",
         "dependency": "menu-custom",
-        "value": 24.0
+        "value": 32
     },
     "menu-label": {
         "type": "entry",
@@ -153,7 +153,7 @@
         "units": "px",
         "description": "Categories icon size",
         "dependency": "show-category-icons",
-        "value": 16.0
+        "value": 24
     },
     "show-application-icons": {
         "type": "switch",
@@ -171,7 +171,7 @@
         "units": "px",
         "description": "Applications icon size",
         "dependency": "show-application-icons",
-        "value": 16.0
+        "value": 24
     },
     "favbox-show": {
         "type": "switch",
@@ -189,7 +189,7 @@
         "units": "px",
         "description": "Favorites icon size",
         "dependency": "favbox-show",
-        "value": 20.0
+        "value": 24
     },
     "show-favorites": {
         "type": "switch",
@@ -275,12 +275,12 @@
     "popup-width": {
         "type": "generic",
         "default": 590,
-        "value": 500
+        "value": 627.3173217773438
     },
     "popup-height": {
         "type": "generic",
         "default": 515,
-        "value": 400
+        "value": 494.82867431640625
     },
     "reset-menu-size-button": {
         "type": "button",

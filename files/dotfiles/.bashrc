@@ -118,6 +118,9 @@ fi
 
 #Rhett's Aliases
 
+alias install="sudo apt install $1"
+
+
 #Easy nav to Desktop and Downlads dir from anywhere
 alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
