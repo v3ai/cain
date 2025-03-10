@@ -118,8 +118,7 @@ fi
 
 #Rhett's Aliases
 
-alias install="sudo apt install $1"
-
+alias install="sudo apt install $1 -y"
 
 
 #Easy nav to Desktop and Downlads dir from anywhere

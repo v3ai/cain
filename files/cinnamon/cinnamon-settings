@@ -417,7 +417,7 @@ window-position=(2032, 454)
 window-size=(1096, 481)
 
 [org/nemo/window-state]
-geometry='776x586+833+772'
+geometry='776x586+166+50'
 maximized=false
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
