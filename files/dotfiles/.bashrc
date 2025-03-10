@@ -121,26 +121,16 @@ fi
 alias install="sudo apt install $1"
 
 
+
 #Easy nav to Desktop and Downlads dir from anywhere
 alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
-alias doc="cd ~/Documents"
 
+alias bindings="micro ~/.config/micro/bindings.json"
 
-#Easy nav to books dir, 
-alias books="cd ~/Desktop/books"
-alias gen="cd ~/Desktop/books/programming/general-programming"
-
-#Easy nav to website
-alias rhett="cd ~/Desktop/rhettapplestone.com"
-
-#easy to nav and edit todo list and push to github
-alias list="wdir=$(pwd) && cd ~/Desktop/rhettapplestone.com && micro list && qcom && cd $wdir"
 
 #Easy way to exit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
-
-alias mbin="micro ~/.config/micro/bindings.json"
 
 #So you don't have to remember how to use the find command
 
