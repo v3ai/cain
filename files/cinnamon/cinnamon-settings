@@ -203,7 +203,7 @@ source-currency=''
 source-units='degree'
 target-currency=''
 target-units='radian'
-window-position=(720, 0)
+window-position=(2392, 489)
 word-size=64
 
 [org/gnome/desktop/a11y]
@@ -408,11 +408,11 @@ sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(2032, 454)
+window-position=(1353, 624)
 window-size=(1096, 481)
 
 [org/nemo/window-state]
-geometry='776x586+1388+466'
+geometry='776x586+166+50'
 maximized=false
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
