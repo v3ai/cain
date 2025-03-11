@@ -117,6 +117,7 @@ if ! shopt -oq posix; then
 fi
 
 #Rhett's Aliases
+alias clone="git clone $1"
 alias install="sudo apt install $1 -y"
 alias uninstall="sudo apt purge $1 -y"
 alias update="sudo apt update -y"
