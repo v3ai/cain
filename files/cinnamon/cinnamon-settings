@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1741647635
+refresh-last-run=1741654837
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -112,7 +112,7 @@ push-tile-left=['<Alt>y']
 push-tile-right=['<Alt>p']
 show-desktop=['<Super>d']
 switch-windows=['<Alt>Tab', '<Alt>backslash']
-toggle-maximized=['<Alt>2']
+toggle-maximized=['<Alt>r']
 
 [org/cinnamon/desktop/media-handling]
 autorun-x-content-ignore=@as []
@@ -718,7 +718,7 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=133
 sizing-mode='fit-width'
-window-ratio=(2.3529411764705883, 1.0542929292929293)
+window-ratio=(3.4126984126984126, 2.0390390390390389)
 
 [org/x/viewer/window]
 maximized=false

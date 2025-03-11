@@ -129,6 +129,8 @@ alias upgrade="sudo apt upgrade -y"
 alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
 
+alias books="cd ~/Desktop/books"
+
 alias bindings="micro ~/.config/micro/bindings.json"
 
 #Easy way to exit this file
