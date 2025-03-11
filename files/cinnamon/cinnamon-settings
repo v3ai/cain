@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1741666324
+refresh-last-run=1741716014
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -413,7 +413,7 @@ window-size=(1096, 481)
 
 [org/nemo/window-state]
 geometry='776x586+166+50'
-maximized=false
+maximized=true
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
 
