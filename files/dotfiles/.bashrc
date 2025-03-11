@@ -120,6 +120,7 @@ fi
 alias clone="git clone $1"
 alias install="sudo apt install $1 -y"
 alias uninstall="sudo apt purge $1 -y"
+alias remove="sudo apt purge $1 -y"
 alias update="sudo apt update -y"
 alias upgrade="sudo apt upgrade -y"
 

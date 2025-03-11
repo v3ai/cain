@@ -82,7 +82,7 @@ picture-uri='file:///home/rhett/walls/anime/a_cartoon_of_a_girl_standing_on_a_ba
 
 [org/cinnamon/desktop/background/slideshow]
 delay=15
-image-source='xml:///usr/share/cinnamon-background-properties/linuxmint.xml'
+image-source='xml:///usr/share/cinnamon-background-properties/linuxmint-wilma.xml'
 
 [org/cinnamon/desktop/interface]
 clock-use-24h=false
@@ -412,7 +412,7 @@ window-position=(2032, 454)
 window-size=(1096, 481)
 
 [org/nemo/window-state]
-geometry='776x586+166+50'
+geometry='776x586+1388+466'
 maximized=false
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
