@@ -718,7 +718,7 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=133
 sizing-mode='fit-width'
-window-ratio=(3.4126984126984126, 2.0390390390390389)
+window-ratio=(2.1717171717171717, 1.3274682306940371)
 
 [org/x/viewer/window]
 maximized=false
