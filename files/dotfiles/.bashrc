@@ -117,8 +117,10 @@ if ! shopt -oq posix; then
 fi
 
 #Rhett's Aliases
-
 alias install="sudo apt install $1 -y"
+alias uninstall="sudo apt purge $1 -y"
+alias update="sudo apt update -y"
+alias upgrade="sudo apt upgrade -y"
 
 
 #Easy nav to Desktop and Downlads dir from anywhere
