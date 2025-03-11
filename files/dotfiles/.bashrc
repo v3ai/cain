@@ -128,6 +128,7 @@ alias upgrade="sudo apt upgrade -y"
 #Easy nav to Desktop and Downlads dir from anywhere
 alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
+alias clug="cd ~/Desktop/clug"
 
 alias books="cd ~/Desktop/books"
 
