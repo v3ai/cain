@@ -134,6 +134,8 @@ alias books="cd ~/Desktop/books"
 alias bindings="micro ~/.config/micro/bindings.json"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
 
+alias list="cd ~/Desktop/rhettapplestone.com && micro list && qcom"
+
 #Easy way to exit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 
