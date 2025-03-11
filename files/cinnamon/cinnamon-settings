@@ -112,7 +112,7 @@ push-tile-left=['<Alt>y']
 push-tile-right=['<Alt>p']
 show-desktop=['<Super>d']
 switch-windows=['<Alt>Tab', '<Alt>backslash']
-toggle-maximized=['<Alt>g']
+toggle-maximized=['<Alt>2']
 
 [org/cinnamon/desktop/media-handling]
 autorun-x-content-ignore=@as []

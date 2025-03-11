@@ -117,6 +117,7 @@ if ! shopt -oq posix; then
 fi
 
 #Rhett's Aliases
+
 alias clone="git clone $1"
 alias install="sudo apt install $1 -y"
 alias uninstall="sudo apt purge $1 -y"
@@ -124,13 +125,11 @@ alias remove="sudo apt purge $1 -y"
 alias update="sudo apt update -y"
 alias upgrade="sudo apt upgrade -y"
 
-
 #Easy nav to Desktop and Downlads dir from anywhere
 alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
 
 alias bindings="micro ~/.config/micro/bindings.json"
-
 
 #Easy way to exit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
