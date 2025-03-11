@@ -118,6 +118,7 @@ fi
 
 #Rhett's Aliases
 
+
 alias clone="git clone $1"
 alias install="sudo apt install $1 -y"
 alias update="sudo apt update -y"
@@ -147,7 +148,6 @@ find(){
 # When you mistype ls
 alias sl="ls"
 
-
 #clear but shorter
 alias c="clear"
 
@@ -162,5 +162,3 @@ alias p="python3"
 
 
 bind 'set completion-ignore-case on'
-
-
