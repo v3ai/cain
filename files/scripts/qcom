@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ $# == 0 ]; then
+
+	git add .
+	git commit -m "Pushed with qcom: https://github.com/v3ai/qcom"
+	git push
+
+else
+
+	cd $1
+	git add .
+	git commit -m "Pushed with qcom: https://github.com/v3ai/qcom"
+	git push
+
+fi

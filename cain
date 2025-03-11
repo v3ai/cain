@@ -118,6 +118,25 @@ else
 	echo "SAME: Micro settings up to date"
 fi
 
+# Collecting script changes
+
+if ! cmp -s /usr/local/bin/qcom ~/cain/files/scripts/qcom; then
+	
+	echo "CHANGED: Collected qcom changes" && CHANGES="$CHANGES Collected qcom changes"
+else
+	echo "SAME: qcom up to date"
+fi
+
+if ! cmp -s /usr/local/bin/gmail ~/cain/files/scripts/gmail; then
+	
+	echo "CHANGED: Collected gmail changes" && CHANGES="$CHANGES Collected gmail changes"
+else
+	echo "SAME: gmail script up to date"
+fi
+
+
+
+
 # ======== Committing files with git if $CHANGES not empty ========= #
 
 if [ -n "$CHANGES" ]
