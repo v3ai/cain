@@ -118,7 +118,6 @@ fi
 
 #Rhett's Aliases
 
-
 alias clone="git clone $1"
 alias install="sudo apt install $1 -y"
 alias update="sudo apt update -y"
@@ -139,7 +138,6 @@ alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 
 #So you don't have to remember how to use the find command
 
-
 find(){
 	command find . -iname "*$1*"
 }
@@ -147,6 +145,7 @@ find(){
 
 # When you mistype ls
 alias sl="ls"
+
 
 #clear but shorter
 alias c="clear"
@@ -162,3 +161,5 @@ alias p="python3"
 
 
 bind 'set completion-ignore-case on'
+
+
