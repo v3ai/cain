@@ -118,6 +118,12 @@ fi
 
 #Rhett's Aliases
 
+
+alias install="sudo apt install $1 -y"
+alias uninstall="sudo apt purge $1 -y"
+alias update="sudo apt update -y"
+alias upgrade="sudo apt upgrade -y"
+
 #Easy nav to Desktop and Downlads dir from anywhere
 alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
@@ -137,7 +143,6 @@ alias list="wdir=$(pwd) && cd ~/Desktop/rhettapplestone.com && micro list && qco
 #Easy way to exit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 
-alias mbin="micro ~/.config/micro/bindings.json"
 
 #So you don't have to remember how to use the find command
 
@@ -150,7 +155,6 @@ find(){
 
 # When you mistype ls
 alias sl="ls"
-
 
 #clear but shorter
 alias c="clear"
@@ -166,6 +170,3 @@ alias p="python3"
 
 
 bind 'set completion-ignore-case on'
-
-
-. "$HOME/.cargo/env"
