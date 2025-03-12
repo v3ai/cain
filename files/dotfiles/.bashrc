@@ -119,8 +119,6 @@ fi
 #Rhett's Aliases
 
 
-
-
 alias clone="git clone $1"
 alias install="sudo apt install $1 -y"
 alias remove="sudo apt purge $1 -y"
