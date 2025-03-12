@@ -417,11 +417,11 @@ sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(761, 542)
+window-position=(1550, 488)
 window-size=(1096, 481)
 
 [org/nemo/window-state]
-geometry='776x586+50+50'
+geometry='776x586+90+90'
 maximized=false
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
