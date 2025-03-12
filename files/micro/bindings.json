@@ -11,6 +11,7 @@
     "Alt-m": "EndOfLine",
     "Alt-s": "Save",
     "Alt-q": "Quit",
+	"Alt-0": "NextSplit",
     "Alt-4": "ToggleMacro",
     "Alt-5": "PlayMacro",
     "CtrlUnderscore": "lua:comment.comment"
