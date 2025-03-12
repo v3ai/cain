@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1741738248
+refresh-last-run=1741745450
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -353,6 +353,10 @@ ignore-ca-cert=true
 ignore-phase2-ca-cert=false
 
 [org/gnome/nm-applet/eap/73de453b-175c-48e8-837c-14b8af8d0e9b]
+ignore-ca-cert=false
+ignore-phase2-ca-cert=false
+
+[org/gnome/nm-applet/eap/b3313191-3af4-4e08-996e-884d4f584ebd]
 ignore-ca-cert=false
 ignore-phase2-ca-cert=false
 
