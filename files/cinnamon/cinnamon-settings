@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1741759855
+refresh-last-run=1741767057
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -417,11 +417,11 @@ sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(1336, 538)
+window-position=(1308, 324)
 window-size=(1096, 481)
 
 [org/nemo/window-state]
-geometry='776x586+32+32'
+geometry='1698x1098+90+90'
 maximized=false
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
