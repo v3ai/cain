@@ -132,7 +132,7 @@ alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
 alias clug="cd ~/Desktop/clug"
 alias books="cd ~/Desktop/books"
-alias bindings="micro ~/.config/micro/bindings.json"
+alias bin="micro ~/.config/micro/bindings.json"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
 
 alias list="cd ~/Desktop/rhettapplestone.com && micro list && qcom"
