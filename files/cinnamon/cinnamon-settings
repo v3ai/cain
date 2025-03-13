@@ -21,7 +21,7 @@ maximized=false
 last-active-shape='polygon'
 last-delete-replace='alpha'
 last-font-name='Sans'
-last-left-rgba=['0.8', '0.0', '0.0', '1.0']
+last-left-rgba=['0.3803921568627451', '0.20784313725490197', '0.5137254901960784', '1.0']
 last-right-rgba=['1.0', '1.0', '0.0', '0.5']
 last-shape-filling='empty'
 last-size=5
@@ -404,7 +404,7 @@ visible-name='rhett'
 
 [org/gtk/settings/color-chooser]
 custom-colors=[(0.80000000000000004, 0.0, 0.0, 1.0), (1.0, 1.0, 0.0, 0.5), (0.082352941176470587, 0.078431372549019607, 0.078431372549019607, 1.0), (0.1803921568627451, 0.20392156862745098, 0.21176470588235294, 1.0)]
-selected-color=(true, 0.80000000000000004, 0.0, 0.0, 1.0)
+selected-color=(true, 0.38039215686274508, 0.20784313725490197, 0.51372549019607838, 1.0)
 
 [org/gtk/settings/file-chooser]
 date-format='regular'
