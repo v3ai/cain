@@ -21,7 +21,7 @@ maximized=false
 last-active-shape='polygon'
 last-delete-replace='alpha'
 last-font-name='Sans'
-last-left-rgba=['0.3803921568627451', '0.20784313725490197', '0.5137254901960784', '1.0']
+last-left-rgba=['0.1803921568627451', '0.7607843137254902', '0.49411764705882355', '1.0']
 last-right-rgba=['1.0', '1.0', '0.0', '0.5']
 last-shape-filling='empty'
 last-size=5
@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1741888927
+refresh-last-run=1741896131
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -193,7 +193,7 @@ unplug-enabled=false
 name='Mint-Y-Dark-Grey'
 
 [org/gnome/baobab/ui]
-window-size=(960, 600)
+window-size=(1677, 770)
 window-state=87168
 
 [org/gnome/calculator]
@@ -404,7 +404,7 @@ visible-name='rhett'
 
 [org/gtk/settings/color-chooser]
 custom-colors=[(0.80000000000000004, 0.0, 0.0, 1.0), (1.0, 1.0, 0.0, 0.5), (0.082352941176470587, 0.078431372549019607, 0.078431372549019607, 1.0), (0.1803921568627451, 0.20392156862745098, 0.21176470588235294, 1.0)]
-selected-color=(true, 0.38039215686274508, 0.20784313725490197, 0.51372549019607838, 1.0)
+selected-color=(true, 0.1803921568627451, 0.76078431372549016, 0.49411764705882355, 1.0)
 
 [org/gtk/settings/file-chooser]
 date-format='regular'
@@ -412,13 +412,13 @@ location-mode='path-bar'
 show-hidden=false
 show-size-column=true
 show-type-column=true
-sidebar-width=211
+sidebar-width=231
 sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(1308, 324)
-window-size=(1096, 481)
+window-position=(1181, 199)
+window-size=(1351, 858)
 
 [org/nemo/window-state]
 geometry='1698x1098+90+90'
