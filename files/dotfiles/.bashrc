@@ -147,12 +147,6 @@ alias ....="cd ../../.."
 #Easy way to edit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 
-#So you don't have to remember how to use the find command
-
-find(){
-	command find . -iname "*$1*"
-}
-
 
 # When you mistype ls
 alias sl="ls"
