@@ -318,7 +318,7 @@ recreate-folders=true
 skip-newer=false
 
 [org/gnome/file-roller/dialogs/new]
-default-extension='.iso'
+default-extension='.cpio'
 encrypt-header=false
 expand-options=false
 volume-size=0
@@ -332,8 +332,8 @@ sort-type='ascending'
 
 [org/gnome/file-roller/ui]
 sidebar-width=200
-window-height=480
-window-width=600
+window-height=973
+window-width=2343
 
 [org/gnome/gnome-screenshot]
 delay=0
@@ -417,11 +417,11 @@ sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(1563, 363)
+window-position=(259, 191)
 window-size=(1351, 858)
 
 [org/nemo/window-state]
-geometry='1698x1098+32+32'
+geometry='1698x1098+56+55'
 maximized=false
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
