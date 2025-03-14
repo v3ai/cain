@@ -118,7 +118,9 @@ fi
 
 #Rhett's Aliases
 
-alias tint="cd ~/Desktop/tint"
+
+alias t="tree -a"
+alias aloe="cd ~/Desktop/aloe"
 alias clone="git clone $1"
 alias install="sudo apt install $1 -y"
 alias remove="sudo apt purge $1 -y"
@@ -138,6 +140,9 @@ alias rhett="cd ~/Desktop/rhettapplestone.com"
 alias list="cd ~/Desktop/rhettapplestone.com && micro list && qcom"
 
 alias f="open ."
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 #Easy way to edit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"

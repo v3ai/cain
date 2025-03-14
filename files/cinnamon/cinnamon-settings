@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1741896131
+refresh-last-run=1741903333
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -193,7 +193,7 @@ unplug-enabled=false
 name='Mint-Y-Dark-Grey'
 
 [org/gnome/baobab/ui]
-window-size=(1677, 770)
+window-size=(1447, 910)
 window-state=87168
 
 [org/gnome/calculator]
@@ -421,7 +421,7 @@ window-position=(1181, 199)
 window-size=(1351, 858)
 
 [org/nemo/window-state]
-geometry='1698x1098+90+90'
+geometry='1698x1098+837+146'
 maximized=false
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
