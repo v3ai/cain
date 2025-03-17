@@ -42,6 +42,10 @@ sudo apt install xclip -y || handle_error
 # Getting program I use for keybindings
 sudo apt install input-remapper -y || handle_error
 
+# Getting alacritty
+sudo apt install alacritty -y || handle_error
+
+
 # Getting background I like (optional)
 # sudo apt install mint-backgrounds-victoria -y || handle_error
 
@@ -76,6 +80,17 @@ cp ~/cain/files/micro/bindings.json ~/.config/micro/ || handle_error
 
 # Loading micro settings
 cp ~/cain/files/micro/settings.json ~/.config/micro/ || handle_error
+
+
+#alacritty stuff
+if [ ! -d "$HOME/.config/alacritty" ]; then
+  mkdir ~/.config/alacritty || handle_error
+fi
+
+cp ~/cain/files/alacritty/alacritty.toml ~/.config/alacritty
+cp ~/cain/files/alacritty/rhett-theme.toml ~/.config/alacritty
+
+
 
 #Making correct directories for input-remapper if they don't exist
 if [ ! -d "$HOME/.config/input-remapper-2" ]; then

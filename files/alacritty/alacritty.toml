@@ -1,0 +1,10 @@
+import = ["~/.config/alacritty/rhett-theme.toml"]
+
+
+[[keyboard.bindings]]
+key = "Tab"
+mods = "Control"
+chars = "\u001b[1;5I"
+
+[window]
+decorations = "Full"

@@ -118,13 +118,13 @@ else
 	echo "SAME: Micro settings up to date"
 fi
 
-# Collecting script changes
 
-if ! cmp -s /usr/local/bin/qcom ~/cain/files/scripts/qcom; then
-	
-	echo "CHANGED: Collected qcom changes" && CHANGES="$CHANGES Collected qcom changes"
-else
-	echo "SAME: qcom up to date"
+# Checking alacritty config
+if ! cmp -s ~/.config/alacritty/alacritty.toml ~/cain/files/alacritty/alacritty.toml; then
+	cp ~/.config/alacritty/alacritty.toml ~/cain/files/alacritty/alacritty.toml || handle_error
+	echo "CHANGED: Collected Alacritty Config" && CHANGES="$CHANGES Collected Alacritty config"
+else 
+	echo "SAME: Alacritty Config up to date"
 fi
 
 
