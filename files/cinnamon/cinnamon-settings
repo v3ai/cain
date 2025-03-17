@@ -6,8 +6,8 @@ height=476
 width=600
 
 [ca/desrt/dconf-editor]
-saved-pathbar-path='/org/gnome/terminal/legacy/keybindings/'
-saved-view='/org/gnome/terminal/legacy/keybindings/'
+saved-pathbar-path='/org/gnome/desktop/applications/terminal/exec'
+saved-view='/org/gnome/desktop/applications/terminal/exec'
 window-height=675
 window-is-maximized=false
 window-width=953
@@ -94,14 +94,19 @@ text-scaling-factor=1.7000000000000006
 toolkit-accessibility=false
 
 [org/cinnamon/desktop/keybindings]
-custom-list=@as []
+custom-list=['custom0']
 show-desklets=@as []
+
+[org/cinnamon/desktop/keybindings/custom-keybindings/custom0]
+binding=['<Alt>t']
+command='alacritty'
+name='term'
 
 [org/cinnamon/desktop/keybindings/media-keys]
 calculator=['<Alt>7']
 home=['<Alt>9', 'XF86Explorer']
 screensaver=['<Alt>1', 'XF86ScreenSaver']
-terminal=['<Alt>t', '<Alt>Return']
+terminal=@as []
 www=['<Alt>8']
 
 [org/cinnamon/desktop/keybindings/wm]
@@ -219,6 +224,9 @@ dwell-threshold=10
 dwell-time=1.2
 secondary-click-enabled=false
 secondary-click-time=1.2
+
+[org/gnome/desktop/applications/terminal]
+exec='alacritty'
 
 [org/gnome/desktop/input-sources]
 current=uint32 0
