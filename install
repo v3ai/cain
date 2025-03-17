@@ -54,7 +54,6 @@ git config --global user.email "rhettapples@googleemailservice.com" || handle_er
 
 #putting scripts in /usr/local/bin
 
-cp ~/cain/files/scripts/gmail /usr/local/bin/gmail
 cp ~/cain/files/scripts/qcom /usr/local/bin/qcom
 
 # Loading configs for cinnamon desktop enviornment
