@@ -117,7 +117,6 @@ if ! shopt -oq posix; then
 fi
 
 #Rhett's Aliases
-
 alias ala="micro ~/.config/alacritty/alacritty.toml"
 alias t="tree -a"
 alias aloe="cd ~/Desktop/aloe"
