@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1742191081
+refresh-last-run=1742259113
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -426,8 +426,10 @@ window-position=(1044, 266)
 window-size=(1351, 858)
 
 [org/nemo/window-state]
+devices-expanded=true
 geometry='1698x1098+50+50'
 maximized=false
+network-expanded=true
 sidebar-bookmark-breakpoint=5
 start-with-sidebar=true
 
@@ -687,7 +689,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/.cache/.fr-848O32'
+virtual-root='file:///media/rhett/My%20Passport/fresh/later'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
