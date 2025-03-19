@@ -13,9 +13,9 @@ window-is-maximized=false
 window-width=953
 
 [com/github/maoschanz/drawing]
-last-active-tool='pencil'
+last-active-tool='rect_select'
 last-version='1.0.2'
-maximized=false
+maximized=true
 
 [com/github/maoschanz/drawing/tools-options]
 last-active-shape='polygon'
@@ -408,8 +408,8 @@ use-transparent-background=false
 visible-name='rhett'
 
 [org/gtk/settings/color-chooser]
-custom-colors=[(0.82745098039215681, 0.84313725490196079, 0.81176470588235294, 1.0), (0.023529411764705882, 0.59607843137254901, 0.60392156862745094, 1.0), (0.45882352941176469, 0.31372549019607843, 0.4823529411764706, 1.0), (0.20392156862745098, 0.396078431372549, 0.64313725490196083, 1.0), (0.7686274509803922, 0.62745098039215685, 0.0, 1.0), (0.30588235294117649, 0.60392156862745094, 0.023529411764705882, 1.0), (0.80000000000000004, 0.0, 0.0, 1.0), (0.1803921568627451, 0.20392156862745098, 0.21176470588235294, 1.0)]
-selected-color=(true, 0.82745098039215681, 0.84313725490196079, 0.81176470588235294, 1.0)
+custom-colors=[(1.0, 1.0, 0.0, 0.5), (0.82745098039215681, 0.84313725490196079, 0.81176470588235294, 1.0), (0.023529411764705882, 0.59607843137254901, 0.60392156862745094, 1.0), (0.45882352941176469, 0.31372549019607843, 0.4823529411764706, 1.0), (0.20392156862745098, 0.396078431372549, 0.64313725490196083, 1.0), (0.7686274509803922, 0.62745098039215685, 0.0, 1.0), (0.30588235294117649, 0.60392156862745094, 0.023529411764705882, 1.0), (0.80000000000000004, 0.0, 0.0, 1.0)]
+selected-color=(true, 0.1803921568627451, 0.76078431372549016, 0.49411764705882355, 1.0)
 
 [org/gtk/settings/file-chooser]
 date-format='regular'
@@ -422,7 +422,7 @@ sort-column='name'
 sort-directories-first=true
 sort-order='ascending'
 type-format='category'
-window-position=(1044, 266)
+window-position=(1044, 282)
 window-size=(1351, 858)
 
 [org/nemo/search]
@@ -431,7 +431,7 @@ search-sort-column='name'
 
 [org/nemo/window-state]
 devices-expanded=true
-geometry='1698x1098+1541+86'
+geometry='1698x1098+50+50'
 maximized=false
 network-expanded=true
 sidebar-bookmark-breakpoint=5
@@ -693,7 +693,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///media/rhett/My%20Passport/fresh/later'
+virtual-root='file:///home/rhett/Desktop/Embedded-Systems-Books'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -738,7 +738,7 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=156
 sizing-mode='fit-width'
-window-ratio=(2.0430222475620332, 2.2812947271517747)
+window-ratio=(7.3447775215646081, 2.0027726159926851)
 
 [org/x/sticky]
 active-group='Group 1'
