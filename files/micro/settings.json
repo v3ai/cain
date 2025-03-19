@@ -1,3 +1,4 @@
 {
-    "matchbrace": false
+    "matchbrace": false,
+    "tabstospaces": true
 }
