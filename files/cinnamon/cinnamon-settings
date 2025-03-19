@@ -738,7 +738,7 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=156
 sizing-mode='fit-width'
-window-ratio=(3.4126036181534638, 0.8858858858858859)
+window-ratio=(4.0860444951240664, 2.2812947271517747)
 
 [org/x/sticky]
 active-group='Group 1'
