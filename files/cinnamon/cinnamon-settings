@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1742361962
+refresh-last-run=1742369164
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -738,7 +738,7 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=156
 sizing-mode='fit-width'
-window-ratio=(7.3447775215646081, 2.0027726159926851)
+window-ratio=(1.3462574044157243, 1.0101010101010102)
 
 [org/x/sticky]
 active-group='Group 1'
