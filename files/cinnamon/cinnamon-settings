@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1742369164
+refresh-last-run=1742529719
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -431,7 +431,7 @@ search-sort-column='name'
 
 [org/nemo/window-state]
 devices-expanded=true
-geometry='1698x1098+50+50'
+geometry='1698x1098+140+140'
 maximized=false
 network-expanded=true
 sidebar-bookmark-breakpoint=5
