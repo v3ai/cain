@@ -139,9 +139,6 @@ alias rhett="cd ~/Desktop/rhettapplestone.com"
 alias list="cd ~/Desktop/rhettapplestone.com && micro list && qcom"
 
 alias f="open ."
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
 
 #Easy way to edit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
