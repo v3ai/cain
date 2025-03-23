@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1742676845
+refresh-last-run=1742759477
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -422,7 +422,7 @@ sort-column='name'
 sort-directories-first=true
 sort-order='ascending'
 type-format='category'
-window-position=(1904, 266)
+window-position=(576, 168)
 window-size=(1351, 858)
 
 [org/nemo/search]
