@@ -116,15 +116,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#Rhett's Aliases
-alias ala="micro ~/.config/alacritty/alacritty.toml"
-alias t="tree -a"
-alias aloe="cd ~/Desktop/aloe"
+#Rhett's Aliases"
 alias clone="git clone"
 alias pull="git pull"
-alias install="sudo apt install $1 -y"
-alias remove="sudo apt purge $1 -y"
-alias uninstall="sudo apt purge $1 -y"
+alias install="sudo apt install $@ -y"
+alias remove="sudo apt purge $@ -y"
+alias uninstall="sudo apt purge $@ -y"
 
 alias update="sudo apt update -y"
 alias upgrade="sudo apt upgrade -y"
@@ -150,21 +147,23 @@ alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 # When you mistype ls
 alias sl="ls"
 
+# qcom program condenced into all that was useful 
+qcom(){
+
+    git add .
+	git commit -m "Pushed with qcom: https://github.com/v3ai/qcom"
+	git push
+
+}
+
 
 #clear but shorter
 alias c="clear"
 
-#Faster cd
-alias d="cd"
-
-
 #open the micro or nvim text editor
 alias m="micro"
-
 alias p="python3"
 
-
 bind 'set completion-ignore-case on'
-
 
 . "$HOME/.cargo/env"
