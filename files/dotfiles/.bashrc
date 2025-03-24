@@ -141,6 +141,8 @@ alias list="cd ~/Desktop/rhettapplestone.com && micro list && qcom"
 
 alias f="open ."
 
+alias n="nvim"
+
 #Easy way to edit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 
