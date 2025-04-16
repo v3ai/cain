@@ -142,20 +142,14 @@ alias o="open ."
 #Easy way to edit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 
-find(){
-    command find . -iname "*$1*"
-}
-
 # When you mistype ls
 alias sl="ls"
 
 # git program condenced into all that was useful 
 qcom(){
-
     git add .
 	git commit -m "Pushed with qcom"
-	git push
-	
+	git push	
 }
 
 #open the micro
@@ -163,4 +157,3 @@ alias m="micro"
 alias p="python3"
 
 bind 'set completion-ignore-case on'
-
