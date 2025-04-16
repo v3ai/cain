@@ -120,23 +120,17 @@ fi
 alias cain="cd ~/cain && ./cain && cd"
 alias clone="git clone"
 alias pull="git pull"
-
 alias install="sudo apt install $@ -y"
 alias uninstall="sudo apt purge $@ -y"
-
 alias update="sudo apt update -y"
 alias upgrade="sudo apt upgrade -y"
-
-#Easy nav to Desktop and Downlads dir from anywhere
 alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
 alias clug="cd ~/Desktop/clug"
 alias books="cd ~/Desktop/books"
 alias bin="micro ~/.config/micro/bindings.json"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
-
 alias list="cd ~/Desktop/rhettapplestone.com && micro list.html && qcom"
-
 alias o="open ."
 
 #Easy way to edit this file
@@ -154,8 +148,8 @@ qcom(){
 
 #open the micro
 alias m="micro"
+
+#easy python3
 alias p="python3"
 
 bind 'set completion-ignore-case on'
-
-
