@@ -24,7 +24,7 @@ ascii = """
 
 """
 
-# all variable declarations
+# All files that need to be tracked
 
 files = [
     "bashrc",
@@ -38,6 +38,7 @@ files = [
     "cinnamonMenuSettings"
 ]
 
+# location of all files on system in a dictionary
 systemPath = {
     "bashrc": "../.bashrc",
     "microBindings": "../.config/micro/bindings.json",
@@ -50,6 +51,7 @@ systemPath = {
     "cinnamonMenuSettings": "../.config/cinnamon/spices/menu@cinnamon.org/0.json"
 }
 
+# location of all files (stored in cain's files dir) in a dictionary
 programPath = {
     "bashrc": "./files/dotfiles/.bashrc",
     "microBindings": "./files/micro/bindings.json",
@@ -62,10 +64,11 @@ programPath = {
     "cinnamonMenuSettings": "./files/cinnamon/0.json"
 }
 
+# variable to keep track of what if any files have changed since the program has run last
 allFilesChanged = ""
 
 
-#function declarations
+#function to check if two files have any differences
 
 def diff(file1, file2):
     if(not(filecmp.cmp(file1, file2, shallow=False))):
@@ -73,6 +76,7 @@ def diff(file1, file2):
     else:
         return False
 
+#dconf dumping all system settings to a temporary file
 os.system("dconf dump / > ~/cain/files/tmp/system-cinnamon")
 
 # main program

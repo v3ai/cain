@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1744788548
+refresh-last-run=1744795750
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -79,13 +79,13 @@ secondary-click-time=1.2
 
 [org/cinnamon/desktop/background]
 color-shading-type='solid'
-picture-options='centered'
+picture-options='zoom'
 picture-uri='file:///home/rhett/Desktop/a_cartoon_of_a_girl_standing_on_a_balcony_with_red_balloons.jpeg'
 primary-color='#000000000000'
 
 [org/cinnamon/desktop/background/slideshow]
 delay=15
-image-source='directory:///home/rhett/Pictures'
+image-source='directory:///home/rhett/Desktop'
 slideshow-enabled=false
 
 [org/cinnamon/desktop/interface]
@@ -450,7 +450,7 @@ sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(1159, 501)
+window-position=(1815, 235)
 window-size=(1351, 857)
 
 [org/nemo/search]
