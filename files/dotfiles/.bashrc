@@ -117,10 +117,11 @@ if ! shopt -oq posix; then
 fi
 
 #Rhett's Aliases"
+#hello
 alias clone="git clone"
 alias pull="git pull"
+
 alias install="sudo apt install $@ -y"
-alias remove="sudo apt purge $@ -y"
 alias uninstall="sudo apt purge $@ -y"
 
 alias update="sudo apt update -y"
@@ -134,36 +135,32 @@ alias books="cd ~/Desktop/books"
 alias bin="micro ~/.config/micro/bindings.json"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
 
-alias list="cd ~/Desktop/rhettapplestone.com && micro list && qcom"
+alias list="cd ~/Desktop/rhettapplestone.com && micro list.html && qcom"
 
-alias f="open ."
-
-alias n="nvim"
+alias o="open ."
 
 #Easy way to edit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
+
+find(){
+    command find . -iname "*$1*"
+}
 
 
 # When you mistype ls
 alias sl="ls"
 
-# qcom program condenced into all that was useful 
+# git program condenced into all that was useful 
 qcom(){
 
     git add .
-	git commit -m "Pushed with qcom: https://github.com/v3ai/qcom"
+	git commit -m "Pushed with qcom"
 	git push
-
+	
 }
 
-
-#clear but shorter
-alias c="clear"
-
-#open the micro or nvim text editor
+#open the micro
 alias m="micro"
-alias p="python3"
 
 bind 'set completion-ignore-case on'
 
-. "$HOME/.cargo/env"

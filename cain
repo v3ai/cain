@@ -1,4 +1,11 @@
-#!/bin/bash
+#!/usr/bin/python3
+
+import os
+import filecmp
+import shutil
+
+ascii = """
+
 # ================================================================== #
 #                                   db                               #
 #                                                                    #
@@ -9,141 +16,84 @@
 #                YMbmd'  `Moo9^Yo..JMML..JMML  JMML.                 #
 #                                                                    #
 # ================================================================== #
-#     This Program Was Made January 2025 By Rhett Applestone         #
+#       This Program Was Made April 2025 By Rhett Applestone         #
 #                                                                    #
 #                            MIT License                             #
 #                Copyright (c) 2025 Rhett Applestone                 #
 # ================================================================== #
 
+"""
 
-# ==================== Error Handling Function ===================== #
+# all variable declarations
 
-handle_error () {
-	echo "An error has occured" && exit 1 
+files = [
+    "bashrc",
+    "microBindings",
+    "microSettings",
+    "inputRemapperBindingsAT",
+    "inputRemapperBindingsCOOLER",
+    "inputRemapperConfig",
+    "inputRemapperXmodmap",
+    "cinnamonSettings",
+    "cinnamonMenuSettings"
+]
+
+systemPath = {
+    "bashrc": "../.bashrc",
+    "microBindings": "../.config/micro/bindings.json",
+    "microSettings": "../.config/micro/settings.json",
+    "inputRemapperBindingsAT": "../.config/input-remapper-2/presets/AT Translated Set 2 keyboard/rhett-keybindingsAT.json",
+    "inputRemapperBindingsCOOLER": "../.config/input-remapper-2/presets/COOLER MASTER SK620 Mechanical Keyboard - Black Edition/rhett-keybindingsCOOLER.json",
+    "inputRemapperConfig": "../.config/input-remapper-2/config.json",
+    "inputRemapperXmodmap": "../.config/input-remapper-2/xmodmap.json",
+    "cinnamonSettings": "./files/tmp/system-cinnamon",
+    "cinnamonMenuSettings": "../.config/cinnamon/spices/menu@cinnamon.org/0.json"
 }
 
-# ================== Making The CLI look pretty ==================== #
+programPath = {
+    "bashrc": "./files/dotfiles/.bashrc",
+    "microBindings": "./files/micro/bindings.json",
+    "microSettings": "./files/micro/settings.json",
+    "inputRemapperBindingsAT": "./files/input-remapper/rhett-keybindingsAT.json",
+    "inputRemapperBindingsCOOLER": "./files/input-remapper/rhett-keybindingsCOOLER.json",
+    "inputRemapperConfig": "./files/input-remapper/config.json",
+    "inputRemapperXmodmap": "./files/input-remapper/xmodmap.json",
+    "cinnamonSettings": "./files/cinnamon/",
+    "cinnamonMenuSettings": "./files/cinnamon/0.json"
+}
 
-# Printing cain ascii art to terminal
-cat ~/cain/files/cainfiles/cai || handle_error
-
-# ====================== Collecting Files ========================== #
-
-#Declaring a changes variable that will collect all changes when cain has been fun
-CHANGES=""
-
-# If current .bashrc not equal to cain's .bashrc, copy yours to it's
-
-if ! cmp -s ~/.bashrc ~/cain/files/dotfiles/.bashrc; then
-	cp ~/.bashrc ~/cain/files/dotfiles || handle_error
-	echo "CHANGED: Collected .bashrc" && CHANGES="$CHANGES Collected .bashrc"
-else 
-	echo "SAME: .bashrc up to date"
-fi
-
-# Collecting configs for cinnamon desktop enviornment and error handling
+allFilesChanged = ""
 
 
-dconf dump / > ~/cain/files/cainfiles/tmp/current-cinnamon
+#function declarations
 
-cp ~/cain/files/cinnamon/cinnamon-settings ~/cain/files/cainfiles/tmp
+def diff(file1, file2):
+    if(not(filecmp.cmp(file1, file2, shallow=False))):
+        return True
+    else:
+        return False
 
-sed -i '/refresh-last-run/d' ~/cain/files/cainfiles/tmp/current-cinnamon
-sed -i '/refresh-last-run/d' ~/cain/files/cainfiles/tmp/cinnamon-settings
+os.system("dconf dump / > ~/cain/files/tmp/system-cinnamon")
 
-if ! cmp -s ~/cain/files/cainfiles/tmp/current-cinnamon ~/cain/files/cainfiles/tmp/cinnamon-settings; then
-	dconf dump / > ~/cain/files/cinnamon/cinnamon-settings || handle_error
-	echo "CHANGED: Collected cinnamon settings" && CHANGES="$CHANGES Collected cinnamon settings"
-else
-	echo "SAME: Cinnamon settings up to date"
-fi
+# main program
+print(ascii)
+print("Files Changed:")
 
-rm ~/cain/files/cainfiles/tmp/current-cinnamon 
-rm ~/cain/files/cainfiles/tmp/cinnamon-settings
-
-
-# Collecting cinnamon menu settings
-
-if ! cmp -s ~/.config/cinnamon/spices/menu@cinnamon.org/0.json ~/cain/files/cinnamon/0.json; then
-	cp ~/.config/cinnamon/spices/menu@cinnamon.org/0.json ~/cain/files/cinnamon/ || handle_error
-	echo "CHANGED: Collected menu settings" && CHANGES="$CHANGES Collected menu settings"
-else 
-	echo "SAME: Menu settings up to date"
-fi
-
-
-# Collecting keybindings for input-remapper and error handling
-
-if ! cmp -s ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/files/input-remapper/rhett-keybindings.json; then
-	cp ~/.config/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/rhett-keybindings.json ~/cain/files/input-remapper || handle_error
-	echo "CHANGED: Collected input-remapper keybindings" && CHANGES="$CHANGES Collected input-remapper keybindings"
-else 
-	echo "SAME: Input-remapper keybindings up to date"
-fi
-
-# Collecting configs for input-remapper and error handling
-
-if ! cmp -s ~/.config/input-remapper-2/config.json ~/cain/files/input-remapper/config.json; then
-	cp ~/.config/input-remapper-2/config.json ~/cain/files/input-remapper || handle_error
-	echo "CHANGED: Collected input-remapper config" && CHANGES="$CHANGES Collected input-remapper config"
-else 
-	echo "SAME: Input-remapper config up to date"
-fi
-
-# Collecting xmodmap.json for input-remapper and error handling
-
-if ! cmp -s ~/.config/input-remapper-2/xmodmap.json ~/cain/files/input-remapper/xmodmap.json; then
-	cp ~/.config/input-remapper-2/xmodmap.json ~/cain/files/input-remapper || handle_error
-	echo "CHANGED: Collected xmodmap.json" && CHANGES="$CHANGES Collected xmodmap.json"
-else 
-	echo "SAME: Xmodmap.json up to date"
-fi
-
-# Collecting micro key bindings and error handling
-
-if ! cmp -s ~/.config/micro/bindings.json ~/cain/files/micro/bindings.json; then
-	cp ~/.config/micro/bindings.json ~/cain/files/micro || handle_error
-	echo "CHANGED: Collected micro keybindings" && CHANGES="$CHANGES Collected micro keybindings"
-else 
-	echo "SAME: Micro keybindings up to date"
-fi
-
-
-# Collecting micro key settings and error handling
-
-if ! cmp -s ~/.config/micro/settings.json ~/cain/files/micro/settings.json; then
-	cp ~/.config/micro/settings.json ~/cain/files/micro || handle_error
-	echo "CHANGED: Collected micro settings" && CHANGES="$CHANGES Collected micro settings"
-else 
-	echo "SAME: Micro settings up to date"
-fi
-
-
-# Checking alacritty config
-if ! cmp -s ~/.config/alacritty/alacritty.toml ~/cain/files/alacritty/alacritty.toml; then
-	cp ~/.config/alacritty/alacritty.toml ~/cain/files/alacritty/alacritty.toml || handle_error
-	echo "CHANGED: Collected Alacritty Config" && CHANGES="$CHANGES Collected Alacritty config"
-else 
-	echo "SAME: Alacritty Config up to date"
-fi
+for file in files:
+    if diff(systemPath[file], programPath[file]):
+        shutil.copy(systemPath[file], programPath[file])
+        allFilesChanged = allFilesChanged + " " + file
+        print("    CHANGED: " + file)
+    else:
+        print("    SAME: " + file)
 
 
 
-
-# ======== Committing files with git if $CHANGES not empty ========= #
-
-if [ -n "$CHANGES" ]
-then
-	cd ~/cain || handle_error
-	git add .
-	git commit -m "cain:$CHANGES"
-	
-	#Optional line
-	#git push	            
-fi
-
-# ================================================================== #
-
-
+if (allFilesChanged != ""):
+    #os.sytem("cd ~/cain && git add . && git commit -m \"CHANGED: " + allFilesChanged +"\" && git push")
+    print("git wouldve pushed")
+        
+# clean up tmp file
+os.system("rm ~/cain/files/tmp/system-cinnamon")
 
 
