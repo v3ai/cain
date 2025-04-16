@@ -157,3 +157,5 @@ alias m="micro"
 alias p="python3"
 
 bind 'set completion-ignore-case on'
+
+
