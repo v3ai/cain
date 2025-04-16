@@ -90,8 +90,7 @@ for file in files:
 
 
 if (allFilesChanged != ""):
-    #os.sytem("cd ~/cain && git add . && git commit -m \"CHANGED: " + allFilesChanged +"\" && git push")
-    print("git wouldve pushed")
+    os.system("cd ~/cain && git add . && git commit -m \"CHANGED: " + allFilesChanged +"\" && git push")
         
 # clean up tmp file
 os.system("rm ~/cain/files/tmp/system-cinnamon")

@@ -117,7 +117,7 @@ if ! shopt -oq posix; then
 fi
 
 #Rhett's Aliases"
-#hello
+alias cain="cd ~/cain && ./cain && cd"
 alias clone="git clone"
 alias pull="git pull"
 
@@ -145,7 +145,6 @@ alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 find(){
     command find . -iname "*$1*"
 }
-
 
 # When you mistype ls
 alias sl="ls"

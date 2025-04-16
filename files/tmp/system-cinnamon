@@ -1,0 +1,783 @@
+[apps/seahorse/listing]
+keyrings-selected=['gnupg://']
+
+[apps/seahorse/windows/key-manager]
+height=476
+width=600
+
+[ca/desrt/dconf-editor]
+saved-pathbar-path='/org/gnome/desktop/applications/terminal/exec'
+saved-view='/org/gnome/desktop/applications/terminal/exec'
+window-height=675
+window-is-maximized=false
+window-width=953
+
+[com/github/maoschanz/drawing]
+last-active-tool='rect_select'
+last-version='1.0.2'
+maximized=true
+
+[com/github/maoschanz/drawing/tools-options]
+last-active-shape='polygon'
+last-delete-replace='alpha'
+last-font-name='Sans'
+last-left-rgba=['0.1803921568627451', '0.7607843137254902', '0.49411764705882355', '1.0']
+last-right-rgba=['1.0', '1.0', '0.0', '0.5']
+last-shape-filling='empty'
+last-size=5
+last-text-background='thin-outline'
+use-antialiasing=true
+
+[com/linuxmint/updates]
+default-repo-is-ok=true
+refresh-last-run=1744788548
+show-welcome-page=false
+window-height=570
+window-pane-position=344
+window-width=790
+
+[io/github/celluloid-player/celluloid]
+settings-migrated=true
+
+[io/github/celluloid-player/celluloid/window-state]
+height=334
+loop-playlist=false
+maximized=true
+playlist-width=250
+show-playlist=false
+volume=1.0
+width=600
+
+[org/blueman/general]
+window-properties=[2876, 870, 2, 18]
+
+[org/cinnamon]
+alttab-switcher-delay=100
+desklet-snap-interval=25
+enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:1:separator@cinnamon.org:1', 'panel1:left:2:grouped-window-list@cinnamon.org:2', 'panel1:right:0:systray@cinnamon.org:3', 'panel1:right:1:xapp-status@cinnamon.org:4', 'panel1:right:2:notifications@cinnamon.org:5', 'panel1:right:3:printers@cinnamon.org:6', 'panel1:right:4:removable-drives@cinnamon.org:7', 'panel1:right:5:keyboard@cinnamon.org:8', 'panel1:right:6:favorites@cinnamon.org:9', 'panel1:right:7:network@cinnamon.org:10', 'panel1:right:8:sound@cinnamon.org:11', 'panel1:right:9:power@cinnamon.org:12', 'panel1:right:10:calendar@cinnamon.org:13', 'panel1:right:11:cornerbar@cinnamon.org:14']
+enabled-desklets=@as []
+next-applet-id=15
+panel-zone-icon-sizes='[{"panelId": 1, "left": 32, "center": 32, "right": 32}]'
+panel-zone-symbolic-icon-sizes='[{"panelId": 1, "left": 28, "center": 28, "right": 16}]'
+panels-autohide=['1:false']
+panels-height=['1:50']
+
+[org/cinnamon/desktop/a11y/applications]
+screen-keyboard-enabled=false
+
+[org/cinnamon/desktop/a11y/keyboard]
+bouncekeys-delay=300
+mousekeys-accel-time=300
+mousekeys-init-delay=300
+mousekeys-max-speed=10
+slowkeys-delay=300
+
+[org/cinnamon/desktop/a11y/mouse]
+dwell-threshold=10
+dwell-time=1.2
+secondary-click-time=1.2
+
+[org/cinnamon/desktop/background]
+color-shading-type='solid'
+picture-options='centered'
+picture-uri='file:///home/rhett/Desktop/a_cartoon_of_a_girl_standing_on_a_balcony_with_red_balloons.jpeg'
+primary-color='#000000000000'
+
+[org/cinnamon/desktop/background/slideshow]
+delay=15
+image-source='directory:///home/rhett/Pictures'
+slideshow-enabled=false
+
+[org/cinnamon/desktop/interface]
+clock-use-24h=false
+cursor-blink-time=1200
+cursor-size=24
+cursor-theme='Yaru'
+gtk-theme='Mint-Y-Dark-Grey'
+text-scaling-factor=1.7000000000000006
+toolkit-accessibility=false
+
+[org/cinnamon/desktop/keybindings]
+custom-list=['custom0']
+show-desklets=@as []
+
+[org/cinnamon/desktop/keybindings/custom-keybindings/custom0]
+binding=['<Alt>t']
+command='alacritty'
+name='term'
+
+[org/cinnamon/desktop/keybindings/media-keys]
+calculator=['<Alt>7']
+home=['<Alt>9', 'XF86Explorer']
+screensaver=['<Alt>1', 'XF86ScreenSaver']
+terminal=@as []
+www=['<Alt>8']
+
+[org/cinnamon/desktop/keybindings/wm]
+activate-window-menu=['<Primary>0']
+close=['<Alt>comma']
+panel-run-dialog=@as []
+push-tile-left=['<Alt>y']
+push-tile-right=['<Alt>p']
+show-desktop=['<Super>d']
+switch-windows=['<Alt>Tab', '<Alt>backslash']
+toggle-maximized=['<Alt>r']
+
+[org/cinnamon/desktop/media-handling]
+autorun-x-content-ignore=@as []
+autorun-x-content-open-folder=@as []
+autorun-x-content-start-app=['x-content/unix-software']
+
+[org/cinnamon/desktop/peripherals/keyboard]
+delay=uint32 500
+repeat-interval=uint32 30
+
+[org/cinnamon/desktop/peripherals/mouse]
+double-click=400
+drag-threshold=8
+speed=0.0
+
+[org/cinnamon/desktop/peripherals/touchpad]
+speed=0.83613445378151252
+tap-to-click=false
+
+[org/cinnamon/desktop/sound]
+event-sounds=false
+volume-sound-enabled=false
+
+[org/cinnamon/desktop/wm/preferences]
+min-window-opacity=30
+
+[org/cinnamon/gestures]
+swipe-down-2='PUSH_TILE_DOWN::end'
+swipe-down-3='TOGGLE_OVERVIEW::end'
+swipe-down-4='VOLUME_DOWN::end'
+swipe-left-2='PUSH_TILE_LEFT::end'
+swipe-left-3='WORKSPACE_NEXT::end'
+swipe-left-4='WINDOW_WORKSPACE_PREVIOUS::end'
+swipe-right-2='PUSH_TILE_RIGHT::end'
+swipe-right-3='WORKSPACE_PREVIOUS::end'
+swipe-right-4='WINDOW_WORKSPACE_NEXT::end'
+swipe-up-2='PUSH_TILE_UP::end'
+swipe-up-3='TOGGLE_EXPO::end'
+swipe-up-4='VOLUME_UP::end'
+tap-3='MEDIA_PLAY_PAUSE::end'
+
+[org/cinnamon/muffin]
+draggable-border-width=10
+workspace-cycle=false
+
+[org/cinnamon/settings-daemon/peripherals/keyboard]
+numlock-state='off'
+
+[org/cinnamon/settings-daemon/peripherals/touchscreen]
+orientation-lock=true
+
+[org/cinnamon/settings-daemon/plugins/power]
+idle-brightness=30
+idle-dim-battery=true
+idle-dim-time=600
+lid-close-ac-action='suspend'
+lid-close-battery-action='shutdown'
+sleep-display-ac=1800
+sleep-display-battery=1800
+sleep-inactive-ac-timeout=0
+sleep-inactive-battery-timeout=0
+
+[org/cinnamon/sounds]
+login-enabled=false
+logout-enabled=false
+notification-enabled=false
+plug-enabled=false
+switch-enabled=false
+tile-enabled=false
+unplug-enabled=false
+
+[org/cinnamon/theme]
+name='Mint-Y-Dark-Grey'
+
+[org/gnome/baobab/ui]
+window-size=(1447, 910)
+window-state=87168
+
+[org/gnome/calculator]
+accuracy=9
+angle-units='degrees'
+base=10
+button-mode='basic'
+number-format='automatic'
+show-thousands=false
+show-zeroes=false
+source-currency=''
+source-units='degree'
+target-currency=''
+target-units='radian'
+window-position=(1720, 0)
+word-size=64
+
+[org/gnome/desktop/a11y]
+always-show-text-caret=false
+
+[org/gnome/desktop/a11y/applications]
+screen-keyboard-enabled=false
+screen-reader-enabled=false
+
+[org/gnome/desktop/a11y/mouse]
+dwell-click-enabled=false
+dwell-threshold=10
+dwell-time=1.2
+secondary-click-enabled=false
+secondary-click-time=1.2
+
+[org/gnome/desktop/applications/terminal]
+exec='alacritty'
+
+[org/gnome/desktop/background]
+picture-options='centered'
+picture-uri='file:///home/rhett/Firefox_wallpaper.png'
+picture-uri-dark='file:///home/rhett/Firefox_wallpaper.png'
+primary-color='#000000000000'
+
+[org/gnome/desktop/input-sources]
+current=uint32 0
+show-all-sources=false
+sources=@a(ss) []
+xkb-options=@as []
+
+[org/gnome/desktop/interface]
+can-change-accels=false
+clock-format='12h'
+clock-show-date=false
+clock-show-seconds=false
+cursor-blink=true
+cursor-blink-time=1200
+cursor-blink-timeout=10
+cursor-size=24
+cursor-theme='Yaru'
+enable-animations=true
+font-name='Ubuntu 10'
+gtk-color-palette='black:white:gray50:red:purple:blue:light blue:green:yellow:orange:lavender:brown:goldenrod4:dodger blue:pink:light green:gray10:gray30:gray75:gray90'
+gtk-color-scheme=''
+gtk-enable-primary-paste=true
+gtk-im-module=''
+gtk-im-preedit-style='callback'
+gtk-im-status-style='callback'
+gtk-key-theme='Default'
+gtk-theme='Mint-Y-Dark-Grey'
+gtk-timeout-initial=200
+gtk-timeout-repeat=20
+icon-theme='Mint-Y-Sand'
+menubar-accel='F10'
+menubar-detachable=false
+menus-have-tearoff=false
+scaling-factor=uint32 0
+text-scaling-factor=1.7000000000000006
+toolbar-detachable=false
+toolbar-icons-size='large'
+toolbar-style='both-horiz'
+toolkit-accessibility=false
+
+[org/gnome/desktop/peripherals/mouse]
+accel-profile='default'
+double-click=400
+drag-threshold=8
+left-handed=false
+middle-click-emulation=false
+natural-scroll=false
+speed=0.0
+
+[org/gnome/desktop/privacy]
+disable-camera=false
+disable-microphone=false
+disable-sound-output=false
+old-files-age=uint32 30
+recent-files-max-age=7
+remember-recent-files=true
+remove-old-temp-files=false
+remove-old-trash-files=false
+
+[org/gnome/desktop/sound]
+event-sounds=false
+input-feedback-sounds=false
+theme-name='LinuxMint'
+
+[org/gnome/desktop/wm/preferences]
+action-double-click-titlebar='toggle-maximize'
+action-middle-click-titlebar='lower'
+action-right-click-titlebar='menu'
+audible-bell=false
+auto-raise=false
+auto-raise-delay=500
+button-layout=':minimize,maximize,close'
+disable-workarounds=false
+focus-mode='click'
+focus-new-windows='smart'
+mouse-button-modifier='<Alt>'
+num-workspaces=4
+raise-on-click=true
+resize-with-right-button=true
+theme='Mint-Y'
+titlebar-font='Ubuntu Medium 10'
+titlebar-uses-system-font=false
+visual-bell=false
+visual-bell-type='fullscreen-flash'
+workspace-names=@as []
+
+[org/gnome/evolution-data-server]
+migrated=true
+
+[org/gnome/file-roller/dialogs/add]
+current-folder='file:///home/rhett/Downloads'
+exclude-files=''
+exclude-folders=''
+include-files='*'
+no-symlinks=true
+selected-files=@as []
+update=false
+
+[org/gnome/file-roller/dialogs/extract]
+recreate-folders=true
+skip-newer=false
+
+[org/gnome/file-roller/dialogs/new]
+default-extension='.cpio'
+encrypt-header=false
+expand-options=false
+volume-size=0
+
+[org/gnome/file-roller/file-selector]
+show-hidden=false
+sidebar-size=264
+window-size=(1320, 1164)
+
+[org/gnome/file-roller/listing]
+list-mode='as-folder'
+name-column-width=250
+show-path=false
+sort-method='name'
+sort-type='ascending'
+
+[org/gnome/file-roller/ui]
+sidebar-width=200
+window-height=973
+window-width=2343
+
+[org/gnome/gnome-screenshot]
+delay=0
+include-pointer=false
+last-save-directory='file:///home/rhett/Desktop'
+
+[org/gnome/nm-applet]
+disable-connected-notifications=true
+disable-disconnected-notifications=true
+
+[org/gnome/nm-applet/eap/45f8d959-469a-4263-861d-586180e32d09]
+ignore-ca-cert=false
+ignore-phase2-ca-cert=false
+
+[org/gnome/nm-applet/eap/6553b21d-c874-44ff-9075-a0a9a16ab219]
+ignore-ca-cert=false
+ignore-phase2-ca-cert=false
+
+[org/gnome/nm-applet/eap/69450be8-dc12-4c82-8d75-910bf63b3d8c]
+ignore-ca-cert=true
+ignore-phase2-ca-cert=false
+
+[org/gnome/nm-applet/eap/73de453b-175c-48e8-837c-14b8af8d0e9b]
+ignore-ca-cert=false
+ignore-phase2-ca-cert=false
+
+[org/gnome/nm-applet/eap/b3313191-3af4-4e08-996e-884d4f584ebd]
+ignore-ca-cert=false
+ignore-phase2-ca-cert=false
+
+[org/gnome/rhythmbox]
+position=(-1, -1)
+
+[org/gnome/rhythmbox/plugins]
+active-plugins=['tray_icon', 'dbus-media-server', 'audioscrobbler', 'mtpdevice', 'rb', 'artsearch', 'mpris', 'power-manager', 'iradio', 'ipod', 'generic-player', 'audiocd', 'android', 'notification']
+seen-plugins=['tray_icon', 'grilo', 'dbus-media-server', 'audioscrobbler', 'mtpdevice', 'rb', 'magnatune', 'listenbrainz', 'webremote', 'replaygain', 'artsearch', 'pythonconsole', 'daap', 'ipod', 'fmradio', 'notification', 'rblirc', 'lyrics', 'im-status']
+
+[org/gnome/rhythmbox/plugins/audioscrobbler/Last.fm]
+scrobbling-enabled=true
+
+[org/gnome/rhythmbox/plugins/audioscrobbler/Libre.fm]
+scrobbling-enabled=true
+
+[org/gnome/rhythmbox/plugins/iradio]
+initial-stations-loaded=true
+
+[org/gnome/rhythmbox/rhythmdb]
+locations=['file:///home/rhett/Music']
+
+[org/gnome/settings-daemon/plugins/xsettings]
+disabled-gtk-modules=@as []
+enabled-gtk-modules=@as []
+overrides=@a{sv} {}
+
+[org/gnome/terminal/legacy/keybindings]
+help='<Primary>Tab'
+move-tab-left='disabled'
+next-tab='<Control>Tab'
+print='<Primary>Tab'
+select-all='<Primary><Shift>a'
+
+[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+background-color='rgb(21,20,20)'
+background-transparency-percent=16
+bold-is-bright=true
+cursor-blink-mode='off'
+cursor-shape='block'
+palette=['rgb(46,52,54)', 'rgb(204,0,0)', 'rgb(78,154,6)', 'rgb(196,160,0)', 'rgb(52,101,164)', 'rgb(117,80,123)', 'rgb(6,152,154)', 'rgb(211,215,207)', 'rgb(85,87,83)', 'rgb(239,41,41)', 'rgb(138,226,52)', 'rgb(252,233,79)', 'rgb(114,159,207)', 'rgb(173,127,168)', 'rgb(52,226,226)', 'rgb(238,238,236)']
+scrollbar-policy='always'
+use-theme-colors=false
+use-theme-transparency=true
+use-transparent-background=false
+visible-name='rhett'
+
+[org/gtk/settings/color-chooser]
+custom-colors=[(1.0, 1.0, 0.0, 0.5), (0.82745098039215681, 0.84313725490196079, 0.81176470588235294, 1.0), (0.023529411764705882, 0.59607843137254901, 0.60392156862745094, 1.0), (0.45882352941176469, 0.31372549019607843, 0.4823529411764706, 1.0), (0.20392156862745098, 0.396078431372549, 0.64313725490196083, 1.0), (0.7686274509803922, 0.62745098039215685, 0.0, 1.0), (0.30588235294117649, 0.60392156862745094, 0.023529411764705882, 1.0), (0.80000000000000004, 0.0, 0.0, 1.0)]
+selected-color=(true, 0.0, 0.0, 0.0, 1.0)
+
+[org/gtk/settings/file-chooser]
+date-format='regular'
+location-mode='path-bar'
+show-hidden=false
+show-size-column=true
+show-type-column=true
+sidebar-width=243
+sort-column='modified'
+sort-directories-first=true
+sort-order='descending'
+type-format='category'
+window-position=(1159, 501)
+window-size=(1351, 857)
+
+[org/nemo/search]
+search-reverse-sort=false
+search-sort-column='name'
+
+[org/nemo/window-state]
+devices-expanded=true
+geometry='1698x1098+50+50'
+maximized=false
+network-expanded=true
+sidebar-bookmark-breakpoint=5
+start-with-sidebar=true
+
+[org/virt-manager/virt-manager]
+manager-window-height=469
+manager-window-width=720
+
+[org/virt-manager/virt-manager/confirm]
+delete-storage=false
+forcepoweroff=true
+
+[org/virt-manager/virt-manager/connections]
+autoconnect=['qemu:///system']
+uris=['qemu:///system']
+
+[org/virt-manager/virt-manager/details]
+show-toolbar=true
+
+[org/virt-manager/virt-manager/new-vm]
+graphics-type='system'
+
+[org/virt-manager/virt-manager/paths]
+media-default='/home/rhett/Desktop/aaaa'
+
+[org/virt-manager/virt-manager/urls]
+isos=['/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/mm.iso', '/var/lib/libvirt/images/mtes.iso', '/var/lib/libvirt/images/minttest.iso', '/var/lib/libvirt/images/ppp.iso', '/var/lib/libvirt/images/pen.iso', '/var/lib/libvirt/images/penis.iso', '/home/rhett/Desktop/aaaa/penis.iso', '/var/lib/libvirt/images/tint-2025.02.04.iso', '/home/rhett/tint/tint-2025.02.04.iso']
+
+[org/virt-manager/virt-manager/vmlist-fields]
+disk-usage=false
+network-traffic=false
+
+[org/virt-manager/virt-manager/vms/012acd508ebf42f2b8eea2ca8d9e9dce]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/054c183c04ce42c1a1b8752e9761afd0]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 835)
+
+[org/virt-manager/virt-manager/vms/0822da68790a4ee09fe172d51f38a7f8]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/0da9a08cabeb4bcaa7e6f14fecdb6667]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/17ff614811c8480a9f1a38f19e24cd35]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 568)
+
+[org/virt-manager/virt-manager/vms/1b29a6806a7a4b9cadc6fba48742da9c]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/1dae9130ed75423ab7fa304ac3aef36a]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/226eac10aab6459d8545544a8bd95a3f]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/25a613e4635745f0a901eeb93bd6cdac]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/2a5fb27e9f214377a15fc4b9eb6b2bbd]
+autoconnect=1
+scaling=1
+vm-window-size=(1080, 618)
+
+[org/virt-manager/virt-manager/vms/31f78fb3e4554f8d9216a1c2b2a46257]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 835)
+
+[org/virt-manager/virt-manager/vms/344825c0009b4d34a4341a1d0b50bf3a]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/35c6a00c8f544fa79232aab8dd0fda21]
+autoconnect=1
+scaling=1
+
+[org/virt-manager/virt-manager/vms/368a98f557894d6398ce522e2a1a0bf8]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 835)
+
+[org/virt-manager/virt-manager/vms/40c9c5092cae45f6beda52b4f7ec4dd2]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 711)
+
+[org/virt-manager/virt-manager/vms/43da979fee8d42188c2e2f2d4597e205]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/4f503e88a1784aa2a733c03f9a0243cb]
+autoconnect=1
+scaling=1
+vm-window-size=(976, 766)
+
+[org/virt-manager/virt-manager/vms/5534ba8c30504903b488a6b234a1afd4]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/58153b2237094a789789f8189bc12b6a]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/58b807ebaa6c40e996b72af9d024806f]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 637)
+
+[org/virt-manager/virt-manager/vms/5cba2465023548f189b67878faf5f33c]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/662d45b851b34f6e8858971725ee5f13]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/6d90d29318e64f9ba5ccd2a516b697f6]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/78388b8bb42843c6bfa7d0f567e62091]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/794001eaeb00480bb27eadb9e3bdf03c]
+autoconnect=1
+scaling=1
+vm-window-size=(996, 743)
+
+[org/virt-manager/virt-manager/vms/93180a1827f1491486ca698996ca0ac1]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/950bf44b70854adc9290b4b5d934d431]
+autoconnect=1
+scaling=1
+
+[org/virt-manager/virt-manager/vms/9ce55a47cd5940f8a17576a8478c4442]
+autoconnect=1
+scaling=1
+vm-window-size=(843, 835)
+
+[org/virt-manager/virt-manager/vms/a8c18f748bb844e69d2d6c760aeb339d]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 835)
+
+[org/virt-manager/virt-manager/vms/a8c767a6136d4ffbae33ec7cd8c6881e]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/aaa32298920c4fffbb12190dcee18343]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 638)
+
+[org/virt-manager/virt-manager/vms/b522d2f64eca413c90322fd811ed0433]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/c11e3bb55c4f40238a1faea3a1e0135f]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/c3431d35128441b3a369bcb37d86f6f6]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/c53335ac940c4eb29eb14ba9365ec6ca]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/c9a7408fb90448d4aefd5a2310fb86ef]
+autoconnect=1
+scaling=1
+vm-window-size=(720, 835)
+
+[org/virt-manager/virt-manager/vms/dafda105195c4bdaafa57a199ad97c01]
+autoconnect=1
+scaling=2
+vm-window-size=(1024, 726)
+
+[org/virt-manager/virt-manager/vms/e31120f3db4d46e4b98817f6f2ea0c93]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/e7c4dd34d6074d2886e6c9fbbcac5b74]
+autoconnect=1
+scaling=1
+
+[org/virt-manager/virt-manager/vms/eb4d29541fb84dadb9fc7e03adb133f7]
+autoconnect=1
+scaling=1
+vm-window-size=(1147, 559)
+
+[org/virt-manager/virt-manager/vms/ee4406ad48c84bcfaaeca7c6a1924339]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 835)
+
+[org/virt-manager/virt-manager/vms/f47402a26a28465e8406b793ffb8830f]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 835)
+
+[org/virt-manager/virt-manager/vms/f55e5ce733bc4298b36c3bbe6fb322ca]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 811)
+
+[org/virt-manager/virt-manager/vms/fd61f704e3bc48aa899c8859eb1a8e10]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 811)
+
+[org/virt-manager/virt-manager/vms/ffd4f1b59d0c408a8b034de221a2a599]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 835)
+
+[org/x/editor/plugins]
+active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-uri-context-menu', 'bracketcompletion', 'textsize', 'docinfo', 'spell']
+
+[org/x/editor/plugins/filebrowser/on-load]
+root='file:///'
+tree-view=true
+virtual-root='file:///home/rhett/Desktop/rhettapplestone.com'
+
+[org/x/editor/preferences/ui]
+statusbar-visible=true
+
+[org/x/editor/state/window]
+bottom-panel-size=140
+side-panel-active-page=827629879
+side-panel-size=200
+size=(2793, 1076)
+state=87168
+
+[org/x/pix/browser]
+browser-sidebar-width=285
+fullscreen-sidebar='hidden'
+fullscreen-thumbnails-visible=false
+maximized=false
+properties-visible=false
+sidebar-sections=['GthFileProperties:expanded', 'GthFileComment:expanded', 'GthFileDetails:expanded', 'GthImageHistogram:expanded']
+sidebar-visible=true
+sort-inverse=false
+sort-type='file::mtime'
+startup-current-file=''
+startup-location='file:///home/rhett/Pictures'
+statusbar-visible=true
+viewer-sidebar='hidden'
+window-height=675
+window-width=1195
+
+[org/x/pix/data-migration]
+catalogs-2-10=true
+
+[org/x/pix/general]
+active-extensions=['23hq', 'bookmarks', 'burn_disc', 'catalogs', 'change_date', 'comments', 'contact_sheet', 'convert_format', 'desktop_background', 'edit_metadata', 'exiv2_tools', 'file_manager', 'find_duplicates', 'flicker', 'gstreamer_tools', 'gstreamer_utils', 'image_print', 'image_rotation', 'importer', 'jpeg_utils', 'list_tools', 'oauth', 'photo_importer', 'raw_files', 'red_eye_removal', 'rename_series', 'resize_images', 'search', 'selections', 'slideshow', 'terminal', 'webalbums']
+
+[org/x/reader/default]
+continuous=true
+dual-page=false
+dual-page-odd-left=false
+fullscreen=false
+inverted-colors=false
+show-sidebar=true
+sidebar-page='links'
+sidebar-size=156
+sizing-mode='free'
+window-ratio=(5.0186739166663497, 1.9805156375717579)
+zoom=1.6653705429296666
+
+[org/x/sticky]
+active-group='Group 1'
+first-run=false
+
+[org/x/viewer/window]
+maximized=true
+
+[org/x/warpinator/preferences]
+ask-for-send-permission=true
+autostart=false
+connect-id='HAL-9000-7F2F1EE4FE0DD88FB972'
+no-overwrite=true
