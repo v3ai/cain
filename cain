@@ -3,6 +3,7 @@
 import os
 import filecmp
 import shutil
+import sys
 
 ascii = """
 
@@ -24,9 +25,9 @@ ascii = """
 
 """
 
-# All files that need to be tracked
+# All filesToTrack that need to be tracked
 
-files = [
+filesToTrack = [
     "bashrc",
     "microBindings",
     "microSettings",
@@ -38,8 +39,9 @@ files = [
     "cinnamonMenuSettings"
 ]
 
-# location of all files on system in a dictionary
-systemPath = {
+    
+# location of all filesToTrack on system in a dictionary
+systemPaths = {
     "bashrc": "../.bashrc",
     "microBindings": "../.config/micro/bindings.json",
     "microSettings": "../.config/micro/settings.json",
@@ -47,28 +49,34 @@ systemPath = {
     "inputRemapperBindingsCOOLER": "../.config/input-remapper-2/presets/COOLER MASTER SK620 Mechanical Keyboard - Black Edition/rhett-keybindingsCOOLER.json",
     "inputRemapperConfig": "../.config/input-remapper-2/config.json",
     "inputRemapperXmodmap": "../.config/input-remapper-2/xmodmap.json",
-    "cinnamonSettings": "./files/tmp/system-cinnamon",
+    "cinnamonSettings": "./filesToTrack/tmp/system-cinnamon",
     "cinnamonMenuSettings": "../.config/cinnamon/spices/menu@cinnamon.org/0.json"
 }
 
-# location of all files (stored in cain's files dir) in a dictionary
-programPath = {
-    "bashrc": "./files/dotfiles/.bashrc",
-    "microBindings": "./files/micro/bindings.json",
-    "microSettings": "./files/micro/settings.json",
-    "inputRemapperBindingsAT": "./files/input-remapper/rhett-keybindingsAT.json",
-    "inputRemapperBindingsCOOLER": "./files/input-remapper/rhett-keybindingsCOOLER.json",
-    "inputRemapperConfig": "./files/input-remapper/config.json",
-    "inputRemapperXmodmap": "./files/input-remapper/xmodmap.json",
-    "cinnamonSettings": "./files/cinnamon/",
-    "cinnamonMenuSettings": "./files/cinnamon/0.json"
+# location of all filesToTrack (stored in cain's filesToTrack dir) in a dictionary
+programPaths = {
+    "bashrc": "./filesToTrack/dotfilesToTrack/.bashrc",
+    "microBindings": "./filesToTrack/micro/bindings.json",
+    "microSettings": "./filesToTrack/micro/settings.json",
+    "inputRemapperBindingsAT": "./filesToTrack/input-remapper/rhett-keybindingsAT.json",
+    "inputRemapperBindingsCOOLER": "./filesToTrack/input-remapper/rhett-keybindingsCOOLER.json",
+    "inputRemapperConfig": "./filesToTrack/input-remapper/config.json",
+    "inputRemapperXmodmap": "./filesToTrack/input-remapper/xmodmap.json",
+    "cinnamonSettings": "./filesToTrack/cinnamon/cinnamon-settings",
+    "cinnamonMenuSettings": "./filesToTrack/cinnamon/0.json"
 }
 
-# variable to keep track of what if any files have changed since the program has run last
-allFilesChanged = ""
 
+# programs to install
+programsToInstall = [
+	"micro",
+	"xclip",
+	"input-remapper",
+	"git",
+	"virtualbox"
+]
 
-#function to check if two files have any differences
+#function to check if two filesToTrack have any differences
 
 def filesAreDifferent(file1, file2):
     if(not(filecmp.cmp(file1, file2, shallow=False))):
@@ -76,27 +84,64 @@ def filesAreDifferent(file1, file2):
     else:
         return False
 
-#dconf dumping all system settings to a temporary file
-os.system("dconf dump / > ~/cain/files/tmp/system-cinnamon")
+#strips filename from the end of path
+def stripFileName(path):
+    index = path.rfind("/")
+    return path[:index+1]
+    
 
-# main program
-print(ascii)
-print("Files Changed:")
+def collect():
+    # variable to keep track of what if any filesToTrack have changed since the program has run last
+    allfilesToTrackChanged = ""
+    #dconf dumping all system settings to a temporary file
+    os.system("dconf dump / > ~/cain/filesToTrack/tmp/system-cinnamon")
+    
+    # main program
+    print(ascii)
+    print("filesToTrack Changed:")
+    
+    for file in filesToTrack:
+        if filesToTrackAreDifferent(systemPaths[file], programPaths[file]):
+            shutil.copy(systemPaths[file], programPaths[file])
+            allfilesToTrackChanged = allfilesToTrackChanged + " " + file
+            print("    CHANGED: " + file)
+        else:
+            print("    SAME: " + file)
+    
+    if (allfilesToTrackChanged != ""):
+      # commented because testing  os.system("cd ~/cain && git add . && git commit -m \"CHANGED: " + allfilesToTrackChanged +"\" && git push")
+            
+    # clean up tmp file
+    os.system("rm ~/cain/filesToTrack/tmp/system-cinnamon")
 
-for file in files:
-    if filesAreDifferent(systemPath[file], programPath[file]):
-        shutil.copy(systemPath[file], programPath[file])
-        allFilesChanged = allFilesChanged + " " + file
-        print("    CHANGED: " + file)
-    else:
-        print("    SAME: " + file)
+def install():
+    print(ascii)
+    print("INSTALLING:")
+    os.system("sudo apt update")
+    
+    #install all programs listed in programToInstall array
+    for program in programsToInstall:
+    	os.system("sudo apt install " + program + " -y")
+    
+    #configure git
+    os.system("git config --global user.name \"Rhett Applestone\"")
+    os.system("git config --global user.email \"rhettapples(at symbol)gmail.com\"")
+
+    #check if dirs exist, and make them if they don't
+    #put every file into it's place
+    
+    for file in filesToTrack:
+        if(not(os.path.isdir(stripFileName(systemPaths[file])))):
+            os.system("mkdir " + stripFileName(systemPaths[file]))
+
+    for file in filesToTrack:
+        shutil.copy(programPaths[file], systemPaths[file])
 
 
-
-if (allFilesChanged != ""):
-    os.system("cd ~/cain && git add . && git commit -m \"CHANGED: " + allFilesChanged +"\" && git push")
-        
-# clean up tmp file
-os.system("rm ~/cain/files/tmp/system-cinnamon")
+#main program that executes
+if (sys.argv[1] == "install"):
+    install()
+else:
+    collect()
 
 
