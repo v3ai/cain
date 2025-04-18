@@ -70,7 +70,7 @@ allFilesChanged = ""
 
 #function to check if two files have any differences
 
-def diff(file1, file2):
+def filesAreDifferent(file1, file2):
     if(not(filecmp.cmp(file1, file2, shallow=False))):
         return True
     else:
@@ -84,7 +84,7 @@ print(ascii)
 print("Files Changed:")
 
 for file in files:
-    if diff(systemPath[file], programPath[file]):
+    if filesAreDifferent(systemPath[file], programPath[file]):
         shutil.copy(systemPath[file], programPath[file])
         allFilesChanged = allFilesChanged + " " + file
         print("    CHANGED: " + file)
