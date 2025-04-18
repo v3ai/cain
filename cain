@@ -25,7 +25,7 @@ ascii = """
 
 """
 
-# All filesToTrack that need to be tracked
+# All files that need to be tracked
 
 filesToTrack = [
     "bashrc",
@@ -107,12 +107,11 @@ def collect():
             print("    CHANGED: " + file)
         else:
             print("    SAME: " + file)
-    
-   # if (allfilesToTrackChanged != ""):
-      # commented because testing  os.system("cd ~/cain && git add . && git commit -m \"CHANGED: " + allfilesToTrackChanged +"\" && git push")
+    if (allFilesChanged != ""):
+        os.system("cd ~/cain && git add . && git commit -m \"CHANGED: " + allFilesChanged +"\" && git push")
             
     # clean up tmp file
-    os.system("rm ~/cain/filesToTrack/tmp/system-cinnamon")
+    os.system("rm ~/cain/files/tmp/system-cinnamon")
 
 def install():
     print(ascii)

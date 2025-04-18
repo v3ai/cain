@@ -116,6 +116,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+#hello
 #Rhett's Aliases"
 alias cain="cd ~/cain && ./cain && cd"
 alias clone="git clone"
