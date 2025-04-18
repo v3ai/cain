@@ -13,7 +13,7 @@ window-is-maximized=false
 window-width=953
 
 [com/github/maoschanz/drawing]
-last-active-tool='highlight'
+last-active-tool='rect_select'
 last-version='1.0.2'
 maximized=true
 
@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1744843492
+refresh-last-run=1744752530
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -79,13 +79,13 @@ secondary-click-time=1.2
 
 [org/cinnamon/desktop/background]
 color-shading-type='solid'
-picture-options='zoom'
+picture-options='centered'
 picture-uri='file:///home/rhett/Desktop/a_cartoon_of_a_girl_standing_on_a_balcony_with_red_balloons.jpeg'
 primary-color='#000000000000'
 
 [org/cinnamon/desktop/background/slideshow]
 delay=15
-image-source='directory:///home/rhett/Desktop'
+image-source='directory:///home/rhett/Pictures'
 slideshow-enabled=false
 
 [org/cinnamon/desktop/interface]
@@ -437,7 +437,7 @@ visible-name='rhett'
 
 [org/gtk/settings/color-chooser]
 custom-colors=[(1.0, 1.0, 0.0, 0.5), (0.82745098039215681, 0.84313725490196079, 0.81176470588235294, 1.0), (0.023529411764705882, 0.59607843137254901, 0.60392156862745094, 1.0), (0.45882352941176469, 0.31372549019607843, 0.4823529411764706, 1.0), (0.20392156862745098, 0.396078431372549, 0.64313725490196083, 1.0), (0.7686274509803922, 0.62745098039215685, 0.0, 1.0), (0.30588235294117649, 0.60392156862745094, 0.023529411764705882, 1.0), (0.80000000000000004, 0.0, 0.0, 1.0)]
-selected-color=(true, 0.1803921568627451, 0.76078431372549016, 0.49411764705882355, 1.0)
+selected-color=(true, 0.0, 0.0, 0.0, 1.0)
 
 [org/gtk/settings/file-chooser]
 date-format='regular'
@@ -450,7 +450,7 @@ sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(1815, 235)
+window-position=(1159, 501)
 window-size=(1351, 857)
 
 [org/nemo/search]

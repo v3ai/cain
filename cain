@@ -49,21 +49,21 @@ systemPaths = {
     "inputRemapperBindingsCOOLER": "../.config/input-remapper-2/presets/COOLER MASTER SK620 Mechanical Keyboard - Black Edition/rhett-keybindingsCOOLER.json",
     "inputRemapperConfig": "../.config/input-remapper-2/config.json",
     "inputRemapperXmodmap": "../.config/input-remapper-2/xmodmap.json",
-    "cinnamonSettings": "./filesToTrack/tmp/system-cinnamon",
+    "cinnamonSettings": "./files/tmp/system-cinnamon",
     "cinnamonMenuSettings": "../.config/cinnamon/spices/menu@cinnamon.org/0.json"
 }
 
 # location of all filesToTrack (stored in cain's filesToTrack dir) in a dictionary
 programPaths = {
-    "bashrc": "./filesToTrack/dotfilesToTrack/.bashrc",
-    "microBindings": "./filesToTrack/micro/bindings.json",
-    "microSettings": "./filesToTrack/micro/settings.json",
-    "inputRemapperBindingsAT": "./filesToTrack/input-remapper/rhett-keybindingsAT.json",
-    "inputRemapperBindingsCOOLER": "./filesToTrack/input-remapper/rhett-keybindingsCOOLER.json",
-    "inputRemapperConfig": "./filesToTrack/input-remapper/config.json",
-    "inputRemapperXmodmap": "./filesToTrack/input-remapper/xmodmap.json",
-    "cinnamonSettings": "./filesToTrack/cinnamon/cinnamon-settings",
-    "cinnamonMenuSettings": "./filesToTrack/cinnamon/0.json"
+    "bashrc": "./files/dotfiles/.bashrc",
+    "microBindings": "./files/micro/bindings.json",
+    "microSettings": "./files/micro/settings.json",
+    "inputRemapperBindingsAT": "./files/input-remapper/rhett-keybindingsAT.json",
+    "inputRemapperBindingsCOOLER": "./files/input-remapper/rhett-keybindingsCOOLER.json",
+    "inputRemapperConfig": "./files/input-remapper/config.json",
+    "inputRemapperXmodmap": "./files/input-remapper/xmodmap.json",
+    "cinnamonSettings": "./files/cinnamon/cinnamon-settings",
+    "cinnamonMenuSettings": "./files/cinnamon/0.json"
 }
 
 
@@ -92,23 +92,23 @@ def stripFileName(path):
 
 def collect():
     # variable to keep track of what if any filesToTrack have changed since the program has run last
-    allfilesToTrackChanged = ""
+    allFilesChanged = ""
     #dconf dumping all system settings to a temporary file
-    os.system("dconf dump / > ~/cain/filesToTrack/tmp/system-cinnamon")
+    os.system("dconf dump / > ~/cain/files/tmp/system-cinnamon")
     
     # main program
     print(ascii)
-    print("filesToTrack Changed:")
+    print("Files Changed:")
     
     for file in filesToTrack:
-        if filesToTrackAreDifferent(systemPaths[file], programPaths[file]):
+        if filesAreDifferent(systemPaths[file], programPaths[file]):
             shutil.copy(systemPaths[file], programPaths[file])
-            allfilesToTrackChanged = allfilesToTrackChanged + " " + file
+            allFilesChanged = allFilesChanged + " " + file
             print("    CHANGED: " + file)
         else:
             print("    SAME: " + file)
     
-    if (allfilesToTrackChanged != ""):
+   # if (allfilesToTrackChanged != ""):
       # commented because testing  os.system("cd ~/cain && git add . && git commit -m \"CHANGED: " + allfilesToTrackChanged +"\" && git push")
             
     # clean up tmp file
@@ -139,7 +139,7 @@ def install():
 
 
 #main program that executes
-if (sys.argv[1] == "install"):
+if (len(sys.argv) > 1 and sys.argv[1] == "install"):
     install()
 else:
     collect()
