@@ -23,9 +23,8 @@ I made cain because I was having a hard time keeping track and updating individu
 
 Cain makes it easy to make your computer exactly like you like it on a fresh install and it does those two things
 
-First, the install script will download all required programs and put all of your configuration files in their respective places
+First, use ./cain install to download all required programs and put all of your configuration files in their respective places
 
-then it gives you a command called "cain" and (optionally) sets up a crontab that will grab the most recent version of those files automatically, and commit them to git in the cain directory.
 
 
 ## NOTE: This program will switch your dotfiles and configs to mine.
@@ -34,13 +33,11 @@ then it gives you a command called "cain" and (optionally) sets up a crontab tha
 
 (One line install), paste into terminal
 ```
-cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && cd cain && ./install
+cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && cd ~/cain && ./cain install
 ```
-if you want to make cain push to github whenever you change a file, edit /usr/local/bin/cain
-and remove the remove the pound sign before the line "git push"
 
-Go about your life normally, and if you update a keybinding, run (or it will do it automatically if you use the crontab)
 
+Your .bashrc will be changed to let you just type this command into the terminal
 ```
 cain
 ```

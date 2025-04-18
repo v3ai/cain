@@ -140,6 +140,12 @@ alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 # When you mistype ls
 alias sl="ls"
 
+
+cain(){
+	cd ~/cain || return
+	./cain "$1"
+	cd || return
+}
 # git program condenced into all that was useful 
 qcom(){
     git add .
