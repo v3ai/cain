@@ -118,7 +118,7 @@ fi
 
 #hello
 #Rhett's Aliases"
-alias cain="cd ~/cain && ./cain && cd"
+
 alias clone="git clone"
 alias pull="git pull"
 alias install="sudo apt install $@ -y"
