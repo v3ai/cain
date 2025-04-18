@@ -73,7 +73,8 @@ programsToInstall = [
 	"xclip",
 	"input-remapper",
 	"git",
-	"virtualbox"
+	"virtualbox",
+	"inkscape"
 ]
 
 #function to check if two filesToTrack have any differences
