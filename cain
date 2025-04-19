@@ -108,11 +108,13 @@ def collect():
             print("    CHANGED: " + file)
         else:
             print("    SAME: " + file)
-    if (allFilesChanged != ""):
-        os.system("cd ~/cain && git add . && git commit -m \"CHANGED: " + allFilesChanged +"\" && git push")
-            
+
     # clean up tmp file
     os.system("rm ~/cain/files/tmp/system-cinnamon")
+
+    if (allFilesChanged != ""):
+        os.system("cd ~/cain && git add . && git commit -m \"CHANGED: " + allFilesChanged +"\" && git push")
+
 
 def install():
     print(ascii)
