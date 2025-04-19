@@ -141,11 +141,6 @@ alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 alias sl="ls"
 
 
-cain(){
-	cd ~/cain || return
-	./cain "$1"
-	cd || return
-}
 # git program condenced into all that was useful 
 qcom(){
     git add .
@@ -160,3 +155,6 @@ alias m="micro"
 alias p="python3"
 
 bind 'set completion-ignore-case on'
+
+# Created by `pipx` on 2025-04-18 23:25:10
+export PATH="$PATH:/home/rhett/.local/bin"
