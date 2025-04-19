@@ -116,7 +116,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#hello
 #Rhett's Aliases"
 
 alias clone="git clone"
@@ -140,6 +139,12 @@ alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 # When you mistype ls
 alias sl="ls"
 
+
+cain(){
+	cd ~/cain || return
+	./cain
+	cd || return
+}
 
 # git program condenced into all that was useful 
 qcom(){

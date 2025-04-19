@@ -23,8 +23,6 @@ I made cain because I was having a hard time keeping track and updating individu
 
 Cain makes it easy to make your computer exactly like you like it on a fresh install and it does those two things
 
-First, use ./cain install to download all required programs and put all of your configuration files in their respective places
-
 
 
 ## NOTE: This program will switch your dotfiles and configs to mine.
@@ -42,7 +40,9 @@ Your .bashrc will be changed to let you just type this command into the terminal
 cain
 ```
 
+
 ### Don't move the cain directory from your home directory or it will break.
+
 Ascii art made with figlet -f Georgia11.flf cain (you may have to download that .flf file)
 
 
