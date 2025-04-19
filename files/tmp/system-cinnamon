@@ -415,13 +415,13 @@ location-mode='path-bar'
 show-hidden=false
 show-size-column=true
 show-type-column=true
-sidebar-width=148
+sidebar-width=150
 sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(0, 106)
-window-size=(1096, 481)
+window-position=(172, 188)
+window-size=(1096, 523)
 
 [org/nemo/preferences]
 show-hidden-files=true
