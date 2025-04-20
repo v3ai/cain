@@ -110,7 +110,7 @@ def collect():
             print("    SAME: " + file)
 
     # clean up tmp file
-    os.system("rm ~/cain/files/tmp/system-cinnamon")
+    os.system("rm ~/cain/files/system-cinnamon")
 
     if (allFilesChanged != ""):
         os.system("cd ~/cain && git add . && git commit -m \"CHANGED: " + allFilesChanged +"\" && git push")
