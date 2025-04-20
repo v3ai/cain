@@ -49,7 +49,7 @@ systemPaths = {
     "inputRemapperBindingsCOOLER": "../.config/input-remapper-2/presets/COOLER MASTER SK620 Mechanical Keyboard - Black Edition/rhett-keybindingsCOOLER.json",
     "inputRemapperConfig": "../.config/input-remapper-2/config.json",
     "inputRemapperXmodmap": "../.config/input-remapper-2/xmodmap.json",
-    "cinnamonSettings": "./files/tmp/system-cinnamon",
+    "cinnamonSettings": "./files/system-cinnamon",
     "cinnamonMenuSettings": "../.config/cinnamon/spices/menu@cinnamon.org/0.json"
 }
 
@@ -95,7 +95,7 @@ def collect():
     # variable to keep track of what if any filesToTrack have changed since the program has run last
     allFilesChanged = ""
     #dconf dumping all system settings to a temporary file
-    os.system("dconf dump / > ~/cain/files/tmp/system-cinnamon")
+    os.system("dconf dump / > ~/cain/files/system-cinnamon")
     
     # main program
     print(ascii)
