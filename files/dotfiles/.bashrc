@@ -153,4 +153,5 @@ alias m="micro"
 #easy python3
 alias p="python3"
 
+# good tab complete
 bind 'set completion-ignore-case on'
