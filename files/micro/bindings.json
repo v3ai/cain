@@ -11,7 +11,12 @@
     "Alt-m": "EndOfLine",
     "Alt-s": "Save",
     "Alt-q": "Quit",
+	"Alt-0": "NextSplit",
+	"\u001b[1;5I": "NextSplit",
+	"Alt-g": "command-edit:goto ",
     "Alt-2": "ToggleMacro",
     "Alt-3": "PlayMacro",
     "CtrlUnderscore": "lua:comment.comment"
 }
+
+

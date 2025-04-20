@@ -117,6 +117,7 @@ if ! shopt -oq posix; then
 fi
 
 #Rhett's Aliases"
+alias cain="cd ~/cain && ./cain && cd"
 alias clone="git clone"
 alias pull="git pull"
 alias install="sudo apt install $@ -y"
@@ -131,19 +132,13 @@ alias bin="micro ~/.config/micro/bindings.json"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
 alias list="cd ~/Desktop/rhettapplestone.com && micro list.html && qcom"
 alias o="open ."
+alias hex="hexcurse"
 
 #Easy way to edit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 
 # When you mistype ls
 alias sl="ls"
-
-
-cain(){
-	cd ~/cain || return
-	./cain
-	cd || return
-}
 
 # git program condenced into all that was useful 
 qcom(){
@@ -159,6 +154,3 @@ alias m="micro"
 alias p="python3"
 
 bind 'set completion-ignore-case on'
-
-# Created by `pipx` on 2025-04-18 23:25:10
-export PATH="$PATH:/home/rhett/.local/bin"
