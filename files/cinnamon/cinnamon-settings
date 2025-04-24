@@ -30,7 +30,7 @@ use-antialiasing=true
 
 [com/linuxmint/updates]
 default-repo-is-ok=true
-refresh-last-run=1745220288
+refresh-last-run=1745472613
 show-welcome-page=false
 window-height=570
 window-pane-position=344
@@ -203,8 +203,8 @@ window-state=87168
 [org/gnome/calculator]
 accuracy=9
 angle-units='degrees'
-base=10
-button-mode='basic'
+base=2
+button-mode='programming'
 number-format='automatic'
 show-thousands=false
 show-zeroes=false
@@ -466,7 +466,7 @@ search-sort-column='name'
 
 [org/nemo/window-state]
 devices-expanded=true
-geometry='1698x1098+50+50'
+geometry='1698x1098+1195+239'
 maximized=false
 network-expanded=true
 sidebar-bookmark-breakpoint=5
@@ -728,7 +728,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/Desktop/rhettapplestone.com'
+virtual-root='file:///home/rhett/.cache/.fr-H0B942'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -773,7 +773,7 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=156
 sizing-mode='free'
-window-ratio=(5.0186739166663497, 1.9805156375717579)
+window-ratio=(5.7815126050420167, 1.7171072180460638)
 zoom=1.6653705429296666
 
 [org/x/sticky]
