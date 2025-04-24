@@ -19,11 +19,10 @@
 
 cain stands for Collect And INstall
 
-Think of cain like a little robot that helps you keep track of dotfiles, keybindings, and desktop environment settings and easily install them on a new computer
+cain is my dotfiles / system files manager and installer
 
 I made cain because I was having a hard time keeping track and updating individual repositories for configs
 
-Cain makes it easy to make your computer exactly like you like it on a fresh install and it does those two things
 
 ### REQUIREMENTS
 Must have like python3, idk comes with linux mint
@@ -41,8 +40,7 @@ Your .bashrc will be changed to let you just type this command into the terminal
 cain
 ```
 
-
-### Don't move the cain directory from your home directory or it will break.
+### Don't move the cain directory from your home directory or it will break, should fix this soon.
 
 Ascii art made with figlet -f Georgia11.flf cain (you may have to download that .flf file)
 
