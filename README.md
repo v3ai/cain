@@ -34,6 +34,8 @@ Cain makes it easy to make your computer exactly like you like it on a fresh ins
 cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && cd ~/cain && ./cain install
 ```
 
+REQUIREMENTS:
+    Must have like python3, idk comes with mint
 
 Your .bashrc will be changed to let you just type this command into the terminal
 ```
