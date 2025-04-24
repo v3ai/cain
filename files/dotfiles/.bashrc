@@ -117,7 +117,6 @@ if ! shopt -oq posix; then
 fi
 
 #Rhett's Aliases"
-alias cain="cd ~/cain && ./cain && cd"
 alias clone="git clone"
 alias pull="git pull"
 alias install="sudo apt install $@ -y"
@@ -139,6 +138,14 @@ alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 
 # When you mistype ls
 alias sl="ls"
+
+#cain
+cain(){
+    wd=$(pwd)
+    cd ~/cain
+    ./cain
+    cd $wd
+}
 
 # git program condenced into all that was useful 
 qcom(){
