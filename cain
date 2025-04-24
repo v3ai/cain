@@ -115,6 +115,8 @@ def collect():
 
     if (allFilesChanged != ""):
         os.system("cd ~/cain && git add . && git commit -m \"CHANGED: " + allFilesChanged +"\" && git push")
+    else:
+        print("\nALL FILES ARE THE SAME\n")
 
 
 def install():
