@@ -25,8 +25,8 @@ I made cain because I was having a hard time keeping track and updating individu
 
 Cain makes it easy to make your computer exactly like you like it on a fresh install and it does those two things
 
-### REQUIREMENTS:
-    Must have like python3, idk comes with linux mint
+### REQUIREMENTS
+Must have like python3, idk comes with linux mint
     
 ### How do I use cain (linux mint)
 
