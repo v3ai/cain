@@ -27,13 +27,11 @@ I made cain because I was having a hard time keeping track and updating individu
 ### REQUIREMENTS
 Must have like python3, idk comes with linux mint
     
-### How do I use cain (linux mint)
+### How to use cain (linux mint)
 
-(One line install), paste into terminal
 ```
-cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && cd ~/cain && ./cain install
+cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && cd ~/cain && ./cain
 ```
-
 
 Your .bashrc will be changed to let you just type this command into the terminal
 ```
