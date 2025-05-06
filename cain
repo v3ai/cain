@@ -143,7 +143,7 @@ def install():
 
     for file in filesToTrack:
         if (file != "cinnamonSettings"):
-            os.system("cp " + programPaths[file] + " " + systemPaths[file])
+            shutil.copy(programPaths[file], systemPaths[file])
         else:
             os.system("dconf load / < ~/cain/files/cinnamon/cinnamon-settings")
 
