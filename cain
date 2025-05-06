@@ -147,6 +147,8 @@ def install():
         else:
             os.system("dconf load / < ~/cain/files/cinnamon/cinnamon-settings")
 
+    os.system("reboot")
+
 
 
 
