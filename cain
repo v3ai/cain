@@ -45,8 +45,8 @@ systemPaths = {
     "bashrc": "../.bashrc",
     "microBindings": "../.config/micro/bindings.json",
     "microSettings": "../.config/micro/settings.json",
-    "inputRemapperBindingsAT": "../.config/input-remapper-2/presets/AT Translated Set 2 keyboard/rhett-keybindingsAT.json",
-    "inputRemapperBindingsCOOLER": "../.config/input-remapper-2/presets/COOLER MASTER SK620 Mechanical Keyboard - Black Edition/rhett-keybindingsCOOLER.json",
+    "inputRemapperBindingsAT": "../.config/input-remapper-2/presets/'AT Translated Set 2 keyboard'/rhett-keybindingsAT.json",
+    "inputRemapperBindingsCOOLER": "../.config/input-remapper-2/presets/'COOLER MASTER SK620 Mechanical Keyboard - Black Edition'/rhett-keybindingsCOOLER.json",
     "inputRemapperConfig": "../.config/input-remapper-2/config.json",
     "inputRemapperXmodmap": "../.config/input-remapper-2/xmodmap.json",
     "cinnamonSettings": "./files/system-cinnamon",
@@ -99,7 +99,6 @@ def collect():
     os.system("dconf dump / > ~/cain/files/system-cinnamon")
     
     # main program
-    print(ascii)
     print("Files Changed:")
     
     for file in filesToTrack:
@@ -120,7 +119,6 @@ def collect():
 
 
 def install():
-    print(ascii)
     print("INSTALLING:")
     os.system("sudo apt update")
     
@@ -134,19 +132,35 @@ def install():
 
     #check if dirs exist, and make them if they don't
     #put every file into it's place
+
+    #making special dirs for input remapper
+    os.system("mkdir ../.config/input-remapper-2/presets/")
     
     for file in filesToTrack:
         if(not(os.path.isdir(stripFileName(systemPaths[file])))):
             os.system("mkdir " + stripFileName(systemPaths[file]))
 
     for file in filesToTrack:
-        shutil.copy(programPaths[file], systemPaths[file])
+        if (file != "cinnamonSettings"):
+            os.system("cp " + programPaths[file] + " " + systemPaths[file])
+        else:
+            os.system("dconf load / < ~/cain/files/cinnamon/cinnamon-settings")
 
 
+
+
+def select():
+    choice = input("Would you Like to Collect (C) or install (I)?: ")
+    if (choice == "I" or choice == "i"):
+        install()
+    elif (choice == "C" or choice == "c"):
+        collect()
+    else:
+        print("\nNon valid input, please try again\n")
+        select()
+    
+
+    
 #main program that executes
-if (len(sys.argv) > 1 and sys.argv[1] == "install"):
-    install()
-else:
-    collect()
-
-
+print(ascii)
+select()
