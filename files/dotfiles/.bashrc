@@ -131,7 +131,6 @@ alias bin="micro ~/.config/micro/bindings.json"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
 alias list="cd ~/Desktop/rhettapplestone.com && micro list.html && qcom"
 alias o="open ."
-alias hex="hexcurse"
 
 #Easy way to edit this file
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
@@ -139,12 +138,15 @@ alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 # When you mistype ls
 alias sl="ls"
 
-#cain
+# fast clear
+alias c="clear"
+
+
+
 cain(){
-    wd=$(pwd)
-    cd ~/cain
-    ./cain
-    cd $wd
+	cd ~/cain || return
+	./cain
+	cd || return
 }
 
 # git program condenced into all that was useful 
@@ -159,7 +161,8 @@ alias m="micro"
 
 #easy python3
 alias p="python3"
-alias c="clear"
 
-# good tab complete
 bind 'set completion-ignore-case on'
+
+# Created by `pipx` on 2025-04-18 23:25:10
+export PATH="$PATH:/home/rhett/.local/bin"

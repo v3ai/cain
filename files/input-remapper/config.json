@@ -2,6 +2,6 @@
     "version": "2.0.1",
     "autoload": {
         "AT Translated Set 2 keyboard": "rhett-keybindingsAT",
-        "COOLER MASTER SK620 Mechanical Keyboard - Black Edition": "rhett-keybindingsCOOLER"
+        "COOLER MASTER SK620 Mechanical Keyboard - Black Edition": "rhett-keybindings"
     }
 }
