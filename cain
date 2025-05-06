@@ -134,11 +134,12 @@ def install():
     #put every file into it's place
 
     #making special dirs for input remapper
+    os.system("mkdir ../.config/input-remapper-2/")
     os.system("mkdir ../.config/input-remapper-2/presets/")
     
     for file in filesToTrack:
         if(not(os.path.isdir(stripFileName(systemPaths[file])))):
-            os.system("mkdir " + stripFileName(systemPaths[file]))
+            os.mkdir(stripFileName(systemPaths[file]))
 
     for file in filesToTrack:
         if (file != "cinnamonSettings"):
