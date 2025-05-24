@@ -45,7 +45,7 @@ settings-migrated=true
 [io/github/celluloid-player/celluloid/window-state]
 height=334
 loop-playlist=false
-maximized=true
+maximized=false
 playlist-width=250
 show-playlist=false
 volume=1.0
@@ -62,6 +62,7 @@ enabled-desklets=@as []
 next-applet-id=15
 panel-zone-icon-sizes='[{"panelId": 1, "left": 24, "center": 24, "right": 24}]'
 panel-zone-symbolic-icon-sizes='[{"panelId": 1, "left": 28, "center": 28, "right": 16}]'
+panels-autohide=['1:true']
 panels-height=['1:33']
 
 [org/cinnamon/desktop/a11y/applications]
@@ -200,7 +201,7 @@ unplug-enabled=false
 name='Mint-Y-Dark-Grey'
 
 [org/gnome/baobab/ui]
-window-size=(840, 580)
+window-size=(1401, 580)
 window-state=87168
 
 [org/gnome/calculator]
@@ -339,8 +340,8 @@ sort-type='ascending'
 
 [org/gnome/file-roller/ui]
 sidebar-width=200
-window-height=480
-window-width=600
+window-height=677
+window-width=1387
 
 [org/gnome/gnome-screenshot]
 delay=0
@@ -420,8 +421,8 @@ sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(172, 172)
-window-size=(1096, 523)
+window-position=(68, 134)
+window-size=(1304, 632)
 
 [org/nemo/preferences]
 show-hidden-files=true
@@ -431,8 +432,8 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='963x719+65+65'
-maximized=false
+geometry='963x719+72+72'
+maximized=true
 sidebar-bookmark-breakpoint=5
 sidebar-width=147
 start-with-sidebar=true
@@ -456,10 +457,10 @@ show-toolbar=true
 graphics-type='system'
 
 [org/virt-manager/virt-manager/paths]
-media-default='/home/rhett/Desktop/aaaa'
+media-default='/home/rhett/Downloads'
 
 [org/virt-manager/virt-manager/urls]
-isos=['/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/mm.iso', '/var/lib/libvirt/images/mtes.iso', '/var/lib/libvirt/images/minttest.iso', '/var/lib/libvirt/images/ppp.iso', '/var/lib/libvirt/images/pen.iso', '/var/lib/libvirt/images/penis.iso', '/home/rhett/Desktop/aaaa/penis.iso', '/var/lib/libvirt/images/tint-2025.02.04.iso', '/home/rhett/tint/tint-2025.02.04.iso']
+isos=['/home/rhett/Downloads/archlinux-2025.05.01-x86_64.iso', '/home/rhett/Downloads/linuxmint-22-cinnamon-64bit.iso', '/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/mm.iso', '/var/lib/libvirt/images/mtes.iso', '/var/lib/libvirt/images/minttest.iso', '/var/lib/libvirt/images/ppp.iso', '/var/lib/libvirt/images/pen.iso', '/var/lib/libvirt/images/penis.iso', '/home/rhett/Desktop/aaaa/penis.iso']
 
 [org/virt-manager/virt-manager/vmlist-fields]
 disk-usage=false
@@ -603,6 +604,11 @@ autoconnect=1
 scaling=1
 vm-window-size=(843, 835)
 
+[org/virt-manager/virt-manager/vms/9f76b53d081e4155849ed9578d8e8f3c]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
 [org/virt-manager/virt-manager/vms/a8c18f748bb844e69d2d6c760aeb339d]
 autoconnect=1
 scaling=1
@@ -653,6 +659,11 @@ autoconnect=1
 scaling=2
 vm-window-size=(1024, 726)
 
+[org/virt-manager/virt-manager/vms/e1a1f6467f1644fdad632d7c0d08aaee]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
 [org/virt-manager/virt-manager/vms/e31120f3db4d46e4b98817f6f2ea0c93]
 autoconnect=1
 scaling=1
@@ -698,7 +709,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/Desktop/ghidra_11.3.2_PUBLIC'
+virtual-root='file:///media/rhett/opi_root/boot'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -743,7 +754,7 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=133
 sizing-mode='fit-width'
-window-ratio=(1.3428451531682755, 0.5429764211676269)
+window-ratio=(2.8571428571428572, 1.3121693121693121)
 
 [org/x/viewer/window]
 maximized=false

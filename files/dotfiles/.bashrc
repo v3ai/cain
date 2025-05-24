@@ -88,9 +88,8 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls'
+alias ll='ls -la -h'
+
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -119,29 +118,48 @@ fi
 #Rhett's Aliases"
 alias clone="git clone"
 alias pull="git pull"
-alias install="sudo apt install $@ -y"
-alias uninstall="sudo apt purge $@ -y"
+alias install="sudo apt install -y"
+alias uninstall="sudo apt purge -y"
+alias remove="sudo apt purge -y"
 alias update="sudo apt update -y"
 alias upgrade="sudo apt upgrade -y"
 alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
-alias clug="cd ~/Desktop/clug"
-alias books="cd ~/Desktop/books"
 alias bin="micro ~/.config/micro/bindings.json"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
 alias list="cd ~/Desktop/rhettapplestone.com && micro list.html && qcom"
-alias o="open ."
-
-#Easy way to edit this file
+alias m="micro"
+alias p="python3"
+alias ip="ifconfig"
+alias books="cd ~/Desktop/books"
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
-
-# When you mistype ls
 alias sl="ls"
-
-# fast clear
 alias c="clear"
 
+#godsend very important
+bind 'set completion-ignore-case on'
 
+finde(){
+	find . -iname "*$1*"
+}
+
+book(){
+
+	declare -A files
+	IFS=$'\n' read -d '' -r -a arr < <(find /home/rhett/Desktop/books -type f)
+	
+	for i in "${arr[@]}"; do
+	    base=$(basename "$i")
+	    files["$base"]="$i"
+	done
+	
+	choice=$(printf "%s\n" "${!files[@]}" | dmenu -i -l 25)
+	
+	if [ -n "$choice" ]; then
+	    xdg-open "${files["$choice"]}"
+	fi
+	
+}
 
 cain(){
 	cd ~/cain || return
@@ -149,20 +167,9 @@ cain(){
 	cd || return
 }
 
-# git program condenced into all that was useful 
 qcom(){
     git add .
 	git commit -m "Pushed with qcom"
 	git push	
 }
 
-#open the micro
-alias m="micro"
-
-#easy python3
-alias p="python3"
-
-bind 'set completion-ignore-case on'
-
-# Created by `pipx` on 2025-04-18 23:25:10
-export PATH="$PATH:/home/rhett/.local/bin"
