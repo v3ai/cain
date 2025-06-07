@@ -62,7 +62,7 @@ enabled-desklets=@as []
 next-applet-id=15
 panel-zone-icon-sizes='[{"panelId": 1, "left": 24, "center": 24, "right": 24}]'
 panel-zone-symbolic-icon-sizes='[{"panelId": 1, "left": 28, "center": 28, "right": 16}]'
-panels-autohide=['1:true']
+panels-autohide=['1:false']
 panels-height=['1:33']
 
 [org/cinnamon/desktop/a11y/applications]
@@ -122,7 +122,7 @@ push-tile-left=['<Alt>y']
 push-tile-right=['<Alt>p']
 show-desktop=['<Super>d']
 switch-windows=['<Alt>Tab', '<Alt>backslash']
-toggle-maximized=['<Alt>r']
+toggle-maximized=['<Alt>r', '<Alt>bracketright']
 
 [org/cinnamon/desktop/media-handling]
 autorun-x-content-ignore=@as []
@@ -216,7 +216,7 @@ source-currency=''
 source-units='degree'
 target-currency=''
 target-units='radian'
-window-position=(944, 229)
+window-position=(720, 0)
 word-size=64
 
 [org/gnome/desktop/a11y]
@@ -416,12 +416,12 @@ location-mode='path-bar'
 show-hidden=false
 show-size-column=true
 show-type-column=true
-sidebar-width=150
+sidebar-width=158
 sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(68, 134)
+window-position=(68, 117)
 window-size=(1304, 632)
 
 [org/nemo/preferences]
@@ -709,7 +709,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///media/rhett/opi_root/boot'
+virtual-root='file:///home/rhett/Desktop/oldsys/t14s/projects-lts/v3ai.github.io'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -754,7 +754,7 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=133
 sizing-mode='fit-width'
-window-ratio=(2.8571428571428572, 1.3121693121693121)
+window-ratio=(2.3529411764705883, 1.0542929292929293)
 
 [org/x/viewer/window]
 maximized=false
