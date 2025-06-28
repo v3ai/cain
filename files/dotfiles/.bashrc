@@ -127,6 +127,7 @@ alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
 alias bin="micro ~/.config/micro/bindings.json"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
+alias druid="cd ~/Desktop/thedruidcollective"
 alias list="cd ~/Desktop/rhettapplestone.com && micro list.html && qcom"
 alias m="micro"
 alias p="python3"
@@ -136,8 +137,38 @@ alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 alias sl="ls"
 alias c="clear"
 
+
 #godsend very important
 bind 'set completion-ignore-case on'
+
+# simple website generator
+web(){
+	touch index.html
+	touch style.css
+	
+	echo "<!DOCTYPE HTML>" >> index.html
+	echo "<html>" >> index.html
+	echo "    <head>" >> index.html
+	echo "    <title>Website</title>" >> index.html
+	echo "    <link rel=\"stylesheet\" href=\"style.css\">" >> index.html
+	echo "    </head>" >> index.html
+	echo "    <body>" >> index.html
+	echo "		<h1>hi</h1>" >> index.html
+	echo "    </body>" >> index.html
+	echo "</html>" >> index.html
+	
+
+	echo "body {" >> style.css
+	echo "    max-width: 40em;" >> style.css
+	echo "    margin: 0 auto;" >> style.css
+	echo "    font-family: \"Courier New\", monospace;" >> style.css
+	echo "    text-align: center;" >> style.css
+	echo "" >> style.css
+	echo "" >> style.css
+	echo "" >> style.css
+}
+
+
 
 finde(){
 	find . -iname "*$1*"

@@ -99,13 +99,8 @@ gtk-theme='Mint-Y-Dark-Grey'
 toolkit-accessibility=false
 
 [org/cinnamon/desktop/keybindings]
-custom-list=['custom0']
+custom-list=['__dummy__']
 show-desklets=@as []
-
-[org/cinnamon/desktop/keybindings/custom-keybindings/custom0]
-binding=['<Alt>g']
-command='/usr/local/bin/gmail'
-name='g'
 
 [org/cinnamon/desktop/keybindings/media-keys]
 calculator=['<Alt>7']
@@ -348,9 +343,19 @@ delay=0
 include-pointer=false
 last-save-directory='file:///home/rhett/Desktop'
 
+[org/gnome/libgnomekbd/preview]
+height=485
+width=1104
+x=180
+y=112
+
 [org/gnome/nm-applet]
 disable-connected-notifications=true
 disable-disconnected-notifications=true
+
+[org/gnome/nm-applet/eap/2a766a1f-7618-4cb1-9deb-88b0457e8a27]
+ignore-ca-cert=false
+ignore-phase2-ca-cert=false
 
 [org/gnome/nm-applet/eap/6553b21d-c874-44ff-9075-a0a9a16ab219]
 ignore-ca-cert=false
@@ -754,7 +759,7 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=133
 sizing-mode='fit-width'
-window-ratio=(2.3529411764705883, 1.0542929292929293)
+window-ratio=(3.4042553191489362, 1.3067292644757433)
 
 [org/x/viewer/window]
 maximized=false
