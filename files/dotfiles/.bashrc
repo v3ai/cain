@@ -163,12 +163,8 @@ web(){
 	echo "    margin: 0 auto;" >> style.css
 	echo "    font-family: \"Courier New\", monospace;" >> style.css
 	echo "    text-align: center;" >> style.css
-	echo "" >> style.css
-	echo "" >> style.css
-	echo "" >> style.css
+	echo "}" >> style.css
 }
-
-
 
 finde(){
 	find . -iname "*$1*"
