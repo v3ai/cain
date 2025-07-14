@@ -8,6 +8,7 @@
     "Alt-k": "CursorUp",
     "Alt-l": "CursorRight",
     "Alt-n": "StartOfLine",
+    "Alt-g": "NextSplit",
     "Alt-m": "EndOfLine",
     "Alt-s": "Save",
     "Alt-q": "Quit",

@@ -125,7 +125,7 @@ alias update="sudo apt update -y"
 alias upgrade="sudo apt upgrade -y"
 alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
-alias bin="micro ~/.config/micro/bindings.json"
+alias bin="cd /usr/local/bin"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
 alias druid="cd ~/Desktop/thedruidcollective"
 alias list="cd ~/Desktop/rhettapplestone.com && micro list.html && qcom"
@@ -136,6 +136,7 @@ alias books="cd ~/Desktop/books"
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 alias sl="ls"
 alias c="clear"
+alias d="cd"
 
 
 #godsend very important
@@ -195,8 +196,12 @@ cain(){
 }
 
 qcom(){
-    git add .
-	git commit -m "Pushed with qcom"
-	git push	
+	if [ ! -d ".git" ]; then
+		git init
+	else
+	    git add .
+		git commit -m "Pushed with qcom"
+		git push	
+	fi
 }
 

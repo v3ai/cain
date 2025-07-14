@@ -99,8 +99,13 @@ gtk-theme='Mint-Y-Dark-Grey'
 toolkit-accessibility=false
 
 [org/cinnamon/desktop/keybindings]
-custom-list=['__dummy__']
+custom-list=['custom0', '__dummy__']
 show-desklets=@as []
+
+[org/cinnamon/desktop/keybindings/custom-keybindings/custom0]
+binding=['<Primary>b']
+command='/usr/local/bin/booklister'
+name='booklister'
 
 [org/cinnamon/desktop/keybindings/media-keys]
 calculator=['<Alt>7']
@@ -430,11 +435,11 @@ show-hidden=false
 show-size-column=true
 show-type-column=true
 sidebar-width=158
-sort-column='modified'
+sort-column='name'
 sort-directories-first=true
-sort-order='descending'
+sort-order='ascending'
 type-format='category'
-window-position=(68, 150)
+window-position=(68, 162)
 window-size=(1304, 632)
 
 [org/nemo/preferences]
@@ -445,8 +450,8 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='963x719+72+72'
-maximized=true
+geometry='1303x719+65+65'
+maximized=false
 sidebar-bookmark-breakpoint=5
 sidebar-width=147
 start-with-sidebar=true
@@ -767,7 +772,7 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=133
 sizing-mode='fit-width'
-window-ratio=(2.3529411764705883, 1.0542929292929293)
+window-ratio=(3.1409501374165685, 1.3538200561101323)
 
 [org/x/viewer/window]
 maximized=false
