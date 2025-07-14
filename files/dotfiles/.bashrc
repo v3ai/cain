@@ -200,8 +200,9 @@ qcom(){
 		git init
 	else
 	    git add .
-		git commit -m "Pushed with qcom"
+		git commit -m "qcom"
 		git push	
 	fi
 }
+
 
