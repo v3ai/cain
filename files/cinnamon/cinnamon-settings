@@ -45,7 +45,7 @@ settings-migrated=true
 [io/github/celluloid-player/celluloid/window-state]
 height=334
 loop-playlist=false
-maximized=false
+maximized=true
 playlist-width=250
 show-playlist=false
 volume=1.0
@@ -358,6 +358,10 @@ y=112
 disable-connected-notifications=true
 disable-disconnected-notifications=true
 
+[org/gnome/nm-applet/eap/06a2bb1b-a672-4a5d-8ecd-c70446499ed2]
+ignore-ca-cert=false
+ignore-phase2-ca-cert=false
+
 [org/gnome/nm-applet/eap/21f35553-b252-4bf7-9103-b1c836d0f277]
 ignore-ca-cert=false
 ignore-phase2-ca-cert=false
@@ -376,6 +380,10 @@ ignore-phase2-ca-cert=false
 
 [org/gnome/nm-applet/eap/69450be8-dc12-4c82-8d75-910bf63b3d8c]
 ignore-ca-cert=true
+ignore-phase2-ca-cert=false
+
+[org/gnome/nm-applet/eap/69a75daa-d445-4196-bcea-73c65dd0fa77]
+ignore-ca-cert=false
 ignore-phase2-ca-cert=false
 
 [org/gnome/nm-applet/eap/73de453b-175c-48e8-837c-14b8af8d0e9b]
@@ -439,7 +447,7 @@ sort-column='name'
 sort-directories-first=true
 sort-order='ascending'
 type-format='category'
-window-position=(68, 162)
+window-position=(68, 115)
 window-size=(1304, 632)
 
 [org/nemo/preferences]
@@ -450,7 +458,7 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='1303x719+65+65'
+geometry='877x465+281+121'
 maximized=false
 sidebar-bookmark-breakpoint=5
 sidebar-width=147
@@ -772,10 +780,10 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=133
 sizing-mode='fit-width'
-window-ratio=(3.1409501374165685, 1.3538200561101323)
+window-ratio=(1.8, 1.3833333333333333)
 
 [org/x/viewer/window]
-maximized=false
+maximized=true
 
 [org/x/warpinator/preferences]
 ask-for-send-permission=true
