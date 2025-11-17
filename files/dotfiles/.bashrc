@@ -138,6 +138,7 @@ alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 alias sl="ls"
 alias c="clear"
 alias d="cd"
+alias t="tree"
 
 
 #godsend very important
