@@ -115,7 +115,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#Rhett's Aliases"
+#Rhett's Aliases
 alias clone="git clone"
 alias pull="git pull"
 alias install="sudo apt install -y"
@@ -125,6 +125,7 @@ alias update="sudo apt update -y"
 alias upgrade="sudo apt upgrade -y"
 alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
+alias doc="cd ~/Documents"
 alias bin="cd /usr/local/bin"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
 alias druid="cd ~/Desktop/thedruidcollective"

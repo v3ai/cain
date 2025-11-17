@@ -43,13 +43,13 @@ window-width=2876
 settings-migrated=true
 
 [io/github/celluloid-player/celluloid/window-state]
-height=334
+height=337
 loop-playlist=false
-maximized=true
+maximized=false
 playlist-width=250
 show-playlist=false
 volume=1.0
-width=600
+width=540
 
 [org/blueman/general]
 window-properties=[2876, 870, 2, 18]
@@ -111,7 +111,7 @@ name='booklister'
 calculator=['<Alt>7']
 home=['<Alt>9', 'XF86Explorer']
 screensaver=['<Alt>1', 'XF86ScreenSaver']
-terminal=['<Alt>t']
+terminal=['<Alt>t', '<Alt>Return']
 www=['<Alt>8']
 
 [org/cinnamon/desktop/keybindings/wm]
@@ -147,6 +147,7 @@ idle-delay=uint32 0
 
 [org/cinnamon/desktop/sound]
 event-sounds=false
+maximum-volume=100
 volume-sound-enabled=false
 
 [org/cinnamon/desktop/wm/preferences]
@@ -205,18 +206,19 @@ window-size=(1401, 580)
 window-state=87168
 
 [org/gnome/calculator]
-accuracy=9
+accuracy=14
 angle-units='degrees'
 base=10
 button-mode='basic'
 number-format='automatic'
+refresh-interval=604800
 show-thousands=false
 show-zeroes=false
 source-currency=''
 source-units='degree'
 target-currency=''
 target-units='radian'
-window-position=(720, 0)
+window-position=(646, 376)
 word-size=64
 
 [org/gnome/desktop/a11y]
@@ -326,7 +328,7 @@ recreate-folders=true
 skip-newer=false
 
 [org/gnome/file-roller/dialogs/new]
-default-extension='.iso'
+default-extension='.zip'
 encrypt-header=false
 expand-options=false
 volume-size=0
@@ -340,8 +342,8 @@ sort-type='ascending'
 
 [org/gnome/file-roller/ui]
 sidebar-width=200
-window-height=677
-window-width=1387
+window-height=815
+window-width=1440
 
 [org/gnome/gnome-screenshot]
 delay=0
@@ -443,9 +445,9 @@ show-hidden=false
 show-size-column=true
 show-type-column=true
 sidebar-width=158
-sort-column='name'
+sort-column='modified'
 sort-directories-first=true
-sort-order='ascending'
+sort-order='descending'
 type-format='category'
 window-position=(68, 115)
 window-size=(1304, 632)
@@ -458,7 +460,7 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='877x465+281+121'
+geometry='738x699+-140+216'
 maximized=false
 sidebar-bookmark-breakpoint=5
 sidebar-width=147
@@ -735,7 +737,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/Desktop/oldsys/t14s/projects-lts/v3ai.github.io'
+virtual-root='file:///home/rhett/Downloads/TunerStudioMS'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -780,10 +782,10 @@ show-sidebar=true
 sidebar-page='links'
 sidebar-size=133
 sizing-mode='fit-width'
-window-ratio=(1.8, 1.3833333333333333)
+window-ratio=(2.3529411764705883, 1.047979797979798)
 
 [org/x/viewer/window]
-maximized=true
+maximized=false
 
 [org/x/warpinator/preferences]
 ask-for-send-permission=true
