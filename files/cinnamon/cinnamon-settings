@@ -462,7 +462,7 @@ search-sort-column='name'
 [org/nemo/window-state]
 geometry='738x699+25+25'
 maximized=true
-sidebar-bookmark-breakpoint=2
+sidebar-bookmark-breakpoint=1
 sidebar-width=147
 start-with-sidebar=true
 
