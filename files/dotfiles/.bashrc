@@ -142,7 +142,6 @@ alias t="tree"
 alias delete="rm -rf"
 alias ..="cd .."
 
-
 #godsend very important
 bind 'set completion-ignore-case on'
 
