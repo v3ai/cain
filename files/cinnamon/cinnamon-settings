@@ -43,13 +43,13 @@ window-width=2876
 settings-migrated=true
 
 [io/github/celluloid-player/celluloid/window-state]
-height=337
+height=334
 loop-playlist=false
-maximized=false
-playlist-width=250
-show-playlist=false
+maximized=true
+playlist-width=193
+show-playlist=true
 volume=1.0
-width=540
+width=600
 
 [org/blueman/general]
 window-properties=[2876, 870, 2, 18]
@@ -218,7 +218,7 @@ source-currency=''
 source-units='degree'
 target-currency=''
 target-units='radian'
-window-position=(646, 376)
+window-position=(278, 376)
 word-size=64
 
 [org/gnome/desktop/a11y]
@@ -453,16 +453,16 @@ window-position=(68, 115)
 window-size=(1304, 632)
 
 [org/nemo/preferences]
-show-hidden-files=true
+show-hidden-files=false
 
 [org/nemo/search]
 search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='738x699+-140+216'
-maximized=false
-sidebar-bookmark-breakpoint=5
+geometry='738x699+25+25'
+maximized=true
+sidebar-bookmark-breakpoint=2
 sidebar-width=147
 start-with-sidebar=true
 
@@ -737,7 +737,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/Downloads/TunerStudioMS'
+virtual-root='file:///home/rhett'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -778,14 +778,14 @@ dual-page=false
 dual-page-odd-left=false
 fullscreen=false
 inverted-colors=false
-show-sidebar=true
+show-sidebar=false
 sidebar-page='links'
-sidebar-size=133
+sidebar-size=499
 sizing-mode='fit-width'
 window-ratio=(2.3529411764705883, 1.047979797979798)
 
 [org/x/viewer/window]
-maximized=false
+maximized=true
 
 [org/x/warpinator/preferences]
 ask-for-send-permission=true

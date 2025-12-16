@@ -139,6 +139,8 @@ alias sl="ls"
 alias c="clear"
 alias d="cd"
 alias t="tree"
+alias delete="rm -rf"
+alias ..="cd .."
 
 
 #godsend very important
