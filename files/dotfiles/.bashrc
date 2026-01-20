@@ -144,6 +144,14 @@ alias ..="cd .."
 #godsend very important
 bind 'set completion-ignore-case on'
 
+list(){
+	cwd=$(pwd)
+	cd ~/rhettapplestone.com
+	micro list.html
+	qcom
+	cd $cwd
+}
+
 # simple website generator
 web(){
 	touch index.html
@@ -176,7 +184,7 @@ finde(){
 book(){
 
 	declare -A files
-	IFS=$'\n' read -d '' -r -a arr < <(find /home/rhett/Desktop/books -type f)
+	IFS=$'\n' read -d '' -r -a arr < <(find /home/rhett/books -type f)
 	
 	for i in "${arr[@]}"; do
 	    base=$(basename "$i")

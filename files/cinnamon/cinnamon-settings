@@ -43,13 +43,13 @@ window-width=2876
 settings-migrated=true
 
 [io/github/celluloid-player/celluloid/window-state]
-height=334
+height=337
 loop-playlist=false
-maximized=true
+maximized=false
 playlist-width=193
 show-playlist=true
 volume=1.0
-width=600
+width=733
 
 [org/blueman/general]
 window-properties=[2876, 870, 2, 18]
@@ -218,7 +218,7 @@ source-currency=''
 source-units='degree'
 target-currency=''
 target-units='radian'
-window-position=(278, 376)
+window-position=(720, 0)
 word-size=64
 
 [org/gnome/desktop/a11y]
@@ -445,7 +445,7 @@ show-hidden=false
 show-size-column=true
 show-type-column=true
 sidebar-width=158
-sort-column='modified'
+sort-column='name'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
@@ -460,7 +460,7 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='738x699+25+25'
+geometry='738x699+113+376'
 maximized=true
 sidebar-bookmark-breakpoint=1
 sidebar-width=147
@@ -737,7 +737,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett'
+virtual-root='file:///home/rhett/Downloads/Breaking%20Bad%20Season%203%20Complete%20720p.BRrip.Sujaidr'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -782,10 +782,10 @@ show-sidebar=false
 sidebar-page='links'
 sidebar-size=499
 sizing-mode='fit-width'
-window-ratio=(2.3529411764705883, 1.047979797979798)
+window-ratio=(0.81053880567106984, 0.35590210033694925)
 
 [org/x/viewer/window]
-maximized=true
+maximized=false
 
 [org/x/warpinator/preferences]
 ask-for-send-permission=true
