@@ -181,6 +181,8 @@ finde(){
 	find . -iname "*$1*"
 }
 
+# book was written by ai
+
 book(){
 
 	declare -A files
