@@ -153,14 +153,27 @@ def install():
 
 
 def select():
-    choice = input("Would you Like to Collect (C) or install (I)?: ")
-    if (choice == "I" or choice == "i"):
-        install()
-    elif (choice == "C" or choice == "c"):
+    if len(sys.argv) < 2:
+        choice = input("Would you Like to Collect (C) or install (I)?: ")
+        if (choice == "I" or choice == "i"):
+            install()
+        elif (choice == "C" or choice == "c"):
+            collect()
+        else:
+            print("\nNon valid input, please try again\n")
+            select()
+    elif sys.argv[1] == "-c" or sys.argv[1] == "-C":
         collect()
+    elif sys.argv[1] == "-i" or sys.argv[1] == "-I":
+        install()
     else:
         print("\nNon valid input, please try again\n")
         select()
+
+    
+        
+
+    
     
 
     

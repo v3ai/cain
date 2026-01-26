@@ -115,7 +115,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
 #Rhett's Aliases
 alias clone="git clone"
 alias pull="git pull"
@@ -203,7 +202,7 @@ book(){
 
 cain(){
 	cd ~/cain || return
-	./cain
+	./cain $@
 	cd || return
 }
 
