@@ -228,7 +228,7 @@ source-currency=''
 source-units='degree'
 target-currency=''
 target-units='radian'
-window-position=(720, 0)
+window-position=(0, 0)
 word-size=64
 
 [org/gnome/desktop/a11y]
@@ -471,7 +471,7 @@ search-sort-column='name'
 
 [org/nemo/window-state]
 geometry='738x699+65+65'
-maximized=false
+maximized=true
 sidebar-bookmark-breakpoint=1
 sidebar-width=147
 start-with-sidebar=true
@@ -747,7 +747,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/Downloads/Breaking%20Bad%20Season%203%20Complete%20720p.BRrip.Sujaidr'
+virtual-root='file:///home/rhett/books/programming/general-programming'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
