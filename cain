@@ -150,8 +150,6 @@ def install():
     os.system("reboot")
 
 
-
-
 def select():
     if len(sys.argv) < 2:
         choice = input("Would you Like to Collect (C) or install (I)?: ")
@@ -169,12 +167,6 @@ def select():
     else:
         print("\nNon valid input, please try again\n")
         select()
-
-    
-        
-
-    
-    
 
     
 #main program that executes
