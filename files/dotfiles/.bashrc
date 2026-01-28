@@ -135,11 +135,14 @@ alias ip="ifconfig"
 alias books="cd ~/books"
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 alias sl="ls"
+alias l="ls"
 alias c="clear"
 alias d="cd"
 alias t="tree"
 alias delete="rm -rf"
 alias ..="cd .."
+
+
 
 #godsend very important
 bind 'set completion-ignore-case on'

@@ -103,12 +103,12 @@ custom-list=['custom0', 'custom1', 'custom2']
 show-desklets=@as []
 
 [org/cinnamon/desktop/keybindings/custom-keybindings/custom0]
-binding=['<Primary>b']
+binding=['<Primary>b', '<Alt>g']
 command='/usr/local/bin/booklister'
 name='booklister'
 
 [org/cinnamon/desktop/keybindings/custom-keybindings/custom1]
-binding=['<Alt>g']
+binding=@as []
 command='gnome-terminal -- micro'
 name='micro'
 
@@ -230,6 +230,12 @@ target-currency=''
 target-units='radian'
 window-position=(0, 0)
 word-size=64
+
+[org/gnome/calendar]
+active-view='month'
+window-maximized=false
+window-position=(116, 68)
+window-size=(800, 600)
 
 [org/gnome/desktop/a11y]
 always-show-text-caret=false
@@ -459,7 +465,7 @@ sort-column='name'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(68, 115)
+window-position=(136, 115)
 window-size=(1304, 632)
 
 [org/nemo/preferences]
@@ -470,7 +476,7 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='738x699+65+65'
+geometry='1269x699+129+630'
 maximized=true
 sidebar-bookmark-breakpoint=1
 sidebar-width=147
@@ -792,7 +798,7 @@ show-sidebar=false
 sidebar-page='links'
 sidebar-size=499
 sizing-mode='fit-width'
-window-ratio=(2.3529411764705883, 1.047979797979798)
+window-ratio=(3.6000000000000001, 1.3833333333333333)
 
 [org/x/viewer/window]
 maximized=false
