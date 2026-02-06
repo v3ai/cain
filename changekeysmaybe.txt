@@ -1,7 +1,6 @@
 I'm thinking about changing some of my shortcut keys.
 
 some will likely stay the same and some may be open to change 
-
 def keep
 
 Alt +
