@@ -465,7 +465,7 @@ sort-column='name'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(136, 115)
+window-position=(68, 115)
 window-size=(1304, 632)
 
 [org/nemo/preferences]
@@ -476,8 +476,8 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='1269x699+129+630'
-maximized=true
+geometry='1039x699+65+65'
+maximized=false
 sidebar-bookmark-breakpoint=1
 sidebar-width=147
 start-with-sidebar=true
@@ -553,7 +553,7 @@ vm-window-size=(1024, 841)
 [org/virt-manager/virt-manager/vms/25a613e4635745f0a901eeb93bd6cdac]
 autoconnect=1
 scaling=1
-vm-window-size=(1024, 841)
+vm-window-size=(1024, 830)
 
 [org/virt-manager/virt-manager/vms/2a5fb27e9f214377a15fc4b9eb6b2bbd]
 autoconnect=1
@@ -564,6 +564,11 @@ vm-window-size=(1080, 618)
 autoconnect=1
 scaling=1
 vm-window-size=(1024, 835)
+
+[org/virt-manager/virt-manager/vms/33101f9006214a9690ccd585b13239dd]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
 
 [org/virt-manager/virt-manager/vms/344825c0009b4d34a4341a1d0b50bf3a]
 autoconnect=1
@@ -798,7 +803,7 @@ show-sidebar=false
 sidebar-page='links'
 sidebar-size=499
 sizing-mode='fit-width'
-window-ratio=(3.6000000000000001, 1.3833333333333333)
+window-ratio=(1.7101325352714836, 0.98570139185786898)
 
 [org/x/viewer/window]
 maximized=false

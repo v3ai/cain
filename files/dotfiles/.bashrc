@@ -115,7 +115,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
 #Rhett's Aliases
 alias clone="git clone"
 alias pull="git pull"
@@ -131,7 +130,6 @@ alias bin="cd /usr/local/bin"
 alias rhett="cd ~/rhettapplestone.com"
 alias m="micro"
 alias p="python3"
-alias ip="ifconfig"
 alias books="cd ~/books"
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 alias sl="ls"
@@ -140,8 +138,23 @@ alias c="clear"
 alias d="cd"
 alias t="tree"
 alias delete="rm -rf"
+alias del="rm -rf"
 alias ..="cd .."
 
+
+ip(){
+	#made by ai
+	hostname -I | cut -d' ' -f1
+}
+
+scan(){
+	IPVAR=$(ip)
+	if [ $# -eq 0 ]; then
+  		sudo nmap "$IPVAR"/24  
+	else
+		sudo nmap "$IPVAR"/24 -p"$1"  
+	fi
+}
 
 
 #godsend very important
@@ -219,5 +232,3 @@ qcom(){
 		git push	
 	fi
 }
-
-
