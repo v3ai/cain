@@ -13,3 +13,4 @@ choice=$(printf "%s\n" "${!files[@]}" | dmenu -i -l 25)
 if [ -n "$choice" ]; then
     xdg-open "${files["$choice"]}"
 fi
+
