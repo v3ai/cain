@@ -461,11 +461,11 @@ show-hidden=false
 show-size-column=true
 show-type-column=true
 sidebar-width=158
-sort-column='name'
+sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(68, 115)
+window-position=(109, 136)
 window-size=(1304, 632)
 
 [org/nemo/preferences]
@@ -476,7 +476,7 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='1039x699+65+65'
+geometry='1039x699+25+25'
 maximized=false
 sidebar-bookmark-breakpoint=1
 sidebar-width=147
@@ -758,7 +758,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/books/programming/general-programming'
+virtual-root='file:///home/rhett/Downloads'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -803,7 +803,7 @@ show-sidebar=false
 sidebar-page='links'
 sidebar-size=499
 sizing-mode='fit-width'
-window-ratio=(1.7101325352714836, 0.98570139185786898)
+window-ratio=(0.86694762191450936, 0.38003663003663002)
 
 [org/x/viewer/window]
 maximized=false
