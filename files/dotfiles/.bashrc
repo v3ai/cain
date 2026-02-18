@@ -119,7 +119,7 @@ fi
 alias clone="git clone"
 alias pull="git pull"
 alias install="sudo apt install -y"
-alias uninstall="sudo apt purge -y"
+alias uninstall="sudo apt autoremove -y"
 alias remove="sudo apt purge -y"
 alias update="sudo apt update -y"
 alias upgrade="sudo apt upgrade -y"
@@ -140,6 +140,7 @@ alias t="tree"
 alias delete="rm -rf"
 alias del="rm -rf"
 alias ..="cd .."
+alias pass="cd ~ && micro pass"
 
 
 ip(){
