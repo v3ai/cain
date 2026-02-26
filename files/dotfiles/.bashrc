@@ -147,7 +147,6 @@ alias pass="cd ~ && micro pass"
 alias n='nnn -d -e -H -r'
 
 
-
 export EDITOR='micro'
 
 ip(){
