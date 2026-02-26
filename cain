@@ -36,7 +36,8 @@ filesToTrack = [
     "inputRemapperBindingsAT",
     "cinnamonSettings",
     "cinnamonMenuSettings",
-    "booklister"
+    "booklister",
+    "nanorc"
 ]
 
     

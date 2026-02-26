@@ -2,4 +2,3 @@ set linenumbers
 bind ^s savefile main
 bind ^q exit main
 
-
