@@ -50,7 +50,8 @@ systemPaths = {
     "inputRemapperBindingsAT": "../.config/input-remapper-2/presets/AT Translated Set 2 keyboard/rhett-keybindingsAT.json",
     "cinnamonSettings": "./files/system-cinnamon",
     "cinnamonMenuSettings": "../.config/cinnamon/spices/menu@cinnamon.org/0.json",
-    "booklister": "/usr/local/bin/booklister"
+    "booklister": "/usr/local/bin/booklister",
+    "nanorc": "../.nanorc"
     
 }
 
@@ -64,7 +65,8 @@ programPaths = {
     "inputRemapperBindingsAT": "./files/input-remapper/rhett-keybindingsAT.json",
     "cinnamonSettings": "./files/cinnamon/cinnamon-settings",
     "cinnamonMenuSettings": "./files/cinnamon/0.json",
-    "booklister": "./files/custom/booklister"
+    "booklister": "./files/custom/booklister",
+    "nanorc": "./files/dotfiles/.nanorc"
 }
 
 

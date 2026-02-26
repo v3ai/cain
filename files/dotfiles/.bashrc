@@ -119,7 +119,9 @@ fi
 alias clone="git clone"
 alias pull="git pull"
 alias install="sudo apt install -y"
+alias i="sudo apt install -y"
 alias uninstall="sudo apt autoremove -y"
+alias u="sudo apt autoremove -y"
 alias remove="sudo apt purge -y"
 alias update="sudo apt update -y"
 alias upgrade="sudo apt upgrade -y"
@@ -132,6 +134,7 @@ alias m="micro"
 alias p="python3"
 alias books="cd ~/books"
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
+alias nrc="micro ~/.nanorc"
 alias sl="ls"
 alias l="ls"
 alias c="clear"
@@ -141,7 +144,11 @@ alias delete="rm -rf"
 alias del="rm -rf"
 alias ..="cd .."
 alias pass="cd ~ && micro pass"
+alias n='nnn -d -e -H -r'
 
+
+
+export EDITOR='micro'
 
 ip(){
 	#made by ai
