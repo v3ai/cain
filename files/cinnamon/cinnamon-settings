@@ -493,7 +493,7 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='1039x617+72+72'
+geometry='1039x617+65+65'
 maximized=false
 sidebar-bookmark-breakpoint=1
 sidebar-width=147
