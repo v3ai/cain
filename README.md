@@ -10,11 +10,11 @@
                                                                                        
 
 
-## NOTE: This program will switch your dotfiles and configs to mine.
+## This program will switch your dotfiles and configs to mine if you install it.
 
-### What is cain and what does it do?
+###what does it do?
 
-cain stands for Collect And INstall
+Collects And INstalls 
 
 cain is my dotfiles / system files manager and installer
 
@@ -40,5 +40,4 @@ cain
 Ascii art made with figlet -f Georgia11.flf cain (you may have to download that .flf file)
 
 
-
-MIT Licensed
+MIT Licensed, check dotfiles for ideas
