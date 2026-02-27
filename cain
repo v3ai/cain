@@ -5,6 +5,18 @@ import filecmp
 import shutil
 import sys
 
+ascii = '''
+                         db
+     
+      ,p6"bo   ,6"Yb.  `7MM  `7MMpMMMb. 
+     6M'  OO  8)   MM    MM    MM    MM 
+     8M        ,pm9MM    MM    MM    MM 
+     YM.    , 8M   MM    MM    MM    MM 
+      YMbmd'  `Moo9^Yo..JMML..JMML  JMML.
+
+'''
+
+
 # All files that need to be tracked
 
 filesToTrack = [
@@ -85,7 +97,7 @@ def collect():
     os.system("dconf dump / > ~/cain/files/system-cinnamon")
     
     # main program
-    print("Files Changed:")
+    print("Files Changed:\n")
     
     for file in filesToTrack:
         if filesAreDifferent(systemPaths[file], programPaths[file]):
@@ -156,4 +168,5 @@ def select():
 
     
 #main program that executes
+print(ascii)
 select()

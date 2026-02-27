@@ -7,10 +7,7 @@
                                   YM.    , 8M   MM    MM    MM    MM                   
                                    YMbmd'  `Moo9^Yo..JMML..JMML  JMML.                 
                                                                                        
-                        This Program Was Made January 2025 By Rhett Applestone         
                                                                                        
-                                               MIT License                             
-                                   Copyright (c) 2025 Rhett Applestone                 
 
 
 ## NOTE: This program will switch your dotfiles and configs to mine.
@@ -44,3 +41,4 @@ Ascii art made with figlet -f Georgia11.flf cain (you may have to download that 
 
 
 
+MIT Licensed

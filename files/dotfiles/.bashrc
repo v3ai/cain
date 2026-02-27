@@ -163,7 +163,6 @@ scan(){
 	fi
 }
 
-
 #godsend very important
 bind 'set completion-ignore-case on'
 
