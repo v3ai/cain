@@ -43,13 +43,13 @@ window-width=2876
 settings-migrated=true
 
 [io/github/celluloid-player/celluloid/window-state]
-height=334
+height=337
 loop-playlist=false
 maximized=false
 playlist-width=193
 show-playlist=true
 volume=1.0
-width=793
+width=733
 
 [org/blueman/general]
 window-properties=[2876, 870, 2, 18]
@@ -348,7 +348,7 @@ skip-newer=false
 [org/gnome/file-roller/dialogs/new]
 default-extension='.zip'
 encrypt-header=false
-expand-options=false
+expand-options=true
 volume-size=0
 
 [org/gnome/file-roller/listing]
@@ -463,11 +463,11 @@ show-hidden=false
 show-size-column=true
 show-type-column=true
 sidebar-width=158
-sort-column='modified'
+sort-column='name'
 sort-directories-first=true
-sort-order='descending'
+sort-order='ascending'
 type-format='category'
-window-position=(0, 0)
+window-position=(117, 114)
 window-size=(1304, 632)
 
 [org/nemo/preferences]
@@ -478,7 +478,7 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='1039x617+82+68'
+geometry='1039x617+25+25'
 maximized=false
 sidebar-bookmark-breakpoint=1
 sidebar-width=147
@@ -765,7 +765,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/Arduino/libraries'
+virtual-root='file:///home/rhett/oldsys/$RECYCLE.BIN'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -810,7 +810,7 @@ show-sidebar=false
 sidebar-page='links'
 sidebar-size=499
 sizing-mode='fit-width'
-window-ratio=(2.4201680672268906, 1.0506329113924051)
+window-ratio=(4.7058823529411766, 1.6468253968253967)
 
 [org/x/viewer/window]
 maximized=false
