@@ -120,19 +120,20 @@ alias clone="git clone"
 alias pull="git pull"
 alias install="sudo apt install -y"
 alias i="sudo apt install -y"
-alias uninstall="sudo apt autoremove -y"
-alias u="sudo apt autoremove -y"
-alias remove="sudo apt purge -y"
+
+alias uninstall="sudo apt purge -y"
+alias u="sudo apt purge -y"
+alias autoremove="sudo apt autoremove -y"
 alias update="sudo apt update -y"
 alias upgrade="sudo apt upgrade -y"
 alias des="cd ~/Desktop"
 alias dow="cd ~/Downloads"
 alias doc="cd ~/Documents"
 alias bin="cd /usr/local/bin"
-alias rhett="cd ~/rhettapplestone.com"
+alias rhett="cd ~/Desktop/rhettapplestone.com"
 alias m="micro"
 alias p="python3"
-alias books="cd ~/books"
+alias books="cd ~/Desktop/books"
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 alias nrc="micro ~/.nanorc"
 alias sl="ls"
@@ -209,7 +210,7 @@ finde(){
 book(){
 
 	declare -A files
-	IFS=$'\n' read -d '' -r -a arr < <(find /home/rhett/books -type f)
+	IFS=$'\n' read -d '' -r -a arr < <(find /home/rhett/Desktop/books -type f)
 	
 	for i in "${arr[@]}"; do
 	    base=$(basename "$i")

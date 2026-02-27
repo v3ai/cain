@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare -A files
-IFS=$'\n' read -d '' -r -a arr < <(find /home/rhett/books -type f)
+IFS=$'\n' read -d '' -r -a arr < <(find /home/rhett/Desktop/books -type f)
 
 for i in "${arr[@]}"; do
     base=$(basename "$i")
