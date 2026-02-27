@@ -43,13 +43,13 @@ window-width=2876
 settings-migrated=true
 
 [io/github/celluloid-player/celluloid/window-state]
-height=337
+height=334
 loop-playlist=false
 maximized=false
 playlist-width=193
 show-playlist=true
 volume=1.0
-width=733
+width=793
 
 [org/blueman/general]
 window-properties=[2876, 870, 2, 18]
@@ -478,7 +478,7 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='1039x617+388+61'
+geometry='1039x617+382+22'
 maximized=false
 sidebar-bookmark-breakpoint=1
 sidebar-width=147
