@@ -145,6 +145,7 @@ alias del="rm -rf"
 alias ..="cd .."
 alias pass="cd ~ && micro pass"
 alias n='nnn -d -e -H -r'
+alias getmp3='yt-dlp -x --audio-format mp3'
 
 export EDITOR='micro'
 

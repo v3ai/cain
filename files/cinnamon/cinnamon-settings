@@ -467,7 +467,7 @@ sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(68, 115)
+window-position=(0, 0)
 window-size=(1304, 632)
 
 [org/nemo/preferences]
@@ -478,7 +478,7 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='1039x617+382+22'
+geometry='1039x617+82+68'
 maximized=false
 sidebar-bookmark-breakpoint=1
 sidebar-width=147
@@ -506,7 +506,7 @@ graphics-type='system'
 media-default='/home/rhett/Downloads'
 
 [org/virt-manager/virt-manager/urls]
-isos=['/home/rhett/Downloads/archlinux-2025.05.01-x86_64.iso', '/home/rhett/Downloads/linuxmint-22-cinnamon-64bit.iso', '/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/mm.iso', '/var/lib/libvirt/images/mtes.iso', '/var/lib/libvirt/images/minttest.iso', '/var/lib/libvirt/images/ppp.iso', '/var/lib/libvirt/images/pen.iso', '/var/lib/libvirt/images/penis.iso', '/home/rhett/Desktop/aaaa/penis.iso']
+isos=['/home/rhett/Downloads/archlinux-2026.02.01-x86_64.iso', '/home/rhett/Downloads/archlinux-2025.05.01-x86_64.iso', '/home/rhett/Downloads/linuxmint-22-cinnamon-64bit.iso', '/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/mm.iso', '/var/lib/libvirt/images/mtes.iso', '/var/lib/libvirt/images/minttest.iso', '/var/lib/libvirt/images/ppp.iso', '/var/lib/libvirt/images/pen.iso', '/var/lib/libvirt/images/penis.iso']
 
 [org/virt-manager/virt-manager/vmlist-fields]
 disk-usage=false
@@ -615,6 +615,11 @@ vm-window-size=(1024, 841)
 autoconnect=1
 scaling=1
 vm-window-size=(1024, 637)
+
+[org/virt-manager/virt-manager/vms/59fa3ccc4a0447e9a1553bbb39e6d76a]
+autoconnect=1
+scaling=1
+vm-window-size=(720, 830)
 
 [org/virt-manager/virt-manager/vms/5cba2465023548f189b67878faf5f33c]
 autoconnect=1
