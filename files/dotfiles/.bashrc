@@ -120,7 +120,6 @@ alias clone="git clone"
 alias pull="git pull"
 alias install="sudo apt install -y"
 alias i="sudo apt install -y"
-
 alias uninstall="sudo apt purge -y"
 alias u="sudo apt purge -y"
 alias autoremove="sudo apt autoremove -y"
@@ -170,7 +169,7 @@ bind 'set completion-ignore-case on'
 
 list(){
 	cwd=$(pwd)
-	cd ~/rhettapplestone.com
+	cd ~/Desktop/rhettapplestone.com
 	micro list.html
 	qcom
 	cd $cwd

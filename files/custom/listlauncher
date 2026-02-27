@@ -1,0 +1,6 @@
+#!/bin/bash
+cwd=$(pwd)
+cd ~/Desktop/rhettapplestone.com
+micro list.html
+qcom
+cd $cwd

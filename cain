@@ -17,6 +17,7 @@ filesToTrack = [
     "cinnamonSettings",
     "cinnamonMenuSettings",
     "booklister",
+    "listlauncher",
     "nanorc"
 ]
 
@@ -32,6 +33,7 @@ systemPaths = {
     "cinnamonSettings": "./files/system-cinnamon",
     "cinnamonMenuSettings": "../.config/cinnamon/spices/menu@cinnamon.org/0.json",
     "booklister": "/usr/local/bin/booklister",
+    "listlauncher": "/usr/local/bin/listlauncher",
     "nanorc": "../.nanorc"
     
 }
@@ -47,6 +49,7 @@ programPaths = {
     "cinnamonSettings": "./files/cinnamon/cinnamon-settings",
     "cinnamonMenuSettings": "./files/cinnamon/0.json",
     "booklister": "./files/custom/booklister",
+    "listlauncher": "./files/custom/listlauncher",
     "nanorc": "./files/dotfiles/.nanorc"
 }
 
