@@ -111,7 +111,6 @@ def collect():
     os.system("rm ~/cain/files/system-cinnamon")
 
     if (allFilesChanged != ""):
-        print("\n")
         os.system("cd ~/cain && git add . && git commit -m \"CHANGED: " + allFilesChanged +"\" && git push")
     else:
         print("\nALL FILES ARE THE SAME\n")
