@@ -2,5 +2,7 @@
 cwd=$(pwd)
 cd ~/Desktop/rhettapplestone.com
 micro list.html
-qcom
+git add .
+git commit -m "qcom"
+git push	
 cd $cwd
