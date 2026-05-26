@@ -73,6 +73,8 @@ programsToInstall = [
 	"input-remapper",
 	"git",
 	"inkscape",
+	"virt-manager",
+	"qemu-system",
 	"suckless-tools"
 ]
 

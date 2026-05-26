@@ -144,9 +144,10 @@ alias t="tree"
 alias delete="rm -rf"
 alias del="rm -rf"
 alias ..="cd .."
-alias pass="cd ~ && micro pass"
 alias n='nnn -d -e -H -r'
 alias getmp3='yt-dlp -x --audio-format mp3'
+alias playlist="yt-dlp -x --audio-format mp3 -o \"%(playlist_index)s - %(title)s.%(ext)s\""
+alias s="search for"
 
 export EDITOR='micro'
 

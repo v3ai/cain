@@ -34,7 +34,8 @@ use-antialiasing=true
 [com/linuxmint/updates]
 autorefresh-hours=2
 default-repo-is-ok=true
-refresh-last-run=1773008279
+install-last-run=1775141745
+refresh-last-run=1779824994
 refresh-minutes=10
 show-welcome-page=false
 tracker-grace-period=30
@@ -52,13 +53,13 @@ version='1.5.29'
 settings-migrated=true
 
 [io/github/celluloid-player/celluloid/window-state]
-height=337
+height=542
 loop-playlist=false
-maximized=false
+maximized=true
 playlist-width=193
 show-playlist=true
 volume=1.0
-width=733
+width=1053
 
 [org/blueman/general]
 window-properties=[2876, 870, 2, 18]
@@ -166,10 +167,14 @@ speed=0.0
 speed=0.83613445378151252
 tap-to-click=false
 
+[org/cinnamon/desktop/screensaver]
+layout-group=0
+
 [org/cinnamon/desktop/session]
 idle-delay=uint32 0
 
 [org/cinnamon/desktop/sound]
+allow-amplified-volume=true
 event-sounds=false
 maximum-volume=100
 volume-sound-enabled=false
@@ -371,7 +376,7 @@ list-mode='as-folder'
 name-column-width=250
 show-path=false
 sort-method='name'
-sort-type='descending'
+sort-type='ascending'
 
 [org/gnome/file-roller/ui]
 sidebar-width=200
@@ -482,7 +487,7 @@ sort-column='name'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(68, 115)
+window-position=(68, 118)
 window-size=(1304, 632)
 
 [org/nemo/preferences]
@@ -493,7 +498,7 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='1039x617+596+97'
+geometry='1294x617+259+159'
 maximized=false
 sidebar-bookmark-breakpoint=1
 sidebar-width=147
@@ -521,7 +526,7 @@ graphics-type='system'
 media-default='/home/rhett/Downloads'
 
 [org/virt-manager/virt-manager/urls]
-isos=['/home/rhett/Downloads/archlinux-2026.02.01-x86_64.iso', '/home/rhett/Downloads/archlinux-2025.05.01-x86_64.iso', '/home/rhett/Downloads/linuxmint-22-cinnamon-64bit.iso', '/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/mm.iso', '/var/lib/libvirt/images/mtes.iso', '/var/lib/libvirt/images/minttest.iso', '/var/lib/libvirt/images/ppp.iso', '/var/lib/libvirt/images/pen.iso', '/var/lib/libvirt/images/penis.iso']
+isos=['/home/rhett/Downloads/trisquel_12.0_amd64.iso', '/home/rhett/Downloads/trisquel_11.0.1_amd64.iso', '/home/rhett/Downloads/archlinux-x86_64.iso', '/home/rhett/Downloads/archlinux-2026.02.01-x86_64.iso', '/home/rhett/Downloads/archlinux-2025.05.01-x86_64.iso', '/home/rhett/Downloads/linuxmint-22-cinnamon-64bit.iso', '/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/mm.iso', '/var/lib/libvirt/images/mtes.iso', '/var/lib/libvirt/images/minttest.iso']
 
 [org/virt-manager/virt-manager/vmlist-fields]
 disk-usage=false
@@ -641,6 +646,11 @@ autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
 
+[org/virt-manager/virt-manager/vms/60f1e97f10ca46a98fa38c65df74ee15]
+autoconnect=1
+scaling=1
+vm-window-size=(1510, 712)
+
 [org/virt-manager/virt-manager/vms/662d45b851b34f6e8858971725ee5f13]
 autoconnect=1
 scaling=1
@@ -666,9 +676,19 @@ autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
 
+[org/virt-manager/virt-manager/vms/9491eaff7d564cb5b131082dd62f284b]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
 [org/virt-manager/virt-manager/vms/950bf44b70854adc9290b4b5d934d431]
 autoconnect=1
 scaling=1
+
+[org/virt-manager/virt-manager/vms/97b53603ce64427fa6a5961ee62ab6b7]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
 
 [org/virt-manager/virt-manager/vms/9ce55a47cd5940f8a17576a8478c4442]
 autoconnect=1
@@ -740,6 +760,11 @@ autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
 
+[org/virt-manager/virt-manager/vms/e6a80f18c32c4cb6bfb8d6eb090c71ab]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 841)
+
 [org/virt-manager/virt-manager/vms/e7c4dd34d6074d2886e6c9fbbcac5b74]
 autoconnect=1
 scaling=1
@@ -780,7 +805,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/oldsys/$RECYCLE.BIN'
+virtual-root='file:///home/rhett/Downloads/bitcoin/src'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -822,10 +847,14 @@ dual-page-odd-left=false
 fullscreen=false
 inverted-colors=false
 show-sidebar=false
-sidebar-page='links'
+sidebar-page='thumbnails'
 sidebar-size=499
 sizing-mode='fit-width'
-window-ratio=(4.7058823529411766, 1.6468253968253967)
+window-ratio=(2.8571428571428572, 1.254724111866969)
+
+[org/x/viewer/ui]
+statusbar=true
+toolbar=true
 
 [org/x/viewer/window]
 maximized=false
