@@ -35,7 +35,7 @@ use-antialiasing=true
 autorefresh-hours=2
 default-repo-is-ok=true
 install-last-run=1775141745
-refresh-last-run=1779824994
+refresh-last-run=1779854233
 refresh-minutes=10
 show-welcome-page=false
 tracker-grace-period=30
@@ -498,7 +498,7 @@ search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='1294x617+259+159'
+geometry='1294x617+65+65'
 maximized=false
 sidebar-bookmark-breakpoint=1
 sidebar-width=147
@@ -805,7 +805,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/Downloads/bitcoin/src'
+virtual-root='file:///home/rhett/Desktop/bitcoin-28.1'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true

@@ -240,3 +240,14 @@ qcom(){
 		git push	
 	fi
 }
+
+com(){
+	if [ ! -d ".git" ]; then
+		git init
+	else
+	    git add .
+		git commit -m "qcom"
+	fi
+}
+
+
