@@ -79,7 +79,7 @@ if [ -x /usr/bin/dircolors ]; then
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
+    alias grep='grep --color=auto -i'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
@@ -132,7 +132,7 @@ alias doc="cd ~/Documents"
 alias bin="cd /usr/local/bin"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
 alias m="micro"
-alias p="python3"
+alias p="ps aux"
 alias books="cd ~/Desktop/books"
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 alias nrc="micro ~/.nanorc"
