@@ -132,7 +132,7 @@ alias doc="cd ~/Documents"
 alias bin="cd /usr/local/bin"
 alias rhett="cd ~/Desktop/rhettapplestone.com"
 alias m="micro"
-alias p="ps aux"
+alias p="python3"
 alias books="cd ~/Desktop/books"
 alias rc="micro ~/.bashrc +120:1 && source ~/.bashrc"
 alias nrc="micro ~/.nanorc"
@@ -147,7 +147,7 @@ alias ..="cd .."
 alias n='nnn -d -e -H -r'
 alias getmp3='yt-dlp -x --audio-format mp3'
 alias playlist="yt-dlp -x --audio-format mp3 -o \"%(playlist_index)s - %(title)s.%(ext)s\""
-alias s="search for"
+alias o="open"
 
 export EDITOR='micro'
 
