@@ -35,7 +35,7 @@ use-antialiasing=true
 autorefresh-hours=2
 default-repo-is-ok=true
 install-last-run=1775141745
-refresh-last-run=1781586123
+refresh-last-run=1782030449
 refresh-minutes=10
 show-welcome-page=false
 tracker-grace-period=30
@@ -142,7 +142,7 @@ name='term'
 calculator=['<Alt>7']
 home=['<Alt>9', 'XF86Explorer']
 screensaver=['<Alt>1', 'XF86ScreenSaver']
-terminal=['<Alt>t']
+terminal=['<Alt>t', '<Alt>Return']
 www=['<Alt>8']
 
 [org/cinnamon/desktop/keybindings/wm]
@@ -260,7 +260,7 @@ source-currency=''
 source-units='degree'
 target-currency=''
 target-units='radian'
-window-position=(539, 376)
+window-position=(514, 143)
 word-size=64
 
 [org/gnome/calendar]
@@ -396,7 +396,7 @@ window-width=1440
 [org/gnome/gnome-screenshot]
 delay=0
 include-pointer=false
-last-save-directory='file:///home/rhett/Desktop'
+last-save-directory='file:///home/rhett/Desktop/auction-stuff/cars'
 
 [org/gnome/libgnomekbd/preview]
 height=485
@@ -815,7 +815,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett'
+virtual-root='file:///home/rhett/Downloads'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -860,7 +860,7 @@ show-sidebar=false
 sidebar-page='thumbnails'
 sidebar-size=499
 sizing-mode='fit-width'
-window-ratio=(2.4190476172237338, 0.98587729117466738)
+window-ratio=(2.3529411764705883, 1.047979797979798)
 
 [org/x/viewer/ui]
 statusbar=true

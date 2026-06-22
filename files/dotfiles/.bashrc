@@ -148,6 +148,9 @@ alias n='nnn -d -e -H -r'
 alias getmp3='yt-dlp -x --audio-format mp3'
 alias playlist="yt-dlp -x --audio-format mp3 -o \"%(playlist_index)s - %(title)s.%(ext)s\""
 alias o="open"
+alias mod="micro ~/Desktop/auction-stuff/modellist.txt"
+alias conv="python3 ~/Desktop/auction-stuff/convert.py"
+alias auc="cd ~/Desktop/auction-stuff"
 
 export EDITOR='micro'
 
