@@ -35,7 +35,7 @@ use-antialiasing=true
 autorefresh-hours=2
 default-repo-is-ok=true
 install-last-run=1775141745
-refresh-last-run=1782030449
+refresh-last-run=1789857361
 refresh-minutes=10
 show-welcome-page=false
 tracker-grace-period=30
@@ -53,16 +53,16 @@ version='1.5.29'
 settings-migrated=true
 
 [io/github/celluloid-player/celluloid/window-state]
-height=542
+height=337
 loop-playlist=false
-maximized=true
+maximized=false
 playlist-width=193
 show-playlist=true
 volume=1.0
-width=1053
+width=733
 
 [org/blueman/general]
-window-properties=[2876, 870, 2, 18]
+window-properties=[1440, 830, 0, 32]
 
 [org/cinnamon]
 alttab-switcher-delay=100
@@ -221,12 +221,12 @@ night-light-last-coordinates=(41.850000000000001, -87.650000000000006)
 
 [org/cinnamon/settings-daemon/plugins/power]
 idle-brightness=30
-idle-dim-battery=true
+idle-dim-battery=false
 idle-dim-time=600
 lid-close-ac-action='suspend'
 lid-close-battery-action='shutdown'
 sleep-display-ac=0
-sleep-display-battery=1800
+sleep-display-battery=0
 sleep-inactive-ac-timeout=0
 sleep-inactive-battery-timeout=0
 
@@ -260,7 +260,7 @@ source-currency=''
 source-units='degree'
 target-currency=''
 target-units='radian'
-window-position=(514, 143)
+window-position=(444, 182)
 word-size=64
 
 [org/gnome/calendar]
@@ -393,10 +393,16 @@ sidebar-width=200
 window-height=815
 window-width=1440
 
+[org/gnome/gitg/preferences/interface]
+enable-monitoring=true
+
+[org/gnome/gitg/state/history]
+paned-panels-position=229
+
 [org/gnome/gnome-screenshot]
 delay=0
 include-pointer=false
-last-save-directory='file:///home/rhett/Desktop/auction-stuff/cars'
+last-save-directory='file:///home/rhett/Desktop'
 
 [org/gnome/libgnomekbd/preview]
 height=485
@@ -438,6 +444,10 @@ ignore-phase2-ca-cert=false
 
 [org/gnome/nm-applet/eap/73de453b-175c-48e8-837c-14b8af8d0e9b]
 ignore-ca-cert=false
+ignore-phase2-ca-cert=false
+
+[org/gnome/nm-applet/eap/f117eea5-a6d2-49e1-840c-08860e31a1aa]
+ignore-ca-cert=true
 ignore-phase2-ca-cert=false
 
 [org/gnome/rhythmbox]
@@ -482,6 +492,17 @@ use-theme-transparency=true
 use-transparent-background=false
 visible-name='rhett'
 
+[org/gnucash/GnuCash/dialogs/new-hierarchy]
+last-geometry=(81, 130, 849, 550)
+
+[org/gnucash/GnuCash/dialogs/tip-of-the-day]
+current-tip=1
+last-geometry=(520, 280, 400, 300)
+show-at-startup=false
+
+[org/gnucash/GnuCash/general]
+prefs-version=5005
+
 [org/gtk/settings/color-chooser]
 custom-colors=[(0.80000000000000004, 0.0, 0.0, 1.0), (1.0, 1.0, 0.0, 0.5), (0.082352941176470587, 0.078431372549019607, 0.078431372549019607, 1.0), (0.1803921568627451, 0.20392156862745098, 0.21176470588235294, 1.0)]
 selected-color=(true, 0.80000000000000004, 0.0, 0.0, 1.0)
@@ -497,18 +518,18 @@ sort-column='modified'
 sort-directories-first=true
 sort-order='descending'
 type-format='category'
-window-position=(68, 115)
+window-position=(68, 66)
 window-size=(1304, 632)
 
 [org/nemo/preferences]
-show-hidden-files=false
+show-hidden-files=true
 
 [org/nemo/search]
 search-reverse-sort=false
 search-sort-column='name'
 
 [org/nemo/window-state]
-geometry='1294x617+25+25'
+geometry='1231x823+25+0'
 maximized=false
 sidebar-bookmark-breakpoint=1
 sidebar-width=147
@@ -815,7 +836,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/Downloads'
+virtual-root='file:///home/rhett/Desktop/senior-proj'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -825,7 +846,7 @@ bottom-panel-size=140
 side-panel-active-page=827629879
 side-panel-size=200
 size=(926, 733)
-state=87168
+state=43908
 
 [org/x/pix/browser]
 browser-sidebar-width=285
@@ -860,7 +881,7 @@ show-sidebar=false
 sidebar-page='thumbnails'
 sidebar-size=499
 sizing-mode='fit-width'
-window-ratio=(2.3529411764705883, 1.047979797979798)
+window-ratio=(2.4190297003090979, 0.98587701481191126)
 
 [org/x/viewer/ui]
 statusbar=true

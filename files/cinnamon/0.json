@@ -45,7 +45,6 @@
                 "overlay-key",
                 "activate-on-hover",
                 "hover-delay",
-                "force-show-panel",
                 "enable-animation"
             ]
         },
@@ -322,13 +321,6 @@
         "description": "Enable autoscrolling in application list",
         "value": true
     },
-    "force-show-panel": {
-        "type": "switch",
-        "default": true,
-        "description": "Force the panel to be visible when opening the menu",
-        "tooltip": "Opening the menu will also show the main panel (which may be auto-hidden).",
-        "value": true
-    },
     "activate-on-hover": {
         "type": "switch",
         "default": false,
@@ -376,5 +368,5 @@
         "description": "Restore the menu to its original size",
         "callback": "_reset_menu_size"
     },
-    "__md5__": "f4320939a20f9c5c5d2524a3e0705a620a188a8ff9c3d3f4fa2c1cd14fe0d0a0"
+    "__md5__": "d547bd350e46f51e2857281904144c9b0a188a8ff9c3d3f4fa2c1cd14fe0d0a0"
 }
