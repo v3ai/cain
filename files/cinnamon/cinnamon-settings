@@ -34,8 +34,8 @@ use-antialiasing=true
 [com/linuxmint/updates]
 autorefresh-hours=2
 default-repo-is-ok=true
-install-last-run=1775141745
-refresh-last-run=1789857361
+install-last-run=1790014248
+refresh-last-run=1790906276
 refresh-minutes=10
 show-welcome-page=false
 tracker-grace-period=30
@@ -260,7 +260,7 @@ source-currency=''
 source-units='degree'
 target-currency=''
 target-units='radian'
-window-position=(444, 182)
+window-position=(360, 113)
 word-size=64
 
 [org/gnome/calendar]
@@ -397,7 +397,11 @@ window-width=1440
 enable-monitoring=true
 
 [org/gnome/gitg/state/history]
-paned-panels-position=229
+paned-panels-position=296
+
+[org/gnome/gitg/state/window]
+size=(1154, 686)
+state=87168
 
 [org/gnome/gnome-screenshot]
 delay=0
@@ -557,7 +561,7 @@ graphics-type='system'
 media-default='/home/rhett/Downloads'
 
 [org/virt-manager/virt-manager/urls]
-isos=['/home/rhett/Downloads/trisquel_12.0_amd64.iso', '/home/rhett/Downloads/trisquel_11.0.1_amd64.iso', '/home/rhett/Downloads/archlinux-x86_64.iso', '/home/rhett/Downloads/archlinux-2026.02.01-x86_64.iso', '/home/rhett/Downloads/archlinux-2025.05.01-x86_64.iso', '/home/rhett/Downloads/linuxmint-22-cinnamon-64bit.iso', '/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/mm.iso', '/var/lib/libvirt/images/mtes.iso', '/var/lib/libvirt/images/minttest.iso']
+isos=['/home/rhett/Downloads/ubuntu-24.04.5.1-desktop-amd64(1).iso', '/home/rhett/Downloads/ubuntu-24.04.5.1-desktop-amd64.iso', '/home/rhett/Downloads/trisquel_12.0_amd64.iso', '/home/rhett/Downloads/trisquel_11.0.1_amd64.iso', '/home/rhett/Downloads/archlinux-x86_64.iso', '/home/rhett/Downloads/archlinux-2026.02.01-x86_64.iso', '/home/rhett/Downloads/archlinux-2025.05.01-x86_64.iso', '/home/rhett/Downloads/linuxmint-22-cinnamon-64bit.iso', '/var/lib/libvirt/images/linuxmint-22.1-cinnamon-64bit.iso', '/var/lib/libvirt/images/mm.iso']
 
 [org/virt-manager/virt-manager/vmlist-fields]
 disk-usage=false
@@ -702,6 +706,11 @@ autoconnect=1
 scaling=1
 vm-window-size=(996, 743)
 
+[org/virt-manager/virt-manager/vms/8a809df14e7644b78beb521da3db53a8]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 757)
+
 [org/virt-manager/virt-manager/vms/93180a1827f1491486ca698996ca0ac1]
 autoconnect=1
 scaling=1
@@ -720,6 +729,11 @@ scaling=1
 autoconnect=1
 scaling=1
 vm-window-size=(1024, 841)
+
+[org/virt-manager/virt-manager/vms/97bf5dc92cb74e2d83068ed480a2a95c]
+autoconnect=1
+scaling=1
+vm-window-size=(1024, 830)
 
 [org/virt-manager/virt-manager/vms/9ce55a47cd5940f8a17576a8478c4442]
 autoconnect=1
@@ -836,7 +850,7 @@ active-plugins=['sort', 'filebrowser', 'joinlines', 'time', 'modelines', 'open-u
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/rhett/Desktop/senior-proj'
+virtual-root='file:///home/rhett/Downloads'
 
 [org/x/editor/preferences/ui]
 statusbar-visible=true
@@ -880,15 +894,16 @@ inverted-colors=false
 show-sidebar=false
 sidebar-page='thumbnails'
 sidebar-size=499
-sizing-mode='fit-width'
-window-ratio=(2.4190297003090979, 0.98587701481191126)
+sizing-mode='free'
+window-ratio=(2.3529411764705883, 1.047979797979798)
+zoom=0.93140643842809823
 
 [org/x/viewer/ui]
 statusbar=true
 toolbar=true
 
 [org/x/viewer/window]
-maximized=false
+maximized=true
 
 [org/x/warpinator/preferences]
 ask-for-send-permission=true

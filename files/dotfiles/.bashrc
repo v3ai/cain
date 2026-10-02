@@ -170,7 +170,7 @@ blackboard(){
 	open	https://ualearn.blackboard.com/ultra/courses/_410357_1/outline
 }
 
-auction(){
+a(){
 
 links=(
 
@@ -435,6 +435,3 @@ com(){
 
 
 
-# >>> Open Interpreter installer >>>
-export PATH="/home/rhett/.local/bin:$PATH"
-# <<< Open Interpreter installer <<<
