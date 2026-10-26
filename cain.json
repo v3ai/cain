@@ -1,0 +1,92 @@
+{
+  "git": {
+    "name": "Rhett Applestone",
+    "email": "rhettapples(at symbol)gmail.com"
+  },
+
+  "settings": {
+    "wallpaper": "files/backgrounds/mmiyagi_japan.jpg",
+    "dark_mode": true,
+    "homepage": "https://www.google.com",
+    "mac_translate": true,
+    "mac_alt": "option"
+  },
+
+  "packages": [
+    {"name": "git", "winget": "Git.Git"},
+    {"name": "micro", "winget": "zyedidia.micro"},
+    {"name": "xclip", "os": ["linux"]},
+    {"name": "inkscape", "winget": "Inkscape.Inkscape", "brew": "--cask inkscape"},
+    {"name": "virt-manager", "os": ["linux"]},
+    {"name": "qemu", "apt": "qemu-system", "pacman": "qemu-full", "winget": "SoftwareFreedomConservancy.QEMU"},
+    {"name": "dmenu", "apt": "suckless-tools", "os": ["linux"]}
+  ],
+
+  "files": [
+    {"src": "files/micro/bindings.json", "dest": "~/.config/micro/bindings.json"},
+    {"src": "files/micro/settings.json", "dest": "~/.config/micro/settings.json"},
+    {"src": "files/dotfiles/.nanorc", "dest": "~/.nanorc", "os": ["linux", "macos"]},
+    {"src": "files/shell/cain.sh", "dest": "~/.config/cain/cain.sh", "os": ["linux", "macos"]},
+    {"src": "files/shell/cain.ps1", "dest": "~/.config/cain/cain.ps1", "os": ["windows"]},
+    {"src": "files/shell/auctions.txt", "dest": "~/.config/cain/auctions.txt"},
+    {"src": "files/shell/blackboard.txt", "dest": "~/.config/cain/blackboard.txt"},
+    {"src": "files/cinnamon/0.json", "dest": "~/.config/cinnamon/spices/menu@cinnamon.org/0.json", "desktop": ["cinnamon"]}
+  ],
+
+  "scripts": [
+    {"src": "files/scripts/booklister.py", "name": "booklister"},
+    {"src": "files/scripts/listlauncher.py", "name": "listlauncher"}
+  ],
+
+  "remaps": [
+    {"from": "capslock", "to": "esc"},
+
+    {"from": "alt+h", "to": "left"},
+    {"from": "alt+j", "to": "down"},
+    {"from": "alt+k", "to": "up"},
+    {"from": "alt+l", "to": "right"},
+    {"from": "alt+n", "to": "home"},
+    {"from": "alt+m", "to": "end"},
+    {"from": "alt+w", "to": "ctrl+right"},
+    {"from": "alt+b", "to": "ctrl+left"},
+    {"from": "alt+o", "to": "ctrl+tab"},
+    {"from": "alt+u", "to": "ctrl+shift+tab"},
+    {"from": "alt+i", "to": "ctrl+t"},
+    {"from": "alt+period", "to": "ctrl+w"},
+    {"from": "alt+semicolon", "to": "ctrl+enter"},
+    {"from": "alt+bracketleft", "to": "esc"},
+
+    {"from": "lalt+s", "to": "ctrl+s"},
+    {"from": "lalt+d", "to": "backspace"},
+    {"from": "lalt+e", "to": "esc"},
+    {"from": "lalt+f", "to": "ctrl+f"},
+    {"from": "lalt+z", "to": "ctrl+z"},
+    {"from": "lalt+a", "to": "ctrl+a"},
+    {"from": "lalt+c", "to": "ctrl+c"},
+    {"from": "lalt+v", "to": "ctrl+shift+v"},
+    {"from": "lalt+x", "to": "ctrl+x"},
+    {"from": "lalt+q", "to": "ctrl+q"},
+    {"from": "lalt+quote", "to": "ctrl+l"},
+    {"from": "ralt+quote", "to": "ctrl+shift+l"},
+    {"from": "ralt+minus", "to": "esc"},
+
+    {"from": "super+m", "to": "ctrl+m"},
+    {"from": "rctrl+backslash", "to": "tab"}
+  ],
+
+  "shortcuts": [
+    {"action": "close_window", "keys": ["alt+comma"]},
+    {"action": "minimize", "keys": ["alt+slash"]},
+    {"action": "toggle_maximize", "keys": ["alt+r", "alt+bracketright"]},
+    {"action": "tile_left", "keys": ["alt+y"]},
+    {"action": "tile_right", "keys": ["alt+p"]},
+    {"action": "show_desktop", "keys": ["super+d"]},
+    {"action": "switch_windows", "keys": ["alt+tab", "alt+backslash"]},
+    {"action": "lock_screen", "keys": ["alt+1"]},
+    {"action": "terminal", "keys": ["alt+t", "alt+enter"]},
+    {"action": "calculator", "keys": ["alt+7"]},
+    {"action": "browser", "keys": ["alt+8"]},
+    {"action": "file_manager", "keys": ["alt+9"]},
+    {"action": "script:booklister", "keys": ["ctrl+b", "super+b", "alt+g"]}
+  ]
+}
