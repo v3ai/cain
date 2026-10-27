@@ -33,11 +33,6 @@
     {"src": "files/cinnamon/0.json", "dest": "~/.config/cinnamon/spices/menu@cinnamon.org/0.json", "desktop": ["cinnamon"]}
   ],
 
-  "scripts": [
-    {"src": "files/scripts/booklister.py", "name": "booklister"},
-    {"src": "files/scripts/listlauncher.py", "name": "listlauncher"}
-  ],
-
   "remaps": [
     {"from": "capslock", "to": "esc"},
 
@@ -87,6 +82,6 @@
     {"action": "calculator", "keys": ["alt+7"]},
     {"action": "browser", "keys": ["alt+8"]},
     {"action": "file_manager", "keys": ["alt+9"]},
-    {"action": "script:booklister", "keys": ["ctrl+b", "super+b", "alt+g"]}
+    {"action": "tool:booklister", "keys": ["ctrl+b", "super+b", "alt+g"]}
   ]
 }

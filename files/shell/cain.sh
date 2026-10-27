@@ -76,11 +76,11 @@ alias vnv="python3 -m venv venv"
 alias src="source ./venv/bin/activate"
 alias vps="ssh rhett@192.3.60.227"
 alias viv="$HOME/Desktop/2025.2/Vivado/bin/vivado"
-alias book="booklister"
+alias book="cain booklister"
+alias booklister="cain booklister"
+alias listlauncher="cain listlauncher"
 
 # ---------------------------------------------------------------- functions
-cain() { python3 "$CAIN_DIR/cain.py" "$@"; }
-
 # open every URL in a list file at once
 blackboard() { grep -v '^\s*$' "$CAIN_CONFIG/blackboard.txt" | while read -r url; do open "$url"; done; }
 

@@ -54,8 +54,9 @@ function llm        { open https://claude.ai/ https://chatgpt.com/ https://gemin
 function vnv        { python -m venv venv }
 function src        { . .\venv\Scripts\Activate.ps1 }
 function vps        { ssh rhett@192.3.60.227 }
-function book       { booklister }
-function cain       { python "$env:CAIN_DIR\cain.py" @args }
+function book       { cain booklister }
+function booklister { cain booklister }
+function listlauncher { cain listlauncher }
 
 # ---------------------------------------------------------------- functions
 function blackboard {

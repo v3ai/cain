@@ -1,0 +1,71 @@
+# Builds and tests cain on Linux, macOS and Windows.
+# Push a tag like v1.0 to publish ready-to-run binaries as a GitHub release.
+name: build
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make CFLAGS="-O2 -Wall -Wextra -Werror -std=c99 -D_DEFAULT_SOURCE"
+      - run: make test
+      - name: Static binary that runs on any distro
+        run: |
+          make clean
+          make CFLAGS="-O2 -std=c99 -D_DEFAULT_SOURCE -static"
+          mv cain cain-linux-x86_64
+      - uses: actions/upload-artifact@v4
+        with: {name: cain-linux-x86_64, path: cain-linux-x86_64}
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make CFLAGS="-O2 -Wall -Wextra -Werror -std=c99 -D_DARWIN_C_SOURCE"
+      - run: make test
+      - name: Universal binary (Apple silicon + Intel)
+        run: |
+          make clean
+          make CFLAGS="-O2 -std=c99 -D_DARWIN_C_SOURCE -arch arm64 -arch x86_64"
+          mv cain cain-macos
+      - uses: actions/upload-artifact@v4
+        with: {name: cain-macos, path: cain-macos}
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Build with MSVC
+        shell: cmd
+        run: build.bat
+      - name: Smoke test
+        shell: bash
+        run: |
+          for os in linux windows macos; do ./cain.exe generate $os > /dev/null; done
+          ./cain.exe install --dry-run < /dev/null
+      - uses: actions/upload-artifact@v4
+        with: {name: cain-windows, path: cain.exe}
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [linux, macos, windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with: {merge-multiple: true}
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            cain-linux-x86_64
+            cain-macos
+            cain.exe
