@@ -13,13 +13,39 @@
   },
 
   "packages": [
-    {"name": "git", "winget": "Git.Git"},
-    {"name": "micro", "winget": "zyedidia.micro"},
+    {"name": "git", "winget": "Git.Git", "terminal": true},
     {"name": "xclip", "os": ["linux"]},
     {"name": "inkscape", "winget": "Inkscape.Inkscape", "brew": "--cask inkscape"},
     {"name": "virt-manager", "os": ["linux"]},
     {"name": "qemu", "apt": "qemu-system", "pacman": "qemu-full", "winget": "SoftwareFreedomConservancy.QEMU"},
-    {"name": "dmenu", "apt": "suckless-tools", "os": ["linux"]}
+    {"name": "dmenu", "apt": "suckless-tools", "os": ["linux"]},
+
+    {"name": "bash", "os": ["linux"], "terminal": true},
+    {"name": "bash-completion", "os": ["linux"], "terminal": true},
+    {"name": "sudo", "os": ["linux"], "terminal": true},
+    {"name": "curl", "os": ["linux"], "terminal": true},
+    {"name": "less", "os": ["linux"], "terminal": true},
+    {"name": "nano", "os": ["linux"], "terminal": true},
+    {"name": "micro", "winget": "zyedidia.micro", "zypper": "micro-editor", "terminal": true,
+     "fallback": "mkdir -p ~/.local/bin && cd ~/.local/bin && curl -fsSL -o .getmicro.sh https://getmic.ro && sh .getmicro.sh; r=$?; rm -f .getmicro.sh; exit $r"},
+    {"name": "iproute2", "dnf": "iproute", "yum": "iproute", "bin": "ip", "os": ["linux"], "terminal": true},
+    {"name": "ssh", "apt": "openssh-client", "dnf": "openssh-clients", "yum": "openssh-clients", "zypper": "openssh-clients",
+     "apk": "openssh-client", "pacman": "openssh", "xbps": "openssh", "os": ["linux"], "terminal": true},
+    {"name": "python3", "pacman": "python", "brew": "python", "os": ["linux", "macos"], "terminal": true},
+    {"name": "pip", "linux": "python3-pip", "pacman": "python-pip", "apk": "py3-pip", "os": ["linux"], "terminal": true},
+    {"name": "venv", "linux": null, "apt": "python3-venv", "os": ["linux"], "terminal": true},
+    {"name": "tree", "os": ["linux", "macos"], "terminal": true},
+    {"name": "nnn", "os": ["linux", "macos"], "terminal": true},
+    {"name": "fzf", "os": ["linux", "macos"], "terminal": true},
+    {"name": "nmap", "os": ["linux", "macos"], "terminal": true},
+    {"name": "ffmpeg", "dnf": "ffmpeg-free", "os": ["linux", "macos"], "terminal": true},
+    {"name": "yt-dlp", "os": ["linux", "macos"], "terminal": true,
+     "fallback": "mkdir -p ~/.local/bin && curl -fsSL -o ~/.local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp && chmod +x ~/.local/bin/yt-dlp"},
+
+    {"name": "grep", "linux": null, "apk": "grep", "os": ["linux"], "terminal": true},
+    {"name": "coreutils", "linux": null, "apk": "coreutils", "os": ["linux"], "terminal": true},
+    {"name": "findutils", "linux": null, "apk": "findutils", "os": ["linux"], "terminal": true},
+    {"name": "shadow", "linux": null, "apk": "shadow", "bin": "usermod", "os": ["linux"], "terminal": true}
   ],
 
   "files": [

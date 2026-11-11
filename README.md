@@ -18,7 +18,7 @@ Everything lives in one file, [`cain.json`](cain.json):
 
 | section     | what it is                                                        |
 |-------------|-------------------------------------------------------------------|
-| `packages`  | programs to install (apt/dnf/pacman/zypper/apk/xbps, brew, winget) |
+| `packages`  | programs to install (apt/dnf/pacman/zypper/apk/xbps, brew, winget). `"terminal": true` ones also go on servers |
 | `files`     | dotfiles copied between `files/` and your home folder              |
 | `remaps`    | key remaps, e.g. `alt+h -> left`, `capslock -> esc`                |
 | `shortcuts` | desktop shortcuts, e.g. `alt+comma` closes a window, `alt+t` opens a terminal |
@@ -48,6 +48,31 @@ cd ~; git clone https://github.com/v3ai/cain; cd cain; .\cain.exe -i
 ```
 (Or build it yourself with `build.bat` from a Visual Studio developer prompt, or `make windows` with MinGW.)
 
+### VPS / server
+
+On a fresh Linux server (Debian, Ubuntu, Fedora, Rocky/Alma/CentOS/RHEL, Arch, openSUSE,
+Alpine, Void), as root or a sudo user:
+```
+curl -fsSL https://raw.githubusercontent.com/v3ai/cain/master/vps.sh | sh
+```
+(no curl? `wget -qO- https://raw.githubusercontent.com/v3ai/cain/master/vps.sh | sh`)
+
+[`vps.sh`](vps.sh) installs git and a C compiler, clones cain to `~/cain`, builds it and runs
+`cain vps`. That installs only what's used in the terminal and skips keybindings, desktop
+settings and GUI apps:
+
+* every package marked `"terminal": true` in `cain.json`: bash, sudo, curl, git, micro, nano,
+  python3 + pip + venv, tree, nnn, fzf, nmap, ffmpeg, yt-dlp, ssh, ...
+  with the right package name for each distro. On Rocky/Alma/CentOS/RHEL it turns on EPEL first.
+  If a distro doesn't package something (e.g. micro or yt-dlp), its `"fallback"` command
+  installs it into `~/.local/bin` instead.
+* the dotfiles (micro, nano, `cain.sh`), git name/email, `cain` itself on your `PATH`
+* the shell block in `~/.bashrc`, plus a line in `~/.profile` / `~/.bash_profile` so SSH logins
+  load it. If your login shell isn't bash or zsh (Alpine's `ash`), cain switches it to bash.
+
+Already cloned? `cd ~/cain && ./vps.sh`, or `make && ./cain vps`. Re-running is safe.
+Just some steps: `cain vps packages shell`.
+
 Install copies `cain` to `~/.local/bin` and puts that on your `PATH`. After that, open
 a new terminal and just type `cain`. The repo can live anywhere: cain remembers where it is.
 
@@ -60,6 +85,7 @@ cain -i               install everything
 cain install keys     only some steps: packages git files bin shell keys desktop
 cain keys             re-apply keybindings after editing cain.json
 cain generate macos   print the keyd / AutoHotkey / Karabiner config for any OS
+cain vps              set up a Linux server: terminal programs, configs, shell (no desktop)
 cain -i --dry-run     show what would happen without changing anything
 cain booklister       pick a book from ~/Desktop/books and open it ($CAIN_BOOKS_DIR to change)
 cain listlauncher     edit list.html on the website, then commit and push ($CAIN_SITE_DIR)
@@ -85,6 +111,11 @@ Files that install overwrites are backed up to `~/.cain-backup/<date>/` first.
   the key under your thumb instead.
 * Any remap can be overridden per OS: `{"from": "lalt+v", "to": "ctrl+shift+v", "macos": "cmd+v"}`.
   Use `null` to skip it on that OS. Any entry can be limited with `"os": ["linux"]`.
+* Packages: `{"name": "ssh", "apt": "openssh-client", "pacman": "openssh"}` sets the name per
+  package manager (`apt dnf yum pacman zypper apk xbps brew winget`, or `linux` for all of them).
+  `null` skips it there. `"fallback": "<shell command>"` runs if the package manager can't
+  install it; `"bin"` is the command to look for if it isn't the same as `name`.
+  `CAIN_PM=apk cain vps -n` shows what a distro would get.
 * Shortcuts can run anything: `{"action": "editor", "keys": ["alt+e"], "run": {"linux": "kate", "windows": "notepad.exe"}}`.
 
 ### Shell
