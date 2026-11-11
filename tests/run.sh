@@ -31,4 +31,26 @@ expect_error "broken JSON"     "line 2"               '{"remaps": [
 expect_error "unknown action"  "unknown shortcut"     '{"shortcuts": [{"action": "fly", "keys": ["alt+f"]}]}' generate windows
 expect_error "unknown step"    "unknown install step" '{}' install nope
 
+expect_error "unknown vps step"  "unknown vps step"     '{}' vps keys
+
+# `cain vps` (Linux only): terminal packages only, with the right name for each distro
+expect_output() {  # expect_output <description> <pm> <wanted|!unwanted>...
+    desc=$1 pm=$2; shift 2
+    out=$(CAIN_PM=$pm ./cain vps packages --dry-run < /dev/null 2>&1)
+    for want in "$@"; do
+        case $want in
+            !*) printf '%s\n' "$out" | grep -q -- "${want#!}" && { echo "FAIL  $desc (didn't want: ${want#!})"; fail=1; return; } ;;
+            *)  printf '%s\n' "$out" | grep -q -- "$want" || { echo "FAIL  $desc (wanted: $want)"; fail=1; return; } ;;
+        esac
+    done
+    echo "ok    $desc"
+}
+if [ "$(uname -s)" = Linux ]; then
+    expect_output "vps apt"    apt    "apt-get install -y python3-venv" "install -y openssh-client" "!inkscape" "!xclip" "!apk"
+    expect_output "vps dnf"    dnf    "dnf install -y ffmpeg-free" "install -y openssh-clients" "install -y iproute\$" "!python3-venv"
+    expect_output "vps pacman" pacman "pacman -Syu" "noconfirm python-pip" "noconfirm openssh" "!virt-manager"
+    expect_output "vps apk"    apk    "apk add grep" "apk add shadow" "apk add py3-pip" "!python3-venv"
+    expect_output "vps zypper" zypper "install micro-editor" "!install micro\$"
+fi
+
 exit $fail

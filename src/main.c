@@ -8,6 +8,7 @@
 #ifdef _WIN32
 #include <windows.h>
 #else
+#include <pwd.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #endif
@@ -21,6 +22,8 @@ static const char *USAGE =
     "  cain install keys    run only some install steps:\n"
     "                       packages git files bin shell keys desktop\n"
     "  cain keys            shorthand for `cain install keys`\n"
+    "  cain vps             set up a Linux server: terminal programs, configs and shell, no desktop\n"
+    "  cain vps shell       run only some vps steps: packages git files bin shell\n"
     "  cain generate [os]   print the keybinding config cain would write for linux/macos/windows\n"
     "  cain booklister      pick a book from ~/Desktop/books and open it\n"
     "  cain listlauncher    edit list.html on the website, then commit and push\n"
@@ -37,6 +40,9 @@ static const char *ASCII =
     "      YMbmd'  `Moo9^Yo..JMML..JMML  JMML.\n";
 
 static const char *const STEPS[] = {"packages", "git", "files", "bin", "shell", "keys", "desktop", NULL};
+/* `cain vps`: a headless server only gets what's used in the terminal */
+static const char *const VPS_STEPS[] = {"packages", "git", "files", "bin", "shell", NULL};
+static int g_vps = 0;
 
 /* ------------------------------------------------------------------ finding the repo */
 
@@ -74,7 +80,7 @@ static char *find_root(void)
 static void install_packages(const Manifest *m, const char *os, const char *de)
 {
     (void)de;
-    packages_install(m, os);
+    packages_install(m, os, g_vps);
 }
 
 static void install_git(const Manifest *m, const char *os, const char *de)
@@ -162,6 +168,47 @@ static void install_bin(const Manifest *m, const char *os, const char *de)
     free(self); free(dest); free(dir); free(repo); free(line);
 }
 
+#ifndef _WIN32
+/* On a server you arrive over SSH, which starts a *login* shell: bash then reads
+ * ~/.bash_profile (or ~/.bash_login, or ~/.profile) and never ~/.bashrc unless told to.
+ * Also make bash the login shell if the account uses something else (Alpine's ash, sh). */
+static void vps_login_shell(void)
+{
+    const char *candidates[] = {"~/.bash_profile", "~/.bash_login", "~/.profile", NULL};
+    char *profile = NULL;
+    for (int i = 0; candidates[i] && !profile; i++) {
+        char *p = expand(candidates[i]);
+        if (file_exists(p)) profile = p;
+        else free(p);
+    }
+    if (!profile) profile = expand("~/.profile");
+    char *text = read_file(profile, NULL);
+    if (!text || !strstr(text, ".bashrc"))
+        upsert_block(profile, "[ -n \"$BASH_VERSION\" ] && [ -f \"$HOME/.bashrc\" ] && . \"$HOME/.bashrc\"");
+    free(text);
+    free(profile);
+
+    struct passwd *pw = getpwuid(getuid());
+    const char *current = pw && pw->pw_shell ? path_base(pw->pw_shell) : "";
+    if (!pw || streq(current, "bash") || streq(current, "zsh")) return;
+    char *bash = which("bash");
+    if (!bash) {
+        warn("bash isn't installed, so your login shell stays %s", *current ? current : "as it is");
+        return;
+    }
+    char *question = xprintf("Your login shell is %s. Switch it to bash so cain's aliases load?", *current ? current : "unset");
+    if (ask(question, 1)) {
+        char *usermod = which("usermod");
+        int ok = usermod ? run(ARGV("usermod", "-s", bash, pw->pw_name), RUN_SUDO)
+                         : run(ARGV("chsh", "-s", bash, pw->pw_name), RUN_SUDO);
+        if (ok != 0) warn("couldn't change your login shell; run: chsh -s %s", bash);
+        free(usermod);
+    }
+    free(question);
+    free(bash);
+}
+#endif
+
 static void install_shell(const Manifest *m, const char *os, const char *de)
 {
     (void)m; (void)de;
@@ -191,6 +238,9 @@ static void install_shell(const Manifest *m, const char *os, const char *de)
     if (file_exists(zshrc) || streq(os, "macos")) upsert_block(zshrc, block);
     free(bashrc);
     free(zshrc);
+#ifndef _WIN32
+    if (g_vps) vps_login_shell();
+#endif
 }
 
 static void install_keys(const Manifest *m, const char *os, const char *de)
@@ -217,8 +267,9 @@ static const StepFn STEP_FNS[] = {
 
 static void install(const Manifest *m, const StrList *steps)
 {
-    const char *os = OS_NATIVE, *de = streq(os, "linux") ? linux_desktop() : "";
-    if (*de) info("INSTALLING on %s (%s)", os, de);
+    const char *os = OS_NATIVE, *de = streq(os, "linux") && !g_vps ? linux_desktop() : "";
+    if (g_vps) info("INSTALLING on a %s server (terminal only)", os);
+    else if (*de) info("INSTALLING on %s (%s)", os, de);
     else info("INSTALLING on %s", os);
     int visual = 0;
     for (int i = 0; i < steps->n; i++) {
@@ -228,6 +279,10 @@ static void install(const Manifest *m, const StrList *steps)
                 STEP_FNS[k](m, os, de);
             }
         visual |= streq(steps->v[i], "keys") || streq(steps->v[i], "desktop");
+    }
+    if (g_vps) {
+        info("\nDone. Log out and SSH back in (or run `exec bash -l`) to load the new shell setup.");
+        return;
     }
     info("\nDone. Log out and back in (or reboot) so every change takes effect.");
     if (visual && ask("Reboot now?", 0)) {
@@ -357,18 +412,28 @@ int main(int argc, char **argv)
         else printf("\nNon valid input, please try again\n\n");
     }
 
+    if (streq(command, "vps")) {
+        if (!streq(OS_NATIVE, "linux")) die("cain vps is for Linux servers");
+        g_vps = 1;
+    }
+
     Manifest *m = manifest_load(OS_NATIVE);
     if (streq(command, "collect") || streq(command, "c")) {
         collect(m);
-    } else if (streq(command, "install") || streq(command, "i") || streq(command, "keys")) {
+    } else if (streq(command, "install") || streq(command, "i") || streq(command, "keys") || g_vps) {
+        const char *const *allowed = g_vps ? VPS_STEPS : STEPS;
         StrList steps = {0};
         if (args.n) steps = args;
         else if (streq(command, "keys")) sl_push(&steps, "keys");
-        else for (int i = 0; STEPS[i]; i++) sl_push(&steps, STEPS[i]);
+        else for (int i = 0; allowed[i]; i++) sl_push(&steps, allowed[i]);
         for (int i = 0; i < steps.n; i++) {
             int known = 0;
-            for (int k = 0; STEPS[k]; k++) known |= streq(STEPS[k], steps.v[i]);
-            if (!known) die("unknown install step \"%s\"; choose from: packages git files bin shell keys desktop", steps.v[i]);
+            for (int k = 0; allowed[k]; k++) known |= streq(allowed[k], steps.v[i]);
+            if (!known) {
+                Buf names = {0};
+                for (int k = 0; allowed[k]; k++) buf_addf(&names, " %s", allowed[k]);
+                die("unknown %s step \"%s\"; choose from:%s", g_vps ? "vps" : "install", steps.v[i], buf_str(&names));
+            }
         }
         install(m, &steps);
     } else {

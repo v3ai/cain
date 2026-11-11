@@ -10,16 +10,25 @@ case "$(uname -s)" in
 esac
 
 if [ "$_cain_os" = linux ] && ! command -v open >/dev/null 2>&1; then
-    open() { for f in "$@"; do xdg-open "$f" >/dev/null 2>&1 & done; }
+    if command -v xdg-open >/dev/null 2>&1; then
+        open() { for f in "$@"; do xdg-open "$f" >/dev/null 2>&1 & done; }
+    else
+        open() { printf '%s\n' "$@"; }   # headless server: just show the links
+    fi
 fi
 
 # install / uninstall / update ... for whichever package manager exists
 if   command -v brew    >/dev/null 2>&1; then _pm_install="brew install";              _pm_remove="brew uninstall";             _pm_update="brew update";          _pm_upgrade="brew upgrade";                 _pm_autoremove="brew autoremove"
 elif command -v apt-get >/dev/null 2>&1; then _pm_install="sudo apt install -y";       _pm_remove="sudo apt purge -y";          _pm_update="sudo apt update -y";   _pm_upgrade="sudo apt upgrade -y";          _pm_autoremove="sudo apt autoremove -y"
 elif command -v dnf     >/dev/null 2>&1; then _pm_install="sudo dnf install -y";       _pm_remove="sudo dnf remove -y";         _pm_update="sudo dnf check-update"; _pm_upgrade="sudo dnf upgrade -y";         _pm_autoremove="sudo dnf autoremove -y"
+elif command -v yum     >/dev/null 2>&1; then _pm_install="sudo yum install -y";       _pm_remove="sudo yum remove -y";         _pm_update="sudo yum check-update"; _pm_upgrade="sudo yum update -y";          _pm_autoremove="sudo yum autoremove -y"
 elif command -v pacman  >/dev/null 2>&1; then _pm_install="sudo pacman -S --needed";   _pm_remove="sudo pacman -Rns";           _pm_update="sudo pacman -Sy";      _pm_upgrade="sudo pacman -Syu";             _pm_autoremove='sudo pacman -Rns $(pacman -Qdtq)'
 elif command -v zypper  >/dev/null 2>&1; then _pm_install="sudo zypper install -y";    _pm_remove="sudo zypper remove -y";      _pm_update="sudo zypper refresh";  _pm_upgrade="sudo zypper update -y";        _pm_autoremove="sudo zypper remove --clean-deps"
+elif command -v apk     >/dev/null 2>&1; then _pm_install="sudo apk add";              _pm_remove="sudo apk del";               _pm_update="sudo apk update";      _pm_upgrade="sudo apk upgrade";             _pm_autoremove=":"
+elif command -v xbps-install >/dev/null 2>&1; then _pm_install="sudo xbps-install -y"; _pm_remove="sudo xbps-remove -y";        _pm_update="sudo xbps-install -S"; _pm_upgrade="sudo xbps-install -Syu";       _pm_autoremove="sudo xbps-remove -Oo -y"
 fi
+# root on a fresh server may not have sudo yet
+if [ "$(id -u)" = 0 ] && ! command -v sudo >/dev/null 2>&1; then sudo() { "$@"; }; fi
 
 i()          { eval "$_pm_install \"\$@\""; }
 install()    { eval "$_pm_install \"\$@\""; }
@@ -98,7 +107,10 @@ ip() {
     if [ "$_cain_os" = macos ]; then
         ipconfig getifaddr en0 || ipconfig getifaddr en1
     else
-        hostname -I | cut -d' ' -f1
+        # `hostname -I` is Debian/Fedora only; `ip route` works everywhere
+        _addr=$(hostname -I 2>/dev/null | cut -d' ' -f1)
+        [ -n "$_addr" ] || _addr=$(command ip -4 route get 1.1.1.1 2>/dev/null | sed -n 's/.* src \([0-9.]*\).*/\1/p')
+        echo "$_addr"
     fi
 }
 

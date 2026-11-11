@@ -192,7 +192,7 @@ const char *detect_linux_pm(void);
 int install_linux_packages(const char *pm, const StrList *names, int quiet);
 void brew_install(const StrList *names);
 void winget_install(const StrList *ids);
-void packages_install(const Manifest *m, const char *os);
+void packages_install(const Manifest *m, const char *os, int terminal_only);
 
 void desktop_apply(const char *os, const char *desktop, const Manifest *m);
 int collect_cinnamon_settings(void);
