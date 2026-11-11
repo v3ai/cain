@@ -33,6 +33,17 @@ expect_error "unknown step"    "unknown install step" '{}' install nope
 
 expect_error "unknown vps step"  "unknown vps step"     '{}' vps keys
 
+# install presets run exactly these steps (no menu: stdin isn't a terminal)
+expect_steps() {  # expect_steps <args> <steps>
+    got=$(./cain $1 --dry-run < /dev/null 2>&1 | sed -n 's/^== \(.*\) ==$/\1/p' | tr '\n' ' ')
+    if [ "$got" = "$2 " ]; then echo "ok    cain $1"; else echo "FAIL  cain $1 (wanted: $2, got: $got)"; fail=1; fi
+}
+expect_steps "install light"         "git files bin shell keys"
+expect_steps "install dotfiles"      "git files bin shell"
+expect_steps "install keybindings"   "keys"
+expect_steps "install dotfiles keys" "git files bin shell keys"
+[ "$(uname -s)" = Linux ] && expect_steps "install server" "packages git files bin shell"
+
 # `cain vps` (Linux only): terminal packages only, with the right name for each distro
 expect_output() {  # expect_output <description> <pm> <wanted|!unwanted>...
     desc=$1 pm=$2; shift 2

@@ -18,9 +18,10 @@ static const char *USAGE =
     "\n"
     "  cain                 ask whether to collect or install\n"
     "  cain -c | collect    copy this machine's configs into the repo, commit and push\n"
-    "  cain -i | install    install programs, configs, keybindings and desktop settings\n"
-    "  cain install keys    run only some install steps:\n"
-    "                       packages git files bin shell keys desktop\n"
+    "  cain -i | install    pick what to install from a menu (full, light, dotfiles, ...)\n"
+    "  cain install light   skip the menu: full light dotfiles keybindings server\n"
+    "  cain install keys    or name install steps: packages git files bin shell keys desktop\n"
+    "  -y, --yes            install everything without the menu\n"
     "  cain keys            shorthand for `cain install keys`\n"
     "  cain vps             set up a Linux server: terminal programs, configs and shell, no desktop\n"
     "  cain vps shell       run only some vps steps: packages git files bin shell\n"
@@ -43,6 +44,80 @@ static const char *const STEPS[] = {"packages", "git", "files", "bin", "shell", 
 /* `cain vps`: a headless server only gets what's used in the terminal */
 static const char *const VPS_STEPS[] = {"packages", "git", "files", "bin", "shell", NULL};
 static int g_vps = 0;
+
+/* What the install menu offers. `cain install <name>` picks one without the menu. */
+typedef struct { const char *name, *label, *desc, *steps; int vps; } Preset;
+static const Preset PRESETS[] = {
+    {"full", "Full", "programs, dotfiles, keybindings and desktop settings", "packages git files bin shell keys desktop", 0},
+    {"light", "Light", "dotfiles and keybindings; no programs, no desktop changes", "git files bin shell keys", 0},
+    {"dotfiles", "Dotfiles", "just configs, shell aliases and git settings", "git files bin shell", 0},
+    {"keybindings", "Keybindings", "just key remaps and shortcuts", "keys", 0},
+    {"server", "Server", "terminal programs and dotfiles, nothing graphical", "packages git files bin shell", 1},
+    {NULL, NULL, NULL, NULL, 0},
+};
+
+static const char *const STEP_DESCS[] = {
+    "programs from cain.json",
+    "your git name and email",
+    "dotfiles: micro, nano, shell aliases...",
+    "put the cain command on your PATH",
+    "load the aliases from your shell's startup file",
+    "key remaps and keyboard shortcuts",
+    "wallpaper, dark mode, desktop theme",
+};
+
+static void push_words(StrList *l, const char *words)
+{
+    char *copy = xstrdup(words);
+    for (char *t = strtok(copy, " "); t; t = strtok(NULL, " "))
+        if (!sl_has(l, t)) sl_push(l, t);
+    free(copy);
+}
+
+static void use_preset(const Preset *p, StrList *steps)
+{
+    if (p->vps) {
+        if (!streq(OS_NATIVE, "linux")) die("the server install is for Linux");
+        g_vps = 1;
+    }
+    push_words(steps, p->steps);
+}
+
+/* The install menu. 0 if the user backed out. */
+static int pick_install(StrList *steps)
+{
+    MenuItem items[16];
+    const Preset *map[16];
+    int n = 0;
+    for (int i = 0; PRESETS[i].name; i++) {
+        if (PRESETS[i].vps && !streq(OS_NATIVE, "linux")) continue;
+        items[n].label = PRESETS[i].label;
+        items[n].desc = PRESETS[i].desc;
+        map[n++] = &PRESETS[i];
+    }
+    items[n].label = "Custom";
+    items[n].desc = "tick each part yourself";
+    int custom = n++;
+
+    int choice = tui_menu("What should cain install?", items, n, 0, NULL);
+    if (choice < 0) return 0;
+    if (choice != custom) {
+        use_preset(map[choice], steps);
+        return 1;
+    }
+
+    MenuItem parts[8];
+    int checked[8], nsteps = 0;
+    for (; STEPS[nsteps]; nsteps++) {
+        parts[nsteps].label = STEPS[nsteps];
+        parts[nsteps].desc = STEP_DESCS[nsteps];
+        checked[nsteps] = 1;
+    }
+    if (tui_menu("Pick what to install", parts, nsteps, 0, checked) < 0) return 0;
+    for (int i = 0; i < nsteps; i++)
+        if (checked[i]) sl_push(steps, STEPS[i]);
+    return steps->n > 0;
+}
 
 /* ------------------------------------------------------------------ finding the repo */
 
@@ -374,11 +449,13 @@ int main(int argc, char **argv)
 {
     const char *command = NULL;
     StrList args = {0};
+    int yes = 0;
     for (int i = 1; i < argc; i++) {
         const char *a = argv[i];
         if (streq(a, "-n") || streq(a, "--dry-run")) g_dry_run = 1;
         else if (streq(a, "-c") || streq(a, "--collect")) command = "collect";
         else if (streq(a, "-i") || streq(a, "--install")) command = "install";
+        else if (streq(a, "-y") || streq(a, "--yes") || streq(a, "--all")) yes = 1;
         else if (streq(a, "-h") || streq(a, "--help") || streq(a, "help")) { fputs(USAGE, stdout); return 0; }
         else if (a[0] == '-') { fprintf(stderr, "cain: unknown option %s\n\n%s", a, USAGE); return 2; }
         else if (!command) command = a;
@@ -402,6 +479,15 @@ int main(int argc, char **argv)
 
     fputs(ASCII, stdout);
     putchar('\n');
+    if (!command && stdin_tty()) {
+        const MenuItem items[] = {
+            {"Install", "put my programs, configs and keybindings on this machine"},
+            {"Collect", "copy this machine's configs into the repo, commit and push"},
+        };
+        int choice = tui_menu("What do you want to do?", items, 2, 0, NULL);
+        if (choice < 0) return 0;
+        command = choice == 0 ? "install" : "collect";
+    }
     while (!command) {
         printf("Would you like to Collect (C) or Install (I)?: ");
         fflush(stdout);
@@ -421,11 +507,22 @@ int main(int argc, char **argv)
     if (streq(command, "collect") || streq(command, "c")) {
         collect(m);
     } else if (streq(command, "install") || streq(command, "i") || streq(command, "keys") || g_vps) {
-        const char *const *allowed = g_vps ? VPS_STEPS : STEPS;
         StrList steps = {0};
-        if (args.n) steps = args;
-        else if (streq(command, "keys")) sl_push(&steps, "keys");
-        else for (int i = 0; allowed[i]; i++) sl_push(&steps, allowed[i]);
+        for (int i = 0; i < args.n; i++) {  /* preset names expand to their steps */
+            const Preset *p = PRESETS;
+            while (p->name && (g_vps || !streq(p->name, args.v[i]))) p++;
+            if (p->name) use_preset(p, &steps);
+            else if (!sl_has(&steps, args.v[i])) sl_push(&steps, args.v[i]);
+        }
+        int menu = !steps.n && !streq(command, "keys") && !g_vps && !yes && stdin_tty();
+        if (menu && !pick_install(&steps)) {
+            info("Nothing installed.");
+            return 0;
+        }
+        const char *const *allowed = g_vps ? VPS_STEPS : STEPS;
+        if (!steps.n && streq(command, "keys")) sl_push(&steps, "keys");
+        if (!steps.n)
+            for (int i = 0; allowed[i]; i++) sl_push(&steps, allowed[i]);
         for (int i = 0; i < steps.n; i++) {
             int known = 0;
             for (int k = 0; allowed[k]; k++) known |= streq(allowed[k], steps.v[i]);

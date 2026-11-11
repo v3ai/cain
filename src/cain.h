@@ -197,6 +197,13 @@ void packages_install(const Manifest *m, const char *os, int terminal_only);
 void desktop_apply(const char *os, const char *desktop, const Manifest *m);
 int collect_cinnamon_settings(void);
 
+/* ------------------------------------------------------------------- tui.c */
+
+typedef struct { const char *label, *desc; } MenuItem;
+/* Arrow-key menu. Returns the chosen index, or -1 if cancelled / stdin isn't a terminal.
+ * With `checked` (one int per item) it's a checklist: Space ticks, Enter confirms. */
+int tui_menu(const char *title, const MenuItem *items, int n, int start, int *checked);
+
 /* ----------------------------------------------------------------- tools.c */
 
 int booklister_main(void);

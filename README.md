@@ -79,9 +79,11 @@ a new terminal and just type `cain`. The repo can live anywhere: cain remembers 
 ### Usage
 
 ```
-cain                  asks: Collect (C) or Install (I)?
+cain                  menu: Install or Collect
 cain -c               collect: copy this machine's configs into the repo, commit, push
-cain -i               install everything
+cain -i               menu: pick what to install (see below)
+cain -i -y            install everything, no menu
+cain install light    pick a preset without the menu: full light dotfiles keybindings server
 cain install keys     only some steps: packages git files bin shell keys desktop
 cain keys             re-apply keybindings after editing cain.json
 cain generate macos   print the keyd / AutoHotkey / Karabiner config for any OS
@@ -90,6 +92,22 @@ cain -i --dry-run     show what would happen without changing anything
 cain booklister       pick a book from ~/Desktop/books and open it ($CAIN_BOOKS_DIR to change)
 cain listlauncher     edit list.html on the website, then commit and push ($CAIN_SITE_DIR)
 ```
+
+`cain -i` opens a menu (arrow keys or j/k, Enter to pick, q to quit):
+
+```
+What should cain install?
+
+ > Full         programs, dotfiles, keybindings and desktop settings
+   Light        dotfiles and keybindings; no programs, no desktop changes
+   Dotfiles     just configs, shell aliases and git settings
+   Keybindings  just key remaps and shortcuts
+   Server       terminal programs and dotfiles, nothing graphical   (Linux)
+   Custom       tick each part yourself
+```
+
+Custom shows a checklist of the install steps (Space ticks, `a` toggles all). When cain isn't
+run from a terminal (a script, CI) it skips the menu and installs everything, like `-y`.
 
 Files that install overwrites are backed up to `~/.cain-backup/<date>/` first.
 
@@ -132,7 +150,7 @@ make          build ./cain
 make test     check the generated configs against tests/expected/
 make windows  cross-compile cain.exe with MinGW
 ```
-The code is in `src/`: `main.c` (commands and install steps), `keys.c` (key names for
+The code is in `src/`: `main.c` (commands, install steps and presets), `tui.c` (the menu), `keys.c` (key names for
 every backend), `keyd.c` / `ahk.c` / `karabiner.c` / `linux_desktop.c` (the backends),
 `packages.c`, `desktop.c`, `tools.c` (booklister, listlauncher), `json.c` and `util.c`.
 GitHub Actions builds and tests on all three OSes. Push a `v*` tag to publish binaries.
