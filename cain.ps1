@@ -102,8 +102,9 @@ function Write-Text([string]$path, [string]$content) {
 
 function Test-SameFile([string]$a, [string]$b) {
     if (-not (Test-Path $a -PathType Leaf) -or -not (Test-Path $b -PathType Leaf)) { return $false }
-    if ((Get-Item $a).Length -ne (Get-Item $b).Length) { return $false }
-    return (Get-FileHash $a).Hash -eq (Get-FileHash $b).Hash
+    $x = [IO.File]::ReadAllBytes($a); $y = [IO.File]::ReadAllBytes($b)
+    if ($x.Length -ne $y.Length) { return $false }
+    return [Convert]::ToBase64String($x) -eq [Convert]::ToBase64String($y)
 }
 
 # Copy src -> dest, first backing up a different existing dest into $backup.
@@ -485,7 +486,8 @@ function Save-Repo {
 function Install-Bin {
     $dir = Expand-Path '~/.local/bin'
     $dest = Join-Path $dir 'cain.cmd'
-    $shim = "@powershell -NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path $script:Root 'cain.ps1')`" %*`r`n"
+    # PSModulePath is cleared because, started from PowerShell 7, it points at modules Windows PowerShell can't load
+    $shim = "@echo off`r`nsetlocal`r`nset PSModulePath=`r`npowershell -NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path $script:Root 'cain.ps1')`" %*`r`n"
     if ((Test-Path $dest) -and [IO.File]::ReadAllText($dest) -eq $shim) { Say "  SAME:      $dest" }
     else { Write-Text $dest $shim; Say "  INSTALLED: $dest" }
     Add-UserPath $dir
