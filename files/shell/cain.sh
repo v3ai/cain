@@ -3,6 +3,13 @@
 
 CAIN_CONFIG="$HOME/.config/cain"
 
+# An alias with the same name as a function below (e.g. an old `alias i="sudo apt install"`
+# in ~/.bashrc) would be expanded inside `i() {` and break this file: drop them first.
+for _cain_fn in open i install uninstall u update upgrade autoremove blackboard a ip scan web finde qcom com; do
+    unalias "$_cain_fn" 2>/dev/null
+done
+unset _cain_fn
+
 # ---------------------------------------------------------------- platform bits
 case "$(uname -s)" in
     Darwin) _cain_os=macos ;;

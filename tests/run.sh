@@ -86,6 +86,19 @@ else
     bad "install sets git name"
 fi
 
+# cain.sh loads even when ~/.bashrc already has aliases named like its functions
+# (the old cain's `alias i="sudo apt install"` used to break it)
+for sh in bash zsh; do
+    command -v $sh > /dev/null 2>&1 || continue
+    opt=; [ $sh = bash ] && opt="-O expand_aliases"   # as in an interactive shell
+    if HOME=$h $sh $opt -c 'alias i="sudo apt install"; alias install=x; alias u=x; alias update=x; alias upgrade=x; alias a=x
+                       . files/shell/cain.sh && type i' > "$tmp/alias.out" 2>&1 && grep -q function "$tmp/alias.out"; then
+        ok "cain.sh loads over old aliases ($sh)"
+    else
+        bad "cain.sh loads over old aliases ($sh)"; cat "$tmp/alias.out"
+    fi
+done
+
 # Karabiner: cain's rules go first, the user's own rules stay, old cain rules go
 cat > "$tmp/karabiner.json" <<'EOF'
 {"global": {"show_in_menu_bar": false}, "profiles": [
