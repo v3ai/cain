@@ -31,7 +31,17 @@ expect_error "broken JSON"     "line 2"               '{"remaps": [
 expect_error "unknown action"  "unknown shortcut"     '{"shortcuts": [{"action": "fly", "keys": ["alt+f"]}]}' generate windows
 expect_error "unknown step"    "unknown install step" '{}' install nope
 
-expect_error "unknown vps step"  "unknown vps step"     '{}' vps keys
+
+# install presets run exactly these steps (no menu: stdin isn't a terminal)
+expect_steps() {  # expect_steps <args> <steps>
+    got=$(./cain $1 --dry-run < /dev/null 2>&1 | sed -n 's/^== \(.*\) ==$/\1/p' | tr '\n' ' ')
+    if [ "$got" = "$2 " ]; then echo "ok    cain $1"; else echo "FAIL  cain $1 (wanted: $2, got: $got)"; fail=1; fi
+}
+expect_steps "install light"         "git files bin shell keys"
+expect_steps "install dotfiles"      "git files bin shell"
+expect_steps "install keybindings"   "keys"
+expect_steps "install dotfiles keys" "git files bin shell keys"
+[ "$(uname -s)" = Linux ] && expect_steps "install server" "packages git files bin shell"
 
 # `cain vps` (Linux only): terminal packages only, with the right name for each distro
 expect_output() {  # expect_output <description> <pm> <wanted|!unwanted>...
@@ -46,6 +56,7 @@ expect_output() {  # expect_output <description> <pm> <wanted|!unwanted>...
     echo "ok    $desc"
 }
 if [ "$(uname -s)" = Linux ]; then
+    expect_error  "unknown vps step" "unknown vps step" '{}' vps keys
     expect_output "vps apt"    apt    "apt-get install -y python3-venv" "install -y openssh-client" "!inkscape" "!xclip" "!apk"
     expect_output "vps dnf"    dnf    "dnf install -y ffmpeg-free" "install -y openssh-clients" "install -y iproute\$" "!python3-venv"
     expect_output "vps pacman" pacman "pacman -Syu" "noconfirm python-pip" "noconfirm openssh" "!virt-manager"
