@@ -41,6 +41,12 @@ expect_steps "install light"         "git files bin shell keys"
 expect_steps "install dotfiles"      "git files bin shell"
 expect_steps "install keybindings"   "keys"
 expect_steps "install dotfiles keys" "git files bin shell keys"
+# plain `cain`: installs on a machine it's never been set up on, asks once it has
+expect_steps "" "packages git files bin shell keys desktop"
+home=$(mktemp -d); mkdir -p "$home/.config/cain"; echo "$PWD" > "$home/.config/cain/repo"
+if HOME=$home ./cain --dry-run < /dev/null 2>&1 | grep -q "Collect (C) or Install (I)"; then echo "ok    cain (already set up) asks"
+else echo "FAIL  cain (already set up) should ask install or collect"; fail=1; fi
+rm -rf "$home"
 [ "$(uname -s)" = Linux ] && expect_steps "install server" "packages git files bin shell"
 
 # `cain vps` (Linux only): terminal packages only, with the right name for each distro

@@ -38,13 +38,13 @@ each OS needs:
 
 Linux / macOS (needs a C compiler: `sudo apt install build-essential`, or `xcode-select --install`):
 ```
-cd && git clone https://github.com/v3ai/cain && cd cain && make && ./cain -i
+cd && git clone https://github.com/v3ai/cain && cd cain && make && ./cain
 ```
 
 Windows (PowerShell): clone the repo, put `cain.exe` from the
 [latest release](https://github.com/v3ai/cain/releases) in the `cain` folder, then:
 ```
-cd ~; git clone https://github.com/v3ai/cain; cd cain; .\cain.exe -i
+cd ~; git clone https://github.com/v3ai/cain; cd cain; .\cain.exe
 ```
 (Or build it yourself with `build.bat` from a Visual Studio developer prompt, or `make windows` with MinGW.)
 
@@ -79,7 +79,7 @@ a new terminal and just type `cain`. The repo can live anywhere: cain remembers 
 ### Usage
 
 ```
-cain                  menu: Install or Collect
+cain                  first run on a machine: install. After that: menu, Install or Collect
 cain -c               collect: copy this machine's configs into the repo, commit, push
 cain -i               menu: pick what to install (see below)
 cain -i -y            install everything, no menu

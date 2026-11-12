@@ -16,7 +16,7 @@
 static const char *USAGE =
     "usage: cain [command] [args...] [-n]\n"
     "\n"
-    "  cain                 ask whether to collect or install\n"
+    "  cain                 first time on a machine: install; after that, ask install or collect\n"
     "  cain -c | collect    copy this machine's configs into the repo, commit and push\n"
     "  cain -i | install    pick what to install from a menu (full, light, dotfiles, ...)\n"
     "  cain install light   skip the menu: full light dotfiles keybindings server\n"
@@ -150,6 +150,29 @@ static char *find_root(void)
     return NULL;
 }
 
+/* ------------------------------------------------------------------ is cain set up here? */
+
+/* Every install leaves ~/.config/cain/repo behind (it says where the repo is), so if
+ * it's missing, cain has never been installed on this machine. */
+static int installed_here(void)
+{
+    char *marker = expand("~/.config/cain/repo");
+    int ok = file_exists(marker);
+    free(marker);
+    return ok;
+}
+
+static void remember_repo(void)
+{
+    static int done = 0;
+    if (done) return;
+    done = 1;
+    char *marker = expand("~/.config/cain/repo"), *line = xprintf("%s\n", g_root);
+    char *old = read_file(marker, NULL);
+    if (!old || !streq(old, line)) write_text(marker, line, 0);
+    free(marker); free(line); free(old);
+}
+
 /* ------------------------------------------------------------------ install steps */
 
 static void install_packages(const Manifest *m, const char *os, const char *de)
@@ -233,14 +256,13 @@ static void install_bin(const Manifest *m, const char *os, const char *de)
 #endif
         info("  INSTALLED: %s", dest);
     }
-    char *repo = expand("~/.config/cain/repo"), *line = xprintf("%s\n", g_root);
-    write_text(repo, line, 0);
+    remember_repo();
 #ifdef _WIN32
     char *native = native_path(dir);
     windows_add_to_path(native);
     free(native);
 #endif
-    free(self); free(dest); free(dir); free(repo); free(line);
+    free(self); free(dest); free(dir);
 }
 
 #ifndef _WIN32
@@ -355,6 +377,7 @@ static void install(const Manifest *m, const StrList *steps)
             }
         visual |= streq(steps->v[i], "keys") || streq(steps->v[i], "desktop");
     }
+    remember_repo();  /* even a keys-only install counts as "cain is set up here" */
     if (g_vps) {
         info("\nDone. Log out and SSH back in (or run `exec bash -l`) to load the new shell setup.");
         return;
@@ -479,6 +502,10 @@ int main(int argc, char **argv)
 
     fputs(ASCII, stdout);
     putchar('\n');
+    if (!command && !installed_here()) {
+        info("cain isn't set up on this machine yet, so let's install it.");
+        command = "install";
+    }
     if (!command && stdin_tty()) {
         const MenuItem items[] = {
             {"Install", "put my programs, configs and keybindings on this machine"},
