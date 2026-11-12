@@ -10,9 +10,10 @@
 
 ## Collects And INstalls
 
-cain is my dotfiles / keybindings / programs manager, written in C with no
-dependencies. It works on **any Linux distro, macOS and Windows**. If you install
-it, your configs and keys become mine.
+cain is my dotfiles / keybindings / programs manager. It works on **any Linux distro,
+macOS and Windows** with nothing to install or build: on Linux and macOS it's a POSIX
+`sh` script plus `awk`, which every system already has; on Windows it's a PowerShell
+script, which comes with Windows. If you install it, your configs and keys become mine.
 
 Everything lives in one file, [`cain.json`](cain.json):
 
@@ -25,7 +26,7 @@ Everything lives in one file, [`cain.json`](cain.json):
 | `settings`  | wallpaper, dark mode, Mac key behavior                            |
 
 Write keys once, in a neutral format (`alt`, `lalt`, `ralt`, `ctrl`, `rctrl`, `shift`, `super`
-+ a key name: see the top of [`src/keys.c`](src/keys.c)). cain turns them into whatever
++ a key name: see `init()` in [`lib/cain.awk`](lib/cain.awk)). cain turns them into whatever
 each OS needs:
 
 | OS      | key remaps                                     | shortcuts                                                  |
@@ -36,17 +37,15 @@ each OS needs:
 
 ### Install
 
-Linux / macOS (needs a C compiler: `sudo apt install build-essential`, or `xcode-select --install`):
+Linux / macOS:
 ```
-cd && git clone https://github.com/v3ai/cain && cd cain && make && ./cain
+cd && git clone https://github.com/v3ai/cain && cd cain && ./cain
 ```
 
-Windows (PowerShell): clone the repo, put `cain.exe` from the
-[latest release](https://github.com/v3ai/cain/releases) in the `cain` folder, then:
+Windows (PowerShell or Command Prompt):
 ```
-cd ~; git clone https://github.com/v3ai/cain; cd cain; .\cain.exe
+cd ~; git clone https://github.com/v3ai/cain; cd cain; .\cain.cmd
 ```
-(Or build it yourself with `build.bat` from a Visual Studio developer prompt, or `make windows` with MinGW.)
 
 ### VPS / server
 
@@ -57,7 +56,7 @@ curl -fsSL https://raw.githubusercontent.com/v3ai/cain/master/vps.sh | sh
 ```
 (no curl? `wget -qO- https://raw.githubusercontent.com/v3ai/cain/master/vps.sh | sh`)
 
-[`vps.sh`](vps.sh) installs git and a C compiler, clones cain to `~/cain`, builds it and runs
+[`vps.sh`](vps.sh) installs git if it's missing, clones cain to `~/cain` and runs
 `cain vps`. That installs only what's used in the terminal and skips keybindings, desktop
 settings and GUI apps:
 
@@ -70,11 +69,12 @@ settings and GUI apps:
 * the shell block in `~/.bashrc`, plus a line in `~/.profile` / `~/.bash_profile` so SSH logins
   load it. If your login shell isn't bash or zsh (Alpine's `ash`), cain switches it to bash.
 
-Already cloned? `cd ~/cain && ./vps.sh`, or `make && ./cain vps`. Re-running is safe.
+Already cloned? `cd ~/cain && ./cain vps`. Re-running is safe.
 Just some steps: `cain vps packages shell`.
 
-Install copies `cain` to `~/.local/bin` and puts that on your `PATH`. After that, open
-a new terminal and just type `cain`. The repo can live anywhere: cain remembers where it is.
+Install links `cain` into `~/.local/bin` (on Windows, a small `cain.cmd`) and puts that on
+your `PATH`. After that, open a new terminal and just type `cain`. The repo can live
+anywhere: cain remembers where it is, and a `git pull` in the repo updates it.
 
 ### Usage
 
@@ -118,7 +118,8 @@ Files that install overwrites are backed up to `~/.cain-backup/<date>/` first.
   keys aren't remapped twice. On Cinnamon, `cain -c` also saves the whole `dconf`
   dump (theme, panels, ...), and install loads it back. booklister uses dmenu, rofi,
   fuzzel, wofi or zenity, whichever is installed.
-* **Windows:** the AutoHotkey script is at
+* **Windows:** run cain as `cain.cmd` (it starts `cain.ps1` with the built-in PowerShell, so
+  you don't have to change the execution policy first). The AutoHotkey script is at
   `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\cain.ahk`. Shell aliases go
   in your PowerShell profile (`files/shell/cain.ps1`). booklister opens a small
   search-as-you-type window.
@@ -146,14 +147,21 @@ manager the machine has. cain adds a small `# >>> cain >>>` block to `~/.bashrc`
 ### Hacking
 
 ```
-make          build ./cain
-make test     check the generated configs against tests/expected/
-make windows  cross-compile cain.exe with MinGW
+sh tests/run.sh               run the tests
+CAIN_SH=bash sh tests/run.sh  ...running cain with another shell
+UPDATE=1 sh tests/run.sh      refresh tests/expected/ after an intended change
 ```
-The code is in `src/`: `main.c` (commands, install steps and presets), `tui.c` (the menu), `keys.c` (key names for
-every backend), `keyd.c` / `ahk.c` / `karabiner.c` / `linux_desktop.c` (the backends),
-`packages.c`, `desktop.c`, `tools.c` (booklister, listlauncher), `json.c` and `util.c`.
-GitHub Actions builds and tests on all three OSes. Push a `v*` tag to publish binaries.
+The code:
+
+* [`cain`](cain): the Linux / macOS command. POSIX `sh` (dash, bash, busybox, ksh, zsh all
+  work): menus, install steps, running commands, dry-run.
+* [`lib/cain.awk`](lib/cain.awk): reads `cain.json` (it has a small JSON parser) and turns it
+  into the keyd / AutoHotkey / Karabiner configs, package and file lists, and the desktop
+  shortcut commands. POSIX `awk` (mawk, gawk, busybox, macOS awk).
+* [`cain.ps1`](cain.ps1) + [`cain.cmd`](cain.cmd): the Windows version, PowerShell 5.1+.
+
+GitHub Actions runs the tests on Linux (several shells, awks and distros), macOS and
+Windows, and checks that the shell and PowerShell versions write the same AutoHotkey script.
 
 MIT licensed, check the dotfiles for ideas.
 ASCII art made with `figlet -f Georgia11.flf cain`.

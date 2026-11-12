@@ -58,9 +58,9 @@ RAlt & vkDC::AltTab
 !7::RunCmd("calc.exe")
 !8::RunCmd("https://www.google.com")
 !9::RunCmd("explorer.exe `"/home/cain-test`"")
-^b::RunCmd("`"\home\cain-test\.local\bin\cain.exe`" booklister", "Hide")
-#b::RunCmd("`"\home\cain-test\.local\bin\cain.exe`" booklister", "Hide")
-!g::RunCmd("`"\home\cain-test\.local\bin\cain.exe`" booklister", "Hide")
+^b::RunCmd("`"\home\cain-test\.local\bin\cain.cmd`" booklister", "Hide")
+#b::RunCmd("`"\home\cain-test\.local\bin\cain.cmd`" booklister", "Hide")
+!g::RunCmd("`"\home\cain-test\.local\bin\cain.cmd`" booklister", "Hide")
 
 ToggleMax() {
     try {

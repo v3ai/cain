@@ -7,8 +7,8 @@
 #
 # or, from a clone:  ./vps.sh
 #
-# It installs git and a C compiler, clones cain to ~/cain (or $CAIN_DIR), builds it
-# and runs `cain vps`. Any arguments are passed on, e.g. `sh vps.sh --dry-run`.
+# It installs git if it's missing, clones cain to ~/cain (or $CAIN_DIR) and runs
+# `cain vps`. Any arguments are passed on, e.g. `sh vps.sh --dry-run`.
 set -e
 
 REPO=${CAIN_REPO:-https://github.com/v3ai/cain}
@@ -26,39 +26,32 @@ else
     die "run this as root, or install sudo first"
 fi
 
-# ------------------------------------------------------------------ build tools
-say "installing git and a C compiler"
-need=""
-have git || need="$need git"
-have make || need="$need make"
-have cc || have gcc || need="$need gcc"
-
-if [ -n "$need" ]; then
+# ------------------------------------------------------------------ git
+if ! have git; then
+    say "installing git"
     if have apt-get; then
         $SUDO apt-get update
-        $SUDO env DEBIAN_FRONTEND=noninteractive apt-get install -y git gcc make libc6-dev ca-certificates
+        $SUDO env DEBIAN_FRONTEND=noninteractive apt-get install -y git ca-certificates
     elif have dnf; then
-        $SUDO dnf install -y git gcc make
+        $SUDO dnf install -y git
     elif have yum; then
-        $SUDO yum install -y git gcc make
+        $SUDO yum install -y git
     elif have pacman; then
-        $SUDO pacman -Syu --needed --noconfirm git gcc make
+        $SUDO pacman -Syu --needed --noconfirm git
     elif have zypper; then
-        $SUDO zypper --non-interactive install git gcc make
+        $SUDO zypper --non-interactive install git
     elif have apk; then
-        $SUDO apk add git gcc make musl-dev
+        $SUDO apk add git
     elif have xbps-install; then
-        $SUDO xbps-install -Sy git gcc make
+        $SUDO xbps-install -Sy git
     else
-        die "no supported package manager (apt dnf yum pacman zypper apk xbps); install git, gcc and make yourself"
+        die "no supported package manager (apt dnf yum pacman zypper apk xbps); install git yourself"
     fi
-else
-    echo "already installed"
 fi
 
 # ------------------------------------------------------------------ get the repo
 here=$(cd "$(dirname "$0")" 2>/dev/null && pwd || true)
-if [ -n "$here" ] && [ -f "$here/cain.json" ] && [ -d "$here/src" ]; then
+if [ -n "$here" ] && [ -f "$here/cain.json" ] && [ -f "$here/lib/cain.awk" ]; then
     DIR=$here                                  # running ./vps.sh from a clone
 else
     DIR=${CAIN_DIR:-$HOME/cain}
@@ -71,13 +64,10 @@ else
     fi
 fi
 
-# ------------------------------------------------------------------ build and run
-say "building cain"
+# ------------------------------------------------------------------ run it
 cd "$DIR"
-make
-
 # When piped from curl, stdin is this script: give cain the terminal so it can ask questions.
 if (exec </dev/tty) 2>/dev/null; then
-    exec ./cain vps "$@" </dev/tty
+    exec sh ./cain vps "$@" </dev/tty
 fi
-exec ./cain vps "$@"
+exec sh ./cain vps "$@"

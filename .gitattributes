@@ -1,0 +1,4 @@
+# keep line endings as they are in the repo, so the sh/awk scripts work in Git Bash too
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.jpg binary

@@ -1,0 +1,980 @@
+#!/bin/sh
+# cain - Collects And INstalls dotfiles, keybindings and programs.
+#
+# Plain POSIX sh + awk, so it runs on any Linux distro and macOS with nothing to
+# install or build. lib/cain.awk reads cain.json and does the thinking; this script
+# runs the commands. On Windows, use cain.cmd (it runs cain.ps1 in PowerShell).
+
+USAGE='usage: cain [command] [args...] [-n]
+
+  cain                 first time on a machine: install; after that, ask install or collect
+  cain -c | collect    copy this machine'"'"'s configs into the repo, commit and push
+  cain -i | install    pick what to install from a menu (full, light, dotfiles, ...)
+  cain install light   skip the menu: full light dotfiles keybindings server
+  cain install keys    or name install steps: packages git files bin shell keys desktop
+  cain keys            shorthand for `cain install keys`
+  cain vps             set up a Linux server: terminal programs, configs and shell, no desktop
+  cain vps shell       run only some vps steps: packages git files bin shell
+  cain generate [os]   print the keybinding config cain would write for linux/macos/windows
+  cain booklister      pick a book from ~/Desktop/books and open it
+  cain listlauncher    edit list.html on the website, then commit and push
+  -y, --yes            install everything without the menu
+  -n, --dry-run        show what would happen without changing anything
+'
+
+ASCII='
+                         db
+
+      ,p6"bo   ,6"Yb.  `7MM  `7MMpMMMb.
+     6M'"'"'  OO  8)   MM    MM    MM    MM
+     8M        ,pm9MM    MM    MM    MM
+     YM.    , 8M   MM    MM    MM    MM
+      YMbmd'"'"'  `Moo9^Yo..JMML..JMML  JMML.
+'
+
+STEPS="packages git files bin shell keys desktop"
+VPS_STEPS="packages git files bin shell"
+KEYD_CONFIG=/etc/keyd/default.conf
+NL='
+'
+SEP=$(printf '\037')   # field separator in lib/cain.awk's lists
+ESC=$(printf '\033')
+DRY=0
+VPS=0
+
+# ------------------------------------------------------------------ messages
+
+info() { printf '%s\n' "$*"; }
+warn() { printf '  WARNING: %s\n' "$*"; }
+die() { printf 'cain: %s\n' "$*" >&2; exit 1; }
+step() { printf '\n== %s ==\n' "$1"; }
+
+# ------------------------------------------------------------------ helpers
+
+have() { command -v "$1" >/dev/null 2>&1; }
+is_root() { [ "$(id -u)" = 0 ]; }
+
+# Quote an argument for display, like a shell would need it.
+shq() {
+    case $1 in
+        '') printf "''" ;;
+        *[!A-Za-z0-9@%+=:,./_-]*) printf "'%s'" "$(printf '%s' "$1" | sed "s/'/'\"'\"'/g")" ;;
+        *) printf '%s' "$1" ;;
+    esac
+}
+
+# run [-s] [-q] cmd args...   -s: through sudo unless root   -q: hide output
+# Shows the command; in dry-run only shows it.
+run() {
+    _sudo=0 _quiet=0
+    while :; do
+        case $1 in
+            -s) _sudo=1; shift ;;
+            -q) _quiet=1; shift ;;
+            *) break ;;
+        esac
+    done
+    if [ $_sudo = 1 ] && ! is_root; then set -- sudo "$@"; fi
+    _shown=
+    for _a in "$@"; do _shown="$_shown $(shq "$_a")"; done
+    if [ "$DRY" = 1 ]; then info "  [dry-run]$_shown"; return 0; fi
+    info "  \$$_shown"
+    if ! have "$1"; then warn "command not found: $1"; return 127; fi
+    if [ $_quiet = 1 ]; then "$@" >/dev/null 2>&1; else "$@"; fi
+}
+
+run_shell() {
+    if [ "$DRY" = 1 ]; then info "  [dry-run] $1"; return 0; fi
+    info "  \$ $1"
+    sh -c "$1"
+}
+
+# ask <question> <default 1|0>
+ask() {
+    if [ "$DRY" = 1 ] || [ ! -t 0 ]; then [ "$2" = 1 ]; return; fi
+    if [ "$2" = 1 ]; then printf '%s [Y/n]: ' "$1"; else printf '%s [y/N]: ' "$1"; fi
+    read -r _answer || { [ "$2" = 1 ]; return; }
+    case $_answer in
+        '') [ "$2" = 1 ] ;;
+        [Yy]*) return 0 ;;
+        *) return 1 ;;
+    esac
+}
+
+same_file() {
+    [ -f "$1" ] && [ -f "$2" ] || return 1
+    if have cmp; then cmp -s "$1" "$2"; else [ "$(cksum < "$1")" = "$(cksum < "$2")" ]; fi
+}
+
+# write_file <dest> <file with the content> [sudo 1|0]
+write_file() {
+    if [ "$DRY" = 1 ]; then
+        info "  [dry-run] write $1 ($(wc -c < "$2" | tr -d ' ') bytes)"
+        return 0
+    fi
+    if [ "${3:-0}" = 1 ] && ! is_root; then
+        run -s mkdir -p "$(dirname "$1")"
+        info "  \$ sudo tee $1"
+        sudo tee "$1" < "$2" > /dev/null || { warn "can't write $1"; return 1; }
+    else
+        mkdir -p "$(dirname "$1")" 2>/dev/null
+        cat "$2" 2>/dev/null > "$1" || { warn "can't write $1"; return 1; }
+    fi
+    info "  wrote $1"
+}
+
+# write_text <dest> <content> [sudo 1|0]
+write_text() {
+    printf '%s' "$2" > "$TMP/text"
+    write_file "$1" "$TMP/text" "${3:-0}"
+}
+
+# copy_file <src> <dest> [backup dir]: backs up a different existing dest first.
+copy_file() {
+    if [ -n "${3:-}" ] && [ -e "$2" ] && ! same_file "$1" "$2"; then
+        _target=$3/$(basename "$2")
+        if [ "$DRY" = 1 ]; then info "  [dry-run] backup $2 -> $_target"
+        else mkdir -p "$3" && cp "$2" "$_target"; fi
+    fi
+    if [ "$DRY" = 1 ]; then info "  [dry-run] copy $1 -> $2"; return 0; fi
+    [ -r "$1" ] || { warn "can't read $1"; return 1; }
+    mkdir -p "$(dirname "$2")" 2>/dev/null
+    cp "$1" "$2" 2>/dev/null || { warn "can't write $2"; return 1; }
+}
+
+# shellcheck disable=SC2088  # matching a literal "~/" on purpose
+expand() { case $1 in "~") printf '%s' "$HOME" ;; "~/"*) printf '%s/%s' "$HOME" "${1#"~/"}" ;; *) printf '%s' "$1" ;; esac; }
+
+# Insert or replace a '# >>> cain >>>' managed block in a text file (e.g. ~/.bashrc).
+upsert_block() {
+    _start='# >>> cain >>>' _end='# <<< cain <<<'
+    _text=
+    [ -f "$1" ] && { _text=$(cat "$1"; printf .); _text=${_text%.}; }
+    _new="$_start$NL$2$NL$_end$NL"
+    case $_text in
+        *"$_start"*"$_end"*)
+            _after=${_text#*"$_start"}
+            _after=${_after#*"$_end"}
+            while :; do case $_after in "$NL"*) _after=${_after#"$NL"} ;; *) break ;; esac; done
+            _out="${_text%%"$_start"*}$_new$_after" ;;
+        '') _out=$_new ;;
+        *"$NL") _out="$_text$NL$_new" ;;
+        *) _out="$_text$NL$NL$_new" ;;
+    esac
+    [ "$_out" = "$_text" ] || write_text "$1" "$_out"
+}
+
+# lib/cain.awk: engine <mode> [os]   (CAIN_* settings come from the environment)
+engine() {
+    CAIN_JSON=$ROOT/cain.json LC_ALL=C awk -v mode="$1" -v os="${2:-$OS}" -f "$LIB"
+}
+
+# Read one value from cain.json, e.g. `json git.name`.
+json() { CAIN_KEY=$1; export CAIN_KEY; engine get; }
+
+linux_desktop() {
+    _d=$(printf '%s:%s' "${XDG_CURRENT_DESKTOP:-}" "${DESKTOP_SESSION:-}" | tr 'A-Z' 'a-z')
+    for _pair in cinnamon:cinnamon kde:kde kde:plasma xfce:xfce mate:mate gnome:gnome \
+                 gnome:ubuntu gnome:unity gnome:pop gnome:budgie; do
+        case $_d in *"${_pair#*:}"*) printf '%s' "${_pair%%:*}"; return ;; esac
+    done
+}
+
+os_release() {  # os_release <KEY>  (lowercased, "" if missing)
+    [ -r /etc/os-release ] || return 0
+    ( . /etc/os-release 2>/dev/null; eval "printf '%s' \"\${$1:-}\"" ) | tr 'A-Z' 'a-z'
+}
+
+open_path() {
+    if [ "$OS" = macos ]; then _opener=open; else _opener=xdg-open; fi
+    ( "$_opener" "$1" >/dev/null 2>&1 & )
+}
+
+# ------------------------------------------------------------------ finding things
+
+# The real path of this script, through any symlinks (~/.local/bin/cain -> repo/cain).
+self_path() {
+    _self=$0
+    case $_self in */*) ;; *) _self=$(command -v -- "$_self" 2>/dev/null || printf '%s' "$_self") ;; esac
+    while [ -L "$_self" ]; do
+        _link=$(readlink "$_self") || break
+        case $_link in /*) _self=$_link ;; *) _self=$(dirname "$_self")/$_link ;; esac
+    done
+    printf '%s' "$_self"
+}
+
+# $CAIN_DIR, then the folder this script is in, then the repo `cain install`
+# remembered, then the current directory.
+find_root() {
+    if [ -n "${CAIN_DIR:-}" ] && [ -f "$CAIN_DIR/cain.json" ]; then printf '%s' "$CAIN_DIR"; return; fi
+    if [ -f "$SELF_DIR/cain.json" ]; then printf '%s' "$SELF_DIR"; return; fi
+    if [ -f "$HOME/.config/cain/repo" ]; then
+        _saved=$(head -n 1 "$HOME/.config/cain/repo")
+        if [ -f "$_saved/cain.json" ]; then printf '%s' "$_saved"; return; fi
+    fi
+    if [ -f ./cain.json ]; then pwd; fi
+}
+
+# Every install leaves ~/.config/cain/repo behind, so if it's missing cain has never
+# been installed on this machine.
+installed_here() { [ -f "$HOME/.config/cain/repo" ]; }
+
+REMEMBERED=0
+remember_repo() {
+    [ $REMEMBERED = 1 ] && return
+    REMEMBERED=1
+    _marker=$HOME/.config/cain/repo
+    if [ ! -f "$_marker" ] || [ "$(cat "$_marker")" != "$ROOT" ]; then write_text "$_marker" "$ROOT$NL"; fi
+}
+
+# ------------------------------------------------------------------ package managers
+
+LINUX_PMS="apt dnf yum pacman zypper apk xbps"
+
+pm_binary() { case $1 in apt) echo apt-get ;; xbps) echo xbps-install ;; *) echo "$1" ;; esac; }
+
+# Sets PM to the machine's package manager ("" if none). $CAIN_PM forces one.
+detect_pm() {
+    PM=
+    if [ -n "${CAIN_PM:-}" ]; then
+        case " $LINUX_PMS " in *" $CAIN_PM "*) PM=$CAIN_PM; return ;; esac
+        die "CAIN_PM=$CAIN_PM: pick one of $LINUX_PMS"
+    fi
+    for _p in $LINUX_PMS; do
+        if have "$(pm_binary "$_p")"; then PM=$_p; return; fi
+    done
+}
+
+# Rocky / Alma / CentOS / RHEL keep most terminal tools (nnn, fzf, yt-dlp...) in EPEL.
+enable_epel() {
+    _id=$(os_release ID) _like=$(os_release ID_LIKE)
+    [ "$_id" = fedora ] && return
+    case "$_id $_like" in *rhel*|*centos*) ;; *) return ;; esac
+    if have rpm && ! rpm -q epel-release >/dev/null 2>&1; then
+        info "  enabling EPEL (extra packages for $_id)"
+        if ! run -s "$PM" install -y epel-release; then
+            _ver=$(os_release VERSION_ID)
+            run -s "$PM" install -y "https://dl.fedoraproject.org/pub/epel/epel-release-latest-${_ver%%.*}.noarch.rpm"
+        fi
+    fi
+    # epel-release ships `crb` on EL9+: it turns on the CodeReady Builder repo
+    if have crb || [ "$DRY" = 1 ]; then run -s -q crb enable; fi
+}
+
+REFRESHED=0
+refresh() {
+    [ $REFRESHED = 1 ] && return
+    REFRESHED=1
+    case $PM in
+        apt) run -s apt-get update ;;
+        pacman) run -s pacman -Syu --noconfirm ;;   # Arch doesn't support partial upgrades
+        apk) run -s apk update ;;
+        zypper) run -s zypper --non-interactive refresh ;;
+        dnf|yum) enable_epel ;;
+    esac
+}
+
+# pm_install <package> [-q]
+pm_install() {
+    refresh
+    case $PM in
+        apt) run -s ${2:-} env DEBIAN_FRONTEND=noninteractive apt-get install -y "$1" ;;
+        dnf|yum) run -s ${2:-} "$PM" install -y "$1" ;;
+        pacman) run -s ${2:-} pacman -S --needed --noconfirm "$1" ;;
+        zypper) run -s ${2:-} zypper --non-interactive install "$1" ;;
+        apk) run -s ${2:-} apk add "$1" ;;
+        xbps) run -s ${2:-} xbps-install -Sy "$1" ;;
+        *) warn "no supported package manager found; install $1 by hand"; return 1 ;;
+    esac
+}
+
+# Linux: install each package; if that fails (or the distro doesn't have it) and the
+# entry has a "fallback" command, run that instead, e.g. a download into ~/.local/bin.
+linux_packages() {
+    CAIN_PM=$PM CAIN_TERMINAL=$VPS
+    export CAIN_PM CAIN_TERMINAL
+    engine packages > "$TMP/packages" || exit 1
+    _failed=
+    while IFS=$SEP read -r _name _skip _pkg _fallback _bin <&3; do
+        _ok=0
+        [ -n "$PM" ] && [ "$_skip" = 0 ] && _ok=1
+        if [ $_ok = 1 ] && pm_install "$_pkg"; then continue; fi
+        if [ $_ok = 0 ] && [ -z "$_fallback" ]; then continue; fi   # null for this distro, nothing else to try
+        if ! have "$_bin" && [ -n "$_fallback" ]; then
+            [ $_ok = 1 ] && info "  $_name isn't packaged here, installing it another way"
+            # look in ~/.local/bin too: it may not be on PATH until the next login
+            if ! run_shell "$_fallback" || { [ "$DRY" = 0 ] && [ ! -e "$HOME/.local/bin/$_bin" ] && ! have "$_bin"; }; then
+                _failed="$_failed $_name"
+            fi
+        elif ! have "$_bin"; then
+            _failed="$_failed $_name"
+        fi
+    done 3< "$TMP/packages"
+    [ -n "$PM" ] || warn "no supported package manager found ($LINUX_PMS)"
+    [ -z "$_failed" ] || warn "couldn't install:$_failed"
+}
+
+find_brew() {
+    BREW=
+    for _b in brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
+        if have "$_b"; then BREW=$_b; return; fi
+    done
+}
+
+# brew_install <name>...  (a name may carry flags, e.g. "--cask inkscape")
+brew_install() {
+    find_brew
+    if [ -z "$BREW" ]; then
+        if ! ask "Homebrew isn't installed. Install it now?" 1; then warn "skipping Homebrew packages"; return; fi
+        run_shell '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+        find_brew
+        [ -n "$BREW" ] || BREW=brew
+    fi
+    for _n in "$@"; do
+        # shellcheck disable=SC2086  # split "--cask name" into words
+        run "$BREW" install $_n || warn "couldn't install $_n"
+    done
+}
+
+macos_packages() {
+    CAIN_TERMINAL=$VPS
+    export CAIN_TERMINAL
+    engine packages > "$TMP/packages" || exit 1
+    set --
+    while IFS=$SEP read -r _name _skip _pkg _fallback _bin; do set -- "$@" "$_pkg"; done < "$TMP/packages"
+    brew_install "$@"
+}
+
+# ------------------------------------------------------------------ keys
+
+install_keyd() {
+    have keyd && return 0
+    if pm_install keyd -q; then
+        if have keyd || [ "$DRY" = 1 ]; then return 0; fi
+    fi
+    info "  keyd isn't packaged here, building it from source"
+    case $PM in
+        apt) _deps="build-essential git" ;;
+        pacman|xbps) _deps="base-devel git" ;;
+        apk) _deps="build-base git linux-headers" ;;
+        *) _deps="gcc make git" ;;
+    esac
+    for _d in $_deps; do pm_install "$_d"; done
+    _src=$HOME/.cache/cain/keyd
+    if [ ! -d "$_src" ]; then
+        mkdir -p "$(dirname "$_src")"
+        run git clone --depth 1 https://github.com/rvaiya/keyd "$_src"
+    fi
+    if ! run make -C "$_src"; then warn "building keyd failed; key remaps were not installed"; return 1; fi
+    run -s make -C "$_src" install
+}
+
+keyd_apply() {
+    install_keyd || return
+    if [ "$(systemctl is-active input-remapper 2>/dev/null)" = active ]; then
+        warn "input-remapper is running and will double-remap keys alongside keyd."
+        if ask "  Disable input-remapper?" 1; then run -s systemctl disable --now input-remapper; fi
+    fi
+    engine keyd > "$TMP/keyd" || exit 1
+    write_file "$KEYD_CONFIG" "$TMP/keyd" 1
+    if have systemctl; then run -s systemctl enable --now keyd
+    else warn "no systemd found: make sure the keyd daemon starts at boot"; fi
+    run -s keyd reload
+}
+
+first_found() {  # first_found <fallback> <cmd>...
+    _fb=$1; shift
+    for _c in "$@"; do if have "$_c"; then printf '%s' "$_c"; return; fi; done
+    printf '%s' "$_fb"
+}
+
+# Window-manager shortcuts and launchers: lib/cain.awk writes the commands for this desktop.
+linux_shortcuts() {
+    CAIN_DESKTOP=$DE
+    CAIN_TERM=$(first_found xterm x-terminal-emulator gnome-terminal konsole xfce4-terminal mate-terminal \
+                kitty alacritty wezterm foot tilix xterm)
+    CAIN_CALC=$(first_found xcalc gnome-calculator kcalc galculator mate-calc qalculate-gtk xcalc)
+    CAIN_EXISTING='' CAIN_KDE_TOOL='' CAIN_PLASMA6=0
+    case $DE in
+        gnome) CAIN_EXISTING=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings 2>/dev/null) ;;
+        cinnamon) CAIN_EXISTING=$(gsettings get org.cinnamon.desktop.keybindings custom-list 2>/dev/null) ;;
+        kde)
+            if have kwriteconfig6; then CAIN_KDE_TOOL=kwriteconfig6 CAIN_PLASMA6=1
+            elif have kwriteconfig5; then CAIN_KDE_TOOL=kwriteconfig5; fi ;;
+    esac
+    export CAIN_DESKTOP CAIN_TERM CAIN_CALC CAIN_EXISTING CAIN_KDE_TOOL CAIN_PLASMA6
+    engine desktop > "$TMP/plan" || exit 1
+    . "$TMP/plan"
+}
+
+karabiner_apply() {
+    if [ ! -d /Applications/Karabiner-Elements.app ]; then brew_install "--cask karabiner-elements"; fi
+    CAIN_KARABINER=$HOME/.config/karabiner/karabiner.json
+    export CAIN_KARABINER
+    if engine karabiner > "$TMP/karabiner" 2> "$TMP/karabiner.err"; then
+        write_file "$CAIN_KARABINER" "$TMP/karabiner"
+        info "  Karabiner reloads this automatically. The first time, open Karabiner-Elements and"
+        info "  allow its Input Monitoring / driver permissions in System Settings > Privacy & Security."
+    else
+        warn "$(cat "$TMP/karabiner.err")"
+    fi
+}
+
+# ------------------------------------------------------------------ desktop look
+
+cinnamon_dump() { printf '%s' "$ROOT/files/cinnamon/cinnamon-settings"; }
+
+set_wallpaper() {
+    _rel=$(json settings.wallpaper)
+    [ -n "$_rel" ] || return 0
+    _src=$ROOT/$_rel
+    [ -f "$_src" ] || { warn "wallpaper $_src not found"; return; }
+    _ext=
+    case ${_src##*/} in ?*.*) _ext=.${_src##*.} ;; esac
+    _wp=$HOME/.config/cain/wallpaper$_ext
+    copy_file "$_src" "$_wp"
+    if [ "$OS" = macos ]; then
+        run osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$_wp\""
+        return
+    fi
+    case $DE in
+        cinnamon) run gsettings set org.cinnamon.desktop.background picture-uri "'file://$_wp'" ;;
+        gnome)
+            run gsettings set org.gnome.desktop.background picture-uri "'file://$_wp'"
+            run gsettings set org.gnome.desktop.background picture-uri-dark "'file://$_wp'" ;;
+        mate) run gsettings set org.mate.background picture-filename "$_wp" ;;
+        kde) run plasma-apply-wallpaperimage "$_wp" ;;
+        xfce)
+            for _prop in $(xfconf-query -c xfce4-desktop -l 2>/dev/null | grep '/last-image$'); do
+                run xfconf-query -c xfce4-desktop -p "$_prop" -s "$_wp"
+            done ;;
+        *) warn "don't know how to set the wallpaper here; it's at $_wp" ;;
+    esac
+}
+
+set_dark_mode() {
+    [ "$(json settings.dark_mode)" = true ] || return 0
+    if [ "$OS" = macos ]; then
+        run osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to true'
+        return
+    fi
+    case $DE in
+        gnome|cinnamon) run gsettings set org.gnome.desktop.interface color-scheme prefer-dark ;;
+        kde) run plasma-apply-colorscheme BreezeDark ;;
+        xfce) run xfconf-query -c xsettings -p /Net/ThemeName -s Adwaita-dark ;;
+    esac
+}
+
+# The saved dconf dump minus keybindings (cain.json owns those) and machine paths.
+load_cinnamon_settings() {
+    [ -f "$(cinnamon_dump)" ] && have dconf || return 0
+    awk '/^\[/ { skip = index($0, "[org/cinnamon/desktop/keybindings") == 1 }
+         !skip && index($0, "picture-uri=") != 1' "$(cinnamon_dump)" > "$TMP/dconf"
+    if [ "$DRY" = 1 ]; then info "  [dry-run] dconf load / < $(cinnamon_dump) (without keybindings)"
+    else info "  \$ dconf load /"; dconf load / < "$TMP/dconf"; fi
+}
+
+# dconf dump into the repo. Succeeds if it changed.
+collect_cinnamon_settings() {
+    dconf dump / > "$TMP/dump" 2>/dev/null && [ -s "$TMP/dump" ] || return 1
+    same_file "$TMP/dump" "$(cinnamon_dump)" && return 1
+    write_file "$(cinnamon_dump)" "$TMP/dump"
+}
+
+# ------------------------------------------------------------------ install steps
+
+install_packages() {
+    if [ "$OS" = macos ]; then macos_packages; else detect_pm; linux_packages; fi
+}
+
+install_git() {
+    _name=$(json git.name) _email=$(json git.email)
+    [ -z "$_name" ] || run git config --global user.name "$_name"
+    [ -z "$_email" ] || run git config --global user.email "$_email"
+}
+
+install_files() {
+    _backup=$HOME/.cain-backup/$(date +%Y%m%d-%H%M%S)
+    CAIN_DESKTOP=$DE
+    export CAIN_DESKTOP
+    engine files > "$TMP/files" || exit 1
+    while IFS=$SEP read -r _src _dest; do
+        _from=$ROOT/$_src _to=$(expand "$_dest")
+        if same_file "$_from" "$_to"; then info "  SAME:      $_dest"
+        else copy_file "$_from" "$_to" "$_backup"; info "  INSTALLED: $_dest"; fi
+    done < "$TMP/files"
+    [ -d "$_backup" ] && info "  (previous versions backed up in $_backup)"
+    return 0
+}
+
+# Put `cain` on PATH as a link to this script, so `git pull` in the repo updates it too.
+install_bin() {
+    _dest=$HOME/.local/bin/cain _target=$SELF_DIR/cain
+    if [ -L "$_dest" ] && [ "$(readlink "$_dest")" = "$_target" ]; then
+        info "  SAME:      $_dest"
+    else
+        if [ "$DRY" = 1 ]; then info "  [dry-run] link $_dest -> $_target"
+        else mkdir -p "$HOME/.local/bin" && rm -f "$_dest" && ln -s "$_target" "$_dest" || warn "can't create $_dest"; fi
+        info "  INSTALLED: $_dest -> $_target"
+    fi
+    remember_repo
+}
+
+# On a server you arrive over SSH, which starts a *login* shell: bash then reads
+# ~/.bash_profile (or ~/.bash_login, or ~/.profile) and never ~/.bashrc unless told to.
+# Also make bash the login shell if the account uses something else (Alpine's ash, sh).
+vps_login_shell() {
+    _profile=
+    for _p in .bash_profile .bash_login .profile; do
+        if [ -f "$HOME/$_p" ]; then _profile=$HOME/$_p; break; fi
+    done
+    [ -n "$_profile" ] || _profile=$HOME/.profile
+    if ! grep -q '\.bashrc' "$_profile" 2>/dev/null; then
+        upsert_block "$_profile" '[ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"'
+    fi
+
+    _user=$(id -un)
+    _login=$(getent passwd "$_user" 2>/dev/null || grep "^$_user:" /etc/passwd 2>/dev/null)
+    _login=${_login##*:}
+    case ${_login##*/} in bash|zsh) return ;; esac
+    if ! have bash; then
+        warn "bash isn't installed, so your login shell stays ${_login:-as it is}"
+        return
+    fi
+    _bash=$(command -v bash)
+    if ask "Your login shell is ${_login:-unset}. Switch it to bash so cain's aliases load?" 1; then
+        if have usermod; then run -s usermod -s "$_bash" "$_user"
+        else run -s chsh -s "$_bash" "$_user"; fi || warn "couldn't change your login shell; run: chsh -s $_bash"
+    fi
+}
+
+install_shell() {
+    _block='case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) export PATH="$HOME/.local/bin:$PATH" ;; esac
+[ -f "$HOME/.config/cain/cain.sh" ] && . "$HOME/.config/cain/cain.sh"'
+    upsert_block "$HOME/.bashrc" "$_block"
+    # macOS defaults to zsh, Linux to bash: always do bash, do zsh if it's in use
+    if [ -f "$HOME/.zshrc" ] || [ "$OS" = macos ]; then upsert_block "$HOME/.zshrc" "$_block"; fi
+    [ $VPS = 1 ] && vps_login_shell
+    return 0
+}
+
+install_keys() {
+    if [ "$OS" = macos ]; then karabiner_apply
+    else detect_pm; keyd_apply; linux_shortcuts; fi
+}
+
+install_desktop() {
+    [ "$OS" = linux ] && [ "$DE" = cinnamon ] && load_cinnamon_settings
+    set_wallpaper
+    set_dark_mode
+}
+
+# The install menu's presets. `cain install <name>` picks one without the menu.
+preset_steps() {
+    case $1 in
+        full) echo "$STEPS" ;;
+        light) echo "git files bin shell keys" ;;
+        dotfiles) echo "git files bin shell" ;;
+        keybindings) echo "keys" ;;
+        server) echo "$VPS_STEPS" ;;
+    esac
+}
+
+install() {  # install <step>...
+    if [ $VPS = 1 ]; then info "INSTALLING on a $OS server (terminal only)"
+    elif [ -n "$DE" ]; then info "INSTALLING on $OS ($DE)"
+    else info "INSTALLING on $OS"; fi
+    _visual=0
+    for _s in "$@"; do
+        step "$_s"
+        "install_$_s"
+        case $_s in keys|desktop) _visual=1 ;; esac
+    done
+    remember_repo   # even a keys-only install counts as "cain is set up here"
+    if [ $VPS = 1 ]; then
+        info "${NL}Done. Log out and SSH back in (or run \`exec bash -l\`) to load the new shell setup."
+        return
+    fi
+    info "${NL}Done. Log out and back in (or reboot) so every change takes effect."
+    if [ $_visual = 1 ] && ask "Reboot now?" 0; then
+        if [ "$OS" = macos ]; then run -s reboot; else run reboot; fi
+    fi
+}
+
+# ------------------------------------------------------------------ collect
+
+collect() {
+    _changed=
+    info "Files Changed:$NL"
+    CAIN_DESKTOP=$DE
+    export CAIN_DESKTOP
+    engine files > "$TMP/files" || exit 1
+    while IFS=$SEP read -r _src _dest; do
+        _repo=$ROOT/$_src _sys=$(expand "$_dest")
+        if [ ! -e "$_sys" ]; then info "    MISSING: $_dest"
+        elif same_file "$_sys" "$_repo"; then info "    SAME: $_dest"
+        else copy_file "$_sys" "$_repo"; _changed="$_changed $_dest"; info "    CHANGED: $_dest"; fi
+    done < "$TMP/files"
+    if [ "$DE" = cinnamon ]; then
+        if collect_cinnamon_settings; then _changed="$_changed cinnamonSettings"; info "    CHANGED: cinnamonSettings"
+        else info "    SAME: cinnamonSettings"; fi
+    fi
+    if [ -z "$_changed" ]; then info "${NL}ALL FILES ARE THE SAME$NL"; return; fi
+    run git -C "$ROOT" add -A
+    if run git -C "$ROOT" commit -m "CHANGED:$_changed"; then run git -C "$ROOT" push; fi
+}
+
+# ------------------------------------------------------------------ menu
+# menu <title> <checklist 0|1> <label> <desc> [<label> <desc>...]
+# Arrow keys (or j/k), Enter to pick, Space to tick, q/Esc to quit. Sets MENU to the
+# chosen index (from 0) or -1, and for a checklist CHECKED_<i> to 1/0 (start them at 1).
+# Falls back to a numbered prompt when the output isn't a terminal.
+
+menu_restore() {
+    [ -n "${MENU_STTY:-}" ] && stty "$MENU_STTY" 2>/dev/null
+    MENU_STTY=
+    printf '\033[?25h'
+}
+
+menu_key() {  # sets KEY to up down home end enter space all quit, or the character typed
+    _k=$(dd bs=1 count=1 2>/dev/null; printf .)
+    _k=${_k%.}
+    case $_k in
+        "$ESC")
+            stty min 0 time 1
+            _seq=$(dd bs=1 count=2 2>/dev/null)
+            stty min 1 time 0
+            case $_seq in
+                '') KEY=quit ;;
+                '[A'|OA) KEY=up ;;
+                '[B'|OB) KEY=down ;;
+                '[H'|OH) KEY=home ;;
+                '[F'|OF) KEY=end ;;
+                '['[0-9]) stty min 0 time 1; dd bs=1 count=1 >/dev/null 2>&1; stty min 1 time 0; KEY=none ;;
+                *) KEY=none ;;
+            esac ;;
+        "$NL"|"$(printf '\r')") KEY=enter ;;
+        ' '|x) KEY=space ;;
+        k|K|w) KEY=up ;;
+        j|J|s) KEY=down ;;
+        g) KEY=home ;;
+        G) KEY=end ;;
+        a|A) KEY=all ;;
+        q|Q|"$(printf '\003')"|"$(printf '\004')") KEY=quit ;;
+        *) KEY=$_k ;;
+    esac
+}
+
+# shellcheck disable=SC2154  # _l, _d and _c are set through eval
+menu_draw() {
+    [ "$MENU_DRAWN" = 1 ] && printf '\033[%dA' $((MENU_N + 3))
+    MENU_DRAWN=1
+    _cols=$(stty size 2>/dev/null </dev/tty | awk '{print $2}')
+    [ -n "$_cols" ] && [ "$_cols" -gt 0 ] 2>/dev/null || _cols=80
+    _cols=$((_cols - 1))
+    _box=0; [ "$MENU_MULTI" = 1 ] && _box=4
+    _room=$((_cols - 3 - _box - MENU_W - 2)); [ $_room -lt 0 ] && _room=0
+    printf "\r\033[2K\033[1m%.${_cols}s\033[0m\n" "$MENU_TITLE"
+    printf "\r\033[2K\033[2m%.${_cols}s\033[0m\n\r\033[2K\n" "$MENU_HINT"
+    _i=0
+    while [ $_i -lt "$MENU_N" ]; do
+        eval "_l=\$MENU_L$_i _d=\$MENU_D$_i _c=\${CHECKED_$_i:-0}"
+        _b=
+        if [ "$MENU_MULTI" = 1 ]; then if [ "$_c" = 1 ]; then _b='[x] '; else _b='[ ] '; fi; fi
+        if [ $_i = "$MENU_CUR" ]; then
+            printf "\r\033[2K \033[1;36m> %s%-${MENU_W}s\033[0m  %.${_room}s\n" "$_b" "$_l" "$_d"
+        else
+            printf "\r\033[2K   %s%-${MENU_W}s  \033[2m%.${_room}s\033[0m\n" "$_b" "$_l" "$_d"
+        fi
+        _i=$((_i + 1))
+    done
+}
+
+menu_plain() {
+    printf '%s\n\n' "$MENU_TITLE"
+    _i=0
+    while [ $_i -lt "$MENU_N" ]; do
+        eval "_l=\$MENU_L$_i _d=\$MENU_D$_i _c=\${CHECKED_$_i:-0}"
+        _b=
+        if [ "$MENU_MULTI" = 1 ]; then if [ "$_c" = 1 ]; then _b='[x] '; else _b='[ ] '; fi; fi
+        printf '  %d) %s%-12s %s\n' $((_i + 1)) "$_b" "$_l" "$_d"
+        _i=$((_i + 1))
+    done
+    if [ "$MENU_MULTI" = 1 ]; then printf '\nNumbers to install, separated by spaces (Enter keeps the [x] ones, q quits): '
+    else printf '\nPick a number (q quits): '; fi
+    read -r _line || { MENU=-1; return; }
+    case $_line in [qQ]*) MENU=-1; return ;; esac
+    if [ "$MENU_MULTI" = 1 ]; then
+        MENU=0
+        [ -z "$_line" ] && return
+        _i=0
+        while [ $_i -lt "$MENU_N" ]; do eval "CHECKED_$_i=0"; _i=$((_i + 1)); done
+        for _t in $(printf '%s' "$_line" | tr ',' ' '); do
+            case $_t in *[!0-9]*|'') continue ;; esac
+            [ "$_t" -ge 1 ] && [ "$_t" -le "$MENU_N" ] && eval "CHECKED_$((_t - 1))=1"
+        done
+        return
+    fi
+    case $_line in
+        *[!0-9]*|'') menu_plain ;;
+        *) if [ "$_line" -ge 1 ] && [ "$_line" -le "$MENU_N" ]; then MENU=$((_line - 1)); else menu_plain; fi ;;
+    esac
+}
+
+menu() {
+    MENU=-1 MENU_TITLE=$1 MENU_MULTI=$2 MENU_N=0 MENU_W=0 MENU_CUR=0 MENU_DRAWN=0
+    shift 2
+    while [ $# -ge 2 ]; do
+        eval "MENU_L$MENU_N=\$1 MENU_D$MENU_N=\$2"
+        [ ${#1} -gt "$MENU_W" ] && MENU_W=${#1}
+        MENU_N=$((MENU_N + 1))
+        shift 2
+    done
+    [ -t 0 ] || return 0
+    if [ ! -t 1 ] || ! MENU_STTY=$(stty -g 2>/dev/null); then menu_plain; return; fi
+    if [ "$MENU_MULTI" = 1 ]; then MENU_HINT='up/down move   space tick   a all/none   enter go   q quit'
+    else MENU_HINT='up/down move   enter pick   q quit'; fi
+    trap 'menu_restore; exit 130' INT TERM
+    stty -icanon -echo min 1 time 0
+    printf '\033[?25l\n'
+    while :; do
+        menu_draw
+        menu_key
+        case $KEY in
+            up) MENU_CUR=$(( (MENU_CUR + MENU_N - 1) % MENU_N )) ;;
+            down) MENU_CUR=$(( (MENU_CUR + 1) % MENU_N )) ;;
+            home) MENU_CUR=0 ;;
+            end) MENU_CUR=$((MENU_N - 1)) ;;
+            space) [ "$MENU_MULTI" = 1 ] && eval "CHECKED_$MENU_CUR=\$((1 - \${CHECKED_$MENU_CUR:-0}))" ;;
+            all)
+                if [ "$MENU_MULTI" = 1 ]; then
+                    _all=1 _i=0
+                    while [ $_i -lt "$MENU_N" ]; do eval "[ \"\${CHECKED_$_i:-0}\" = 1 ] || _all=0"; _i=$((_i + 1)); done
+                    _i=0
+                    while [ $_i -lt "$MENU_N" ]; do eval "CHECKED_$_i=$((1 - _all))"; _i=$((_i + 1)); done
+                fi ;;
+            enter) MENU=$MENU_CUR; break ;;
+            quit) break ;;
+            [1-9]) [ "$KEY" -le "$MENU_N" ] && MENU_CUR=$((KEY - 1)) ;;
+        esac
+    done
+    menu_restore
+    trap - INT TERM
+    printf '\n'
+}
+
+# The install menu. Sets STEP_LIST; fails if the user backed out.
+pick_install() {
+    if [ "$OS" = linux ]; then
+        menu "What should cain install?" 0 \
+            Full "programs, dotfiles, keybindings and desktop settings" \
+            Light "dotfiles and keybindings; no programs, no desktop changes" \
+            Dotfiles "just configs, shell aliases and git settings" \
+            Keybindings "just key remaps and shortcuts" \
+            Server "terminal programs and dotfiles, nothing graphical" \
+            Custom "tick each part yourself"
+        _presets="full light dotfiles keybindings server custom"
+    else
+        menu "What should cain install?" 0 \
+            Full "programs, dotfiles, keybindings and desktop settings" \
+            Light "dotfiles and keybindings; no programs, no desktop changes" \
+            Dotfiles "just configs, shell aliases and git settings" \
+            Keybindings "just key remaps and shortcuts" \
+            Custom "tick each part yourself"
+        _presets="full light dotfiles keybindings custom"
+    fi
+    [ "$MENU" -ge 0 ] || return 1
+    set -- $_presets
+    shift "$MENU"
+    if [ "$1" != custom ]; then
+        [ "$1" = server ] && VPS=1
+        STEP_LIST=$(preset_steps "$1")
+        return 0
+    fi
+    _i=0
+    for _s in $STEPS; do eval "CHECKED_$_i=1"; _i=$((_i + 1)); done
+    menu "Pick what to install" 1 \
+        packages "programs from cain.json" \
+        git "your git name and email" \
+        files "dotfiles: micro, nano, shell aliases..." \
+        bin "put the cain command on your PATH" \
+        shell "load the aliases from your shell's startup file" \
+        keys "key remaps and keyboard shortcuts" \
+        desktop "wallpaper, dark mode, desktop theme"
+    [ "$MENU" -ge 0 ] || return 1
+    STEP_LIST='' _i=0
+    for _s in $STEPS; do
+        eval "[ \"\$CHECKED_$_i\" = 1 ] && STEP_LIST=\"\$STEP_LIST \$_s\""
+        _i=$((_i + 1))
+    done
+    [ -n "$STEP_LIST" ]
+}
+
+# ------------------------------------------------------------------ tools
+
+booklister() {
+    _dir=${CAIN_BOOKS_DIR:-$HOME/Desktop/books}
+    [ -d "$_dir" ] || die "no books folder at $_dir (set CAIN_BOOKS_DIR to change it)"
+    # name <SEP> path, one per book, sorted by name; the same name twice: the last one wins
+    find -L "$_dir" -type f 2>/dev/null | awk -v sep="$SEP" '
+        { n = $0; sub(/.*\//, "", n); if (!(n in path)) order[++c] = n; path[n] = $0 }
+        END { for (i = 1; i <= c; i++) print tolower(order[i]) sep order[i] sep path[order[i]] }' \
+        | sort | cut -d "$SEP" -f 2- > "$TMP/books"
+    [ -s "$TMP/books" ] || die "no books in $_dir"
+    cut -d "$SEP" -f 1 "$TMP/books" > "$TMP/names"
+
+    _choice=
+    if [ "$OS" = macos ]; then
+        _list=$(sed 's/\\/\\\\/g; s/"/\\"/g; s/.*/"&"/' "$TMP/names" | paste -sd, - | sed 's/","/", "/g')
+        _choice=$(osascript -e "choose from list {$_list} with title \"Books\" with prompt \"Open which book?\"" 2>/dev/null)
+        [ "$_choice" = false ] && _choice=
+    elif have dmenu; then _choice=$(dmenu -i -l 25 < "$TMP/names")
+    elif have rofi; then _choice=$(rofi -dmenu -i -l 25 < "$TMP/names")
+    elif have fuzzel; then _choice=$(fuzzel --dmenu < "$TMP/names")
+    elif have wofi; then _choice=$(wofi --dmenu < "$TMP/names")
+    elif have zenity; then
+        set -- zenity --list --title=Books --column=Book --hide-header --width=560 --height=520
+        while IFS= read -r _n; do set -- "$@" "$_n"; done < "$TMP/names"
+        _choice=$("$@" 2>/dev/null)
+    elif [ -t 0 ]; then
+        if have fzf; then _choice=$(fzf -i < "$TMP/names")
+        else
+            awk '{ printf "%3d  %s\n", NR, $0 }' "$TMP/names"
+            printf 'book #: '
+            read -r _n || _n=
+            case $_n in *[!0-9]*|'') ;; *) _choice=$(sed -n "${_n}p" "$TMP/names") ;; esac
+        fi
+    fi
+    [ -n "$_choice" ] || return 0
+    while IFS=$SEP read -r _n _p; do
+        [ "$_n" = "$_choice" ] && open_path "$_p"
+    done < "$TMP/books"
+    return 0
+}
+
+listlauncher() {
+    _site=${CAIN_SITE_DIR:-$HOME/Desktop/rhettapplestone.com}
+    cd "$_site" 2>/dev/null || die "can't open $_site (set CAIN_SITE_DIR to change it)"
+    run "${EDITOR:-micro}" list.html
+    run git add .
+    run git commit -m qcom
+    run git push
+}
+
+# ------------------------------------------------------------------ main
+
+main() {
+    command='' args=
+    YES=0
+    for _a in "$@"; do
+        case $_a in
+            -n|--dry-run) DRY=1 ;;
+            -c|--collect) command=collect ;;
+            -i|--install) command=install ;;
+            -y|--yes|--all) YES=1 ;;
+            -h|--help|help) printf '%s' "$USAGE"; exit 0 ;;
+            -*) printf 'cain: unknown option %s\n\n%s' "$_a" "$USAGE" >&2; exit 2 ;;
+            *) if [ -z "$command" ]; then command=$_a; else args="$args $_a"; fi ;;
+        esac
+    done
+
+    case $(uname -s) in
+        Darwin) OS=macos ;;
+        MINGW*|MSYS*|CYGWIN*) OS=windows ;;
+        *) OS=linux ;;
+    esac
+
+    TMP=$(mktemp -d 2>/dev/null || { d=${TMPDIR:-/tmp}/cain.$$; mkdir -p "$d" && printf '%s' "$d"; })
+    trap 'rm -rf "$TMP"' EXIT
+
+    _self=$(self_path)
+    SELF_DIR=$(cd "$(dirname "$_self")" && pwd)
+    LIB=$SELF_DIR/lib/cain.awk
+    [ -f "$LIB" ] || die "can't find $LIB next to the cain script"
+
+    # the tools don't need the repo
+    case $command in
+        booklister) booklister; exit ;;
+        listlauncher) listlauncher; exit ;;
+    esac
+
+    ROOT=$(find_root)
+    [ -n "$ROOT" ] || die "can't find the cain repo (the folder with cain.json). Run cain from inside it, or set CAIN_DIR."
+    ROOT=$(cd "$ROOT" && pwd)
+
+    if [ "$command" = generate ]; then
+        set -- $args
+        _gos=${1:-$OS}
+        case $_gos in linux|macos|windows) ;; *) die "generate: pick linux, macos or windows" ;; esac
+        engine generate "$_gos"
+        exit
+    fi
+
+    if [ "$OS" = windows ]; then die "on Windows, run cain.cmd (it uses PowerShell)"; fi
+
+    printf '%s\n' "$ASCII"
+    if [ -z "$command" ] && ! installed_here; then
+        info "cain isn't set up on this machine yet, so let's install it."
+        command=install
+    fi
+    if [ -z "$command" ] && [ -t 0 ]; then
+        menu "What do you want to do?" 0 \
+            Install "put my programs, configs and keybindings on this machine" \
+            Collect "copy this machine's configs into the repo, commit and push"
+        case $MENU in 0) command=install ;; 1) command=collect ;; *) exit 0 ;; esac
+    fi
+    while [ -z "$command" ]; do
+        printf 'Would you like to Collect (C) or Install (I)?: '
+        read -r _line || exit 1
+        case $_line in
+            [cC]*) command=collect ;;
+            [iI]*) command=install ;;
+            *) printf '\nNon valid input, please try again\n\n' ;;
+        esac
+    done
+
+    if [ "$command" = vps ]; then
+        [ "$OS" = linux ] || die "cain vps is for Linux servers"
+        VPS=1
+    fi
+
+    engine check || exit 1   # a broken cain.json stops here, before anything changes
+    DE=
+    [ "$OS" = linux ] && [ $VPS = 0 ] && DE=$(linux_desktop)
+
+    case $command in
+        collect|c) collect ;;
+        install|i|keys|vps)
+            STEP_LIST=
+            for _a in $args; do   # preset names expand to their steps
+                _p=
+                [ $VPS = 0 ] && _p=$(preset_steps "$_a")
+                if [ -n "$_p" ]; then
+                    if [ "$_a" = server ]; then
+                        [ "$OS" = linux ] || die "the server install is for Linux"
+                        VPS=1 DE=
+                    fi
+                    for _s in $_p; do case " $STEP_LIST " in *" $_s "*) ;; *) STEP_LIST="$STEP_LIST $_s" ;; esac; done
+                else
+                    case " $STEP_LIST " in *" $_a "*) ;; *) STEP_LIST="$STEP_LIST $_a" ;; esac
+                fi
+            done
+            if [ -z "$STEP_LIST" ] && [ "$command" != keys ] && [ $VPS = 0 ] && [ $YES = 0 ] && [ -t 0 ]; then
+                if ! pick_install; then info "Nothing installed."; exit 0; fi
+                [ $VPS = 1 ] && DE=
+            fi
+            if [ $VPS = 1 ]; then _allowed=$VPS_STEPS _kind=vps; else _allowed=$STEPS _kind=install; fi
+            [ -z "$STEP_LIST" ] && [ "$command" = keys ] && STEP_LIST=keys
+            [ -z "$STEP_LIST" ] && STEP_LIST=$_allowed
+            for _s in $STEP_LIST; do
+                case " $_allowed " in
+                    *" $_s "*) ;;
+                    *) die "unknown $_kind step \"$_s\"; choose from: $_allowed" ;;
+                esac
+            done
+            install $STEP_LIST ;;
+        *) printf 'cain: unknown command "%s"\n\n%s' "$command" "$USAGE" >&2; exit 2 ;;
+    esac
+}
+
+main "$@"
