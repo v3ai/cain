@@ -164,9 +164,9 @@ function Test-Applies($entry) {
     return $true
 }
 
-# Modifier bits, in print order
+# Modifier bits, in print order. (PowerShell names ignore case: never call another variable $bits.)
 $ModNames = @('super', 'lsuper', 'rsuper', 'ctrl', 'lctrl', 'rctrl', 'alt', 'lalt', 'ralt', 'shift')
-$M = @{ SUPER = 1; LSUPER = 2; RSUPER = 4; CTRL = 8; LCTRL = 16; RCTRL = 32; ALT = 64; LALT = 128; RALT = 256; SHIFT = 512 }
+$Bits = @{ SUPER = 1; LSUPER = 2; RSUPER = 4; CTRL = 8; LCTRL = 16; RCTRL = 32; ALT = 64; LALT = 128; RALT = 256; SHIFT = 512 }
 $AnyAlt = 64 + 128 + 256
 $NamedKeys = @(
     'comma period slash semicolon quote bracketleft bracketright backslash minus equal grave tab enter',
@@ -203,11 +203,11 @@ function Format-Combo($c) {
     return $s + $c.k
 }
 
-function Get-Generic([int]$m) {
-    $g = $m -band ($M.SUPER -bor $M.CTRL -bor $M.ALT -bor $M.SHIFT)
-    if ($m -band ($M.LSUPER -bor $M.RSUPER)) { $g = $g -bor $M.SUPER }
-    if ($m -band ($M.LCTRL -bor $M.RCTRL)) { $g = $g -bor $M.CTRL }
-    if ($m -band ($M.LALT -bor $M.RALT)) { $g = $g -bor $M.ALT }
+function Get-Generic([int]$mods) {
+    $g = $mods -band ($Bits.SUPER -bor $Bits.CTRL -bor $Bits.ALT -bor $Bits.SHIFT)
+    if ($mods -band ($Bits.LSUPER -bor $Bits.RSUPER)) { $g = $g -bor $Bits.SUPER }
+    if ($mods -band ($Bits.LCTRL -bor $Bits.RCTRL)) { $g = $g -bor $Bits.CTRL }
+    if ($mods -band ($Bits.LALT -bor $Bits.RALT)) { $g = $g -bor $Bits.ALT }
     return $g
 }
 
@@ -282,10 +282,10 @@ function Get-AhkHotkey($c) {
 function Get-AhkSend($c) {
     $g = Get-Generic $c.m
     $s = ''
-    if ($g -band $M.SUPER) { $s += '#' }
-    if ($g -band $M.CTRL) { $s += '^' }
-    if ($g -band $M.ALT) { $s += '!' }
-    if ($g -band $M.SHIFT) { $s += '+' }
+    if ($g -band $Bits.SUPER) { $s += '#' }
+    if ($g -band $Bits.CTRL) { $s += '^' }
+    if ($g -band $Bits.ALT) { $s += '!' }
+    if ($g -band $Bits.SHIFT) { $s += '+' }
     $k = Get-AhkKey $c.k
     if ($k.Length -gt 1) { return "$s{$k}" } else { return "$s$k" }
 }
@@ -334,10 +334,10 @@ function New-AhkScript {
             if ($dst.m) { & $add (Get-AhkKey $src.k) $body } else { & $add (Get-AhkKey $src.k) (Get-AhkKey $dst.k) }
         } else {
             & $add (Get-AhkHotkey $src) $body
-            if ($dst.m -eq 0 -and $Selectable -contains $dst.k -and -not ($src.m -band $M.SHIFT)) {
+            if ($dst.m -eq 0 -and $Selectable -contains $dst.k -and -not ($src.m -band $Bits.SHIFT)) {
                 # keep Shift working for selecting: Alt+Shift+H -> Shift+Left
-                $hk = Get-AhkHotkey @{ m = ($src.m -bor $M.SHIFT); k = $src.k }
-                & $add $hk ('Send "' + (Get-AhkSend @{ m = $M.SHIFT; k = $dst.k }) + '"')
+                $hk = Get-AhkHotkey @{ m = ($src.m -bor $Bits.SHIFT); k = $src.k }
+                & $add $hk ('Send "' + (Get-AhkSend @{ m = $Bits.SHIFT; k = $dst.k }) + '"')
             }
         }
     }
@@ -353,8 +353,8 @@ function New-AhkScript {
                 $alt = $c.m -band $AnyAlt
                 $key = Get-AhkKey $c.k
                 if ($alt -and $c.m -eq $alt) {
-                    if ($alt -ne $M.RALT) { & $add "LAlt & $key" 'AltTab' }
-                    if ($alt -ne $M.LALT) { & $add "RAlt & $key" 'AltTab' }
+                    if ($alt -ne $Bits.RALT) { & $add "LAlt & $key" 'AltTab' }
+                    if ($alt -ne $Bits.LALT) { & $add "RAlt & $key" 'AltTab' }
                 } else { & $add $hk 'Send "!{Tab}"' }
             } elseif ($AhkWm.ContainsKey($sc.action)) {
                 & $add $hk $AhkWm[$sc.action]

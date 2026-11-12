@@ -42,15 +42,17 @@ jobs:
         image: [alpine, debian, ubuntu, fedora, archlinux, "rockylinux/rockylinux:9", "opensuse/tumbleweed"]
     steps:
       - uses: actions/checkout@v4
+      # `cain generate` first: on an image without awk (openSUSE) that installs it
       - name: Tests on a fresh ${{ matrix.image }}, with nothing installed first
-        run: docker run --rm -v "$PWD:/src:ro" "${{ matrix.image }}" sh -c 'cp -r /src /tmp/cain && cd /tmp/cain && sh tests/run.sh'
+        run: docker run --rm -v "$PWD:/src:ro" "${{ matrix.image }}" sh -c 'cp -r /src /tmp/cain && cd /tmp/cain && sh ./cain generate linux > /dev/null && sh tests/run.sh'
 
   macos:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - run: sh tests/run.sh
-      - run: CAIN_SH=zsh sh tests/run.sh
+      - run: CAIN_SH="zsh --emulate sh" sh tests/run.sh
+      - run: CAIN_SH=/bin/dash sh tests/run.sh
       - run: CAIN_SH=/bin/bash sh tests/run.sh
 
   windows:

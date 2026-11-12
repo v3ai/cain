@@ -288,6 +288,21 @@ pm_install() {
     esac
 }
 
+# cain needs awk. Every desktop and server install has it, but some container
+# images (openSUSE's) don't: install it then.
+ensure_awk() {
+    have awk && return 0
+    [ "$OS" = linux ] || die "cain needs awk, which normally comes with the system"
+    detect_pm
+    [ -n "$PM" ] || die "cain needs awk: install gawk or mawk and try again"
+    info "cain needs awk and this system doesn't have it: installing it"
+    case $PM in apt) _awk=mawk ;; *) _awk=gawk ;; esac
+    _dry=$DRY DRY=0
+    pm_install "$_awk"
+    DRY=$_dry
+    have awk || die "couldn't install awk: install gawk or mawk and try again"
+}
+
 # Linux: install each package; if that fails (or the distro doesn't have it) and the
 # entry has a "fallback" command, run that instead, e.g. a download into ~/.local/bin.
 linux_packages() {
@@ -887,6 +902,7 @@ main() {
     TMP=$(mktemp -d 2>/dev/null || { d=${TMPDIR:-/tmp}/cain.$$; mkdir -p "$d" && printf '%s' "$d"; })
     trap 'rm -rf "$TMP"' EXIT
 
+    ensure_awk
     _self=$(self_path)
     SELF_DIR=$(cd "$(dirname "$_self")" && pwd)
     LIB=$SELF_DIR/lib/cain.awk
