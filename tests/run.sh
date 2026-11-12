@@ -31,7 +31,6 @@ expect_error "broken JSON"     "line 2"               '{"remaps": [
 expect_error "unknown action"  "unknown shortcut"     '{"shortcuts": [{"action": "fly", "keys": ["alt+f"]}]}' generate windows
 expect_error "unknown step"    "unknown install step" '{}' install nope
 
-expect_error "unknown vps step"  "unknown vps step"     '{}' vps keys
 
 # install presets run exactly these steps (no menu: stdin isn't a terminal)
 expect_steps() {  # expect_steps <args> <steps>
@@ -57,6 +56,7 @@ expect_output() {  # expect_output <description> <pm> <wanted|!unwanted>...
     echo "ok    $desc"
 }
 if [ "$(uname -s)" = Linux ]; then
+    expect_error  "unknown vps step" "unknown vps step" '{}' vps keys
     expect_output "vps apt"    apt    "apt-get install -y python3-venv" "install -y openssh-client" "!inkscape" "!xclip" "!apk"
     expect_output "vps dnf"    dnf    "dnf install -y ffmpeg-free" "install -y openssh-clients" "install -y iproute\$" "!python3-venv"
     expect_output "vps pacman" pacman "pacman -Syu" "noconfirm python-pip" "noconfirm openssh" "!virt-manager"
