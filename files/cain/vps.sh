@@ -2,10 +2,10 @@
 # Set up a fresh Linux server (VPS) with cain: terminal programs, configs and shell.
 # Works on Debian, Ubuntu, Fedora, Rocky/Alma/CentOS/RHEL, Arch, openSUSE, Alpine and Void.
 #
-#   curl -fsSL https://raw.githubusercontent.com/v3ai/cain/master/vps.sh | sh
-#   wget -qO- https://raw.githubusercontent.com/v3ai/cain/master/vps.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/v3ai/cain/master/files/cain/vps.sh | sh
+#   wget -qO- https://raw.githubusercontent.com/v3ai/cain/master/files/cain/vps.sh | sh
 #
-# or, from a clone:  ./vps.sh
+# or, from a clone:  sh files/cain/vps.sh
 #
 # It installs git if it's missing, clones cain to ~/cain (or $CAIN_DIR) and runs
 # `cain vps`. Any arguments are passed on, e.g. `sh vps.sh --dry-run`.
@@ -50,9 +50,9 @@ if ! have git; then
 fi
 
 # ------------------------------------------------------------------ get the repo
-here=$(cd "$(dirname "$0")" 2>/dev/null && pwd || true)
-if [ -n "$here" ] && [ -f "$here/cain.json" ] && [ -f "$here/lib/cain.awk" ]; then
-    DIR=$here                                  # running ./vps.sh from a clone
+here=$(cd "$(dirname "$0")/../.." 2>/dev/null && pwd || true)   # the repo, if this is files/cain/vps.sh in one
+if [ -n "$here" ] && [ -f "$here/files/cain.json" ] && [ -f "$here/cain" ]; then
+    DIR=$here                                  # running it from a clone
 else
     DIR=${CAIN_DIR:-$HOME/cain}
     if [ -d "$DIR/.git" ]; then

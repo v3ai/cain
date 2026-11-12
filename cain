@@ -2,8 +2,8 @@
 # cain - Collects And INstalls dotfiles, keybindings and programs.
 #
 # Plain POSIX sh + awk, so it runs on any Linux distro and macOS with nothing to
-# install or build. lib/cain.awk reads cain.json and does the thinking; this script
-# runs the commands. On Windows, use cain.cmd (it runs cain.ps1 in PowerShell).
+# install or build. files/cain/cain.awk reads files/cain.json and does the thinking;
+# this script runs the commands. On Windows, use files\cain\cain.cmd (PowerShell).
 
 USAGE='usage: cain [command] [args...] [-n]
 
@@ -37,7 +37,7 @@ VPS_STEPS="packages git files bin shell"
 KEYD_CONFIG=/etc/keyd/default.conf
 NL='
 '
-SEP=$(printf '\037')   # field separator in lib/cain.awk's lists
+SEP=$(printf '\037')   # field separator in cain.awk's lists
 ESC=$(printf '\033')
 DRY=0
 VPS=0
@@ -164,9 +164,9 @@ upsert_block() {
     [ "$_out" = "$_text" ] || write_text "$1" "$_out"
 }
 
-# lib/cain.awk: engine <mode> [os]   (CAIN_* settings come from the environment)
+# files/cain/cain.awk: engine <mode> [os]   (CAIN_* settings come from the environment)
 engine() {
-    CAIN_JSON=$ROOT/cain.json LC_ALL=C awk -v mode="$1" -v os="${2:-$OS}" -f "$LIB"
+    CAIN_JSON=$ROOT/files/cain.json LC_ALL=C awk -v mode="$1" -v os="${2:-$OS}" -f "$LIB"
 }
 
 # Read one value from cain.json, e.g. `json git.name`.
@@ -206,13 +206,13 @@ self_path() {
 # $CAIN_DIR, then the folder this script is in, then the repo `cain install`
 # remembered, then the current directory.
 find_root() {
-    if [ -n "${CAIN_DIR:-}" ] && [ -f "$CAIN_DIR/cain.json" ]; then printf '%s' "$CAIN_DIR"; return; fi
-    if [ -f "$SELF_DIR/cain.json" ]; then printf '%s' "$SELF_DIR"; return; fi
+    if [ -n "${CAIN_DIR:-}" ] && [ -f "$CAIN_DIR/files/cain.json" ]; then printf '%s' "$CAIN_DIR"; return; fi
+    if [ -f "$SELF_DIR/files/cain.json" ]; then printf '%s' "$SELF_DIR"; return; fi
     if [ -f "$HOME/.config/cain/repo" ]; then
         _saved=$(head -n 1 "$HOME/.config/cain/repo")
-        if [ -f "$_saved/cain.json" ]; then printf '%s' "$_saved"; return; fi
+        if [ -f "$_saved/files/cain.json" ]; then printf '%s' "$_saved"; return; fi
     fi
-    if [ -f ./cain.json ]; then pwd; fi
+    if [ -f ./files/cain.json ]; then pwd; fi
 }
 
 # Every install leaves ~/.config/cain/repo behind, so if it's missing cain has never
@@ -403,7 +403,7 @@ first_found() {  # first_found <fallback> <cmd>...
     printf '%s' "$_fb"
 }
 
-# Window-manager shortcuts and launchers: lib/cain.awk writes the commands for this desktop.
+# Window-manager shortcuts and launchers: cain.awk writes the commands for this desktop.
 linux_shortcuts() {
     CAIN_DESKTOP=$DE
     CAIN_TERM=$(first_found xterm x-terminal-emulator gnome-terminal konsole xfce4-terminal mate-terminal \
@@ -905,7 +905,7 @@ main() {
     ensure_awk
     _self=$(self_path)
     SELF_DIR=$(cd "$(dirname "$_self")" && pwd)
-    LIB=$SELF_DIR/lib/cain.awk
+    LIB=$SELF_DIR/files/cain/cain.awk
     [ -f "$LIB" ] || die "can't find $LIB next to the cain script"
 
     # the tools don't need the repo
@@ -915,7 +915,7 @@ main() {
     esac
 
     ROOT=$(find_root)
-    [ -n "$ROOT" ] || die "can't find the cain repo (the folder with cain.json). Run cain from inside it, or set CAIN_DIR."
+    [ -n "$ROOT" ] || die "can't find the cain repo (the folder with files/cain.json). Run cain from inside it, or set CAIN_DIR."
     ROOT=$(cd "$ROOT" && pwd)
 
     if [ "$command" = generate ]; then
@@ -926,7 +926,7 @@ main() {
         exit
     fi
 
-    if [ "$OS" = windows ]; then die "on Windows, run cain.cmd (it uses PowerShell)"; fi
+    if [ "$OS" = windows ]; then die "on Windows, run files\\cain\\cain.cmd (it uses PowerShell)"; fi
 
     printf '%s\n' "$ASCII"
     if [ -z "$command" ] && ! installed_here; then

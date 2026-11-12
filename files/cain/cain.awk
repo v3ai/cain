@@ -3,8 +3,8 @@
 # desktop shortcuts. The `cain` shell script does everything that touches the system.
 #
 # Plain POSIX awk (mawk, gawk, busybox, macOS awk). Run with LC_ALL=C.
-#   awk -v mode=<mode> -v os=<linux|macos|windows> -f lib/cain.awk
-# Inputs come from the environment: CAIN_JSON (path to cain.json), HOME, and per mode
+#   awk -v mode=<mode> -v os=<linux|macos|windows> -f files/cain/cain.awk
+# Inputs come from the environment: CAIN_JSON (path to files/cain.json), HOME, and per mode
 # the CAIN_* variables named below. Everything happens in BEGIN.
 #
 # Modes:

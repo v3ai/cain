@@ -15,7 +15,7 @@ macOS and Windows** with nothing to install or build: on Linux and macOS it's a 
 `sh` script plus `awk`, which every system already has; on Windows it's a PowerShell
 script, which comes with Windows. If you install it, your configs and keys become mine.
 
-Everything lives in one file, [`cain.json`](cain.json):
+Everything lives in one file, [`files/cain.json`](files/cain.json):
 
 | section     | what it is                                                        |
 |-------------|-------------------------------------------------------------------|
@@ -26,7 +26,7 @@ Everything lives in one file, [`cain.json`](cain.json):
 | `settings`  | wallpaper, dark mode, Mac key behavior                            |
 
 Write keys once, in a neutral format (`alt`, `lalt`, `ralt`, `ctrl`, `rctrl`, `shift`, `super`
-+ a key name: see `init()` in [`lib/cain.awk`](lib/cain.awk)). cain turns them into whatever
++ a key name: see `init()` in [`files/cain/cain.awk`](files/cain/cain.awk)). cain turns them into whatever
 each OS needs:
 
 | OS      | key remaps                                     | shortcuts                                                  |
@@ -44,7 +44,7 @@ cd && git clone https://github.com/v3ai/cain && cd cain && ./cain
 
 Windows (PowerShell or Command Prompt):
 ```
-cd ~; git clone https://github.com/v3ai/cain; cd cain; .\cain.cmd
+cd ~; git clone https://github.com/v3ai/cain; cd cain; .\files\cain\cain.cmd
 ```
 
 ### VPS / server
@@ -52,15 +52,15 @@ cd ~; git clone https://github.com/v3ai/cain; cd cain; .\cain.cmd
 On a fresh Linux server (Debian, Ubuntu, Fedora, Rocky/Alma/CentOS/RHEL, Arch, openSUSE,
 Alpine, Void), as root or a sudo user:
 ```
-curl -fsSL https://raw.githubusercontent.com/v3ai/cain/master/vps.sh | sh
+curl -fsSL https://raw.githubusercontent.com/v3ai/cain/master/files/cain/vps.sh | sh
 ```
-(no curl? `wget -qO- https://raw.githubusercontent.com/v3ai/cain/master/vps.sh | sh`)
+(no curl? `wget -qO- https://raw.githubusercontent.com/v3ai/cain/master/files/cain/vps.sh | sh`)
 
-[`vps.sh`](vps.sh) installs git if it's missing, clones cain to `~/cain` and runs
+[`vps.sh`](files/cain/vps.sh) installs git if it's missing, clones cain to `~/cain` and runs
 `cain vps`. That installs only what's used in the terminal and skips keybindings, desktop
 settings and GUI apps:
 
-* every package marked `"terminal": true` in `cain.json`: bash, sudo, curl, git, micro, nano,
+* every package marked `"terminal": true` in `files/cain.json`: bash, sudo, curl, git, micro, nano,
   python3 + pip + venv, tree, nnn, fzf, nmap, ffmpeg, yt-dlp, ssh, ...
   with the right package name for each distro. On Rocky/Alma/CentOS/RHEL it turns on EPEL first.
   If a distro doesn't package something (e.g. micro or yt-dlp), its `"fallback"` command
@@ -85,7 +85,7 @@ cain -i               menu: pick what to install (see below)
 cain -i -y            install everything, no menu
 cain install light    pick a preset without the menu: full light dotfiles keybindings server
 cain install keys     only some steps: packages git files bin shell keys desktop
-cain keys             re-apply keybindings after editing cain.json
+cain keys             re-apply keybindings after editing files/cain.json
 cain generate macos   print the keyd / AutoHotkey / Karabiner config for any OS
 cain vps              set up a Linux server: terminal programs, configs, shell (no desktop)
 cain -i --dry-run     show what would happen without changing anything
@@ -118,8 +118,9 @@ Files that install overwrites are backed up to `~/.cain-backup/<date>/` first.
   keys aren't remapped twice. On Cinnamon, `cain -c` also saves the whole `dconf`
   dump (theme, panels, ...), and install loads it back. booklister uses dmenu, rofi,
   fuzzel, wofi or zenity, whichever is installed.
-* **Windows:** run cain as `cain.cmd` (it starts `cain.ps1` with the built-in PowerShell, so
-  you don't have to change the execution policy first). The AutoHotkey script is at
+* **Windows:** the first time, run `files\cain\cain.cmd` (it starts `cain.ps1` with the
+  built-in PowerShell, so you don't have to change the execution policy first). After
+  install, `cain` works from any terminal. The AutoHotkey script is at
   `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\cain.ahk`. Shell aliases go
   in your PowerShell profile (`files/shell/cain.ps1`). booklister opens a small
   search-as-you-type window.
@@ -146,22 +147,27 @@ manager the machine has. cain adds a small `# >>> cain >>>` block to `~/.bashrc`
 
 ### Hacking
 
-```
-sh tests/run.sh               run the tests
-CAIN_SH=bash sh tests/run.sh  ...running cain with another shell
-UPDATE=1 sh tests/run.sh      refresh tests/expected/ after an intended change
-```
-The code:
+The repo keeps to three things at the top: `cain` (the command), `files/` and this README.
 
-* [`cain`](cain): the Linux / macOS command. POSIX `sh` (dash, bash, busybox, ksh, zsh all
-  work): menus, install steps, running commands, dry-run.
-* [`lib/cain.awk`](lib/cain.awk): reads `cain.json` (it has a small JSON parser) and turns it
-  into the keyd / AutoHotkey / Karabiner configs, package and file lists, and the desktop
-  shortcut commands. POSIX `awk` (mawk, gawk, busybox, macOS awk).
-* [`cain.ps1`](cain.ps1) + [`cain.cmd`](cain.cmd): the Windows version, PowerShell 5.1+.
+```
+files/cain.json        the config: packages, files, remaps, shortcuts, settings
+files/cain/cain.awk    reads cain.json (it has a small JSON parser) and turns it into the
+                       keyd / AutoHotkey / Karabiner configs, package and file lists, and
+                       the desktop shortcut commands. POSIX awk (mawk, gawk, busybox, macOS awk)
+files/cain/cain.ps1    the Windows version, PowerShell 5.1+ (cain.cmd starts it)
+files/cain/vps.sh      sets up a fresh server
+files/cain/tests/      the tests
+files/...              the dotfiles themselves
+```
 
-GitHub Actions runs the tests on Linux (several shells, awks and distros), macOS and
-Windows, and checks that the shell and PowerShell versions write the same AutoHotkey script.
+`cain` itself is POSIX `sh` (dash, bash, busybox, ksh, zsh all work): menus, install
+steps, running commands, dry-run.
+
+```
+sh files/cain/tests/run.sh               run the tests
+CAIN_SH=bash sh files/cain/tests/run.sh  ...running cain with another shell
+UPDATE=1 sh files/cain/tests/run.sh      refresh the expected outputs after an intended change
+```
 
 MIT licensed, check the dotfiles for ideas.
 ASCII art made with `figlet -f Georgia11.flf cain`.

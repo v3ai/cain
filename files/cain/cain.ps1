@@ -2,7 +2,7 @@
 #
 # Plain Windows PowerShell 5.1 (built into Windows 10 and 11), so there's nothing to
 # install or build. Run it through cain.cmd: `cain`, `cain -i`, `cain keys`, ...
-# Linux and macOS use the `cain` shell script instead; both read the same cain.json.
+# Linux and macOS use the `cain` shell script instead; both read files/cain.json.
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2
@@ -213,7 +213,7 @@ function Get-Generic([int]$mods) {
 }
 
 function Read-Manifest {
-    $path = Join-Path $script:Root 'cain.json'
+    $path = Join-Path $script:Root 'files\cain.json'
     try { $text = [IO.File]::ReadAllText($path) } catch { Die "can't read $path" }
     try { $j = $text | ConvertFrom-Json } catch { Die "${path}: $($_.Exception.Message)" }
     if ($j -isnot [psobject]) { Die "${path}: expected a JSON object" }
@@ -487,7 +487,7 @@ function Install-Bin {
     $dir = Expand-Path '~/.local/bin'
     $dest = Join-Path $dir 'cain.cmd'
     # PSModulePath is cleared because, started from PowerShell 7, it points at modules Windows PowerShell can't load
-    $shim = "@echo off`r`nsetlocal`r`nset PSModulePath=`r`npowershell -NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path $script:Root 'cain.ps1')`" %*`r`n"
+    $shim = "@echo off`r`nsetlocal`r`nset PSModulePath=`r`npowershell -NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path $script:Root 'files\cain\cain.ps1')`" %*`r`n"
     if ((Test-Path $dest) -and [IO.File]::ReadAllText($dest) -eq $shim) { Say "  SAME:      $dest" }
     else { Write-Text $dest $shim; Say "  INSTALLED: $dest" }
     Add-UserPath $dir
@@ -744,16 +744,18 @@ function Invoke-Listlauncher {
 
 # ------------------------------------------------------------------ main
 
-# $CAIN_DIR, then this script's folder, then the repo `cain install` remembered, then here.
+# $CAIN_DIR, then the repo this script is in (it's files\cain\cain.ps1), then the repo
+# `cain install` remembered, then here.
 function Find-Root {
-    if ($env:CAIN_DIR -and (Test-Path (Join-Path $env:CAIN_DIR 'cain.json'))) { return (Resolve-Path $env:CAIN_DIR).Path }
-    if (Test-Path (Join-Path $PSScriptRoot 'cain.json')) { return $PSScriptRoot }
+    if ($env:CAIN_DIR -and (Test-Path (Join-Path $env:CAIN_DIR 'files\cain.json'))) { return (Resolve-Path $env:CAIN_DIR).Path }
+    $repo = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
+    if (Test-Path (Join-Path $repo 'files\cain.json')) { return $repo }
     $marker = Expand-Path '~/.config/cain/repo'
     if (Test-Path $marker) {
         $saved = (Get-Content $marker -TotalCount 1)
-        if ($saved -and (Test-Path (Join-Path $saved 'cain.json'))) { return $saved }
+        if ($saved -and (Test-Path (Join-Path $saved 'files\cain.json'))) { return $saved }
     }
-    if (Test-Path 'cain.json') { return (Get-Location).Path }
+    if (Test-Path 'files\cain.json') { return (Get-Location).Path }
     return $null
 }
 
@@ -774,7 +776,7 @@ if ($command -eq 'booklister') { Invoke-Booklister; exit 0 }
 if ($command -eq 'listlauncher') { Invoke-Listlauncher; exit 0 }
 
 $script:Root = Find-Root
-if (-not $script:Root) { Die "can't find the cain repo (the folder with cain.json). Run cain from inside it, or set CAIN_DIR." }
+if (-not $script:Root) { Die "can't find the cain repo (the folder with files\cain.json). Run cain from inside it, or set CAIN_DIR." }
 
 if ($command -eq 'generate') {
     $os = if ($rest) { $rest[0] } else { 'windows' }

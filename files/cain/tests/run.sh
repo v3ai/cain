@@ -1,10 +1,11 @@
 #!/bin/sh
-# Regression tests: `sh tests/run.sh`.
-# Checks the generated configs against tests/expected/, error cases, the install
+# Regression tests: `sh files/cain/tests/run.sh`.
+# Checks the generated configs against expected/, error cases, the install
 # presets, real installs into a throwaway home folder, and the desktop plans.
-#   CAIN_SH=bash sh tests/run.sh    run cain with another shell (default: its #! line)
-#   UPDATE=1 sh tests/run.sh        refresh tests/expected/ after an intended change
-cd "$(dirname "$0")/.." || exit 1
+#   CAIN_SH=bash sh files/cain/tests/run.sh    run cain with another shell (default: its #! line)
+#   UPDATE=1 sh files/cain/tests/run.sh        refresh expected/ after an intended change
+cd "$(dirname "$0")/../../.." || exit 1   # the repo
+T=files/cain/tests AWK=files/cain/cain.awk JSON=files/cain.json
 export HOME=/home/cain-test CAIN_DIR=.
 unset XDG_CURRENT_DESKTOP DESKTOP_SESSION CAIN_PM
 CAIN="${CAIN_SH:+$CAIN_SH }./cain"
@@ -19,18 +20,18 @@ bad() { echo "FAIL  $1"; fail=1; }
 
 for os in linux windows macos; do
     if [ -n "${UPDATE:-}" ]; then
-        $CAIN generate $os > tests/expected/$os.txt
-    elif $CAIN generate $os > "$tmp/$os.txt" && same tests/expected/$os.txt "$tmp/$os.txt"; then
+        $CAIN generate $os > $T/expected/$os.txt
+    elif $CAIN generate $os > "$tmp/$os.txt" && same $T/expected/$os.txt "$tmp/$os.txt"; then
         ok "generate $os"
     else
-        bad "generate $os"; diff -u tests/expected/$os.txt "$tmp/$os.txt" 2>/dev/null | head -40
+        bad "generate $os"; diff -u $T/expected/$os.txt "$tmp/$os.txt" 2>/dev/null | head -40
     fi
 done
 
 expect_error() {  # expect_error <description> <message> <cain.json> <args...>
     desc=$1 msg=$2 json=$3; shift 3
-    mkdir -p "$tmp/err"
-    printf '%s' "$json" > "$tmp/err/cain.json"
+    mkdir -p "$tmp/err/files"
+    printf '%s' "$json" > "$tmp/err/files/cain.json"
     if CAIN_DIR=$tmp/err $CAIN "$@" < /dev/null 2>&1 | grep -q -- "$msg"; then ok "$desc"
     else bad "$desc (wanted: $msg)"; fi
 }
@@ -80,7 +81,7 @@ else
 fi
 if ! command -v git >/dev/null 2>&1; then
     ok "install sets git name (skipped: no git here)"
-elif [ "$(HOME=$h GIT_CONFIG_GLOBAL=$h/.gitconfig git config --global user.name)" = "$(CAIN_KEY=git.name CAIN_JSON=cain.json awk -v mode=get -f lib/cain.awk)" ]; then
+elif [ "$(HOME=$h GIT_CONFIG_GLOBAL=$h/.gitconfig git config --global user.name)" = "$(CAIN_KEY=git.name CAIN_JSON=$JSON awk -v mode=get -f $AWK)" ]; then
     ok "install sets git name"
 else
     bad "install sets git name"
@@ -107,7 +108,7 @@ cat > "$tmp/karabiner.json" <<'EOF'
     {"description": "cain: old rule", "manipulators": []},
     {"description": "my rule é", "manipulators": []}]}}]}
 EOF
-karabiner() { CAIN_JSON=cain.json CAIN_KARABINER=$1 LC_ALL=C awk -v mode=karabiner -v os=macos -f lib/cain.awk; }
+karabiner() { CAIN_JSON=$JSON CAIN_KARABINER=$1 LC_ALL=C awk -v mode=karabiner -v os=macos -f $AWK; }
 karabiner "$tmp/karabiner.json" > "$tmp/k.out" 2>&1
 if grep -q '"my rule \\u00e9"' "$tmp/k.out" && ! grep -q "old rule" "$tmp/k.out" &&
    grep -q '"show_in_menu_bar": false' "$tmp/k.out" && [ "$(grep -c '"description": "cain: ' "$tmp/k.out")" -gt 30 ]; then
@@ -124,8 +125,8 @@ fi
 
 # desktop shortcut plans: run them with stand-ins that print each command's exact arguments
 plan() {
-    CAIN_JSON=cain.json CAIN_DESKTOP=$1 CAIN_EXISTING=$2 CAIN_KDE_TOOL=$3 CAIN_PLASMA6=${4:-0} \
-        CAIN_TERM=kitty CAIN_CALC=kcalc LC_ALL=C awk -v mode=desktop -v os=linux -f lib/cain.awk > "$tmp/plan"
+    CAIN_JSON=$JSON CAIN_DESKTOP=$1 CAIN_EXISTING=$2 CAIN_KDE_TOOL=$3 CAIN_PLASMA6=${4:-0} \
+        CAIN_TERM=kitty CAIN_CALC=kcalc LC_ALL=C awk -v mode=desktop -v os=linux -f $AWK > "$tmp/plan"
     (
         run() { printf '%s|' "$@"; echo; }
         info() { echo "$*"; }
