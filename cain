@@ -23,7 +23,7 @@
 # ======================================================================= what cain manages
 
 # Parts installed on each kind of machine, in this order
-DESKTOP="programs dotfiles scripts micro input-remapper cinnamon background"
+DESKTOP="programs dotfiles micro input-remapper cinnamon background"
 SERVER="server-programs dotfiles micro"
 
 # Programs to install with apt
@@ -37,9 +37,6 @@ GIT_EMAIL="example@example.com"
 # Files and folders:   part   place in this repo   place on the system
 files_to_track() {
     track dotfiles        files/dotfiles/.bashrc              ~/.bashrc
-    track dotfiles        files/dotfiles/.nanorc              ~/.nanorc
-    track scripts         files/scripts/booklister            /usr/local/bin/booklister
-    track scripts         files/scripts/listlauncher          /usr/local/bin/listlauncher
     track micro           files/micro/bindings.json           ~/.config/micro/bindings.json
     track micro           files/micro/settings.json           ~/.config/micro/settings.json
     track input-remapper  files/input-remapper/config.json    ~/.config/input-remapper-2/config.json
@@ -75,7 +72,7 @@ has() { case " $1 " in *" $2 "*) return 0 ;; esac; return 1; }
 
 # copy <from> <to>: copy a file or folder if it's different. It replaces what's there
 # completely (a folder ends up exactly like the original). When installing, whatever it
-# replaces is backed up first. Installing outside your home folder (/usr/local/bin) uses sudo.
+# replaces is backed up first.
 copy() {
     if [ ! -e "$1" ]; then
         say "    missing:  $1"
@@ -86,15 +83,12 @@ copy() {
         return
     fi
     if [ "$MODE" = install ] && [ -e "$2" ]; then
-        backup=${2#"$HOME"/}
-        backup="$BACKUP/${backup#/}"
+        backup="$BACKUP/${2#"$HOME"/}"
         mkdir -p "$(dirname "$backup")" && cp -R "$2" "$backup"
     fi
-    as=""
-    case $2 in "$HOME"/*) ;; *) [ "$MODE" = install ] && as=$SUDO ;; esac
-    $as mkdir -p "$(dirname "$2")"
-    $as rm -rf "$2"
-    $as cp -R "$1" "$2"
+    mkdir -p "$(dirname "$2")"
+    rm -rf "$2"
+    cp -R "$1" "$2"
     say "    CHANGED:  $2"
     has "$CHANGED" "$PART" || CHANGED="$CHANGED $PART"
 }
