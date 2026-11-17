@@ -1,164 +1,277 @@
-#!/usr/bin/python3
+#!/bin/sh
+#
+#                          db
+#
+#       ,p6"bo   ,6"Yb.  `7MM  `7MMpMMMb.
+#      6M'  OO  8)   MM    MM    MM    MM
+#      8M        ,pm9MM    MM    MM    MM
+#      YM.    , 8M   MM    MM    MM    MM
+#       YMbmd'  `Moo9^Yo..JMML..JMML  JMML.
+#
+# cain - Collects And INstalls my programs, dotfiles and settings.
+#
+#   cain                 asks what to do
+#   cain -i desktop      install everything for a desktop
+#   cain -i server       install everything for a server
+#   cain -i micro        install only some parts (part names are in the lists below)
+#   cain -c              collect: copy this machine's files into the repo, commit and push
+#
+# To track something new, add a line to one of the lists below. That's it.
 
-import os
-import filecmp
-import shutil
-import sys
 
-ascii = '''
-                         db
-     
-      ,p6"bo   ,6"Yb.  `7MM  `7MMpMMMb. 
-     6M'  OO  8)   MM    MM    MM    MM 
-     8M        ,pm9MM    MM    MM    MM 
-     YM.    , 8M   MM    MM    MM    MM 
-      YMbmd'  `Moo9^Yo..JMML..JMML  JMML.
+# ======================================================================= what cain manages
 
-'''
+# Parts installed on each kind of machine, in this order
+DESKTOP="programs dotfiles micro input-remapper cinnamon background"
+SERVER="server-programs dotfiles micro"
 
+# Programs to install with apt
+DESKTOP_PROGRAMS="micro git xclip input-remapper inkscape virt-manager qemu-system suckless-tools"
+SERVER_PROGRAMS="micro git"
 
-# All files that need to be tracked
+# Who git commits as
+GIT_NAME="v3ai"
+GIT_EMAIL="example@example.com"
 
-filesToTrack = [
-    "bashrc",
-    "microBindings",
-    "microSettings",
-    "inputRemapperConfig",
-    "inputRemapperXmodmap",
-    "inputRemapperBindingsAT",
-    "cinnamonSettings",
-    "cinnamonMenuSettings"
-]
-
-    
-# location of all filesToTrack on system in a dictionary
-systemPaths = {
-    "bashrc": "../.bashrc",
-    "microBindings": "../.config/micro/bindings.json",
-    "microSettings": "../.config/micro/settings.json",
-    "inputRemapperConfig": "../.config/input-remapper-2/config.json",
-    "inputRemapperXmodmap": "../.config/input-remapper-2/xmodmap.json",
-    "inputRemapperBindingsAT": "../.config/input-remapper-2/presets/AT Translated Set 2 keyboard/rhett-keybindings.json",
-    "cinnamonSettings": "./files/system-cinnamon",
-    "cinnamonMenuSettings": "../.config/cinnamon/spices/menu@cinnamon.org/0.json"    
+# Files and folders:   part   place in this repo   place on the system
+files_to_track() {
+    track dotfiles        files/dotfiles/.bashrc              ~/.bashrc
+    track micro           files/micro/bindings.json           ~/.config/micro/bindings.json
+    track micro           files/micro/settings.json           ~/.config/micro/settings.json
+    track input-remapper  files/input-remapper/config.json    ~/.config/input-remapper-2/config.json
+    track input-remapper  files/input-remapper/xmodmap.json   ~/.config/input-remapper-2/xmodmap.json
+    track input-remapper  files/input-remapper/rhett-keybindings.json \
+        ~/".config/input-remapper-2/presets/AT Translated Set 2 keyboard/rhett-keybindings.json"
+    track cinnamon        files/cinnamon/spices               ~/.config/cinnamon/spices
+    track background      files/backgrounds                   ~/.local/share/backgrounds/cain
 }
 
-# location of all filesToTrack (stored in cain's filesToTrack dir) in a dictionary
-programPaths = {
-    "bashrc": "./files/dotfiles/.bashrc",
-    "microBindings": "./files/micro/bindings.json",
-    "microSettings": "./files/micro/settings.json",
-    "inputRemapperConfig": "./files/input-remapper/config.json",
-    "inputRemapperXmodmap": "./files/input-remapper/xmodmap.json",
-    "inputRemapperBindingsAT": "./files/input-remapper/rhett-keybindings.json",
-    "cinnamonSettings": "./files/cinnamon/cinnamon-settings",
-    "cinnamonMenuSettings": "./files/cinnamon/0.json"
+# Settings kept in dconf:   part   file in this repo   dconf folder
+settings_to_track() {
+    setting cinnamon      files/cinnamon/cinnamon.ini         /org/cinnamon/
+    setting cinnamon      files/cinnamon/gtk-interface.ini    /org/gnome/desktop/interface/
+    setting cinnamon      files/cinnamon/window-manager.ini   /org/gnome/desktop/wm/preferences/
+    setting cinnamon      files/cinnamon/terminal.ini         /org/gnome/terminal/legacy/
+    setting cinnamon      files/cinnamon/nemo.ini             /org/nemo/preferences/
 }
 
+# dconf keys that are never collected: the wallpaper (set from WALLPAPER) and your location
+SKIP_KEYS="picture-uri night-light-last-coordinates"
 
-# programs to install
-programsToInstall = [
-	"micro",
-	"xclip",
-	"input-remapper",
-	"git",
-	"inkscape",
-	"virt-manager",
-	"qemu-system",
-	"suckless-tools"
-]
-
-#function to check if two filesToTrack have any differences
-
-def filesAreDifferent(file1, file2):
-    if(not(filecmp.cmp(file1, file2, shallow=False))):
-        return True
-    else:
-        return False
-
-#strips filename from the end of path
-def stripFileName(path):
-    index = path.rfind("/")
-    return path[:index+1]
-    
-
-def collect():
-    # variable to keep track of what if any filesToTrack have changed since the program has run last
-    allFilesChanged = ""
-    #dconf dumping all system settings to a temporary file
-    os.system("dconf dump / > ~/cain/files/system-cinnamon")
-    
-    # main program
-    print("Files Changed:\n")
-    
-    for file in filesToTrack:
-        if filesAreDifferent(systemPaths[file], programPaths[file]):
-            shutil.copy(systemPaths[file], programPaths[file])
-            allFilesChanged = allFilesChanged + " " + file
-            print("    CHANGED: " + file)
-        else:
-            print("    SAME: " + file)
-
-    # clean up tmp file
-    os.system("rm ~/cain/files/system-cinnamon")
-
-    if (allFilesChanged != ""):
-        os.system("cd ~/cain && git add . && git commit -m \"CHANGED: " + allFilesChanged +"\" && git push")
-    else:
-        print("\nALL FILES ARE THE SAME\n")
+# The background part sets this picture as the wallpaper
+WALLPAPER="$HOME/.local/share/backgrounds/cain/mmiyagi_japan.jpg"
 
 
-def install():
-    print("INSTALLING:")
-    os.system("sudo apt update")
-    
-    #install all programs listed in programToInstall array
-    for program in programsToInstall:
-    	os.system("sudo apt install " + program + " -y")
-    
-    #configure git
-    os.system("git config --global user.name \"v3ai\"")
-    os.system("git config --global user.email \"example@example.com\"")
+# ======================================================================= the program
 
-    #check if dirs exist, and make them if they don't
-    #put every file into it's place
+say() { printf '%s\n' "$*"; }
 
-    #making special dirs for input remapper
-    os.system("mkdir ../.config/input-remapper-2/")
-    os.system("mkdir ../.config/input-remapper-2/presets/")
-    
-    for file in filesToTrack:
-        if(not(os.path.isdir(stripFileName(systemPaths[file])))):
-            os.mkdir(stripFileName(systemPaths[file]))
+# has "list of words" word
+has() { case " $1 " in *" $2 "*) return 0 ;; esac; return 1; }
 
-    for file in filesToTrack:
-        if (file != "cinnamonSettings"):
-            shutil.copy(programPaths[file], systemPaths[file])
-        else:
-            os.system("dconf load / < ~/cain/files/cinnamon/cinnamon-settings")
+# copy <from> <to>: copy a file or folder if it's different. When installing, whatever it
+# replaces is backed up first.
+copy() {
+    if [ ! -e "$1" ]; then
+        say "    missing:  $1"
+        return
+    fi
+    if diff -r "$1" "$2" >/dev/null 2>&1; then
+        say "    same:     $2"
+        return
+    fi
+    if [ "$MODE" = install ] && [ -e "$2" ]; then
+        backup="$BACKUP/${2#"$HOME"/}"
+        mkdir -p "$(dirname "$backup")" && cp -R "$2" "$backup"
+    fi
+    mkdir -p "$(dirname "$2")"
+    if [ -d "$1" ]; then
+        mkdir -p "$2" && cp -R "$1/." "$2/"
+    else
+        cp "$1" "$2"
+    fi
+    say "    CHANGED:  $2"
+    has "$CHANGED" "$PART" || CHANGED="$CHANGED $PART"
+}
 
-    os.system("reboot")
+# track <part> <place in repo> <place on system>
+track() {
+    [ "$1" = "$PART" ] || return 0
+    if [ "$MODE" = install ]; then
+        copy "$2" "$3"
+    else
+        copy "$3" "$2"
+    fi
+}
 
+# setting <part> <file in repo> <dconf folder>
+# Your home folder is saved as @HOME@, so the settings work for any user name.
+setting() {
+    [ "$1" = "$PART" ] || return 0
+    if [ "$MODE" = collect ]; then
+        dconf dump "$3" | sed "s|$HOME|@HOME@|g" | remove_skipped_keys > "$TMP/dconf"
+        copy "$TMP/dconf" "$2"
+        return
+    fi
 
-def select():
-    if len(sys.argv) < 2:
-        choice = input("Would you Like to Collect (C) or install (I)?: ")
-        if (choice == "I" or choice == "i"):
-            install()
-        elif (choice == "C" or choice == "c"):
-            collect()
-        else:
-            print("\nNon valid input, please try again\n")
-            select()
-    elif sys.argv[1] == "-c" or sys.argv[1] == "-C":
-        collect()
-    elif sys.argv[1] == "-i" or sys.argv[1] == "-I":
-        install()
-    else:
-        print("\nNon valid input, please try again\n")
-        select()
+    if [ ! -f "$2" ]; then
+        say "    missing:  $2"
+        return
+    fi
+    mkdir -p "$BACKUP" && dconf dump "$3" > "$BACKUP/$(basename "$2")"
+    sed "s|@HOME@|$HOME|g" "$2" > "$TMP/dconf"
+    run_dconf load "$3" < "$TMP/dconf" && say "    loaded:   $2"
 
-    
-#main program that executes
-print(ascii)
-select()
+    # read the settings back to make sure every one of them stuck
+    dconf dump "$3" > "$TMP/now"
+    if grep '=' "$TMP/dconf" | grep -vxF -f "$TMP/now" > "$TMP/missing"; then
+        say "    these settings did not stick:"
+        sed 's/^/        /' "$TMP/missing"
+    fi
+}
+
+remove_skipped_keys() {
+    keys=$(say "$SKIP_KEYS" | sed 's/  */|/g')
+    grep -Ev "^($keys)="
+}
+
+# dconf can only save settings inside a desktop session. Over ssh or a TTY there isn't one,
+# so start a temporary one.
+run_dconf() {
+    if [ -n "$DBUS_SESSION_BUS_ADDRESS" ] || [ -S "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/bus" ]; then
+        dconf "$@"
+    else
+        dbus-run-session -- dconf "$@"
+    fi
+}
+
+set_wallpaper() {
+    run_dconf write /org/cinnamon/desktop/background/picture-uri "'file://$WALLPAPER'" &&
+        say "    wallpaper: $WALLPAPER"
+}
+
+install_programs() {
+    $SUDO apt-get update
+    for program in "$@"; do
+        $SUDO apt-get install -y "$program"
+    done
+    git config --global user.name "$GIT_NAME"
+    git config --global user.email "$GIT_EMAIL"
+}
+
+# install desktop | server | <part...>
+install() {
+    case $1 in
+        desktop) set -- $DESKTOP ;;
+        server)  set -- $SERVER ;;
+    esac
+    for part in "$@"; do
+        has "$DESKTOP $SERVER" "$part" || { say "Unknown part: $part"; usage; exit 1; }
+    done
+
+    MODE=install
+    for PART in "$@"; do
+        say ""
+        say "INSTALLING: $PART"
+        case $PART in
+            programs)        install_programs $DESKTOP_PROGRAMS ;;
+            server-programs) install_programs $SERVER_PROGRAMS ;;
+        esac
+        files_to_track
+        settings_to_track
+        [ "$PART" = background ] && set_wallpaper
+    done
+
+    # so "cain" works from anywhere
+    mkdir -p ~/.local/bin && ln -sf "$CAIN_DIR/cain" ~/.local/bin/cain
+
+    say ""
+    [ -d "$BACKUP" ] && say "The files cain replaced were backed up to $BACKUP"
+    if has "$*" cinnamon && [ -t 0 ]; then
+        printf 'Log out and back in for the Cinnamon settings to take effect. Reboot now? [y/N]: '
+        read -r answer
+        case $answer in [Yy]*) $SUDO reboot ;; esac
+    fi
+}
+
+# collect [desktop|server]   (guesses from whether Cinnamon is installed)
+collect() {
+    kind=$1
+    if [ -z "$kind" ]; then
+        if command -v cinnamon >/dev/null; then kind=desktop; else kind=server; fi
+    fi
+    case $kind in
+        desktop) parts=$DESKTOP ;;
+        server)  parts=$SERVER ;;
+        *) usage; exit 1 ;;
+    esac
+
+    MODE=collect
+    say "Files Changed ($kind):"
+    say ""
+    for PART in $parts; do
+        files_to_track
+        settings_to_track
+    done
+
+    if [ -z "$CHANGED" ]; then
+        say ""
+        say "ALL FILES ARE THE SAME"
+        return
+    fi
+    git add -A files && git commit -m "CHANGED:$CHANGED" && git push
+}
+
+choose() {
+    printf 'Would you like to Collect (C) or Install (I)?: '
+    read -r answer
+    case $answer in
+        [Cc]*) collect ;;
+        [Ii]*) choose_install ;;
+        *) say "Not a valid choice"; exit 1 ;;
+    esac
+}
+
+choose_install() {
+    printf 'Desktop (D) or Server (S)?: '
+    read -r answer
+    case $answer in
+        [Dd]*) install desktop ;;
+        [Ss]*) install server ;;
+        *) say "Not a valid choice"; exit 1 ;;
+    esac
+}
+
+usage() {
+    say "usage: cain                   asks what to do"
+    say "       cain -i desktop        install everything for a desktop: $DESKTOP"
+    say "       cain -i server         install everything for a server: $SERVER"
+    say "       cain -i <part...>      install only some parts"
+    say "       cain -c [desktop|server]   collect this machine's files, commit and push"
+}
+
+# ----------------------------------------------------------------------- main
+
+if [ -n "$SUDO_USER" ]; then
+    say "Run cain without sudo, it asks for sudo when it needs it."
+    exit 1
+fi
+if [ "$(id -u)" = 0 ]; then SUDO=""; else SUDO="sudo"; fi
+
+# work from the repo, wherever it is (even when run through ~/.local/bin/cain)
+CAIN_DIR=$(dirname "$(readlink -f "$0")")
+cd "$CAIN_DIR" || exit 1
+
+BACKUP=~/.cain-backup/$(date +%Y-%m-%d_%H%M%S)
+TMP=$(mktemp -d)
+trap 'rm -rf "$TMP"' EXIT
+
+sed -n '3,9s/^#//p' "$CAIN_DIR/cain"    # the ascii art at the top of this file
+
+case $1 in
+    -c|-C) collect "$2" ;;
+    -i|-I) shift; if [ $# -eq 0 ]; then choose_install; else install "$@"; fi ;;
+    -h|--help) usage ;;
+    "") choose ;;
+    *) usage; exit 1 ;;
+esac
