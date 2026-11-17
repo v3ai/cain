@@ -69,7 +69,8 @@ say() { printf '%s\n' "$*"; }
 # has "list of words" word
 has() { case " $1 " in *" $2 "*) return 0 ;; esac; return 1; }
 
-# copy <from> <to>: copy a file or folder if it's different. When installing, whatever it
+# copy <from> <to>: copy a file or folder if it's different. It replaces what's there
+# completely (a folder ends up exactly like the original). When installing, whatever it
 # replaces is backed up first.
 copy() {
     if [ ! -e "$1" ]; then
@@ -85,11 +86,8 @@ copy() {
         mkdir -p "$(dirname "$backup")" && cp -R "$2" "$backup"
     fi
     mkdir -p "$(dirname "$2")"
-    if [ -d "$1" ]; then
-        mkdir -p "$2" && cp -R "$1/." "$2/"
-    else
-        cp "$1" "$2"
-    fi
+    rm -rf "$2"
+    cp -R "$1" "$2"
     say "    CHANGED:  $2"
     has "$CHANGED" "$PART" || CHANGED="$CHANGED $PART"
 }
@@ -120,6 +118,8 @@ setting() {
     fi
     mkdir -p "$BACKUP" && dconf dump "$3" > "$BACKUP/$(basename "$2")"
     sed "s|@HOME@|$HOME|g" "$2" > "$TMP/dconf"
+    # wipe the dconf folder first, so it ends up exactly like the file
+    run_dconf reset -f "$3"
     run_dconf load "$3" < "$TMP/dconf" && say "    loaded:   $2"
 
     # read the settings back to make sure every one of them stuck
@@ -179,7 +179,8 @@ install() {
         esac
         files_to_track
         settings_to_track
-        [ "$PART" = background ] && set_wallpaper
+        # (installing cinnamon wipes the wallpaper setting too, so put it back)
+        case $PART in cinnamon|background) [ -f "$WALLPAPER" ] && set_wallpaper ;; esac
     done
 
     # so "cain" works from anywhere

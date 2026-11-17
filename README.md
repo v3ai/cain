@@ -58,8 +58,10 @@ cain -h                    help
 `cain -c` collects the desktop parts if Cinnamon is installed, otherwise the server
 parts; `cain -c server` / `cain -c desktop` picks one.
 
-Files that install replaces are backed up to `~/.cain-backup/<date>/` first (including
-the old dconf settings).
+Install overwrites everything it manages completely: files are replaced, folders end
+up exactly like the repo's (extra files are removed), and each dconf folder is wiped
+before loading, so old settings don't linger. Whatever it replaces is backed up to
+`~/.cain-backup/<date>/` first (including the old dconf settings).
 
 ### Adding things
 
