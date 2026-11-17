@@ -16,7 +16,8 @@
 #   cain -i micro        install only some parts (part names are in the lists below)
 #   cain -c              collect: copy this machine's files into the repo, commit and push
 #
-# To track something new, add a line to one of the lists below. That's it.
+# To track something new, put it in files/ and add a line to one of the lists below.
+# cain warns about anything in files/ that no line covers, so nothing gets left out.
 
 
 # ======================================================================= what cain manages
@@ -94,6 +95,7 @@ copy() {
 
 # track <part> <place in repo> <place on system>
 track() {
+    [ "$MODE" = list ] && { say "$2"; return; }
     [ "$1" = "$PART" ] || return 0
     if [ "$MODE" = install ]; then
         copy "$2" "$3"
@@ -105,6 +107,7 @@ track() {
 # setting <part> <file in repo> <dconf folder>
 # Your home folder is saved as @HOME@, so the settings work for any user name.
 setting() {
+    [ "$MODE" = list ] && { say "$2"; return; }
     [ "$1" = "$PART" ] || return 0
     if [ "$MODE" = collect ]; then
         dconf dump "$3" | sed "s|$HOME|@HOME@|g" | remove_skipped_keys > "$TMP/dconf"
@@ -127,6 +130,24 @@ setting() {
     if grep '=' "$TMP/dconf" | grep -vxF -f "$TMP/now" > "$TMP/missing"; then
         say "    these settings did not stick:"
         sed 's/^/        /' "$TMP/missing"
+    fi
+}
+
+# Warn about files in files/ that no track or setting line covers. Those are never
+# installed, and are easy to lose without noticing.
+check_everything_tracked() {
+    MODE=list
+    { files_to_track; settings_to_track; } > "$TMP/listed"
+    find files -type f | sort | while IFS= read -r file; do
+        while IFS= read -r listed; do
+            case $file in "$listed"|"$listed"/*) continue 2 ;; esac
+        done < "$TMP/listed"
+        say "    not tracked: $file   (add a line for it at the top of cain)"
+    done > "$TMP/untracked"
+    if [ -s "$TMP/untracked" ]; then
+        say "These files in the repo aren't in any list, so cain ignores them:"
+        cat "$TMP/untracked"
+        say ""
     fi
 }
 
@@ -200,6 +221,7 @@ install() {
         has "$DESKTOP $SERVER" "$part" || { say "Unknown part: $part"; usage; exit 1; }
     done
 
+    check_everything_tracked
     MODE=install
     for PART in "$@"; do
         say ""
@@ -242,6 +264,7 @@ collect() {
         *) usage; exit 1 ;;
     esac
 
+    check_everything_tracked
     MODE=collect
     say "Files Changed ($kind):"
     say ""

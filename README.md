@@ -75,6 +75,9 @@ Everything cain manages is listed at the top of the `cain` script, one line each
 `track` copies a file or folder, `setting` saves/loads a dconf folder. The first word is
 the part it belongs to.
 
+Every file in `files/` should be covered by one of those lines. `cain -c` and `cain -i`
+list any that aren't, so nothing gets left behind without you noticing.
+
 ### Cinnamon settings
 
 * `files/cinnamon/*.ini` hold the dconf folders for Cinnamon, the GTK/window theme,
