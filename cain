@@ -13,7 +13,7 @@
 #   cain                 asks what to do
 #   cain -i desktop      install everything for a desktop
 #   cain -i server       install everything for a server
-#   cain -i micro        install only some parts (part names are in the lists below)
+#   cain -i micro claude install only some parts (part names are in the lists below)
 #   cain -c              collect: copy this machine's files into the repo, commit and push
 #
 # To track something new, add a line to one of the lists below. That's it.
@@ -22,8 +22,8 @@
 # ======================================================================= what cain manages
 
 # Parts installed on each kind of machine, in this order
-DESKTOP="programs dotfiles micro input-remapper cinnamon background"
-SERVER="server-programs dotfiles micro"
+DESKTOP="programs dotfiles micro claude input-remapper cinnamon background"
+SERVER="server-programs dotfiles micro claude"
 
 # Programs to install with apt
 DESKTOP_PROGRAMS="micro git xclip input-remapper inkscape virt-manager qemu-system suckless-tools"
@@ -38,6 +38,8 @@ files_to_track() {
     track dotfiles        files/dotfiles/.bashrc              ~/.bashrc
     track micro           files/micro/bindings.json           ~/.config/micro/bindings.json
     track micro           files/micro/settings.json           ~/.config/micro/settings.json
+    track claude          files/claude/CLAUDE.md              ~/.claude/CLAUDE.md
+    track claude          files/claude/settings.json          ~/.claude/settings.json
     track input-remapper  files/input-remapper/config.json    ~/.config/input-remapper-2/config.json
     track input-remapper  files/input-remapper/xmodmap.json   ~/.config/input-remapper-2/xmodmap.json
     track input-remapper  files/input-remapper/rhett-keybindings.json \

@@ -48,7 +48,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$HOME/.local/bin/cain\" claude >/dev/null 2>&1 || true",
+            "command": "\"$HOME/.local/bin/cain\" -i claude >/dev/null 2>&1 || true",
             "timeout": 30
           }
         ]

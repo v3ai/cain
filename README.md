@@ -26,7 +26,7 @@ Desktop (Linux Mint / Cinnamon):
 cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && ~/cain/cain -i desktop
 ```
 
-Server (just micro, git and my configs):
+Server (just micro, git and my configs, including Claude Code's):
 ```
 cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && ~/cain/cain -i server
 ```
@@ -40,6 +40,7 @@ live anywhere.
 | `server-programs`|         | yes    | micro git |
 | `dotfiles`       | yes     | yes    | `~/.bashrc` |
 | `micro`          | yes     | yes    | micro bindings and settings |
+| `claude`         | yes     | yes    | Claude Code config: `~/.claude/CLAUDE.md` and `~/.claude/settings.json` |
 | `input-remapper` | yes     |        | input-remapper config and my keyboard preset; enables the daemon so the preset loads at boot |
 | `background`     | yes     |        | pictures in `files/backgrounds/`, copied to `~/.local/share/backgrounds/cain/` and set as the wallpaper |
 | `cinnamon`       | yes     |        | Cinnamon settings (dconf) and panel applet settings |
