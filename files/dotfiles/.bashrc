@@ -170,6 +170,7 @@ blackboard(){
 	open	https://ualearn.blackboard.com/ultra/courses/_410357_1/outline
 }
 
+
 a(){
 
 links=(
