@@ -162,7 +162,6 @@ alias website="ssh rhett@192.3.60.227"
 alias vps="ssh rhett@163.245.197.62"
 alias viv="/home/rhett/Desktop/2025.2/Vivado/bin/vivado"
 
-
 blackboard(){
 	open	https://ualearn.blackboard.com/ultra/courses/_406718_1/outline
 	open	https://ualearn.blackboard.com/ultra/courses/_409363_1/outline
