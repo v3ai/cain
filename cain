@@ -117,8 +117,8 @@ def install():
     	os.system("sudo apt install " + program + " -y")
     
     #configure git
-    os.system("git config --global user.name \"Rhett Applestone\"")
-    os.system("git config --global user.email \"rhettapples(at symbol)gmail.com\"")
+    os.system("git config --global user.name \"v3ai\"")
+    os.system("git config --global user.email \"example@example.com\"")
 
     #check if dirs exist, and make them if they don't
     #put every file into it's place
