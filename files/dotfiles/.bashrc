@@ -158,9 +158,9 @@ alias maxbid="python3 ~/Desktop/auction-stuff/maxbid.py"
 alias llm="open https://claude.ai/ && open https://chatgpt.com/ && open https://gemini.google.com/ && open https://www.perplexity.ai/"
 alias vnv="python3 -m venv venv"
 alias src="source ./venv/bin/activate"
-alias vps="ssh rhett@192.3.60.227"
+alias website="ssh rhett@192.3.60.227"
+alias vps="ssh rhett@163.245.197.62"
 alias viv="/home/rhett/Desktop/2025.2/Vivado/bin/vivado"
-
 
 blackboard(){
 	open	https://ualearn.blackboard.com/ultra/courses/_406718_1/outline

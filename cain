@@ -27,10 +27,7 @@ filesToTrack = [
     "inputRemapperXmodmap",
     "inputRemapperBindingsAT",
     "cinnamonSettings",
-    "cinnamonMenuSettings",
-    "booklister",
-    "listlauncher",
-    "nanorc"
+    "cinnamonMenuSettings"
 ]
 
     
@@ -43,11 +40,7 @@ systemPaths = {
     "inputRemapperXmodmap": "../.config/input-remapper-2/xmodmap.json",
     "inputRemapperBindingsAT": "../.config/input-remapper-2/presets/AT Translated Set 2 keyboard/rhett-keybindings.json",
     "cinnamonSettings": "./files/system-cinnamon",
-    "cinnamonMenuSettings": "../.config/cinnamon/spices/menu@cinnamon.org/0.json",
-    "booklister": "/usr/local/bin/booklister",
-    "listlauncher": "/usr/local/bin/listlauncher",
-    "nanorc": "../.nanorc"
-    
+    "cinnamonMenuSettings": "../.config/cinnamon/spices/menu@cinnamon.org/0.json"    
 }
 
 # location of all filesToTrack (stored in cain's filesToTrack dir) in a dictionary
@@ -59,10 +52,7 @@ programPaths = {
     "inputRemapperXmodmap": "./files/input-remapper/xmodmap.json",
     "inputRemapperBindingsAT": "./files/input-remapper/rhett-keybindings.json",
     "cinnamonSettings": "./files/cinnamon/cinnamon-settings",
-    "cinnamonMenuSettings": "./files/cinnamon/0.json",
-    "booklister": "./files/custom/booklister",
-    "listlauncher": "./files/custom/listlauncher",
-    "nanorc": "./files/dotfiles/.nanorc"
+    "cinnamonMenuSettings": "./files/cinnamon/0.json"
 }
 
 
