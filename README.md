@@ -38,7 +38,8 @@ live anywhere.
 |------------------|:-------:|:------:|------------|
 | `programs`       | yes     |        | micro git xclip input-remapper inkscape virt-manager qemu-system suckless-tools |
 | `server-programs`|         | yes    | micro git |
-| `dotfiles`       | yes     | yes    | `~/.bashrc` |
+| `dotfiles`       | yes     | yes    | `~/.bashrc`, `~/.nanorc` |
+| `scripts`        | yes     |        | `booklister` and `listlauncher` in `/usr/local/bin` (the Cinnamon keybindings run them) |
 | `micro`          | yes     | yes    | micro bindings and settings |
 | `input-remapper` | yes     |        | input-remapper config and my keyboard preset; enables the daemon so the preset loads at boot |
 | `background`     | yes     |        | pictures in `files/backgrounds/`, copied to `~/.local/share/backgrounds/cain/` and set as the wallpaper |
@@ -73,7 +74,11 @@ Everything cain manages is listed at the top of the `cain` script, one line each
 ```
 
 `track` copies a file or folder, `setting` saves/loads a dconf folder. The first word is
-the part it belongs to.
+the part it belongs to. Installing to a place outside your home folder (like
+`/usr/local/bin`) asks for sudo.
+
+Every file in `files/` should be covered by one of those lines. `cain -c` and `cain -i`
+list any that aren't, so nothing gets left behind without you noticing.
 
 ### Cinnamon settings
 

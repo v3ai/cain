@@ -1,0 +1,8 @@
+#!/bin/bash
+cwd=$(pwd)
+cd ~/Desktop/rhettapplestone.com
+micro list.html
+git add .
+git commit -m "qcom"
+git push	
+cd $cwd
