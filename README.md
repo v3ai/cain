@@ -40,7 +40,7 @@ live anywhere.
 | `server-programs`|         | yes    | micro git |
 | `dotfiles`       | yes     | yes    | `~/.bashrc` |
 | `micro`          | yes     | yes    | micro bindings and settings |
-| `input-remapper` | yes     |        | input-remapper config and my keyboard preset |
+| `input-remapper` | yes     |        | input-remapper config and my keyboard preset; enables the daemon so the preset loads at boot |
 | `background`     | yes     |        | pictures in `files/backgrounds/`, copied to `~/.local/share/backgrounds/cain/` and set as the wallpaper |
 | `cinnamon`       | yes     |        | Cinnamon settings (dconf) and panel applet settings |
 

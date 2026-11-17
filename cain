@@ -150,6 +150,37 @@ set_wallpaper() {
         say "    wallpaper: $WALLPAPER"
 }
 
+# The input-remapper window runs as root and can leave its config folder owned by root,
+# which stops cain from replacing the files in it. Give the folder back to you.
+own_input_remapper_config() {
+    dir=~/.config/input-remapper-2
+    [ -e "$dir" ] || return 0
+    if [ -n "$(find "$dir" ! -user "$(id -u)" 2>/dev/null)" ]; then
+        $SUDO chown -R "$(id -u):$(id -g)" "$dir" && say "    owned:    $dir"
+    fi
+}
+
+# The daemon is what actually remaps keys. Unless it's enabled, nothing starts it at boot,
+# so the autoload presets never load until you open the input-remapper window.
+start_input_remapper() {
+    if ! command -v input-remapper-control >/dev/null; then
+        say "    input-remapper isn't installed (install the programs part first)"
+        return
+    fi
+    $SUDO systemctl enable -q input-remapper-daemon &&
+        say "    enabled:  input-remapper-daemon (starts at boot)"
+    # start it now, unless it's already running (opening the window starts a copy too,
+    # and a second copy fails with "name already exists on the bus")
+    if ! systemctl is-active -q input-remapper-daemon &&
+        ! pgrep -f bin/input-remapper-service >/dev/null; then
+        $SUDO systemctl start input-remapper-daemon && say "    started:  input-remapper-daemon"
+    fi
+    # load the presets now, the same way logging in does
+    input-remapper-control --command stop-all >/dev/null 2>&1 &&
+        input-remapper-control --command autoload >/dev/null 2>&1 &&
+        say "    loaded:   autoload presets"
+}
+
 install_programs() {
     $SUDO apt-get update
     for program in "$@"; do
@@ -176,11 +207,15 @@ install() {
         case $PART in
             programs)        install_programs $DESKTOP_PROGRAMS ;;
             server-programs) install_programs $SERVER_PROGRAMS ;;
+            input-remapper)  own_input_remapper_config ;;
         esac
         files_to_track
         settings_to_track
-        # (installing cinnamon wipes the wallpaper setting too, so put it back)
-        case $PART in cinnamon|background) [ -f "$WALLPAPER" ] && set_wallpaper ;; esac
+        case $PART in
+            # (installing cinnamon wipes the wallpaper setting too, so put it back)
+            cinnamon|background) [ -f "$WALLPAPER" ] && set_wallpaper ;;
+            input-remapper)      start_input_remapper ;;
+        esac
     done
 
     # so "cain" works from anywhere
