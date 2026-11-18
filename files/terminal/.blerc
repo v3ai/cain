@@ -1,0 +1,41 @@
+# ble.sh config: GUI-style selection at the bash prompt
+
+# --- Behave like plain bash: no colours, no as-you-type suggestions, no extra markers ---
+bleopt highlight_syntax=
+bleopt highlight_filename=
+bleopt highlight_variable=
+bleopt filename_ls_colors=
+bleopt complete_auto_complete=
+bleopt complete_auto_menu=
+bleopt complete_menu_filter=
+bleopt prompt_eol_mark=
+bleopt exec_errexit_mark=
+bleopt exec_exit_mark=
+bleopt exec_elapsed_mark=
+
+# Alt+Shift+h/j/k/l extend the selection (left/down/up/right).
+# kitty sends Alt+Shift+h as ESC H, which ble.sh reads as M-H; bind both spellings.
+for _k in H S-h; do ble-bind -f "M-$_k" '@marked backward-char'; done
+for _k in L S-l; do ble-bind -f "M-$_k" '@marked forward-char';  done
+for _k in K S-k; do ble-bind -f "M-$_k" '@marked backward-line'; done
+for _k in J S-j; do ble-bind -f "M-$_k" '@marked forward-line';  done
+unset _k
+
+# Selected text -> system clipboard (X11)
+function my/blerc/region-text {
+  local a=$_ble_edit_ind b=$_ble_edit_mark
+  ((a > b)) && { local t=$a; a=$b; b=$t; }
+  REPLY=${_ble_edit_str:a:b-a}
+}
+
+# Ctrl+C: copy the selection if there is one, otherwise clear the line like normal ^C
+function ble/widget/my-copy-or-interrupt {
+  if [[ $_ble_edit_mark_active ]]; then
+    local REPLY; my/blerc/region-text
+    printf '%s' "$REPLY" | xclip -selection clipboard
+    _ble_edit_mark_active=
+  else
+    ble/widget/discard-line
+  fi
+}
+ble-bind -f C-c my-copy-or-interrupt

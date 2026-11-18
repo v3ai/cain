@@ -22,11 +22,11 @@
 # ======================================================================= what cain manages
 
 # Parts installed on each kind of machine, in this order
-DESKTOP="programs dotfiles micro claude input-remapper cinnamon background"
+DESKTOP="programs dotfiles micro claude input-remapper cinnamon terminal background"
 SERVER="server-programs dotfiles micro claude"
 
 # Programs to install with apt
-DESKTOP_PROGRAMS="micro git xclip input-remapper inkscape virt-manager qemu-system suckless-tools"
+DESKTOP_PROGRAMS="micro git xclip kitty make gawk input-remapper inkscape virt-manager qemu-system suckless-tools"
 SERVER_PROGRAMS="micro git"
 
 # Who git commits as
@@ -46,6 +46,10 @@ files_to_track() {
         ~/".config/input-remapper-2/presets/AT Translated Set 2 keyboard/rhett-keybindings.json"
     track cinnamon        files/cinnamon/spices               ~/.config/cinnamon/spices
     track background      files/backgrounds                   ~/.local/share/backgrounds/cain
+    track terminal        files/terminal/kitty.conf           ~/.config/kitty/kitty.conf
+    track terminal        files/terminal/kitty.app.png        ~/.config/kitty/kitty.app.png
+    track terminal        files/terminal/kitty.desktop        ~/.local/share/applications/kitty.desktop
+    track terminal        files/terminal/.blerc               ~/.blerc
 }
 
 # Settings kept in dconf:   part   file in this repo   dconf folder
@@ -59,6 +63,9 @@ settings_to_track() {
 
 # dconf keys that are never collected: the wallpaper (set from WALLPAPER) and your location
 SKIP_KEYS="picture-uri night-light-last-coordinates"
+
+# The terminal part makes this the default terminal
+TERMINAL="kitty"
 
 # The background part sets this picture as the wallpaper
 WALLPAPER="$HOME/.local/share/backgrounds/cain/mmiyagi_japan.jpg"
@@ -183,6 +190,36 @@ start_input_remapper() {
         say "    loaded:   autoload presets"
 }
 
+# ble.sh is the bash line editor that gives the prompt Alt+Shift+hjkl selection and
+# Ctrl+C copy (set up in ~/.blerc). It isn't packaged, so build it from git.
+install_blesh() {
+    if [ -f ~/.local/share/blesh/ble.sh ]; then
+        say "    same:     ~/.local/share/blesh (update it with: ble-update)"
+        return
+    fi
+    for tool in git make gawk; do
+        command -v "$tool" >/dev/null ||
+            { say "    $tool isn't installed (install the programs part first)"; return; }
+    done
+    git clone -q --recursive --depth 1 --shallow-submodules \
+        https://github.com/akinomyoga/ble.sh.git "$TMP/blesh" &&
+        make -s -C "$TMP/blesh" install PREFIX="$HOME/.local" >/dev/null &&
+        say "    installed: ble.sh to ~/.local/share/blesh"
+}
+
+# Make TERMINAL the terminal that Cinnamon, Nemo and x-terminal-emulator (Alt+T) open
+set_default_terminal() {
+    if ! command -v "$TERMINAL" >/dev/null; then
+        say "    $TERMINAL isn't installed (install the programs part first)"
+        return
+    fi
+    run_dconf write /org/cinnamon/desktop/applications/terminal/exec "'$TERMINAL'" &&
+        run_dconf write /org/cinnamon/desktop/applications/terminal/exec-arg "'--'" &&
+        say "    default terminal: $TERMINAL"
+    $SUDO update-alternatives --set x-terminal-emulator "$(command -v "$TERMINAL")" >/dev/null &&
+        say "    x-terminal-emulator: $TERMINAL"
+}
+
 install_programs() {
     $SUDO apt-get update
     for program in "$@"; do
@@ -217,6 +254,7 @@ install() {
             # (installing cinnamon wipes the wallpaper setting too, so put it back)
             cinnamon|background) [ -f "$WALLPAPER" ] && set_wallpaper ;;
             input-remapper)      start_input_remapper ;;
+            terminal)            install_blesh; set_default_terminal ;;
         esac
     done
 

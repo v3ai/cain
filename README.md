@@ -36,12 +36,13 @@ live anywhere.
 
 | part             | desktop | server | what it is |
 |------------------|:-------:|:------:|------------|
-| `programs`       | yes     |        | micro git xclip input-remapper inkscape virt-manager qemu-system suckless-tools |
+| `programs`       | yes     |        | micro git xclip kitty make gawk input-remapper inkscape virt-manager qemu-system suckless-tools |
 | `server-programs`|         | yes    | micro git |
 | `dotfiles`       | yes     | yes    | `~/.bashrc` |
 | `micro`          | yes     | yes    | micro bindings and settings |
 | `claude`         | yes     | yes    | Claude Code config: `~/.claude/CLAUDE.md` and `~/.claude/settings.json` |
 | `input-remapper` | yes     |        | input-remapper config and my keyboard preset; enables the daemon so the preset loads at boot |
+| `terminal`       | yes     |        | kitty as the default terminal (with the GNOME Terminal icon), kitty config, and ble.sh so the bash prompt has Alt+Shift+hjkl selection and Ctrl+C copy (`~/.blerc`) |
 | `background`     | yes     |        | pictures in `files/backgrounds/`, copied to `~/.local/share/backgrounds/cain/` and set as the wallpaper |
 | `cinnamon`       | yes     |        | Cinnamon settings (dconf) and panel applet settings |
 
@@ -75,6 +76,20 @@ Everything cain manages is listed at the top of the `cain` script, one line each
 
 `track` copies a file or folder, `setting` saves/loads a dconf folder. The first word is
 the part it belongs to.
+
+### Terminal
+
+* kitty: Ctrl+C copies when text is selected (otherwise it's a normal ^C),
+  Ctrl+V pastes, Ctrl+Shift+C always sends ^C.
+* [ble.sh](https://github.com/akinomyoga/ble.sh) replaces bash's line editor so the prompt
+  can select text: Alt+Shift+h/l select left/right, Alt+Shift+k/j select up/down a line,
+  Ctrl+C copies the selection to the clipboard. Its colours and as-you-type suggestions are
+  turned off in `~/.blerc`. It's built from git into `~/.local/share/blesh` the first time;
+  update it later with `ble-update`. `.bashrc` only loads it if it's there, so servers are fine.
+* The default terminal is `TERMINAL` in the script (Cinnamon's setting and
+  `x-terminal-emulator`, which Alt+T opens).
+* kitty shows the GNOME Terminal icon in Alt+Tab and the panel, from
+  `~/.local/share/applications/kitty.desktop` and `~/.config/kitty/kitty.app.png`.
 
 ### Cinnamon settings
 
