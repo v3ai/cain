@@ -45,3 +45,122 @@ ble-bind -f C-c my-copy-or-interrupt
 # west = ambiguous-width characters are 1 column (kitty/GNOME default); 15.1 = kitty 0.32's Unicode tables
 bleopt char_width_mode=west
 bleopt char_width_version=15.1
+
+# --- Tab completion like plain bash (readline) ---
+# ble.sh's own completion opens a menu under the prompt and cycles through it on the next Tab.
+# This makes Tab work like stock bash instead: complete as far as possible and beep if there's
+# more than one match; another Tab that can't add anything prints the matches in columns above
+# a new prompt (asking "Display all N possibilities? (y or n)" for 100 or more, with a --More-- pager).
+# completion-ignore-case from .bashrc still applies.
+bleopt complete_ambiguous=        # only names that start with what you typed (no fuzzy matches)
+bleopt complete_menu_complete_opts=insert-selection:hidden   # never draw ble.sh's own menu
+ble-face disabled=none            # lines ble.sh leaves behind (above a list, after Ctrl+C) aren't greyed out
+
+# With completion-ignore-case, readline keeps the case you typed when some match has it
+# ("al" + alpha1, Alpine -> "alp"); ble.sh may take the case from another match ("Alp").
+function my/rl/keep-typed-case {
+  ble/util/rlvar#test completion-ignore-case 0 || return 0
+  local beg=$_ble_complete_menu0_beg end=$_ble_edit_ind str0=$1 ind0=$2
+  local typed=${str0:beg:ind0-beg} cur=${_ble_edit_str:beg:end-beg}
+  [[ $typed ]] || return 0
+  local pack ins list=() "${_ble_complete_cand_varnames[@]/%/=}"
+  for pack in "${_ble_complete_menu_items[@]}"; do
+    ble/complete/cand/unpack "$pack"; list+=("$INSERT")
+  done
+  mapfile -t list < <(printf '%s\n' "${list[@]}" | sort)
+  for ins in "${list[@]}"; do
+    if [[ ${ins::${#typed}} == "$typed" ]]; then
+      [[ ${ins::${#cur}} != "$cur" ]] && ble/widget/.replace-range "$beg" "$end" "${ins::${#cur}}"
+      return 0
+    fi
+  done
+}
+
+# the display names of the current matches, sorted like readline does -> my_rl_items
+function my/rl/collect-items {
+  local pack ret "${_ble_complete_cand_varnames[@]/%/=}" show items=()
+  for pack in "${_ble_complete_menu_items[@]}"; do
+    ble/complete/cand/unpack "$pack"
+    show=${CAND:PREFIX_LEN}
+    case $ACTION in
+    (file|file_rhs|progcomp)  # directories get a trailing / (readline's mark-directories)
+      [[ $ACTION == file_rhs ]] && CAND=${CAND:${#DATA}}
+      ble/complete/action:file/.get-filename
+      [[ $show != */ && -d $ret ]] && show+=/ ;;
+    esac
+    items+=("$show")
+  done
+  mapfile -t my_rl_items < <(printf '%s\n' "${items[@]}" | sort -u)
+}
+
+# read one key the way readline's get_y_or_n does: 1 = yes, 0 = no, 2 = newline (pager only)
+function my/rl/y-or-n {
+  local key
+  while :; do
+    IFS= read -rsn1 -d '' key < /dev/tty || return 0
+    case $key in
+    ([yY' ']) return 1 ;;
+    ([nN]|$'\x7f'|$'\a'|$'\x03') return 0 ;;
+    ($'\r'|$'\n') [[ $1 == pager ]] && return 2 ;;
+    ([qQ]) [[ $1 == pager ]] && return 0 ;;
+    esac
+    printf '\a'
+  done
+}
+
+# print my_rl_items in columns like readline's rl_display_match_list (runs below the command line)
+function my/rl/print-items {
+  local n=${#my_rl_items[@]} s max=0 width=${COLUMNS:-80} height=${LINES:-24}
+  if ((n >= 100)); then
+    printf 'Display all %d possibilities? (y or n)' "$n"
+    my/rl/y-or-n; (($? == 1)) || { printf '\n'; return; }
+    printf '\n'
+  fi
+  for s in "${my_rl_items[@]}"; do ((${#s} > max)) && max=${#s}; done
+  ((max += 2))
+  local limit=$((width / max))
+  ((limit != 1 && limit * max == width)) && ((limit--))
+  ((limit <= 0)) && limit=1
+  local count=$(((n + limit - 1) / limit)) i j l line lines=0 r
+  for ((i = 0; i < count; i++)); do
+    line=
+    for ((j = 0, l = i; j < limit && l < n; j++, l += count)); do
+      s=${my_rl_items[l]}; line+=$s
+      if ((j + 1 < limit)); then
+        if ((max <= ${#s})); then line+=' '; else printf -v r '%*s' $((max - ${#s})) ''; line+=$r; fi
+      fi
+    done
+    printf '%s\n' "${line%"${line##*[! ]}"}"
+    ((lines++))
+    if ((lines >= height - 1 && i + 1 < count)); then
+      printf -- '--More--'
+      my/rl/y-or-n pager; r=$?
+      printf '\r\e[K'
+      ((r == 0)) && return
+      ((r == 2)) && ((lines--)) || lines=0
+    fi
+  done
+}
+
+# Like readline's rl_complete: Tab lists the matches only when the previous key was also Tab
+# and it didn't change the line ("al" Tab -> "alp", Tab beeps, Tab lists).
+_my_rl_changed=
+function ble/widget/my/readline-complete {
+  local str0=$_ble_edit_str ind0=$_ble_edit_ind list=
+  [[ $WIDGET == "$LASTWIDGET" && ! $_my_rl_changed ]] && list=1
+  ble/widget/complete insert_common
+  if [[ $_ble_complete_menu_active ]]; then
+    my/rl/keep-typed-case "$str0" "$ind0"
+    local my_rl_items; my/rl/collect-items
+    ble/complete/menu/clear                       # no ble.sh menu
+    if [[ $list && $_ble_edit_str == "$str0" ]]; then
+      ble/widget/.internal-print-command 'my/rl/print-items > /dev/tty' pre-flush
+    else
+      ble/widget/.bell
+    fi
+  fi                                              # (else one match was inserted, or none and ble beeped)
+  _my_rl_changed=; [[ $_ble_edit_str != "$str0" ]] && _my_rl_changed=1
+  return 0
+}
+ble-bind -f TAB my/readline-complete
+ble-bind -f C-i my/readline-complete

@@ -1,11 +1,17 @@
 # Early prompt: ble.sh takes ~0.3s to load, which left new terminals blank. Draw a copy of
 # the prompt (and window title) right away; at the end of this file ble-attach draws the
 # identical real one over it (keys typed meanwhile still count).
-# Keep this in sync with the PS1 set further down.
+# Keep this in sync with the PS1 set further down. Only done when the prompt fits on one row:
+# ble.sh can't take over a wrapped one (long directory) without flicker.
 if [[ $- == *i* && -t 1 && -f ~/.local/share/blesh/ble.sh ]]; then
-    _early_ps1='\[\e]0;\u@\h: \w\a\]\[\033[01;92m\]\u@\h\[\033[00m\]:\[\033[01;94m\]\w\[\033[00m\]\$ '
-    _early_ps1=${_early_ps1@P}; _early_ps1=${_early_ps1//$'\001'/}; _early_ps1=${_early_ps1//$'\002'/}
-    printf '%s' "$_early_ps1"; _early_prompt_shown=1; unset _early_ps1
+    _early_plain='\u@\h:\w\$ '; _early_plain=${_early_plain@P}
+    read -r _ _early_cols < <(stty size 2>/dev/null)
+    if (( ${#_early_plain} < ${_early_cols:-0} )); then
+        _early_ps1='\[\e]0;\u@\h: \w\a\]\[\033[01;92m\]\u@\h\[\033[00m\]:\[\033[01;94m\]\w\[\033[00m\]\$ '
+        _early_ps1=${_early_ps1@P}; _early_ps1=${_early_ps1//$'\001'/}; _early_ps1=${_early_ps1//$'\002'/}
+        printf '%s' "$_early_ps1"; _early_prompt_shown=1
+    fi
+    unset _early_plain _early_cols _early_ps1
 fi
 [[ $- == *i* && -f ~/.local/share/blesh/ble.sh ]] && source -- ~/.local/share/blesh/ble.sh --attach=none
 

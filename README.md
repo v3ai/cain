@@ -103,9 +103,15 @@ the part it belongs to.
     (`--single-instance`). Alt+T and the Cinnamon default terminal use it
     (`TERMINAL_COMMAND` in the script). All those windows share one process.
   * ble.sh takes ~0.3s to load, so `.bashrc` prints a copy of the prompt first and ble.sh
-    draws the real one over it. If you change `PS1`, change `_early_ps1` at the top of
+    draws the real one over it (only when the prompt fits on one line; a wrapped one can't
+    be handed over without flicker). If you change `PS1`, change `_early_ps1` at the top of
     `.bashrc` to match. `~/.blerc` sets the character widths so ble.sh doesn't probe the
     terminal (that made the prompt flicker), and `ble-attach` runs inside synchronized output.
+* Tab completion works like stock bash, not ble.sh's menu (`~/.blerc`): Tab completes as far
+  as it can and beeps if there's more than one match; a Tab that can't add anything lists the
+  matches in columns above a new prompt, with readline's "Display all N possibilities?
+  (y or n)" question for 100+ and its `--More--` pager. With `completion-ignore-case` it keeps
+  the case you typed, and lines ble.sh leaves behind aren't greyed out.
 
 ### Cinnamon settings
 
