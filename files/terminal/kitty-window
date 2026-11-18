@@ -1,0 +1,3 @@
+#!/bin/sh
+# Open a kitty window in the already-running kitty process if there is one (much faster).
+exec "$HOME/.local/bin/kitty" --single-instance "$@"

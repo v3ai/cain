@@ -48,6 +48,9 @@ files_to_track() {
     track background      files/backgrounds                   ~/.local/share/backgrounds/cain
     track terminal        files/terminal/kitty.conf           ~/.config/kitty/kitty.conf
     track terminal        files/terminal/kitty.app.png        ~/.config/kitty/kitty.app.png
+    track terminal        files/terminal/kitty.app-128.png    ~/.config/kitty/kitty.app-128.png
+    track terminal        files/terminal/kitty                ~/.local/bin/kitty
+    track terminal        files/terminal/kitty-window         ~/.local/bin/kitty-window
     track terminal        files/terminal/kitty.desktop        ~/.local/share/applications/kitty.desktop
     track terminal        files/terminal/.blerc               ~/.blerc
 }
@@ -66,6 +69,9 @@ SKIP_KEYS="picture-uri night-light-last-coordinates"
 
 # The terminal part makes this the default terminal
 TERMINAL="kitty"
+# ...and has Cinnamon open it with this (Alt+T, Nemo's "Open in Terminal"): opens a window
+# in the already-running kitty, which is much faster than starting a new one
+TERMINAL_COMMAND="$HOME/.local/bin/kitty-window"
 
 # The background part sets this picture as the wallpaper
 WALLPAPER="$HOME/.local/share/backgrounds/cain/mmiyagi_japan.jpg"
@@ -213,9 +219,11 @@ set_default_terminal() {
         say "    $TERMINAL isn't installed (install the programs part first)"
         return
     fi
-    run_dconf write /org/cinnamon/desktop/applications/terminal/exec "'$TERMINAL'" &&
+    open_with=$TERMINAL
+    [ -x "$TERMINAL_COMMAND" ] && open_with=$TERMINAL_COMMAND
+    run_dconf write /org/cinnamon/desktop/applications/terminal/exec "'$open_with'" &&
         run_dconf write /org/cinnamon/desktop/applications/terminal/exec-arg "'--'" &&
-        say "    default terminal: $TERMINAL"
+        say "    default terminal: $open_with"
     $SUDO update-alternatives --set x-terminal-emulator "$(command -v "$TERMINAL")" >/dev/null &&
         say "    x-terminal-emulator: $TERMINAL"
 }

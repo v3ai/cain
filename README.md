@@ -42,7 +42,7 @@ live anywhere.
 | `micro`          | yes     | yes    | micro bindings and settings |
 | `claude`         | yes     | yes    | Claude Code config: `~/.claude/CLAUDE.md` and `~/.claude/settings.json` |
 | `input-remapper` | yes     |        | input-remapper config and my keyboard preset; enables the daemon so the preset loads at boot |
-| `terminal`       | yes     |        | kitty as the default terminal (with the GNOME Terminal icon), kitty config, and ble.sh so the bash prompt has Alt+Shift+hjkl selection and Ctrl+C copy (`~/.blerc`) |
+| `terminal`       | yes     |        | kitty as the default terminal (with the GNOME Terminal icon), kitty config, fast-start launchers in `~/.local/bin`, and ble.sh so the bash prompt has Alt+Shift+hjkl selection and Ctrl+C copy (`~/.blerc`) |
 | `background`     | yes     |        | pictures in `files/backgrounds/`, copied to `~/.local/share/backgrounds/cain/` and set as the wallpaper |
 | `cinnamon`       | yes     |        | Cinnamon settings (dconf) and panel applet settings |
 
@@ -89,7 +89,23 @@ the part it belongs to.
 * The default terminal is `TERMINAL` in the script (Cinnamon's setting and
   `x-terminal-emulator`, which Alt+T opens).
 * kitty shows the GNOME Terminal icon in Alt+Tab and the panel, from
-  `~/.local/share/applications/kitty.desktop` and `~/.config/kitty/kitty.app.png`.
+  `~/.local/share/applications/kitty.desktop` and `~/.config/kitty/kitty.app.png`
+  (`kitty.app-128.png` is the size X11 wants, so kitty doesn't warn about it).
+* Looks like GNOME Terminal: block cursor and a `user@host: dir` window title (kitty's shell
+  integration is told to leave both alone), and `ls` colours match because `.bashrc` turns
+  bold colours into bright ones in kitty (GNOME's "bold is bright", which kitty doesn't have).
+* Fast start (~1s down to ~0.2s):
+  * `~/.local/bin/kitty` wraps the real kitty. kitty's Python runs with `-OO`, but Ubuntu
+    ships no `*.opt-2.pyc` files and `/usr` isn't writable, so every launch recompiled ~200
+    modules. The wrapper sets `PYTHONPYCACHEPREFIX` to `~/.cache/kitty/pycache` so they're
+    cached (`kitty.conf` keeps it out of shells running inside kitty).
+  * `~/.local/bin/kitty-window` opens the window in the already-running kitty
+    (`--single-instance`). Alt+T and the Cinnamon default terminal use it
+    (`TERMINAL_COMMAND` in the script). All those windows share one process.
+  * ble.sh takes ~0.3s to load, so `.bashrc` prints a copy of the prompt first and ble.sh
+    draws the real one over it. If you change `PS1`, change `_early_ps1` at the top of
+    `.bashrc` to match. `~/.blerc` sets the character widths so ble.sh doesn't probe the
+    terminal (that made the prompt flicker), and `ble-attach` runs inside synchronized output.
 
 ### Cinnamon settings
 

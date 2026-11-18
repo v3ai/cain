@@ -1,3 +1,12 @@
+# Early prompt: ble.sh takes ~0.3s to load, which left new terminals blank. Draw a copy of
+# the prompt (and window title) right away; at the end of this file ble-attach draws the
+# identical real one over it (keys typed meanwhile still count).
+# Keep this in sync with the PS1 set further down.
+if [[ $- == *i* && -t 1 && -f ~/.local/share/blesh/ble.sh ]]; then
+    _early_ps1='\[\e]0;\u@\h: \w\a\]\[\033[01;92m\]\u@\h\[\033[00m\]:\[\033[01;94m\]\w\[\033[00m\]\$ '
+    _early_ps1=${_early_ps1@P}; _early_ps1=${_early_ps1//$'\001'/}; _early_ps1=${_early_ps1//$'\002'/}
+    printf '%s' "$_early_ps1"; _early_prompt_shown=1; unset _early_ps1
+fi
 [[ $- == *i* && -f ~/.local/share/blesh/ble.sh ]] && source -- ~/.local/share/blesh/ble.sh --attach=none
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
@@ -80,6 +89,16 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    # kitty has no "bold is bright" option like GNOME Terminal, so turn every
+    # bold basic foreground (01 + 30-37) into its bright version (90-97) to match
+    if [ "$TERM" = xterm-kitty ]; then
+        LS_COLORS=$(printf '%s' "$LS_COLORS" | awk 'BEGIN{RS=":";ORS=":"} {
+            i=index($0,"="); k=substr($0,1,i); n=split(substr($0,i+1),c,";")
+            b=0; for(j=1;j<=n;j++) if(c[j]+0==1) b=1
+            o=""; for(j=1;j<=n;j++){ if(b && c[j]~/^3[0-7]$/) c[j]=c[j]+60; o=o (j>1?";":"") c[j] }
+            print k o }' | sed 's/:*$//')
+        export LS_COLORS
+    fi
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
@@ -442,4 +461,14 @@ com(){
 
 
 
-[[ ! ${BLE_VERSION-} ]] || ble-attach
+# Hand over from the early prompt (top of this file) to ble.sh without flicker:
+#  - \e[?2026h ... \e[?2026l is synchronized output: the terminal shows only the final result of
+#    ble-attach, not its intermediate redraws (terminals that don't support it ignore it)
+#  - the early prompt is left in place: ble.sh's first redraw starts with its own \r and draws the
+#    identical real prompt over it in a single write, so nothing visibly changes
+if [[ ${BLE_VERSION-} ]]; then
+    printf '\e[?2026h'; ble-attach; printf '\e[?2026l'
+elif [[ ${_early_prompt_shown-} ]]; then
+    printf '\r\e[K'   # ble.sh failed to load: clear the early prompt so bash's own isn't doubled
+fi
+unset _early_prompt_shown

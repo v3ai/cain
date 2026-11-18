@@ -39,3 +39,9 @@ function ble/widget/my-copy-or-interrupt {
   fi
 }
 ble-bind -f C-c my-copy-or-interrupt
+
+# Fixed character widths, so ble.sh doesn't probe the terminal at startup (the probe blanks the
+# prompt line for a moment, which showed up as a flicker when a new terminal opens).
+# west = ambiguous-width characters are 1 column (kitty/GNOME default); 15.1 = kitty 0.32's Unicode tables
+bleopt char_width_mode=west
+bleopt char_width_version=15.1

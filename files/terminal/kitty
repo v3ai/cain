@@ -1,0 +1,7 @@
+#!/bin/sh
+# kitty runs its embedded Python with -OO, but Ubuntu ships no *.opt-2.pyc files and
+# /usr isn't writable, so every launch recompiled ~200 modules from source (~0.7s).
+# Keep the compiled bytecode in a user-writable cache instead.
+# (kitty.conf has "env PYTHONPYCACHEPREFIX" so this doesn't leak into shells.)
+export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME:-$HOME/.cache}/kitty/pycache"
+exec /usr/bin/kitty "$@"
