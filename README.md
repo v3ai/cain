@@ -26,7 +26,7 @@ Desktop (Linux Mint / Cinnamon):
 cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && ~/cain/cain -i desktop
 ```
 
-Server (just micro, git and my configs, including Claude Code's):
+Server (just micro, git, kitty's terminfo and my configs, including Claude Code's):
 ```
 cd && sudo apt install git -y && git clone https://github.com/v3ai/cain && ~/cain/cain -i server
 ```
@@ -37,7 +37,7 @@ live anywhere.
 | part             | desktop | server | what it is |
 |------------------|:-------:|:------:|------------|
 | `programs`       | yes     |        | micro git xclip kitty make gawk input-remapper inkscape virt-manager qemu-system suckless-tools |
-| `server-programs`|         | yes    | micro git |
+| `server-programs`|         | yes    | micro git kitty-terminfo (so ssh from kitty works) |
 | `dotfiles`       | yes     | yes    | `~/.bashrc` |
 | `micro`          | yes     | yes    | micro bindings and settings |
 | `claude`         | yes     | yes    | Claude Code config: `~/.claude/CLAUDE.md` and `~/.claude/settings.json` |
@@ -86,6 +86,10 @@ the part it belongs to.
   Ctrl+C copies the selection to the clipboard. Its colours and as-you-type suggestions are
   turned off in `~/.blerc`. It's built from git into `~/.local/share/blesh` the first time;
   update it later with `ble-update`. `.bashrc` only loads it if it's there, so servers are fine.
+* ssh from kitty: kitty sets `TERM=xterm-kitty`, which a machine only understands with kitty's
+  terminfo installed (otherwise `clear`, `less`, `micro` say "'xterm-kitty': unknown terminal
+  type"). The server part installs `kitty-terminfo`, and `.bashrc` falls back to
+  `xterm-256color` on any machine that still lacks it.
 * The default terminal is `TERMINAL` in the script (Cinnamon's setting and
   `x-terminal-emulator`, which Alt+T opens).
 * kitty shows the GNOME Terminal icon in Alt+Tab and the panel, from

@@ -1,3 +1,11 @@
+# Over ssh from kitty, TERM is xterm-kitty. A machine without kitty's terminfo (the
+# kitty-terminfo package, which "cain -i server" installs) can't use it: clear, less and
+# micro fail with "'xterm-kitty': unknown terminal type". Fall back to xterm-256color there.
+if [[ $- == *i* && $TERM == xterm-kitty ]] && command -v infocmp >/dev/null &&
+    ! infocmp xterm-kitty >/dev/null 2>&1; then
+    export TERM=xterm-256color
+fi
+
 # Early prompt: ble.sh takes ~0.3s to load, which left new terminals blank. Draw a copy of
 # the prompt (and window title) right away; at the end of this file ble-attach draws the
 # identical real one over it (keys typed meanwhile still count).

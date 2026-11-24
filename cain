@@ -27,7 +27,7 @@ SERVER="server-programs dotfiles micro claude"
 
 # Programs to install with apt
 DESKTOP_PROGRAMS="micro git xclip kitty make gawk input-remapper inkscape virt-manager qemu-system suckless-tools"
-SERVER_PROGRAMS="micro git"
+SERVER_PROGRAMS="micro git kitty-terminfo"
 
 # Who git commits as
 GIT_NAME="v3ai"
